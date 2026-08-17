@@ -426,9 +426,9 @@ export const generateNLSLessonPlan = async (
       
       Thì phần Mục tiêu phải ghi:
       ===NLS_MỤC_TIÊU===
-      <red>* Phát triển năng lực số</red>
-      <red>1.1.TC1a: Tìm kiếm thông tin, quy tắc.</red>
-      <red>3.4.NC1a: Sử dụng MTCT để giải.</red>
+      <blue>* Phát triển năng lực số</blue>
+      <blue>1.1.TC1a: Tìm kiếm thông tin, quy tắc.</blue>
+      <blue>3.4.NC1a: Sử dụng MTCT để giải.</blue>
       ===END===
       
       ⛔️ CÁC ĐIỀU CẤM (STRICTLY PROHIBITED):
@@ -493,16 +493,16 @@ export const generateNLSLessonPlan = async (
   const isEnglishActive = !!options.includeEnglishIntegration;
 
   const nlsStatusInstruction = isNlsActive
-    ? "1. NĂNG LỰC SỐ & AI (<red>): BẬT -> BẮT BUỘC chèn NLS/AI màu đỏ trong thẻ <red>...</red> và tạo BẢNG TỔNG HỢP NLS ở cuối bài."
-    : "1. NĂNG LỰC SỐ & AI (<red>): TẮT -> CẤM TUYỆT ĐỐI chèn chữ màu đỏ (<red>), CẤM tạo Bảng tổng hợp NLS cuối bài.";
+    ? "1. NĂNG LỰC SỐ (<blue>) & AI (<purple>): BẬT -> BẮT BUỘC chèn NLS màu xanh dương trong thẻ <blue>...</blue> (hoặc AI trong thẻ <purple>...</purple>) và tạo BẢNG TỔNG HỢP NLS ở cuối bài."
+    : "1. NĂNG LỰC SỐ & AI: TẮT -> CẤM TUYỆT ĐỐI chèn chữ màu xanh dương (<blue>) hoặc màu tím (<purple>), CẤM tạo Bảng tổng hợp NLS cuối bài.";
 
   const disabilityStatusInstruction = isDisabilityActive
     ? "2. HỖ TRỢ HSKT (<green>): BẬT -> BẮT BUỘC chèn câu hỗ trợ HSKT màu xanh lá trong thẻ <green>[Hỗ trợ HSKT: ...]</green>."
     : "2. HỖ TRỢ HSKT (<green>): TẮT -> CẤM TUYỆT ĐỐI chèn bất kỳ nội dung HSKT nào, CẤM DÙNG THẺ <green>. Không được tự ý đưa HSKT vào.";
 
   const englishStatusInstruction = isEnglishActive
-    ? "3. TÍCH HỢP TIẾNG ANH (<blue>): BẬT -> BẮT BUỘC chèn nội dung tiếng Anh màu xanh dương trong thẻ <blue>...</blue>."
-    : "3. TÍCH HỢP TIẾNG ANH (<blue>): TẮT -> CẤM TUYỆT ĐỐI chèn bất kỳ từ vựng hay câu lệnh Tiếng Anh nào, CẤM DÙNG THẺ <blue>. Không được tự ý đưa Tiếng Anh vào.";
+    ? "3. TÍCH HỢP TIẾNG ANH (<orange>): BẬT -> BẮT BUỘC chèn nội dung tiếng Anh màu cam trong thẻ <orange>...</orange>."
+    : "3. TÍCH HỢP TIẾNG ANH (<orange>): TẮT -> CẤM TUYỆT ĐỐI chèn bất kỳ từ vựng hay câu lệnh Tiếng Anh nào, CẤM DÙNG THẺ <orange>. Không được tự ý đưa Tiếng Anh vào.";
 
   const needMarkersForSubFeatures = !isNlsActive && (isDisabilityActive || isEnglishActive);
 
@@ -529,15 +529,15 @@ export const generateNLSLessonPlan = async (
     ${disabilityStatusInstruction}
     ${englishStatusInstruction}
 
-    ${options.analyzeOnly ? "- Analyze only, do not edit in detail." : needMarkersForSubFeatures ? "- DO NOT insert Digital Competence or AI Competence in red (<red>). DO NOT generate DC summary tables.\n    - BUT YOU MUST STILL OUTPUT THE STRUCTURED MARKERS ===DC_OBJECTIVES=== AND ===DC_ACTIVITY_X_ORGANIZATION=== to wrap <green>Disability Support</green> and/or <blue>English Integration</blue> content for automated Word DOCX injection." : isNlsActive ? "- Edit the lesson plan and INTEGRATE COMPETENCIES into teaching activities." : "- Keep lesson plan structure and only process enabled items."}
+    ${options.analyzeOnly ? "- Analyze only, do not edit in detail." : needMarkersForSubFeatures ? "- DO NOT insert Digital Competence in blue (<blue>) or AI Competence in purple (<purple>). DO NOT generate DC summary tables.\n    - BUT YOU MUST STILL OUTPUT THE STRUCTURED MARKERS ===DC_OBJECTIVES=== AND ===DC_ACTIVITY_X_ORGANIZATION=== to wrap <green>Disability Support</green> and/or <orange>English Integration</orange> content for automated Word DOCX injection." : isNlsActive ? "- Edit the lesson plan and INTEGRATE COMPETENCIES into teaching activities." : "- Keep lesson plan structure and only process enabled items."}
     ${options.detailedReport ? "- Include a detailed explanation table of selected competence codes at the end." : ""}
     
     FORMAT REQUIREMENTS (MANDATORY):
     1. PRESERVE ORIGINAL FORMATTING: You must keep bold (**text**), italic (*text*) formatting from the original text.
     2. TABLES: Use standard Markdown Table.
-    ${isNlsActive ? "3. DC ADDITIONS: Use <red>...</red> tags to mark digital & AI competence content in red. Include indicator codes (e.g. 1.1.TC1a: or NLa.A1:)." : "3. DC ADDITIONS: DISABLED. DO NOT use <red> tags."}
-    ${isDisabilityActive ? "4. DISABILITY SUPPORT: Use <green>[Hỗ trợ HSKT: ...]</green> to mark inclusive education support." : "4. DISABILITY SUPPORT: DISABLED. ABSOLUTELY DO NOT use <green> tags or disability support."}
-    ${isEnglishActive ? "5. ENGLISH INTEGRATION: Use <blue>[EN Instruction: ...]</blue> or similar tags based on the level." : "5. ENGLISH INTEGRATION: DISABLED. ABSOLUTELY DO NOT use <blue> tags or English content."}
+    ${isNlsActive ? "3. DC ADDITIONS: Use <blue>...</blue> tags to mark digital competence content in blue (and <purple>...</purple> for AI competence in purple). Include indicator codes (e.g. 1.1.TC1a: or NLa.A1:)." : "3. DC ADDITIONS: DISABLED. DO NOT use <blue> or <purple> tags."}
+    ${isDisabilityActive ? "4. DISABILITY SUPPORT: Use <green>[Hỗ trợ HSKT: ...]</green> to mark inclusive education support in green." : "4. DISABILITY SUPPORT: DISABLED. ABSOLUTELY DO NOT use <green> tags or disability support."}
+    ${isEnglishActive ? "5. ENGLISH INTEGRATION: Use <orange>[EN Instruction: ...]</orange> or similar tags based on the level in orange." : "5. ENGLISH INTEGRATION: DISABLED. ABSOLUTELY DO NOT use <orange> tags or English content."}
     6. LOCATION: Insert in Objectives under "2. Competence". For activities, ONLY insert into section "d) Organization" (or steps under Organization). DO NOT insert into Content, Outcomes, or Objectives of activities.
   ` : `
     ${modeText}
@@ -563,25 +563,67 @@ export const generateNLSLessonPlan = async (
     ${englishStatusInstruction}
 
     YÊU CẦU XỬ LÝ NỘI DUNG:
-    ${options.analyzeOnly ? "- Chỉ phân tích, không chỉnh sửa chi tiết." : needMarkersForSubFeatures ? "- KHÔNG chèn Năng lực số hay Năng lực AI màu đỏ (<red>), KHÔNG tạo Bảng tổng hợp NLS ở cuối bài.\n    - NHƯNG BẮT BUỘC PHẢI TẠO CÁC MARKER ===NLS_MỤC_TIÊU=== VÀ ===NLS_HOẠT_ĐỘNG_X_TỔ_CHỨC=== (hoặc ===NLS_HOẠT_ĐỘNG_X_BƯỚC_Y===) để bọc nội dung được BẬT (HSKT hoặc Tiếng Anh) phục vụ chèn tự động vào file Word (.docx)." : isNlsActive ? "- Chỉnh sửa giáo án và TÍCH HỢP NĂNG LỰC SỐ / AI vào phần d. Tổ chức thực hiện của các hoạt động dạy học." : "- Giữ nguyên khung bài dạy, chỉ xử lý hạng mục được BẬT."}
+    ${options.analyzeOnly ? "- Chỉ phân tích, không chỉnh sửa chi tiết." : needMarkersForSubFeatures ? "- KHÔNG chèn Năng lực số màu xanh (<blue>) hay Năng lực AI màu tím (<purple>), KHÔNG tạo Bảng tổng hợp NLS ở cuối bài.\n    - NHƯNG BẮT BUỘC PHẢI TẠO CÁC MARKER ===NLS_MỤC_TIÊU=== VÀ ===NLS_HOẠT_ĐỘNG_X_TỔ_CHỨC=== (hoặc ===NLS_HOẠT_ĐỘNG_X_BƯỚC_Y===) để bọc nội dung được BẬT (HSKT hoặc Tiếng Anh) phục vụ chèn tự động vào file Word (.docx)." : isNlsActive ? "- Chỉnh sửa giáo án và TÍCH HỢP NĂNG LỰC SỐ / AI vào phần d. Tổ chức thực hiện của các hoạt động dạy học." : "- Giữ nguyên khung bài dạy, chỉ xử lý hạng mục được BẬT."}
     ${options.detailedReport ? "- Kèm theo bảng giải thích chi tiết mã năng lực đã chọn ở cuối bài." : ""}
     
     YÊU CẦU VỀ ĐỊNH DẠNG VÀ VỊ TRÍ TRÍCH DẪN (BẮT BUỘC):
     1. GIỮ NGUYÊN ĐỊNH DẠNG GỐC: Bạn phải giữ nguyên các đoạn in đậm (**text**), in nghiêng (*text*) của văn bản gốc. Không được làm mất định dạng này.
     2. TOÁN HỌC: Tất cả công thức toán phải viết dạng LaTeX trong dấu $. Ví dụ: $x^2$. Không dùng unicode.
     3. BẢNG: Sử dụng Markdown Table chuẩn.
-    ${isNlsActive ? "4. NLS BỔ SUNG: Dùng thẻ <red>...</red> để đánh dấu màu đỏ nội dung NLS. Giữ nguyên Mã chỉ báo NLS (ví dụ: 1.1.TC1a:) trước mỗi ý." : "4. NLS BỔ SUNG: TẮT. KHÔNG DÙNG THẺ <red>."}
-    ${isDisabilityActive ? "5. HỖ TRỢ HSKT: Dùng thẻ <green>...</green> để đánh dấu hỗ trợ HSKT." : "5. HỖ TRỢ HSKT: TẮT. CẤM TUYỆT ĐỐI DÙNG THẺ <green> VÀ CẤM TỰ Ý THÊM HSKT."}
-    ${isEnglishActive ? "6. TÍCH HỢP TIẾNG ANH: Dùng thẻ <blue>...</blue> để đánh dấu nội dung tiếng Anh." : "6. TÍCH HỢP TIẾNG ANH: TẮT. CẤM TUYỆT ĐỐI DÙNG THẺ <blue> VÀ CẤM TỰ Ý THÊM TIẾNG ANH."}
+    ${isNlsActive ? "4. NLS & AI BỔ SUNG: Dùng thẻ <blue>...</blue> để đánh dấu màu xanh dương nội dung NLS, thẻ <purple>...</purple> cho nội dung AI. Giữ nguyên Mã chỉ báo NLS/AI (ví dụ: 1.1.TC1a:, NLc.C2:) trước mỗi ý." : "4. NLS & AI BỔ SUNG: TẮT. KHÔNG DÙNG THẺ <blue> HOẶC <purple>."}
+    ${isDisabilityActive ? "5. HỖ TRỢ HSKT: Dùng thẻ <green>...</green> để đánh dấu màu xanh lá hỗ trợ HSKT." : "5. HỖ TRỢ HSKT: TẮT. CẤM TUYỆT ĐỐI DÙNG THẺ <green> VÀ CẤM TỰ Ý THÊM HSKT."}
+    ${isEnglishActive ? "6. TÍCH HỢP TIẾNG ANH: Dùng thẻ <orange>...</orange> để đánh dấu màu cam nội dung tiếng Anh." : "6. TÍCH HỢP TIẾNG ANH: TẮT. CẤM TUYỆT ĐỐI DÙNG THẺ <orange> VÀ CẤM TỰ Ý THÊM TIẾNG ANH."}
     7. CHUẨN MÃ NLS THEO KHỐI LỚP & MÔN HỌC: Lớp 1-3 chỉ chọn mã CB1/CB2; Lớp 4-6 chọn CB2/TC1; Lớp 7-9 chọn TC1/TC2; Lớp 10-12 chọn TC2/NC1.
     8. VỊ TRÍ CHÈN VÀ TRÍCH DẪN DÒNG LIỀN TRƯỚC:
        - Mỗi Marker '===NLS_...===' PHẢI đính kèm thông tin '|VITRI:...' trích dẫn chính xác dòng/câu liền trước trong giáo án gốc của giáo viên.
-       - Ví dụ Marker: '===NLS_HOẠT_ĐỘNG_1_TỔ_CHỨC|VITRI: Hoạt động 1 > d. Tổ chức thực hiện > Sau dòng: "GV chiếu hình ảnh/video..."==='
-       - Phần I. Mục tiêu: Chèn ở cuối mục "2. Năng lực" (trước mục 3. Phẩm chất). Nếu không bật NLS thì chèn tiêu đề HSKT (<green>...</green>) và/hoặc Tiếng Anh (<blue>...</blue>).
+       - Ví dụ Marker: '===NLS_HOẠT_ĐỘNG_1_BƯỚC_2|VITRI: Hoạt động 1 > d. Tổ chức thực hiện > Bước 2 > Sau dòng: "GV yêu cầu HS sử dụng GeoGebra..."==='
+       - Phần I. Mục tiêu: Chèn ở cuối mục "2. Năng lực" (trước mục 3. Phẩm chất). Nếu không bật NLS thì chèn tiêu đề HSKT (<green>...</green>) và/hoặc Tiếng Anh (<orange>...</orange>).
        - Các hoạt động dạy học: CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" (hoặc các Bước/Nhiệm vụ trong Tổ chức thực hiện). TUYỆT ĐỐI KHÔNG chèn vào phần Mục tiêu, Nội dung, hay Sản phẩm của các hoạt động.
+     9. PHÂN BỔ NLS/AI THEO ĐÚNG BƯỚC – BẮT BUỘC TUÂN THỦ (căn cứ CV 3456/BGDĐT & QĐ 3439):
+       ⭐ NLS (<blue>) VÀ NĂNG LỰC AI (<purple>) LUÔN LUÔN LÀ NĂNG LỰC CỦA HỌC SINH. GV chỉ tổ chức/hướng dẫn, KHÔNG phát triển NLS/AI. Câu chỉ báo PHẢI có chủ thể HS.
+       - Bước 1 (Chuyển giao nhiệm vụ – GV giao bài): CHỈ chèn khi GV dùng học liệu SỐ (video, slide, Kahoot/Quizizz). CẤM chèn khi GV chỉ nói miệng / viết bảng / phát phiếu giấy.
+       - Bước 2 (Thực hiện nhiệm vụ – HS làm): ĐÂY LÀ BƯỚC TRỌNG TÂM – chèn khi HS dùng bất kỳ công cụ số (GeoGebra, PhET, MTCT, Google Docs, tìm kiếm web, AI Chatbot...). CẤM chèn khi HS chỉ làm tay / thảo luận miệng.
+       - Bước 3 (Báo cáo, thảo luận – HS trình bày): Chèn khi HS chia sẻ qua nền tảng số (Padlet, Google Slides, TV số...). CẤM chèn khi HS chỉ trình bày miệng / lên bảng đen.
+       - Bước 4 (Đánh giá, kết luận – GV chốt): MẶC ĐỊNH KHÔNG CHÈN NLS. Chỉ chèn khi GV/HS thực sự dùng AI / phần mềm số để phản biện hoặc tự đánh giá kết quả (rất hiếm gặp).
+       - Vị trí ngay dưới "d. Tổ chức thực hiện" (trước Bước 1): CHỈ dùng khi NLS/AI xuyên suốt NHIỀU BƯỚC hoặc TOÀN BỘ hoạt động (VD: Kahoot toàn hoạt động, Google Classroom nộp bài online xuyên suốt). KHÔNG dùng để đặt NLS chỉ xảy ra ở 1 bước đơn lẻ.
+     10. PHÂN BIỆT NLS THEO LOẠI HOẠT ĐỘNG DẠY HỌC (CV 5512 – BẮT BUỘC):
+        Nhận diện tên/tiêu đề hoạt động, áp dụng đúng mã NLS và cách viết phù hợp đặc thù sư phạm:
+
+        [LUYỆN TẬP / Thực hành / Củng cố / Bài tập]:
+        - HS ĐÃ CÓ KIẾN THỨC NỀN → tự lực làm bài tập ĐÓNG (có đáp án chuẩn). GV chỉ theo dõi, hỗ trợ khi cần, KHÔNG dạy kiến thức mới.
+        - TUYỆT ĐỐI KHÔNG dùng VẾ KÉP "GV hướng dẫn mới → HS" (sai hoàn toàn ở Luyện tập).
+        - KHÔNG dùng mã khám phá mới: 1.2 (đánh giá nguồn mới), 1.3, NLd.D1 (nhận diện vấn đề thực tiễn).
+        - Cách viết BẮT BUỘC: VẾ ĐƠN "HS tự [kiểm tra/chia sẻ] bằng [công cụ số cụ thể] để củng cố kết quả".
+        - 🚫 TUYỆT ĐỐI KHÔNG TỰ BỊA THÊM công cụ số (Quizizz, Kahoot, Padlet, Google Docs...) nếu giáo án gốc KHÔNG đề cập.
+
+        NHÓM-LT1 (Truyền thống: trả lời miệng, phiếu giấy, ghép nối giấy, thảo luận miệng):
+        ⇒ KHÔNG CHÈN BẤT KỲ NLS NÀO. KHÔNG tự thêm Quizizz/Kahoot/Padlet/Docs nếu GA gốc không đề cập.
+
+        NHÓM-LT2 (Có công cụ số ghi rõ trong GA gốc - GA nhắc tên phần mềm/nền tảng cụ thể):
+        ⇒ CHÈN NLS đúng mã: Quizizz/Kahoot→2.1(B1 hoặc Vị trí 1); MTCT/GeoGebra→5.2(B2); AI chatbot→NLc.C2(B2); Padlet→2.2(B3); Docs→2.4(B2); GForms/Classroom→2.2(B3).
+
+        NHÓM-LT3 (Thực hành đo đạc + ghi vào bảng tính số đã ghi trong GA gốc):
+        ⇒ CHÈN 5.2(B2). HS chỉ ghi vở/bảng giấy ⇒ KHÔNG CHÈN.
+
+        [VẬN DỤNG / Áp dụng thực tiễn / Dự án mở]:
+        - HS HOÀN TOÀN TỰ CHỦ. Tình huống MỞ. KHÔNG ép đủ 4 bước. TỐI ĐA 2-3 NLS.
+        - KHÔNG dùng 5.2 MTCT kiểm tra nghiệm. KHÔNG VẾ KÉP "GV hướng dẫn → HS".
+        VD-1 (Giao về nhà/dự án - dấu hiệu: "về nhà","dự án","nghiên cứu thêm"): 1.1(B2), 3.1(B2), 2.2(B3). B1 chỉ chèn nếu GV giao qua nền tảng số.
+        VD-2 (Tạo sản phẩm - dấu hiệu: "báo cáo","video","poster","sơ đồ","thuyết trình"): 3.1(B2), 2.2(B3), 2.4(B2 nếu nhóm).
+        VD-3 (Giải pháp thực tiễn - dấu hiệu: "đề xuất","thiết kế","ứng dụng AI","giải quyết vấn đề"): NLd.D1(B2), NLa.A3(B2), 1.1(B2).
+        VD-4 (Thực hành đơn giản trong lớp - dấu hiệu: "thực hành","đo","quan sát"): CHỈ 1 NLS - 3.1 (quay video ngắn → nộp Classroom). KHÔNG bịa thêm.
+        Bước 4: MẶC ĐỊNH KHÔNG CHÈN (GV nhận xét ở tiết sau hoặc ngoài lớp).
+
+     11. QUY TẮC ĐPQ – ĐỌC–PHÂN TÍCH–QUYẾT ĐỊNH (BẮT BUỘC TRƯỚC MỌI QUYẾT ĐỊNH CHÈN NLS):
+        B1-ĐỌC: "GV làm gì? HS làm gì? Có tên công cụ/phần mềm/nền tảng số nào được nhắc đến trong GA gốc không?"
+        B2-PHÂN TÍCH: TH-A (có công cụ số thực sự trong GA gốc) / TH-B (Vận dụng mở, đủ điều kiện đề xuất) / TH-C (truyền thống, không có công cụ số)?
+        B3-QUYẾT ĐỊNH: TH-A ⇒ CHÈN đúng mã | TH-B ⇒ CHÈN tối đa 3 NLS theo nhóm VD | TH-C ⇒ KHÔNG CHÈN, không bịa công cụ số.
+        🚨 QUY TẮC VÀNG: "KHÔNG BAO GIỜ TỰ THÊM CÔNG CỤ SỐ (Quizizz, Kahoot, Padlet, Google Docs, GeoGebra...) vào Mở đầu/HTKM/Luyện tập nếu GA gốc KHÔNG ĐỀ CẬP. Chỉ Vận dụng mới được phép đề xuất công cụ mới."
     
+
     LƯU Ý VỀ TÍCH HỢP HOẠT ĐỘNG (KHI CÓ PPCT):
     - Các hoạt động dạy học (trong phần Tiến trình) cũng chỉ được thiết kế xoay quanh các năng lực số đã trích xuất từ PPCT. Không thiết kế hoạt động cho các năng lực nằm ngoài PPCT.
+    
     
     ĐỊNH DẠNG ĐẦU RA:
     - Trả về toàn bộ nội dung giáo án đã chỉnh sửa dưới dạng Markdown.

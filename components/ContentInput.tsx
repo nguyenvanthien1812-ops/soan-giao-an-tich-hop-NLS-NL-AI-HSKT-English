@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { UploadCloud, Loader2, CheckCircle, FileText, FileUp, AlertCircle } from 'lucide-react';
+import { UploadCloud, Loader2, CheckCircle, FileText, FileUp, AlertCircle, FolderUp, ClipboardPaste } from 'lucide-react';
 import { OriginalDocxFile } from '../types';
 
 interface ContentInputProps {
@@ -15,6 +15,8 @@ interface ContentInputProps {
 declare const mammoth: any;
 declare const pdfjsLib: any;
 
+type PpctTab = 'file' | 'paste';
+
 const ContentInput: React.FC<ContentInputProps> = ({
   lessonContent,
   setLessonContent,
@@ -27,6 +29,8 @@ const ContentInput: React.FC<ContentInputProps> = ({
 
   const [processingLesson, setProcessingLesson] = useState(false);
   const [processingDist, setProcessingDist] = useState(false);
+  const [ppctTab, setPpctTab] = useState<PpctTab>('file');
+
 
   const [lessonFileName, setLessonFileName] = useState<string | null>(null);
   const [distFileName, setDistFileName] = useState<string | null>(null);
@@ -195,6 +199,13 @@ const ContentInput: React.FC<ContentInputProps> = ({
             isLesson={true}
             hasContent={!!lessonContent}
           />
+          {/* Cảnh báo khuyến nghị dùng .docx */}
+          <div className="flex items-start gap-1.5 px-3 py-2 bg-amber-50 border border-amber-200 rounded-xl mt-1">
+            <AlertCircle size={13} className="text-amber-500 mt-0.5 shrink-0" />
+            <p className="text-[11px] font-semibold text-amber-700 leading-relaxed">
+              <span className="font-bold">Khuyến nghị dùng file .docx</span> — Giúp tải về giữ nguyên định dạng bảng biểu gốc. File PDF vẫn hoạt động nhưng kết quả xuất Word có thể mất định dạng.
+            </p>
+          </div>
           {!lessonContent && (
             <p className="text-xs font-semibold text-rose-500 flex items-center mt-1">
               <AlertCircle size={13} className="mr-1" /> Vui lòng chọn file giáo án trước khi tiếp tục
@@ -202,21 +213,86 @@ const ContentInput: React.FC<ContentInputProps> = ({
           )}
         </div>
 
-        {/* Ô Upload PPCT */}
+        {/* Ô PPCT — 2 Tab */}
         <div className="space-y-2 text-left">
           <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center justify-between">
-            <span>File Phân phối chương trình (PPCT)</span>
+            <span>Phân phối chương trình (PPCT)</span>
             <span className="text-[11px] font-medium text-slate-400">Tùy chọn</span>
           </label>
-          <UploadBox
-            title="Tải lên File PPCT"
-            subTitle="Tài liệu tham khảo YCCĐ năng lực (nếu có)"
-            inputRef={distInputRef}
-            fileName={distFileName}
-            isProcessing={processingDist}
-            isLesson={false}
-            hasContent={!!distributionContent}
-          />
+
+          {/* Tab switcher */}
+          <div className="flex rounded-xl overflow-hidden border border-slate-200 shadow-sm">
+            <button
+              type="button"
+              onClick={() => setPpctTab('file')}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-bold transition-all ${
+                ppctTab === 'file'
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-white text-slate-500 hover:bg-slate-50'
+              }`}
+            >
+              <FolderUp size={13} />
+              Tải file
+            </button>
+            <button
+              type="button"
+              onClick={() => setPpctTab('paste')}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-bold transition-all border-l border-slate-200 ${
+                ppctTab === 'paste'
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-white text-slate-500 hover:bg-slate-50'
+              }`}
+            >
+              <ClipboardPaste size={13} />
+              Dán / Nhập tay
+            </button>
+          </div>
+
+          {/* Tab: Tải file */}
+          {ppctTab === 'file' && (
+            <UploadBox
+              title="Tải lên File PPCT"
+              subTitle="Tài liệu tham khảo YCCĐ năng lực (nếu có)"
+              inputRef={distInputRef}
+              fileName={distFileName}
+              isProcessing={processingDist}
+              isLesson={false}
+              hasContent={!!distributionContent && ppctTab === 'file'}
+            />
+          )}
+
+          {/* Tab: Dán / Nhập tay */}
+          {ppctTab === 'paste' && (
+            <div className="space-y-2">
+              <textarea
+                value={distributionContent}
+                onChange={(e) => setDistributionContent(e.target.value)}
+                placeholder={`Dán (Ctrl+V) hoặc nhập nội dung PPCT vào đây...\n\nVí dụ: copy cột "Năng lực số" và "Năng lực AI" từ bảng Excel/Word của nhà trường rồi dán vào đây.`}
+                rows={7}
+                className={`w-full rounded-2xl border text-xs sm:text-sm font-medium text-slate-700 p-3.5 resize-none focus:outline-none focus:ring-4 transition-all shadow-sm
+                  ${distributionContent
+                    ? 'border-emerald-300 bg-emerald-50/50 focus:ring-emerald-500/10 focus:border-emerald-500'
+                    : 'border-indigo-200 bg-slate-50/80 focus:ring-indigo-500/10 focus:border-indigo-400'
+                  }`}
+              />
+              {distributionContent && (
+                <div className="flex items-center justify-between">
+                  <p className="text-[11px] font-semibold text-emerald-600 flex items-center gap-1">
+                    <CheckCircle size={12} />
+                    Đã có nội dung ({distributionContent.length} ký tự)
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setDistributionContent('')}
+                    className="text-[11px] font-bold text-rose-400 hover:text-rose-600 transition-colors"
+                  >
+                    Xoá
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
           <p className="text-xs font-medium text-slate-400 mt-1">Giúp AI trích xuất chính xác mã NLS từ chương trình nhà trường.</p>
         </div>
       </div>
