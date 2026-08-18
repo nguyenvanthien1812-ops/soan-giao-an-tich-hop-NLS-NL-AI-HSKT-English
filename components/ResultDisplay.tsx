@@ -463,7 +463,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
   const parseTextWithFormatting = (text: string): TextRun[] => {
     // Làm sạch LaTeX và <br> trước khi parse định dạng
     const cleanedText = cleanLatex(text);
-    const parts = cleanedText.split(/(\*\*.*?\*\*|\*.*?\*|<u>.*?<\/u>|<red>.*?<\/red>|<green>.*?<\/green>|<blue>.*?<\/blue>)/g);
+    const parts = cleanedText.split(/(\*\*.*?\*\*|\*.*?\*|<u>.*?<\/u>|<blue>.*?<\/blue>|<purple>.*?<\/purple>|<green>.*?<\/green>|<orange>.*?<\/orange>|<red>.*?<\/red>)/g);
     return parts.map(part => {
       if (part.startsWith('**') && part.endsWith('**')) {
         return new TextRun({ text: part.slice(2, -2), bold: true });
@@ -474,14 +474,20 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
       if (part.startsWith('<u>') && part.endsWith('</u>')) {
         return new TextRun({ text: part.replace(/<\/?u>/g, ''), underline: { type: UnderlineType.SINGLE } });
       }
-      if (part.startsWith('<red>') && part.endsWith('</red>')) {
-        return new TextRun({ text: cleanLatex(part.replace(/<\/?red>/g, '')), color: "FF0000" });
+      if (part.startsWith('<blue>') && part.endsWith('</blue>')) {
+        return new TextRun({ text: cleanLatex(part.replace(/<\/?blue>/g, '')), color: "0055D4", bold: true });
+      }
+      if (part.startsWith('<purple>') && part.endsWith('</purple>')) {
+        return new TextRun({ text: cleanLatex(part.replace(/<\/?purple>/g, '')), color: "7030A0", bold: true });
       }
       if (part.startsWith('<green>') && part.endsWith('</green>')) {
         return new TextRun({ text: cleanLatex(part.replace(/<\/?green>/g, '')), color: "008000", italics: true });
       }
-      if (part.startsWith('<blue>') && part.endsWith('</blue>')) {
-        return new TextRun({ text: cleanLatex(part.replace(/<\/?blue>/g, '')), color: "0000FF", italics: true });
+      if (part.startsWith('<orange>') && part.endsWith('</orange>')) {
+        return new TextRun({ text: cleanLatex(part.replace(/<\/?orange>/g, '')), color: "B45309", italics: true });
+      }
+      if (part.startsWith('<red>') && part.endsWith('</red>')) {
+        return new TextRun({ text: cleanLatex(part.replace(/<\/?red>/g, '')), color: "FF0000" });
       }
       return new TextRun({ text: part });
     });
@@ -499,31 +505,39 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
   // Helper: Chuyển đổi một dòng markdown/thẻ màu thành các <w:r> trong Word XML
   const convertLineToWordRunsXml = (line: string): string => {
     const cleaned = cleanLatex(line);
-    const tokenRegex = /(<red>[\s\S]*?<\/red>|<green>[\s\S]*?<\/green>|<blue>[\s\S]*?<\/blue>|<u>[\s\S]*?<\/u>|\*\*[\s\S]*?\*\*|\*[\s\S]*?\*)/g;
+    const tokenRegex = /(<blue>[\s\S]*?<\/blue>|<purple>[\s\S]*?<\/purple>|<green>[\s\S]*?<\/green>|<orange>[\s\S]*?<\/orange>|<red>[\s\S]*?<\/red>|<u>[\s\S]*?<\/u>|\*\*[\s\S]*?\*\*|\*[\s\S]*?\*)/g;
     const parts = cleaned.split(tokenRegex);
     let runsXml = '';
 
     for (const part of parts) {
       if (!part) continue;
       let text = part;
-      let isRed = false;
-      let isGreen = false;
       let isBlue = false;
+      let isPurple = false;
+      let isGreen = false;
+      let isOrange = false;
+      let isRed = false;
       let isBold = false;
       let isItalic = false;
       let isUnderline = false;
 
-      if (part.startsWith('<red>') && part.endsWith('</red>')) {
-        isRed = true;
-        text = part.slice(5, -6);
+      if (part.startsWith('<blue>') && part.endsWith('</blue>')) {
+        isBlue = true;
+        text = part.slice(6, -7);
+      } else if (part.startsWith('<purple>') && part.endsWith('</purple>')) {
+        isPurple = true;
+        text = part.slice(8, -9);
       } else if (part.startsWith('<green>') && part.endsWith('</green>')) {
         isGreen = true;
         isItalic = true;
         text = part.slice(7, -8);
-      } else if (part.startsWith('<blue>') && part.endsWith('</blue>')) {
-        isBlue = true;
+      } else if (part.startsWith('<orange>') && part.endsWith('</orange>')) {
+        isOrange = true;
         isItalic = true;
-        text = part.slice(6, -7);
+        text = part.slice(8, -9);
+      } else if (part.startsWith('<red>') && part.endsWith('</red>')) {
+        isRed = true;
+        text = part.slice(5, -6);
       } else if (part.startsWith('<u>') && part.endsWith('</u>')) {
         isUnderline = true;
         text = part.slice(3, -4);
@@ -536,19 +550,27 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
       }
 
       // Xử lý nếu bên trong còn lồng tiếp thẻ
-      if (text.includes('<red>') || text.includes('</red>')) {
-        isRed = true;
-        text = text.replace(/<\/?red>/g, '');
+      if (text.includes('<blue>') || text.includes('</blue>')) {
+        isBlue = true;
+        text = text.replace(/<\/?blue>/g, '');
+      }
+      if (text.includes('<purple>') || text.includes('</purple>')) {
+        isPurple = true;
+        text = text.replace(/<\/?purple>/g, '');
       }
       if (text.includes('<green>') || text.includes('</green>')) {
         isGreen = true;
         isItalic = true;
         text = text.replace(/<\/?green>/g, '');
       }
-      if (text.includes('<blue>') || text.includes('</blue>')) {
-        isBlue = true;
+      if (text.includes('<orange>') || text.includes('</orange>')) {
+        isOrange = true;
         isItalic = true;
-        text = text.replace(/<\/?blue>/g, '');
+        text = text.replace(/<\/?orange>/g, '');
+      }
+      if (text.includes('<red>') || text.includes('</red>')) {
+        isRed = true;
+        text = text.replace(/<\/?red>/g, '');
       }
       if (text.startsWith('**') && text.endsWith('**') && text.length >= 4) {
         isBold = true;
@@ -566,9 +588,11 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
       if (isBold) rPr += `<w:b/>`;
       if (isItalic) rPr += `<w:i/>`;
       if (isUnderline) rPr += `<w:u w:val="single"/>`;
-      if (isRed) rPr += `<w:color w:val="FF0000"/>`;
+      if (isBlue) rPr += `<w:color w:val="0055D4"/>`;
+      else if (isPurple) rPr += `<w:color w:val="7030A0"/>`;
       else if (isGreen) rPr += `<w:color w:val="008000"/>`;
-      else if (isBlue) rPr += `<w:color w:val="0000FF"/>`;
+      else if (isOrange) rPr += `<w:color w:val="B45309"/>`;
+      else if (isRed) rPr += `<w:color w:val="FF0000"/>`;
 
       runsXml += `<w:r><w:rPr>${rPr}</w:rPr><w:t xml:space="preserve">${escapedText}</w:t></w:r>`;
     }
@@ -576,7 +600,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
     return runsXml;
   };
 
-  // Chuyển Markdown sang Word XML - MÀU ĐỎ NLS/AI, MÀU XANH HSKT & TIẾNG ANH (GIỮ NGUYÊN MÃ NLS)
+  // Chuyển Markdown sang Word XML - MÀU XANH DƯƠNG NLS, MÀU TÍM AI, MÀU XANH LÁ HSKT, MÀU CAM TIẾNG ANH (GIỮ NGUYÊN MÃ NLS)
   const convertMarkdownToWordXml = (markdown: string): string => {
     // Bước 1: Thay thế <br> thành ký tự xuống dòng thực sự trước khi split
     const normalizedMarkdown = markdown.replace(/<br\s*\/?>/gi, '\n');
@@ -624,7 +648,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
       const isHeader = rowIndex === 0;
       html += `<tr>`;
       cells.forEach(cellText => {
-        const cleanCell = cleanLatex(cellText.trim().replace(/<\/?red>/g, '').replace(/<\/?green>/g, '').replace(/<\/?blue>/g, ''));
+        const cleanCell = cleanLatex(cellText.trim().replace(/<\/?blue>/g, '').replace(/<\/?purple>/g, '').replace(/<\/?green>/g, '').replace(/<\/?orange>/g, '').replace(/<\/?red>/g, ''));
         const tag = isHeader ? 'th' : 'td';
         const style = isHeader
           ? 'border: 1px solid #000000; padding: 6px 10px; font-weight: bold; background-color: #f3f4f6; text-align: center;'
@@ -651,22 +675,28 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
       if (!trimmed || (trimmed.startsWith('===') && trimmed.endsWith('==='))) continue;
 
       let clean = cleanLatex(trimmed);
-      let isGreen = clean.includes('<green>');
       let isBlue = clean.includes('<blue>');
+      let isPurple = clean.includes('<purple>');
+      let isGreen = clean.includes('<green>');
+      let isOrange = clean.includes('<orange>');
       let isRed = clean.includes('<red>');
 
-      clean = clean.replace(/<\/?red>/g, '').replace(/<\/?green>/g, '').replace(/<\/?blue>/g, '');
+      clean = clean.replace(/<\/?blue>/g, '').replace(/<\/?purple>/g, '').replace(/<\/?green>/g, '').replace(/<\/?orange>/g, '').replace(/<\/?red>/g, '');
       // Chuyển Markdown **...** thành <b>...</b>
       clean = clean.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
       clean = clean.replace(/\*(.*?)\*/g, '<i>$1</i>');
 
       let style = "margin-bottom: 4px; font-family: 'Times New Roman', Times, serif;";
-      if (isRed) {
-        style += " color: #dc2626;";
+      if (isBlue) {
+        style += " color: #1d4ed8; font-weight: 600;";
+      } else if (isPurple) {
+        style += " color: #7c3aed; font-weight: 600;";
       } else if (isGreen) {
         style += " color: #059669; font-style: italic;";
-      } else if (isBlue) {
-        style += " color: #2563eb; font-style: italic;";
+      } else if (isOrange) {
+        style += " color: #b45309; font-style: italic;";
+      } else if (isRed) {
+        style += " color: #dc2626;";
       }
 
       html += `<p style="${style}">${clean}</p>`;
@@ -678,7 +708,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
   // Helper: Chuyển Markdown thành Plain Text sạch sẽ không còn thẻ tag
   const convertMarkdownToCleanPlainText = (content: string): string => {
     let clean = cleanLatex(content);
-    clean = clean.replace(/<\/?red>/g, '').replace(/<\/?green>/g, '').replace(/<\/?blue>/g, '').replace(/<\/?u>/g, '');
+    clean = clean.replace(/<\/?blue>/g, '').replace(/<\/?purple>/g, '').replace(/<\/?green>/g, '').replace(/<\/?orange>/g, '').replace(/<\/?red>/g, '').replace(/<\/?u>/g, '');
     clean = clean.replace(/\*\*(.*?)\*\*/g, '$1');
     clean = clean.replace(/\*(.*?)\*/g, '$1');
     return clean.trim();
@@ -819,7 +849,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
       let nlsXmlStr = '';
       if (section.content.trim().startsWith('|') || section.marker.includes('BẢNG_TỔNG_HỢP') || section.marker.includes('SUMMARY_TABLE')) {
         nlsXmlStr = `
-          <w:p><w:pPr><w:pBdr><w:top w:val="single" w:sz="12" w:space="1" w:color="FF0000"/></w:pBdr></w:pPr></w:p>
+          <w:p><w:pPr><w:pBdr><w:top w:val="single" w:sz="12" w:space="1" w:color="0055D4"/></w:pBdr></w:pPr></w:p>
           <w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/><w:b/><w:color w:val="000000"/></w:rPr><w:t>BẢNG TỔNG HỢP NĂNG LỰC SỐ TRONG BÀI HỌC</w:t></w:r></w:p>
           ${convertMarkdownTableToWordXmlTable(section.content)}
         `;
@@ -1003,13 +1033,13 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
       const bodyNode = xmlDoc.getElementsByTagName('w:body')[0];
       if (bodyNode) {
         let fallbackXmlStr = `
-          <w:p><w:pPr><w:pBdr><w:top w:val="single" w:sz="12" w:space="1" w:color="FF0000"/></w:pBdr></w:pPr></w:p>
-          <w:p><w:r><w:rPr><w:color w:val="FF0000"/></w:rPr><w:t>═══ NỘI DUNG NLS BỔ SUNG ═══</w:t></w:r></w:p>
+          <w:p><w:pPr><w:pBdr><w:top w:val="single" w:sz="12" w:space="1" w:color="0055D4"/></w:pBdr></w:pPr></w:p>
+          <w:p><w:r><w:rPr><w:color w:val="0055D4"/></w:rPr><w:t>═══ NỘI DUNG NLS BỔ SUNG ═══</w:t></w:r></w:p>
         `;
 
         for (const section of sections) {
           if (notInsertedSections.includes(section.marker)) {
-            fallbackXmlStr += `<w:p><w:r><w:rPr><w:color w:val="FF0000"/></w:rPr><w:t>[${section.marker}]</w:t></w:r></w:p>`;
+            fallbackXmlStr += `<w:p><w:r><w:rPr><w:color w:val="0055D4"/></w:rPr><w:t>[${section.marker}]</w:t></w:r></w:p>`;
             fallbackXmlStr += convertMarkdownToWordXml(section.content);
           }
         }
@@ -1170,14 +1200,20 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
   if (!result) return null;
 
   const components = {
-    red: ({ children }: { children: React.ReactNode }) => (
-      <span style={{ color: '#dc2626' }}>{children}</span>
+    blue: ({ children }: { children: React.ReactNode }) => (
+      <span style={{ color: '#1d4ed8', fontWeight: 600 }}>{children}</span>
+    ),
+    purple: ({ children }: { children: React.ReactNode }) => (
+      <span style={{ color: '#7c3aed', fontWeight: 600 }}>{children}</span>
     ),
     green: ({ children }: { children: React.ReactNode }) => (
       <span style={{ color: '#059669', fontStyle: 'italic', fontWeight: 600 }}>{children}</span>
     ),
-    blue: ({ children }: { children: React.ReactNode }) => (
-      <span style={{ color: '#2563eb', fontStyle: 'italic', fontWeight: 600 }}>{children}</span>
+    orange: ({ children }: { children: React.ReactNode }) => (
+      <span style={{ color: '#b45309', fontStyle: 'italic', fontWeight: 600 }}>{children}</span>
+    ),
+    red: ({ children }: { children: React.ReactNode }) => (
+      <span style={{ color: '#dc2626' }}>{children}</span>
     ),
   };
 
@@ -1340,7 +1376,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
                 Hướng dẫn chèn thủ công (Chuẩn vị trí neo như File Word)
               </h3>
               <p className="text-slate-600 text-xs sm:text-sm font-medium">
-                Vị trí chèn và nội dung được đồng bộ <strong>100% khớp với Luồng xuất file Word</strong>. Bấm nút <strong>Copy</strong> để dán trực tiếp vào file Word (giữ nguyên màu Đỏ/Xanh và bảng kẻ ô).
+                Vị trí chèn và nội dung được đồng bộ <strong>100% khớp với Luồng xuất file Word</strong>. Bấm nút <strong>Copy</strong> để dán trực tiếp vào file Word (giữ nguyên màu sắc và bảng kẻ ô).
               </p>
             </div>
             <button
@@ -1370,9 +1406,11 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
                 .replace(/_/g, ' ');
 
               const isCopied = copiedIndex === idx;
-              const hasRed = section.content.includes('<red>');
-              const hasGreen = section.content.includes('<green>');
               const hasBlue = section.content.includes('<blue>');
+              const hasPurple = section.content.includes('<purple>');
+              const hasGreen = section.content.includes('<green>');
+              const hasOrange = section.content.includes('<orange>');
+              const hasRed = section.content.includes('<red>');
               const isTable = section.content.trim().startsWith('|') || section.marker.includes('BẢNG_TỔNG_HỢP') || section.marker.includes('SUMMARY_TABLE');
 
               return (
@@ -1384,9 +1422,14 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
                         <span className="inline-block w-2.5 h-2.5 rounded-full bg-indigo-400 mr-2.5"></span>
                         MỤC {idx + 1}: {formattedTitle}
                       </span>
-                      {hasRed && (
-                        <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-red-500/20 text-red-300 border border-red-400/30">
-                          🔴 NLS/AI
+                      {hasBlue && (
+                        <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-blue-500/20 text-blue-300 border border-blue-400/30">
+                          🔵 NLS
+                        </span>
+                      )}
+                      {hasPurple && (
+                        <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-purple-500/20 text-purple-300 border border-purple-400/30">
+                          🟣 AI
                         </span>
                       )}
                       {hasGreen && (
@@ -1394,13 +1437,18 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
                           🟢 HSKT
                         </span>
                       )}
-                      {hasBlue && (
-                        <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-blue-500/20 text-blue-300 border border-blue-400/30">
-                          🔵 Tiếng Anh
+                      {hasOrange && (
+                        <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-amber-500/20 text-amber-300 border border-amber-400/30">
+                          🟠 Tiếng Anh
+                        </span>
+                      )}
+                      {hasRed && !hasBlue && !hasPurple && (
+                        <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-red-500/20 text-red-300 border border-red-400/30">
+                          🔴 NLS/AI
                         </span>
                       )}
                       {isTable && (
-                        <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-purple-500/20 text-purple-300 border border-purple-400/30">
+                        <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
                           📊 Bảng tổng hợp
                         </span>
                       )}
@@ -1451,7 +1499,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
                           📊 BẢNG TỔNG HỢP NĂNG LỰC SỐ TOÀN BÀI (5 CỘT CHUẨN - TỰ ĐỘNG KẺ Ô KHI DÁN VÀO WORD):
                         </p>
                         <div className="prose prose-sm max-w-none font-serif text-slate-900 border border-slate-300 rounded-lg p-3 bg-white shadow-2xs" style={{ fontFamily: "'Times New Roman', Times, serif" }}>
-                          <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                          <ReactMarkdown rehypePlugins={[rehypeRaw]} components={components as any}>
                             {section.content}
                           </ReactMarkdown>
                         </div>
@@ -1463,18 +1511,25 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
                         </p>
                         <div className="whitespace-pre-wrap leading-relaxed text-sm sm:text-base" style={{ fontFamily: "'Times New Roman', Times, serif" }}>
                           {section.content.split('\n').map((line, lineIdx) => {
-                            const cleaned = cleanLatex(line.replace(/<\/?red>/g, '').replace(/<\/?green>/g, '').replace(/<\/?blue>/g, ''));
+                            const cleaned = cleanLatex(line.replace(/<\/?blue>/g, '').replace(/<\/?purple>/g, '').replace(/<\/?green>/g, '').replace(/<\/?orange>/g, '').replace(/<\/?red>/g, ''));
                             if (!cleaned.trim() || (cleaned.startsWith('===') && cleaned.endsWith('==='))) return null;
-                            const isGreen = line.includes('<green>');
                             const isBlue = line.includes('<blue>');
+                            const isPurple = line.includes('<purple>');
+                            const isGreen = line.includes('<green>');
+                            const isOrange = line.includes('<orange>');
                             const isRed = line.includes('<red>');
+
+                            let colorClass = 'text-slate-800';
+                            if (isBlue) colorClass = 'text-blue-700 font-bold';
+                            else if (isPurple) colorClass = 'text-purple-700 font-bold';
+                            else if (isGreen) colorClass = 'text-emerald-700 italic font-semibold';
+                            else if (isOrange) colorClass = 'text-amber-800 italic font-semibold';
+                            else if (isRed) colorClass = 'text-red-600 font-semibold';
 
                             return (
                               <div
                                 key={lineIdx}
-                                className={`font-semibold py-0.5 ${
-                                  isGreen ? 'text-emerald-700 italic' : isBlue ? 'text-blue-700 italic' : isRed ? 'text-red-600' : 'text-slate-800'
-                                }`}
+                                className={`py-0.5 ${colorClass}`}
                                 style={{ fontFamily: "'Times New Roman', Times, serif" }}
                               >
                                 {cleaned}

@@ -465,14 +465,11 @@ export const generateNLSLessonPlan = async (
     ? "CHẾ ĐỘ TÍCH HỢP: CHỈ TÍCH HỢP NĂNG LỰC SỐ THEO THÔNG TƯ 02/2025/TT-BGDĐT."
     : "CHẾ ĐỘ TÍCH HỢP: TÍCH HỢP SONG SONG CẢ NĂNG LỰC SỐ (TT 02/2025) VÀ NĂNG LỰC AI (QĐ 3439/QĐ-BGDĐT).";
 
-  const aiGradeGuidance = (options.integrationMode === 'AI' || options.integrationMode === 'BOTH' || !options.integrationMode)
-    ? getAIGradeGuidance(info.grade)
-    : "";
+  const needAI = options.integrationMode === 'AI' || options.integrationMode === 'BOTH';
 
-  const aiFrameworkPrompt = (options.integrationMode === 'AI' || options.integrationMode === 'BOTH' || !options.integrationMode)
-    ? `\n    ${AI_FRAMEWORK_DATA_QD3439}\n`
-    : "";
+  const aiGradeGuidance = needAI ? getAIGradeGuidance(info.grade) : "";
 
+  const aiFrameworkPrompt = needAI ? `\n    ${AI_FRAMEWORK_DATA_QD3439}\n` : "";
   const disabilityPrompt = options.includeDisabilitySupport
     ? `\n    ${DISABILITY_SUPPORT_INSTRUCTIONS}\n    DẠNG KHUYẾT TẬT CẦN HỖ TRỢ: ${
         options.disabilityType === 'INTELLECTUAL' ? 'Khuyết tật Trí tuệ / Khó khăn học tập' :
@@ -488,16 +485,33 @@ export const generateNLSLessonPlan = async (
     : "";
 
   // Tạo các câu quy tắc động theo đúng trạng thái Checkbox của người dùng
-  const isNlsActive = options.integrationMode !== 'NONE';
+  const mode = options.integrationMode || 'BOTH';
+  const isDigitalNLSActive = mode === 'NLS' || mode === 'BOTH';
+  const isAINLActive = mode === 'AI' || mode === 'BOTH';
+  const isNlsActive = isDigitalNLSActive || isAINLActive;
   const isDisabilityActive = !!options.includeDisabilitySupport;
   const isEnglishActive = !!options.includeEnglishIntegration;
 
-  const nlsStatusInstruction = isNlsActive
-    ? "1. NĂNG LỰC SỐ (<blue>) & AI (<purple>): BẬT -> BẮT BUỘC chèn NLS màu xanh dương trong thẻ <blue>...</blue> (hoặc AI trong thẻ <purple>...</purple>) và tạo BẢNG TỔNG HỢP NLS ở cuối bài."
-    : "1. NĂNG LỰC SỐ & AI: TẮT -> CẤM TUYỆT ĐỐI chèn chữ màu xanh dương (<blue>) hoặc màu tím (<purple>), CẤM tạo Bảng tổng hợp NLS cuối bài.";
+  let nlsStatusInstruction = "";
+  if (isDigitalNLSActive && isAINLActive) {
+    nlsStatusInstruction = "1. NĂNG LỰC SỐ (<blue>) & AI (<purple>): BẬT CẢ HAI -> BẮT BUỘC chèn NLS màu xanh dương trong thẻ <blue>...</blue> VÀ Năng lực AI trong thẻ <purple>...</purple>, đồng thời tạo BẢNG TỔNG HỢP NLS & AI ở cuối bài.";
+  } else if (isDigitalNLSActive) {
+    nlsStatusInstruction = "1. NĂNG LỰC SỐ (<blue>): CHỈ BẬT NLS -> BẮT BUỘC chèn NLS màu xanh dương trong thẻ <blue>...</blue> và tạo BẢNG TỔNG HỢP NLS ở cuối bài. CẤM TUYỆT ĐỐI dùng thẻ <purple> (màu tím), CẤM chèn bất kỳ mã Năng lực AI (NLa, NLb, NLc, NLd).";
+  } else if (isAINLActive) {
+    nlsStatusInstruction = "1. NĂNG LỰC AI (<purple>): CHỈ BẬT AI -> BẮT BUỘC chèn Năng lực AI màu tím trong thẻ <purple>...</purple> và tạo BẢNG TỔNG HỢP AI ở cuối bài. CẤM TUYỆT ĐỐI dùng thẻ <blue> (màu xanh dương), CẤM chèn các mã NLS thông thường (1.x, 2.x, 3.x, 4.x, 5.x).";
+  } else {
+    nlsStatusInstruction = "1. NĂNG LỰC SỐ & AI: TẮT -> CẤM TUYỆT ĐỐI chèn chữ màu xanh dương (<blue>) hoặc màu tím (<purple>), CẤM tạo Bảng tổng hợp NLS cuối bài.";
+  }
+
+  if (isEnglishActive) {
+    nlsStatusInstruction += "\n    LƯU Ý ĐỒNG THỜI: Tích hợp Tiếng Anh (<orange>) đang BẬT. Giữ <blue>/<purple> NLS/AI trên DÒNG RIÊNG, <orange> Tiếng Anh trên DÒNG RIÊNG. TUYỆT ĐỐI không gộp lẫn các thẻ trong cùng 1 câu.";
+  }
+  if (isDisabilityActive) {
+    nlsStatusInstruction += "\n    LƯU Ý ĐỒNG THỜI: Hỗ trợ HSKT (<green>) đang BẬT. Giữ <blue>/<purple> NLS/AI trên DÒNG RIÊNG, <green> HSKT trên DÒNG RIÊNG. TUYỆT ĐỐI không gộp lẫn các thẻ trong cùng 1 câu.";
+  }
 
   const disabilityStatusInstruction = isDisabilityActive
-    ? "2. HỖ TRỢ HSKT (<green>): BẬT -> BẮT BUỘC chèn câu hỗ trợ HSKT màu xanh lá trong thẻ <green>[Hỗ trợ HSKT: ...]</green>."
+    ? "2. HỖ TRỢ HSKT (<green>): BẬT -> BẮT BUỘC chèn câu hỗ trợ HSKT màu xanh lá trong thẻ <green>[Hỗ trợ HSKT: ...]</green> (trọng tâm Bước 1 & Bước 2, tối đa 1 câu/bước)."
     : "2. HỖ TRỢ HSKT (<green>): TẮT -> CẤM TUYỆT ĐỐI chèn bất kỳ nội dung HSKT nào, CẤM DÙNG THẺ <green>. Không được tự ý đưa HSKT vào.";
 
   const englishStatusInstruction = isEnglishActive
@@ -529,13 +543,13 @@ export const generateNLSLessonPlan = async (
     ${disabilityStatusInstruction}
     ${englishStatusInstruction}
 
-    ${options.analyzeOnly ? "- Analyze only, do not edit in detail." : needMarkersForSubFeatures ? "- DO NOT insert Digital Competence in blue (<blue>) or AI Competence in purple (<purple>). DO NOT generate DC summary tables.\n    - BUT YOU MUST STILL OUTPUT THE STRUCTURED MARKERS ===DC_OBJECTIVES=== AND ===DC_ACTIVITY_X_ORGANIZATION=== to wrap <green>Disability Support</green> and/or <orange>English Integration</orange> content for automated Word DOCX injection." : isNlsActive ? "- Edit the lesson plan and INTEGRATE COMPETENCIES into teaching activities." : "- Keep lesson plan structure and only process enabled items."}
+    ${options.analyzeOnly ? "- Analyze only, do not edit in detail." : needMarkersForSubFeatures ? "- DO NOT insert Digital Competence in blue (<blue>) or AI Competence in purple (<purple>). DO NOT generate DC summary tables.\n    - BUT YOU MUST STILL OUTPUT THE STRUCTURED MARKERS ===DC_OBJECTIVES=== AND ===DC_ACTIVITY_X_ORGANIZATION=== to wrap <green>Disability Support</green> and/or <orange>English Integration</orange> content for automated Word DOCX injection." : isNlsActive ? "- Edit the lesson plan and INTEGRATE ALL ENABLED COMPETENCIES (Digital Competence / AI / Disability Support / English) in parallel into teaching activities." : "- Keep lesson plan structure and only process enabled items."}
     ${options.detailedReport ? "- Include a detailed explanation table of selected competence codes at the end." : ""}
     
     FORMAT REQUIREMENTS (MANDATORY):
     1. PRESERVE ORIGINAL FORMATTING: You must keep bold (**text**), italic (*text*) formatting from the original text.
     2. TABLES: Use standard Markdown Table.
-    ${isNlsActive ? "3. DC ADDITIONS: Use <blue>...</blue> tags to mark digital competence content in blue (and <purple>...</purple> for AI competence in purple). Include indicator codes (e.g. 1.1.TC1a: or NLa.A1:)." : "3. DC ADDITIONS: DISABLED. DO NOT use <blue> or <purple> tags."}
+    ${isDigitalNLSActive && isAINLActive ? "3. DC & AI ADDITIONS: Use <blue>...</blue> tags for digital competence and <purple>...</purple> for AI competence. Include indicator codes (e.g. 1.1.TC1a: or NLc.C2:)." : isDigitalNLSActive ? "3. DC ADDITIONS: ONLY use <blue>...</blue> tags for digital competence (e.g. 1.1.TC1a:). ABSOLUTELY DO NOT use <purple> tags or AI codes." : isAINLActive ? "3. AI ADDITIONS: ONLY use <purple>...</purple> tags for AI competence (e.g. NLc.C2:). ABSOLUTELY DO NOT use <blue> tags or standard DC codes." : "3. DC & AI ADDITIONS: DISABLED. DO NOT use <blue> or <purple> tags."}
     ${isDisabilityActive ? "4. DISABILITY SUPPORT: Use <green>[Hỗ trợ HSKT: ...]</green> to mark inclusive education support in green." : "4. DISABILITY SUPPORT: DISABLED. ABSOLUTELY DO NOT use <green> tags or disability support."}
     ${isEnglishActive ? "5. ENGLISH INTEGRATION: Use <orange>[EN Instruction: ...]</orange> or similar tags based on the level in orange." : "5. ENGLISH INTEGRATION: DISABLED. ABSOLUTELY DO NOT use <orange> tags or English content."}
     6. LOCATION: Insert in Objectives under "2. Competence". For activities, ONLY insert into section "d) Organization" (or steps under Organization). DO NOT insert into Content, Outcomes, or Objectives of activities.
@@ -563,14 +577,23 @@ export const generateNLSLessonPlan = async (
     ${englishStatusInstruction}
 
     YÊU CẦU XỬ LÝ NỘI DUNG:
-    ${options.analyzeOnly ? "- Chỉ phân tích, không chỉnh sửa chi tiết." : needMarkersForSubFeatures ? "- KHÔNG chèn Năng lực số màu xanh (<blue>) hay Năng lực AI màu tím (<purple>), KHÔNG tạo Bảng tổng hợp NLS ở cuối bài.\n    - NHƯNG BẮT BUỘC PHẢI TẠO CÁC MARKER ===NLS_MỤC_TIÊU=== VÀ ===NLS_HOẠT_ĐỘNG_X_TỔ_CHỨC=== (hoặc ===NLS_HOẠT_ĐỘNG_X_BƯỚC_Y===) để bọc nội dung được BẬT (HSKT hoặc Tiếng Anh) phục vụ chèn tự động vào file Word (.docx)." : isNlsActive ? "- Chỉnh sửa giáo án và TÍCH HỢP NĂNG LỰC SỐ / AI vào phần d. Tổ chức thực hiện của các hoạt động dạy học." : "- Giữ nguyên khung bài dạy, chỉ xử lý hạng mục được BẬT."}
+    ${options.analyzeOnly ? "- Chỉ phân tích, không chỉnh sửa chi tiết." : needMarkersForSubFeatures ? "- KHÔNG chèn Năng lực số màu xanh (<blue>) hay Năng lực AI màu tím (<purple>), KHÔNG tạo Bảng tổng hợp NLS ở cuối bài.\n    - NHƯNG BẮT BUỘC PHẢI TẠO CÁC MARKER ===NLS_MỤC_TIÊU=== VÀ ===NLS_HOẠT_ĐỘNG_X_TỔ_CHỨC=== (hoặc ===NLS_HOẠT_ĐỘNG_X_BƯỚC_Y===) để bọc nội dung được BẬT (HSKT hoặc Tiếng Anh) phục vụ chèn tự động vào file Word (.docx)." : (() => {
+        const tasks: string[] = [];
+        if (isDigitalNLSActive && isAINLActive) tasks.push("TÍCH HỢP SONG SONG cả Năng lực số (<blue>) và Năng lực AI (<purple>) vào phần d. Tổ chức thực hiện");
+        else if (isDigitalNLSActive) tasks.push("TÍCH HỢP NĂNG LỰC SỐ (<blue>) vào phần d. Tổ chức thực hiện (CẤM dùng thẻ <purple> hay mã AI)");
+        else if (isAINLActive) tasks.push("TÍCH HỢP NĂNG LỰC AI (<purple>) vào phần d. Tổ chức thực hiện (CẤM dùng thẻ <blue> hay mã NLS thông thường)");
+        if (isDisabilityActive) tasks.push("ĐỒNG THỜI chèn câu HỖ TRỢ HSKT (<green>) vào đúng các bước của hoạt động (trọng tâm Bước 1 & Bước 2, tối đa 1 câu/bước)");
+        if (isEnglishActive) tasks.push("ĐỒNG THỜI chèn nội dung TÍCH HỢP TIẾNG ANH (<orange>) vào các hoạt động theo đúng cấp độ");
+        if (tasks.length === 0) return "- Giữ nguyên khung bài dạy, chỉ xử lý định dạng.";
+        return "- Chỉnh sửa giáo án, THỰC HIỆN SONG SONG ĐẦY ĐỦ CÁC MỤC ĐƯỢC BẬT:\n" + tasks.map(t => "      + " + t).join("\n");
+      })()}
     ${options.detailedReport ? "- Kèm theo bảng giải thích chi tiết mã năng lực đã chọn ở cuối bài." : ""}
     
     YÊU CẦU VỀ ĐỊNH DẠNG VÀ VỊ TRÍ TRÍCH DẪN (BẮT BUỘC):
     1. GIỮ NGUYÊN ĐỊNH DẠNG GỐC: Bạn phải giữ nguyên các đoạn in đậm (**text**), in nghiêng (*text*) của văn bản gốc. Không được làm mất định dạng này.
     2. TOÁN HỌC: Tất cả công thức toán phải viết dạng LaTeX trong dấu $. Ví dụ: $x^2$. Không dùng unicode.
     3. BẢNG: Sử dụng Markdown Table chuẩn.
-    ${isNlsActive ? "4. NLS & AI BỔ SUNG: Dùng thẻ <blue>...</blue> để đánh dấu màu xanh dương nội dung NLS, thẻ <purple>...</purple> cho nội dung AI. Giữ nguyên Mã chỉ báo NLS/AI (ví dụ: 1.1.TC1a:, NLc.C2:) trước mỗi ý." : "4. NLS & AI BỔ SUNG: TẮT. KHÔNG DÙNG THẺ <blue> HOẶC <purple>."}
+    ${isDigitalNLSActive && isAINLActive ? "4. NLS & AI BỔ SUNG: Dùng thẻ <blue>...</blue> để đánh dấu màu xanh dương nội dung NLS, thẻ <purple>...</purple> cho nội dung AI. Giữ nguyên Mã chỉ báo NLS/AI (ví dụ: 1.1.TC1a:, NLc.C2:) trước mỗi ý." : isDigitalNLSActive ? "4. NLS BỔ SUNG: CHỈ dùng thẻ <blue>...</blue> để đánh dấu màu xanh dương nội dung NLS (ví dụ: 1.1.TC1a:). CẤM TUYỆT ĐỐI dùng thẻ <purple> hoặc mã Năng lực AI (NLa, NLb, NLc, NLd)." : isAINLActive ? "4. AI BỔ SUNG: CHỈ dùng thẻ <purple>...</purple> để đánh dấu màu tím nội dung AI (ví dụ: NLc.C2:). CẤM TUYỆT ĐỐI dùng thẻ <blue> hoặc mã NLS thông thường." : "4. NLS & AI BỔ SUNG: TẮT. KHÔNG DÙNG THẺ <blue> HOẶC <purple>."}
     ${isDisabilityActive ? "5. HỖ TRỢ HSKT: Dùng thẻ <green>...</green> để đánh dấu màu xanh lá hỗ trợ HSKT." : "5. HỖ TRỢ HSKT: TẮT. CẤM TUYỆT ĐỐI DÙNG THẺ <green> VÀ CẤM TỰ Ý THÊM HSKT."}
     ${isEnglishActive ? "6. TÍCH HỢP TIẾNG ANH: Dùng thẻ <orange>...</orange> để đánh dấu màu cam nội dung tiếng Anh." : "6. TÍCH HỢP TIẾNG ANH: TẮT. CẤM TUYỆT ĐỐI DÙNG THẺ <orange> VÀ CẤM TỰ Ý THÊM TIẾNG ANH."}
     7. CHUẨN MÃ NLS THEO KHỐI LỚP & MÔN HỌC: Lớp 1-3 chỉ chọn mã CB1/CB2; Lớp 4-6 chọn CB2/TC1; Lớp 7-9 chọn TC1/TC2; Lớp 10-12 chọn TC2/NC1.
@@ -578,49 +601,45 @@ export const generateNLSLessonPlan = async (
        - Mỗi Marker '===NLS_...===' PHẢI đính kèm thông tin '|VITRI:...' trích dẫn chính xác dòng/câu liền trước trong giáo án gốc của giáo viên.
        - Ví dụ Marker: '===NLS_HOẠT_ĐỘNG_1_BƯỚC_2|VITRI: Hoạt động 1 > d. Tổ chức thực hiện > Bước 2 > Sau dòng: "GV yêu cầu HS sử dụng GeoGebra..."==='
        - Phần I. Mục tiêu: Chèn ở cuối mục "2. Năng lực" (trước mục 3. Phẩm chất). Nếu không bật NLS thì chèn tiêu đề HSKT (<green>...</green>) và/hoặc Tiếng Anh (<orange>...</orange>).
-       - Các hoạt động dạy học: CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" (hoặc các Bước/Nhiệm vụ trong Tổ chức thực hiện). TUYỆT ĐỐI KHÔNG chèn vào phần Mục tiêu, Nội dung, hay Sản phẩm của các hoạt động.
+       - Các hoạt động dạy học: CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" (hoặc các Bước/Nhiệm vụ trong Tổ chức thực hiện). TUYỆT ĐỐI CẤM chèn bất kỳ thẻ màu nào (<blue>, <purple>, <green>, <orange>) vào phần Mục tiêu, Nội dung, hay Sản phẩm của các hoạt động.
      9. PHÂN BỔ NLS/AI THEO ĐÚNG BƯỚC – BẮT BUỘC TUÂN THỦ (căn cứ CV 3456/BGDĐT & QĐ 3439):
        ⭐ NLS (<blue>) VÀ NĂNG LỰC AI (<purple>) LUÔN LUÔN LÀ NĂNG LỰC CỦA HỌC SINH. GV chỉ tổ chức/hướng dẫn, KHÔNG phát triển NLS/AI. Câu chỉ báo PHẢI có chủ thể HS.
-       - Bước 1 (Chuyển giao nhiệm vụ – GV giao bài): CHỈ chèn khi GV dùng học liệu SỐ (video, slide, Kahoot/Quizizz). CẤM chèn khi GV chỉ nói miệng / viết bảng / phát phiếu giấy.
+       - Bước 1 (Chuyển giao nhiệm vụ – GV giao bài): CHỈ chèn khi HS CHỦ ĐỘNG THAO TÁC thiết bị / học liệu số (HS trực tiếp bấm Quizizz/Kahoot, truy cập Classroom/LMS nhận bài, hoặc chủ động trích xuất thông tin cụ thể từ video theo yêu cầu). CẤM chèn khi GV chỉ chiếu video/slide cho HS xem thụ động (đây là việc của GV, không tính là NLS của HS), GV chỉ nói miệng hoặc phát phiếu giấy.
        - Bước 2 (Thực hiện nhiệm vụ – HS làm): ĐÂY LÀ BƯỚC TRỌNG TÂM – chèn khi HS dùng bất kỳ công cụ số (GeoGebra, PhET, MTCT, Google Docs, tìm kiếm web, AI Chatbot...). CẤM chèn khi HS chỉ làm tay / thảo luận miệng.
        - Bước 3 (Báo cáo, thảo luận – HS trình bày): Chèn khi HS chia sẻ qua nền tảng số (Padlet, Google Slides, TV số...). CẤM chèn khi HS chỉ trình bày miệng / lên bảng đen.
        - Bước 4 (Đánh giá, kết luận – GV chốt): MẶC ĐỊNH KHÔNG CHÈN NLS. Chỉ chèn khi GV/HS thực sự dùng AI / phần mềm số để phản biện hoặc tự đánh giá kết quả (rất hiếm gặp).
        - Vị trí ngay dưới "d. Tổ chức thực hiện" (trước Bước 1): CHỈ dùng khi NLS/AI xuyên suốt NHIỀU BƯỚC hoặc TOÀN BỘ hoạt động (VD: Kahoot toàn hoạt động, Google Classroom nộp bài online xuyên suốt). KHÔNG dùng để đặt NLS chỉ xảy ra ở 1 bước đơn lẻ.
-     10. PHÂN BIỆT NLS THEO LOẠI HOẠT ĐỘNG DẠY HỌC (CV 5512 – BẮT BUỘC):
-        Nhận diện tên/tiêu đề hoạt động, áp dụng đúng mã NLS và cách viết phù hợp đặc thù sư phạm:
+      10. PHÂN BIỆT VÀ TÍCH HỢP NLS THEO LOẠI HOẠT ĐỘNG DẠY HỌC (CV 5512 & CV 3456 – BẮT BUỘC):
+         Mục tiêu là CHUYỂN ĐỔI VÀ TÍCH HỢP NLS VÀO BÀI DẠY. AI chủ động phân tích bài học để tích hợp NLS vừa sức theo từng hoạt động:
 
-        [LUYỆN TẬP / Thực hành / Củng cố / Bài tập]:
-        - HS ĐÃ CÓ KIẾN THỨC NỀN → tự lực làm bài tập ĐÓNG (có đáp án chuẩn). GV chỉ theo dõi, hỗ trợ khi cần, KHÔNG dạy kiến thức mới.
-        - TUYỆT ĐỐI KHÔNG dùng VẾ KÉP "GV hướng dẫn mới → HS" (sai hoàn toàn ở Luyện tập).
-        - KHÔNG dùng mã khám phá mới: 1.2 (đánh giá nguồn mới), 1.3, NLd.D1 (nhận diện vấn đề thực tiễn).
-        - Cách viết BẮT BUỘC: VẾ ĐƠN "HS tự [kiểm tra/chia sẻ] bằng [công cụ số cụ thể] để củng cố kết quả".
-        - 🚫 TUYỆT ĐỐI KHÔNG TỰ BỊA THÊM công cụ số (Quizizz, Kahoot, Padlet, Google Docs...) nếu giáo án gốc KHÔNG đề cập.
+         [MỞ ĐẦU / Khởi động]:
+         - Tích hợp trò chơi tương tác số (Quizizz/Kahoot/lật ô số trên màn chiếu) → Mã 2.1(B1 hoặc Vị trí 1).
+         - Quan sát hình ảnh/video số mở đầu và trích xuất dữ liệu trả lời câu hỏi → Mã 1.1(B1). Bước 4 mặc định không chèn.
 
-        NHÓM-LT1 (Truyền thống: trả lời miệng, phiếu giấy, ghép nối giấy, thảo luận miệng):
-        ⇒ KHÔNG CHÈN BẤT KỲ NLS NÀO. KHÔNG tự thêm Quizizz/Kahoot/Padlet/Docs nếu GA gốc không đề cập.
+         [HÌNH THÀNH KIẾN THỨC MỚI (HTKM) – TRỌNG TÂM BÀI HỌC]:
+         - 🌟 BẮT BUỘC TÍCH HỢP NLS VÀO BƯỚC 2 (Thực hiện nhiệm vụ):
+           + Khai thác học liệu số / hình ảnh số phóng to / kính hiển vi ảo / video khoa học / mô phỏng 3D / PhET → Mã 5.2.TC1a hoặc 5.3.TC1a(B2).
+           + Tra cứu dữ liệu Internet bổ sung cho SGK theo hướng dẫn → Mã 1.1.TC1a(B2).
+           + Dùng phần mềm chuyên ngành: MTCT Casio kiểm tra tính toán → 5.2.TC1a(B2); GeoGebra vẽ hình/đồ thị → 5.2/5.3(B2); AI tra cứu (nếu bật AI) → NLc.C2(B2).
+           + Hợp tác nhóm số: thảo luận trên bảng nhóm số / Padlet / Google Docs → Mã 2.4.TC1a hoặc 3.1.CB1a(B2).
+         - Cách viết Bước 2: VẾ KÉP "GV hướng dẫn HS sử dụng [công cụ/học liệu số] → HS thao tác [hành động số cụ thể] để rút ra kiến thức".
 
-        NHÓM-LT2 (Có công cụ số ghi rõ trong GA gốc - GA nhắc tên phần mềm/nền tảng cụ thể):
-        ⇒ CHÈN NLS đúng mã: Quizizz/Kahoot→2.1(B1 hoặc Vị trí 1); MTCT/GeoGebra→5.2(B2); AI chatbot→NLc.C2(B2); Padlet→2.2(B3); Docs→2.4(B2); GForms/Classroom→2.2(B3).
+         [LUYỆN TẬP / Thực hành / Củng cố / Bài tập]:
+         - Tích hợp bài tập trắc nghiệm số / câu hỏi củng cố (Quizizz, Kahoot, Google Forms) → Mã 2.1.TC1a(B1 hoặc Vị trí 1).
+         - Tích hợp công cụ kiểm tra kết quả (MTCT Casio, GeoGebra, bảng tính) → Mã 5.2.TC1a(B2).
+         - Chia sẻ đáp án/phiếu học tập nhóm qua Padlet/màn hình số → Mã 2.2.TC1a(B3).
+         - Cách viết: VẾ ĐƠN "HS tự [thao tác số/kiểm tra] bằng [công cụ số] để củng cố kết quả".
 
-        NHÓM-LT3 (Thực hành đo đạc + ghi vào bảng tính số đã ghi trong GA gốc):
-        ⇒ CHÈN 5.2(B2). HS chỉ ghi vở/bảng giấy ⇒ KHÔNG CHÈN.
+         [VẬN DỤNG / Áp dụng thực tiễn / Dự án mở]:
+         - Tích hợp tìm kiếm thông tin thực tế mở rộng → Mã 1.1.TC1a(B2).
+         - Tích hợp tạo sản phẩm số: thiết kế poster / sơ đồ tư duy / bài trình chiếu bằng Canva / PowerPoint → Mã 3.1.TC1a hoặc 3.1.CB1a(B2).
+         - Tích hợp chia sẻ và nộp bài qua Google Classroom / Padlet / Zalo lớp → Mã 2.2.TC1a(B3). Tối đa 2-3 NLS.
 
-        [VẬN DỤNG / Áp dụng thực tiễn / Dự án mở]:
-        - HS HOÀN TOÀN TỰ CHỦ. Tình huống MỞ. KHÔNG ép đủ 4 bước. TỐI ĐA 2-3 NLS.
-        - KHÔNG dùng 5.2 MTCT kiểm tra nghiệm. KHÔNG VẾ KÉP "GV hướng dẫn → HS".
-        VD-1 (Giao về nhà/dự án - dấu hiệu: "về nhà","dự án","nghiên cứu thêm"): 1.1(B2), 3.1(B2), 2.2(B3). B1 chỉ chèn nếu GV giao qua nền tảng số.
-        VD-2 (Tạo sản phẩm - dấu hiệu: "báo cáo","video","poster","sơ đồ","thuyết trình"): 3.1(B2), 2.2(B3), 2.4(B2 nếu nhóm).
-        VD-3 (Giải pháp thực tiễn - dấu hiệu: "đề xuất","thiết kế","ứng dụng AI","giải quyết vấn đề"): NLd.D1(B2), NLa.A3(B2), 1.1(B2).
-        VD-4 (Thực hành đơn giản trong lớp - dấu hiệu: "thực hành","đo","quan sát"): CHỈ 1 NLS - 3.1 (quay video ngắn → nộp Classroom). KHÔNG bịa thêm.
-        Bước 4: MẶC ĐỊNH KHÔNG CHÈN (GV nhận xét ở tiết sau hoặc ngoài lớp).
-
-     11. QUY TẮC ĐPQ – ĐỌC–PHÂN TÍCH–QUYẾT ĐỊNH (BẮT BUỘC TRƯỚC MỌI QUYẾT ĐỊNH CHÈN NLS):
-        B1-ĐỌC: "GV làm gì? HS làm gì? Có tên công cụ/phần mềm/nền tảng số nào được nhắc đến trong GA gốc không?"
-        B2-PHÂN TÍCH: TH-A (có công cụ số thực sự trong GA gốc) / TH-B (Vận dụng mở, đủ điều kiện đề xuất) / TH-C (truyền thống, không có công cụ số)?
-        B3-QUYẾT ĐỊNH: TH-A ⇒ CHÈN đúng mã | TH-B ⇒ CHÈN tối đa 3 NLS theo nhóm VD | TH-C ⇒ KHÔNG CHÈN, không bịa công cụ số.
-        🚨 QUY TẮC VÀNG: "KHÔNG BAO GIỜ TỰ THÊM CÔNG CỤ SỐ (Quizizz, Kahoot, Padlet, Google Docs, GeoGebra...) vào Mở đầu/HTKM/Luyện tập nếu GA gốc KHÔNG ĐỀ CẬP. Chỉ Vận dụng mới được phép đề xuất công cụ mới."
-    
-
+      11. NGUYÊN TẮC TÍCH HỢP ĐÚNG - TRÚNG - ĐỦ & KHÓA CHẶT VỊ TRÍ CHÈN (BẮT BUỘC):
+         - ĐÚNG: Chuẩn mã NLS theo cấp học (Lớp 1-3: CB1/CB2; Lớp 4-6: CB2/TC1; Lớp 7-9: TC1/TC2; Lớp 10-12: TC2/NC1).
+         - TRÚNG: Công cụ số gắn liền với nội dung bài (KHTN dùng kính hiển vi ảo/ảnh số; Toán dùng GeoGebra, MTCT; Văn/Sử/Địa dùng tra cứu, bản đồ số).
+         - ĐỦ: Mỗi kế hoạch bài dạy PHẢI TÍCH HỢP NLS TỪ 2–4 HOẠT ĐỘNG, phân bổ đều ở HTKM (trọng tâm), Luyện tập và Vận dụng. Tuyệt đối không dồn toàn bộ NLS vào chỉ 1 hoạt động Vận dụng.
+         - 🚫 KHÓA CHẶT VỊ TRÍ CHÈN: TUYỆT ĐỐI CẤM chèn bất kỳ thẻ màu nào (<blue>, <purple>, <green>, <orange>) vào mục "a. Mục tiêu", "b. Nội dung", hoặc "c. Sản phẩm" của hoạt động. CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" (hoặc các Bước 1, 2, 3 bên trong Tổ chức thực hiện).
     LƯU Ý VỀ TÍCH HỢP HOẠT ĐỘNG (KHI CÓ PPCT):
     - Các hoạt động dạy học (trong phần Tiến trình) cũng chỉ được thiết kế xoay quanh các năng lực số đã trích xuất từ PPCT. Không thiết kế hoạt động cho các năng lực nằm ngoài PPCT.
     

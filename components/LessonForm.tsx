@@ -191,27 +191,27 @@ const LessonForm: React.FC<LessonFormProps> = ({
             type="checkbox"
             checked={includeEnglishIntegration}
             onChange={(e) => setIncludeEnglishIntegration(e.target.checked)}
-            className="w-5 h-5 text-indigo-600 rounded-lg border-slate-300 focus:ring-indigo-500 focus:ring-offset-0 transition-transform group-hover:scale-105"
+            className="w-5 h-5 text-amber-600 rounded-lg border-slate-300 focus:ring-amber-500 focus:ring-offset-0 transition-transform group-hover:scale-105"
           />
-          <span className="text-sm sm:text-base font-bold text-slate-800 flex items-center group-hover:text-indigo-700 transition-colors">
+          <span className="text-sm sm:text-base font-bold text-slate-800 flex items-center group-hover:text-amber-700 transition-colors">
             <span className="text-xl mr-2">🇬🇧</span>
-            Tích hợp Tiếng Anh (Ngôn ngữ thứ 2) <span className="ml-2 text-xs font-medium px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">QĐ 2371/2025</span>
+            Tích hợp Tiếng Anh (Ngôn ngữ thứ 2) <span className="ml-2 text-xs font-medium px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">QĐ 2371/2025</span>
           </span>
         </label>
 
         {includeEnglishIntegration && (
-          <div className="p-4 bg-indigo-50/70 border border-indigo-200/80 rounded-2xl space-y-2.5 text-left animate-fadeIn shadow-sm">
-            <label className="block text-xs font-bold uppercase tracking-wider text-indigo-950">
+          <div className="p-4 bg-amber-50/70 border border-amber-200/80 rounded-2xl space-y-2.5 text-left animate-fadeIn shadow-sm">
+            <label className="block text-xs font-bold uppercase tracking-wider text-amber-950">
               Mức độ tích hợp Tiếng Anh (CLIL):
             </label>
             <select
               value={englishIntegrationLevel}
               onChange={(e) => setEnglishIntegrationLevel(e.target.value as import('../types').EnglishIntegrationLevel)}
-              className="block w-full rounded-xl border-indigo-300 bg-white p-3 text-xs sm:text-sm font-bold text-indigo-950 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 cursor-pointer shadow-sm"
+              className="block w-full rounded-xl border-amber-300 bg-white p-3 text-xs sm:text-sm font-bold text-amber-950 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 cursor-pointer shadow-sm"
             >
-              <option value="BASIC">🟢 Cấp độ 1 (Cơ bản): Tích hợp từ vựng song ngữ (Key Vocabulary)</option>
-              <option value="INTER">🔵 Cấp độ 2 (Trung cấp): Tích hợp Câu lệnh lớp học (Classroom Instructions)</option>
-              <option value="CLIL">🟣 Cấp độ 3 (Nâng cao): Soạn bài theo chuẩn CLIL toàn diện</option>
+              <option value="BASIC">🔸 Cấp độ 1 (Cơ bản): Tích hợp từ vựng song ngữ (Key Vocabulary)</option>
+              <option value="INTER">🔶 Cấp độ 2 (Trung cấp): Tích hợp Câu lệnh lớp học (Classroom Instructions)</option>
+              <option value="CLIL">🌐 Cấp độ 3 (Nâng cao): Soạn bài theo chuẩn CLIL toàn diện</option>
             </select>
           </div>
         )}

@@ -219,10 +219,11 @@ NGUYÊN TẮC NGHIÊM NGẶT:
 6. QUY TẮC ĐẶT NLS/AI VÀO ĐÚNG BƯỚC (linh hoạt theo nội dung – BẮT BUỘC TUÂN THỦ):
    ⭐ NGUYÊN TẮC CỐT LÕI: NLS (<blue>) VÀ NĂNG LỰC AI (<purple>) LUÔN LUÔN LÀ NĂNG LỰC CỦA HỌC SINH (HS). GV chỉ là người tổ chức, hướng dẫn, tạo điều kiện. GV KHÔNG phát triển NLS/AI. Câu chỉ báo NLS/AI PHẢI có chủ thể HS: "HS [hành động số] để [mục đích học tập]".
    - Chỉ chèn NLS/AI vào bước CÓ hoạt động số/AI thực sự xảy ra, không chèn bừa vào mọi bước.
-   - Bước 1 (Chuyển giao nhiệm vụ – GV giao bài):
-     ✅ CHỈ chèn khi GV dùng học liệu SỐ cụ thể (video, slide chiếu, hình ảnh số, Kahoot/Quizizz đặt câu hỏi khởi động) để giao nhiệm vụ cho HS.
-     ❌ CẤM chèn khi GV chỉ nói miệng / viết bảng / phát phiếu học tập in giấy (không có công cụ số).
-     Ưu tiên mã: 1.1 (HS tiếp nhận thông tin số từ học liệu GV cung cấp), NLc.C2 (HS làm quen ứng dụng AI)
+    - Bước 1 (Chuyển giao nhiệm vụ – GV giao bài):
+      ⭐ NGUYÊN TẮC CV 3456: NLS là của HS. Chỉ phát triển khi HS CHỦ ĐỘNG THAO TÁC / KHAI THÁC công cụ số, KHÔNG tính hành động GV thao tác máy.
+      ✅ CHỈ chèn khi HS CHỦ ĐỘNG THAO TÁC thiết bị, học liệu số: HS trực tiếp bấm Quizizz/Kahoot trên thiết bị (2.1), HS đăng nhập Google Classroom/LMS nhận bài (2.1), hoặc HS được giao nhiệm vụ chủ động trích xuất dữ liệu cụ thể từ video/hình ảnh số (1.1).
+      ❌ CẤM chèn khi GV chỉ chiếu video/slide cho HS ngồi xem thụ động (đây là thao tác của GV, HS không phát triển NLS), GV chỉ nói miệng, viết bảng hoặc phát phiếu giấy.
+      Ưu tiên mã: 2.1 (HS tương tác Quizizz/Kahoot/LMS), 1.1 (HS chủ động trích xuất dữ liệu từ học liệu số), NLc.C2 (HS làm quen ứng dụng AI)
    - Bước 2 (Thực hiện nhiệm vụ – HS làm việc): ĐÂY LÀ BƯỚC TRỌNG TÂM CHÈN NLS NHIỀU NHẤT.
      ✅ Chèn khi HS dùng bất kỳ công cụ số: GeoGebra, PhET, MTCT Casio, Google Docs nhóm, tìm kiếm web, AI Chatbot, Padlet chia sẻ nhóm...
      ❌ CẤM chèn khi HS chỉ làm bài tay / vở bài tập truyền thống / thảo luận miệng không dùng công cụ số.
@@ -258,107 +259,48 @@ NGUYÊN TẮC NGHIÊM NGẶT:
 
    ⚠️ LƯU Ý: Một hoạt động CÓ THỂ có cả VỊ TRÍ 1 (khi NLS xuyên suốt cả hoạt động, VD Kahoot) VÀ VỊ TRÍ 2 (xen kẽ trong Bước 2 sau các Ví dụ/Bài tập cụ thể, VD GeoGebra) nếu có cả 2 tình huống trên.
 
-8. QUY TẮC PHÂN BIỆT NLS THEO LOẠI HOẠT ĐỘNG DẠY HỌC (CV 5512 – BẮT BUỘC):
-   Khi nhận diện tên/tiêu đề hoạt động, phân tích đúng đặc thù sư phạm rồi chọn mã NLS và cách viết phù hợp:
+8. QUY TẮC PHÂN BIỆT VÀ TÍCH HỢP NLS THEO LOẠI HOẠT ĐỘNG DẠY HỌC (CV 5512 & CV 3456 – BẮT BUỘC):
+   Mục tiêu của kế hoạch bài dạy là CHUYỂN ĐỔI VÀ TÍCH HỢP NĂNG LỰC SỐ VÀO CÁC HOẠT ĐỘNG DẠY HỌC. AI chủ động phân tích nội dung chuyên môn bài học để tích hợp các hoạt động số thiết thực, vừa sức theo từng loại hoạt động:
 
    A. HOẠT ĐỘNG MỞ ĐẦU (Khởi động, Tạo tình huống có vấn đề):
-      - Mục đích: Kết nối kiến thức cũ, kích thích tò mò, dẫn dắt vào bài mới.
-      - CHỈ chèn NLS nếu GV dùng học liệu số (video YouTube, slide số, Kahoot/Quizizz khởi động).
-      - Ưu tiên mã: 1.1 (HS tiếp nhận thông tin số từ học liệu GV), 2.1 (tương tác Kahoot/Quizizz), NLc.C2 (làm quen AI).
-      - Bước 4 thường KHÔNG chèn NLS (GV chỉ dẫn dắt vào bài, không cần công cụ số).
+      - Mục đích: Kết nối kiến thức cũ, kích thích tò mò, tạo tâm thế vào bài mới.
+      - TÍCH HỢP NLS:
+        + Nếu có trò chơi khởi động / câu hỏi trắc nghiệm: Tích hợp trò chơi tương tác số (Quizizz, Kahoot, trò chơi lật ô số trên màn chiếu/phần mềm trình chiếu) → Mã 2.1 (HS tương tác thiết bị số).
+        + Nếu có tình huống thực tế / video / hình ảnh mở đầu: HS quan sát học liệu số và chủ động trích xuất dữ liệu trả lời câu hỏi vào bài → Mã 1.1 (Tiếp nhận/trích xuất dữ liệu số).
+      - Cách viết: Nhấn mạnh thao tác số của HS. Bước 4 mặc định KHÔNG chèn NLS (GV chỉ dẫn dắt vào bài).
 
-   B. HOẠT ĐỘNG HÌNH THÀNH KIẾN THỨC MỚI (HTKM, Khám phá, Tìm hiểu):
-      - Mục đích: HS chủ động khám phá, phân tích, rút ra kiến thức mới.
-      - Bước 2 là TRỌNG TÂM chèn NLS (HS dùng GeoGebra/PhET/MTCT/AI khám phá).
-      - Ưu tiên mã: 5.2, 5.3 (GeoGebra/PhET/MTCT), 2.4 (hợp tác nhóm qua Docs/Padlet), 3.1 (tạo nội dung khám phá), NLc.C2 (AI hỗ trợ học).
-      - Cách viết: VẾ KÉP "GV hướng dẫn [công cụ số cụ thể] → HS thực hiện [thao tác số/rút ra kết luận]" — hợp lý vì GV đang dạy kiến thức mới.
+   B. HOẠT ĐỘNG HÌNH THÀNH KIẾN THỨC MỚI (HTKM, Khám phá, Tìm hiểu – TRỌNG TÂM BÀI HỌC):
+      - Mục đích: HS chủ động khám phá, phân tích, rút ra kiến thức cốt lõi của bài học.
+      - 🌟 BẮT BUỘC TÍCH HỢP NLS VÀO BƯỚC 2 (Thực hiện nhiệm vụ):
+        + Khai thác học liệu số: HS quan sát hình ảnh số phóng to, video khoa học, kính hiển vi ảo, thí nghiệm ảo PhET, phần mềm mô phỏng 3D để rút ra đặc điểm/khái niệm → Mã 5.2.TC1a hoặc 5.3.TC1a.
+        + Tra cứu thông tin số: HS tìm kiếm dữ liệu trên Internet bổ sung cho SGK theo định hướng của GV → Mã 1.1.TC1a.
+        + Sử dụng công cụ số chuyên ngành: MTCT Casio kiểm tra tính toán (Toán/Lý/Hóa) → Mã 5.2.TC1a; GeoGebra vẽ hình/đồ thị → Mã 5.2/5.3; AI chatbot tra cứu/hỗ trợ học (nếu bật AI) → Mã NLc.C2.
+        + Hợp tác nhóm số: HS làm việc nhóm trên bảng nhóm số / Padlet / Google Docs → Mã 2.4.TC1a hoặc 3.1.CB1a.
+      - Cách viết: VẾ KÉP ở Bước 2: "GV hướng dẫn HS sử dụng [công cụ/học liệu số] → HS thao tác [hành động số cụ thể] để rút ra kiến thức".
 
    C. HOẠT ĐỘNG LUYỆN TẬP (Thực hành, Củng cố, Bài tập):
-      - Mục đích: HS tự CỦNG CỐ kiến thức VỪA HỌC bằng bài tập ĐÓNG (có đáp án chuẩn).
-      - ⚠️ HS ĐÃ CÓ KIẾN THỨC NỀN → tự lực giải quyết; GV chỉ theo dõi, hỗ trợ khi cần (KHÔNG dạy mới).
-      - ❌ TUYỆT ĐỐI KHÔNG dùng VẾ KÉP "GV hướng dẫn mới → HS" ở Luyện tập.
-      - ❌ KHÔNG dùng mã khám phá mới (1.2 đánh giá nguồn mới, 1.3 quản lý dữ liệu, NLd.D1 nhận diện vấn đề).
-      - 🚫 TUYỆT ĐỐI KHÔNG TỰ BỊA THÊM công cụ số (Quizizz, Kahoot, Padlet, Google Docs...) nếu giáo án gốc KHÔNG đề cập. Chỉ chèn NLS khi công cụ số ĐÃ CÓ THỰC SỰ trong nội dung giáo án gốc.
-
-      PHÂN LOẠI 3 NHÓM LUYỆN TẬP – áp dụng theo đúng nhóm:
-
-      [NHÓM 1 – TRUYỀN THỐNG – Không có công cụ số]:
-      Dấu hiệu nhận biết: HS trả lời miệng / điền phiếu giấy / ghép nối trên giấy / thảo luận nhóm miệng / GV hỏi HS phát biểu.
-      → ❌ KHÔNG CHÈN BẤT KỲ NLS NÀO. Đây là hoạt động truyền thống, không có công cụ số.
-      → ❌ Không được thêm Quizizz/Kahoot/Padlet vào nếu GA gốc không nhắc đến.
-
-      [NHÓM 2 – CÓ CÔNG CỤ SỐ – Đã ghi trong giáo án gốc]:
-      Dấu hiệu nhận biết: GA gốc có nhắc trực tiếp đến tên phần mềm/nền tảng số.
-      → ✅ CHÈN NLS với mã phù hợp:
-         - GV tổ chức Quizizz/Kahoot (GHI TRONG GA): mã 2.1 – Bước 1 hoặc Vị trí 1 (nếu xuyên suốt)
-         - HS dùng MTCT Casio làm/kiểm tra bài tập: mã 5.2 – Bước 2
-         - HS dùng GeoGebra/Desmos kiểm tra kết quả: mã 5.2 – Bước 2
-         - HS cộng tác Google Docs giải bài chung: mã 2.4 – Bước 2
-         - HS chia sẻ đáp án qua Padlet (GA có ghi): mã 2.2 – Bước 3
-         - HS nộp bài qua Google Forms/Classroom: mã 2.2 – Bước 3
-         - HS dùng AI chatbot tự kiểm tra: mã NLc.C2 – Bước 2
-      → Cách viết: VẾ ĐƠN "HS tự [kiểm tra/chia sẻ] bằng [công cụ số cụ thể] để củng cố kết quả".
-
-      [NHÓM 3 – THỰC HÀNH ĐO ĐẠC – Có thể kết hợp bảng tính]:
-      Dấu hiệu nhận biết: HS thực hành đo đạc/thí nghiệm + GHI SỐ LIỆU vào bảng/máy tính.
-      → ✅ CHỈ CHÈN nếu GA gốc có ghi HS nhập dữ liệu vào bảng tính/phần mềm số.
-         - HS nhập dữ liệu vào Google Sheets/Excel: mã 5.2 – Bước 2
-      → ❌ Nếu HS chỉ ghi vào vở/bảng giấy → KHÔNG CHÈN NLS.
+      - Mục đích: HS tự củng cố, khắc sâu kiến thức vừa học qua bài tập/thực hành.
+      - TÍCH HỢP NLS:
+        + Bài tập trắc nghiệm / câu hỏi củng cố: HS tham gia trả lời trên nền tảng số (Quizizz, Kahoot, Google Forms, Liveworksheets) → Mã 2.1.TC1a (Bước 1 hoặc Vị trí 1).
+        + Bài tập tính toán / hình học / thí nghiệm: HS sử dụng MTCT Casio / GeoGebra / bảng tính Excel để thực hiện và kiểm tra kết quả → Mã 5.2.TC1a (Bước 2).
+        + Chia sẻ kết quả củng cố: HS chia sẻ đáp án / phiếu học tập nhóm qua Padlet / TV số lớp → Mã 2.2.TC1a (Bước 3).
+      - Cách viết: VẾ ĐƠN "HS tự [thao tác số/kiểm tra] bằng [công cụ số] để củng cố kết quả".
 
    D. HOẠT ĐỘNG VẬN DỤNG (Áp dụng thực tiễn, Dự án mở, Tìm hiểu cuộc sống):
-      - Mục đích: HS HOÀN TOÀN TỰ CHỦ áp dụng kiến thức vào tình huống THỰC TIỄN MỞ (không có đáp án chuẩn duy nhất).
-      - ⚠️ KHÔNG BẮT BUỘC DIỄN RA TRONG LỚP: Có thể giao về nhà, làm dự án nhiều ngày, báo cáo ở tiết sau.
-      - ⚠️ KHÔNG ÉP ĐỦ 4 BƯỚC nếu Vận dụng giao về nhà. KHÔNG tạo Bước 3/4 giả tạo trong tiết.
-      - ❌ KHÔNG dùng mã bài tập củng cố (5.2 MTCT kiểm tra nghiệm) – Vận dụng không có bài tập đóng.
-      - ❌ KHÔNG dùng VẾ KÉP "GV hướng dẫn → HS" – HS hoàn toàn tự chủ.
-      - ⚠️ GIỚI HẠN: Tối đa 2-3 NLS cho Vận dụng. Không ép đủ 4-5 mã nếu GA gốc chỉ có 1-2 dòng hướng dẫn.
+      - Mục đích: HS tự chủ áp dụng kiến thức vào tình huống thực tiễn mở.
+      - TÍCH HỢP NLS:
+        + Tìm kiếm thông tin thực tiễn mở rộng trên Internet → Mã 1.1.TC1a (Bước 2).
+        + Tạo sản phẩm số: HS thiết kế poster / sơ đồ tư duy / bài trình chiếu bằng Canva / PowerPoint / Mindmap → Mã 3.1.TC1a hoặc 3.1.CB1a (Bước 2).
+        + Chia sẻ và nộp sản phẩm: Nộp qua Google Classroom / Padlet / Zalo nhóm lớp → Mã 2.2.TC1a (Bước 3).
+      - Giới hạn: Tối đa 2-3 NLS phù hợp.
 
-      ĐIỀU KIỆN ĐỀ XUẤT NLS MỚI CHO VẬN DỤNG (được phép khi đủ điều kiện):
-      Vận dụng là hoạt động MỞ – AI được phép đề xuất NLS mới khi nhiệm vụ gốc thuộc 1 trong các nhóm sau:
-
-      [NHÓM VĐ-1 – GIAO VỀ NHÀ / DỰ ÁN NHIỀU NGÀY]:
-      Dấu hiệu: "về nhà", "tuần sau", "dự án", "nghiên cứu thêm".
-      → ✅ Đề xuất: 1.1 (tìm kiếm Internet), 3.1 (tạo báo cáo/video/poster số), 2.2 (nộp Google Classroom/Padlet)
-      → Bước 1: chỉ chèn nếu GV giao qua nền tảng số (2.1). Nếu GV giao miệng → không chèn Bước 1.
-
-      [NHÓM VĐ-2 – TẠO SẢN PHẨM (báo cáo, video, poster, sơ đồ)]:
-      Dấu hiệu: "làm bài thuyết trình", "viết báo cáo", "vẽ sơ đồ", "quay video", "poster".
-      → ✅ Đề xuất: 3.1 (tạo sản phẩm số), 2.2 (chia sẻ/nộp), 2.4 (cộng tác nhóm số nếu nhóm)
-      → Được đề xuất công cụ phù hợp: Google Slides, Canva, Padlet, Google Classroom.
-
-      [NHÓM VĐ-3 – GIẢI PHÁP THỰC TIỄN / ĐỀ XUẤT Ý TƯỞNG]:
-      Dấu hiệu: "đề xuất", "thiết kế", "tìm hiểu thực tế", "giải quyết vấn đề cuộc sống", "ứng dụng AI".
-      → ✅ Đề xuất: NLd.D1 (nhận diện vấn đề → giải pháp AI), NLa.A3 (phản biện AI), 1.1 (tra cứu)
-
-      [NHÓM VĐ-4 – THỰC HÀNH ĐƠN GIẢN TRONG LỚP (không tạo sản phẩm số)]:
-      Dấu hiệu: "thực hành", "đo", "quan sát", "thực hiện".
-      → ⚠️ CHỈ đề xuất TỐI ĐA 1 NLS phù hợp nhất (ưu tiên 3.1 nếu có thể tạo sản phẩm số đơn giản).
-      → Ưu tiên mã: 3.1 (quay video ngắn ghi lại thực hành → nộp Classroom) – hợp lý và phổ biến.
-      → KHÔNG bịa thêm nhiều mã. KHÔNG tạo đủ 4 bước nếu GA chỉ có 2-3 dòng.
-
-      Bước 4: MẶC ĐỊNH KHÔNG CHÈN (GV nhận xét ở tiết sau hoặc ngoài lớp).
-
-
-9. QUY TẮC ĐPQ – ĐỌC–PHÂN TÍCH–QUYẾT ĐỊNH (BẮT BUỘC ÁP DỤNG TRƯỚC MỌI QUYẾT ĐỊNH CHÈN NLS):
-   Trước khi chèn bất kỳ NLS nào vào bất kỳ bước nào, AI bắt buộc thực hiện 3 bước tuần tự:
-
-   BƯỚC 1 – ĐỌC (Đọc nguyên văn nội dung giáo án gốc tại bước đó):
-      → Câu hỏi: "GV đang làm gì? HS đang làm gì? Có tên công cụ/phần mềm/nền tảng số nào được nhắc đến không?"
-      → Liệt kê: [Hành động GV] + [Hành động HS] + [Công cụ số nếu có]
-
-   BƯỚC 2 – PHÂN TÍCH (Xác định tình huống):
-      → Nếu có công cụ số trong GA gốc → Tình huống A: Tag chính xác
-      → Nếu KHÔNG có công cụ số nhưng là Vận dụng mở → Tình huống B: Được phép đề xuất có điều kiện
-      → Nếu KHÔNG có công cụ số và là Luyện tập/HTKM truyền thống → Tình huống C: Không chèn
-
-   BƯỚC 3 – QUYẾT ĐỊNH:
-      Tình huống A (Có công cụ số thực sự): ✅ CHÈN NLS phù hợp theo bảng mã – mọi loại hoạt động
-      Tình huống B (Vận dụng mở, đề xuất): ✅ CHÈN tối đa 2-3 NLS phù hợp nhóm VĐ-1/2/3/4
-      Tình huống C (Truyền thống, không có công cụ số): ❌ KHÔNG CHÈN – tuyệt đối không bịa công cụ số
-
-   🚨 QUY TẮC VÀNG: "KHÔNG BAO GIỜ BỊA THÊM CÔNG CỤ SỐ (Quizizz, Kahoot, Padlet, Google Docs, GeoGebra...)
-   vào Bước 1/2/3/4 của Mở đầu, HTKM, Luyện tập nếu giáo án gốc KHÔNG ĐỀ CẬP.
-   Chỉ Vận dụng mới được phép đề xuất công cụ số mới, và phải chọn đúng nhóm VĐ-1/2/3/4."
+9. NGUYÊN TẮC TÍCH HỢP NLS ĐÚNG - TRÚNG - ĐỦ (BẮT BUỘC):
+   - ĐÚNG: Chuẩn mã NLS theo cấp học / khối lớp (Lớp 1-3: CB1/CB2; Lớp 4-6: CB2/TC1; Lớp 7-9: TC1/TC2; Lớp 10-12: TC2/NC1).
+   - TRÚNG: Công cụ số và hoạt động số phải gắn liền với nội dung bài dạy (Sinh học/KHTN dùng kính hiển vi ảo, video vi sinh, ảnh số; Toán dùng GeoGebra, MTCT; Văn/Sử/Địa dùng tra cứu, bản đồ số).
+   - ĐỦ: Mỗi kế hoạch bài dạy PHẢI TÍCH HỢP NLS TỪ 2–4 HOẠT ĐỘNG, phân bổ hợp lý ở Hình thành kiến thức mới (trọng tâm), Luyện tập và Vận dụng. Tuyệt đối không dồn toàn bộ NLS vào chỉ 1 hoạt động Vận dụng cuối bài.
+   - 🚫 KHÓA CHẶT VỊ TRÍ CHÈN THẺ MÀU (NLS, AI, HSKT, TIẾNG ANH):
+     + TUYỆT ĐỐI CẤM chèn bất kỳ thẻ màu nào (<blue>, <purple>, <green>, <orange>) vào các mục: "a. Mục tiêu", "b. Nội dung", "c. Sản phẩm" của các hoạt động.
+     + CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" (hoặc các Bước 1, Bước 2, Bước 3 bên trong phần Tổ chức thực hiện).
 
 QUY TẮC ĐÁNH DẤU MÀU SẮC (BẮT BUỘC):
 - Dùng thẻ <blue>nội dung</blue> để đánh dấu MÀU XANH DƯƠNG cho Năng lực số (NLS).
@@ -473,8 +415,15 @@ YÊU CẦU XỬ LÝ (KHI BẬT CHẾ ĐỘ TÍCH HỢP HÒA NHẬP HSKT):
    - Nội dung mục tiêu HSKT: Nhận biết và thực hiện được các thao tác/nhiệm vụ cơ bản vừa sức dưới sự hướng dẫn của giáo viên và sự hỗ trợ của bạn học; chủ động tham gia hòa nhập cùng các bạn.
 
 2. MỤC II. TIẾN TRÌNH DẠY HỌC (CÁC HOẠT ĐỘNG):
-   - CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" (hoặc các Bước 1, Bước 2, Bước 3, Bước 4 dưới phần Tổ chức thực hiện) của các hoạt động.
-   - Thêm câu hỗ trợ HSKT được bọc trong thẻ <green>[Hỗ trợ HSKT: ...]</green>.
+   - ⚠️ VỊ TRÍ CHÈN BẮT BUỘC: CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" của các hoạt động, bọc trong thẻ <green>[Hỗ trợ HSKT: ...]</green>.
+   - 🚫 TUYỆT ĐỐI CẤM chèn thẻ <green> vào phần "a. Mục tiêu", "b. Nội dung", hoặc "c. Sản phẩm" của hoạt động.
+   - QUY TẮC PHÂN BỔ THEO BƯỚC (BẮT BUỘC – TRÁNH CHÈN QUÁ NHIỀU TRÀN LAN):
+     + Bước 1 (Giao nhiệm vụ): ✅ LUÔN CHÈN 1 câu điều chỉnh cách giao nhiệm vụ vừa sức cho HSKT (chia nhỏ nhiệm vụ, tài liệu trực quan, nhờ bạn hỗ trợ).
+     + Bước 2 (Thực hiện nhiệm vụ): ✅ LUÔN CHÈN 1 câu hỗ trợ HSKT thực hiện thao tác cơ bản hoặc phân công "Đôi bạn cùng tiến".
+     + Bước 3 (Báo cáo, thảo luận): ⚪ CHỈ chèn nếu hoạt động yêu cầu HSKT báo cáo theo hình thức phù hợp (chọn tranh, trả lời ngắn, bạn báo cáo thay).
+     + Bước 4 (Đánh giá, kết luận): ❌ MẶC ĐỊNH KHÔNG CHÈN (HSKT cùng cả lớp lắng nghe kết luận chung).
+   - GIỚI HẠN: Tối đa 1 câu <green> mỗi bước; mỗi hoạt động chỉ chèn 1-2 câu <green> (trọng tâm Bước 1 & Bước 2). TUYỆT ĐỐI KHÔNG chèn tràn lan vào tất cả mọi bước.
+   - KHI BẬT CẢ NLS VÀ HSKT: Thẻ <blue>/<purple> (NLS/AI) và thẻ <green> (HSKT) PHẢI NẰM TRÊN CÁC DÒNG RIÊNG BIỆT, TUYỆT ĐỐI KHÔNG gộp chung trong một câu.
    - Hướng dẫn hỗ trợ theo loại khuyết tật:
      + Trí tuệ / Học tập: GV đơn giản hóa nhiệm vụ, chia nhỏ từng thao tác, tăng cường hình ảnh trực quan, giao bạn học bên cạnh hỗ trợ.
      + Thị giác (Nhìn): GV thuyết minh rõ bằng lời nói, cung cấp hình ảnh phóng to / tài liệu chữ lớn, nhờ bạn đọc giúp.
