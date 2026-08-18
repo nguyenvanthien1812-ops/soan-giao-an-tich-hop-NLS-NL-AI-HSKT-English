@@ -2,6 +2,15 @@ import React, { useRef, useState } from 'react';
 import { UploadCloud, Loader2, CheckCircle, FileText, FileUp, AlertCircle, FolderUp, ClipboardPaste } from 'lucide-react';
 import { OriginalDocxFile } from '../types';
 
+// Nhận diện giáo án đã có NLS được chèn sẵn
+function detectExistingNLS(text: string): boolean {
+  // Dạng bracket gốc của GV: [1.1.TC1a: ...], [5.2.TC2b: ...], [6.2.CB1a: ...]
+  const nlsBracket = /\[\d+\.\d+\.(TC|CB|NC)\d+[a-z]?:/i;
+  // Dạng thẻ màu của ứng dụng: <blue>
+  const nlsTag = /<blue>/i;
+  return nlsBracket.test(text) || nlsTag.test(text);
+}
+
 interface ContentInputProps {
   lessonContent: string;
   setLessonContent: (val: string) => void;
@@ -9,6 +18,8 @@ interface ContentInputProps {
   setDistributionContent: (val: string) => void;
   // Callback để lưu file DOCX gốc cho XML Injection
   onOriginalDocxLoaded?: (file: OriginalDocxFile | null) => void;
+  // Callback thông báo khi phát hiện NLS trong file giáo án
+  onNLSDetected?: (hasNLS: boolean) => void;
 }
 
 // Khai báo thư viện ngoại
@@ -22,7 +33,8 @@ const ContentInput: React.FC<ContentInputProps> = ({
   setLessonContent,
   distributionContent,
   setDistributionContent,
-  onOriginalDocxLoaded
+  onOriginalDocxLoaded,
+  onNLSDetected
 }) => {
   const lessonInputRef = useRef<HTMLInputElement>(null);
   const distInputRef = useRef<HTMLInputElement>(null);
@@ -68,8 +80,13 @@ const ContentInput: React.FC<ContentInputProps> = ({
       if (!text.trim()) {
         alert("Không thể đọc được nội dung văn bản từ file này. Có thể file chứa ảnh scan?");
         setFileName(null);
+        if (isLesson) onNLSDetected?.(false);
       } else {
         setContent(text);
+        // Chỉ nhận diện NLS cho file giáo án (không phải PPCT)
+        if (isLesson) {
+          onNLSDetected?.(detectExistingNLS(text));
+        }
       }
 
     } catch (error) {

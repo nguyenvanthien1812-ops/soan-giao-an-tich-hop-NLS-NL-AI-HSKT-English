@@ -520,6 +520,41 @@ export const generateNLSLessonPlan = async (
 
   const needMarkersForSubFeatures = !isNlsActive && (isDisabilityActive || isEnglishActive);
 
+  // ====== CHẾ ĐỘ BỔ SUNG (SUPPLEMENT MODE) ======
+  // Khi file giáo án đã có NLS → chỉ thêm AI/HSKT/Tiếng Anh, GIỮ NGUYÊN NLS đã có
+  const isSupplementMode = options.hasExistingNLS === true;
+
+  // Xây dựng danh sách nhiệm vụ bổ sung
+  const supplementTasks: string[] = [];
+  if (isAINLActive) supplementTasks.push(`Bổ sung NĂNG LỰC AI (<purple>...</purple>) vào phần "d. Tổ chức thực hiện" của các hoạt động phù hợp`);
+  if (isDisabilityActive) supplementTasks.push(`Bổ sung HỖ TRỢ HSKT (<green>[Hỗ trợ HSKT: ...]</green>) vào Bước 1 (điều chỉnh giao nhiệm vụ) và Bước 2 (hỗ trợ thực hiện) của 1-2 hoạt động trọng tâm`);
+  if (isEnglishActive) supplementTasks.push(`Bổ sung TIẾNG ANH (<orange>...</orange>) dạng song ngữ cho các khái niệm/thuật ngữ kỹ thuật quan trọng trong phần d. Tổ chức thực hiện`);
+
+  const supplementModePrompt = isSupplementMode ? `
+=== CHẾ ĐỘ BỔ SUNG (SUPPLEMENT MODE) — ĐÃ PHÁT HIỆN GIÁO ÁN CÓ NLS ===
+
+PHÁT HIỆN: File giáo án này ĐÃ CÓ Năng lực số (NLS) được chèn sẵn dưới dạng [...] hoặc <blue>.
+
+NGUYÊN TẮC BẤT DI BẤT DỊCH — TUYỆT ĐỐI TUÂN THỦ:
+✅ GIỮ NGUYÊN 100%: Tất cả NLS đã có trong ngoặc vuông [...] hoặc thẻ <blue>...<\/blue>. KHÔNG được tái sinh, thay thế, hay viết lại chúng.
+✅ GIỮ NGUYÊN 100%: Toàn bộ nội dung, cấu trúc, 4 bước và thứ tự các hoạt động.
+❌ TUYỆT ĐỐI KHÔNG: Tái sinh NLS mới (<blue>) vì NLS đã đủ và đã được giáo viên chèn sẵn.
+❌ TUYỆT ĐỐI KHÔNG: Xóa, bình luận, hay thay đổi bất kỳ NLS bracket [...] nào đã có.
+❌ TUYỆT ĐỐI KHÔNG: Chèn thẻ màu vào giữa danh sách câu hỏi (1., 2., 3., ...) hay đáp án (A., B., C., D.).
+❌ TUYỆT ĐỐI KHÔNG: Đẩy thẻ thừa ra cuối file — nếu không tìm được vị trí phù hợp, bỏ qua.
+
+NHIỆM VỤ DUY NHẤT — CHỈ BỔ SUNG CÁC THÀNH PHẦN SAU:
+${supplementTasks.length > 0 ? supplementTasks.map((t, i) => `${i + 1}. ${t}`).join('\n') : '(Không có hạng mục nào được bật — giữ nguyên toàn bộ giáo án.)'}
+
+QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
+- CHỈ CHÈN vào "d. Tổ chức thực hiện" (Bước 1, 2, 3, 4).
+- TUYỆT ĐỐI KHÔNG chèn vào: a. Mục tiêu, b. Nội dung, c. Sản phẩm của hoạt động.
+- AI (<purple>): Chèn cuối Bước 1 (khi GV giao nhiệm vụ có AI) hoặc cuối Bước 2 (HS thực hành AI). Phân bổ 1-3 điểm cho cả bài.
+- HSKT (<green>): Bước 1 (1 câu GV điều chỉnh nhiệm vụ) + Bước 2 (1 câu GV hỗ trợ trực tiếp). Áp dụng cho 1-2 hoạt động.
+- Tiếng Anh (<orange>): Song ngữ khái niệm kỹ thuật, ngay sau lần xuất hiện đầu tiên trong Bước 1/2. Tối đa 3-5 khái niệm/bài.
+
+` : '';
+
   // User prompt
   const userPrompt = isEnglishSubject ? `
     DIGITAL COMPETENCE FRAMEWORK REFERENCE DATA:
@@ -553,6 +588,9 @@ export const generateNLSLessonPlan = async (
     ${isDisabilityActive ? "4. DISABILITY SUPPORT: Use <green>[Hỗ trợ HSKT: ...]</green> to mark inclusive education support in green." : "4. DISABILITY SUPPORT: DISABLED. ABSOLUTELY DO NOT use <green> tags or disability support."}
     ${isEnglishActive ? "5. ENGLISH INTEGRATION: Use <orange>[EN Instruction: ...]</orange> or similar tags based on the level in orange." : "5. ENGLISH INTEGRATION: DISABLED. ABSOLUTELY DO NOT use <orange> tags or English content."}
     6. LOCATION: Insert in Objectives under "2. Competence". For activities, ONLY insert into section "d) Organization" (or steps under Organization). DO NOT insert into Content, Outcomes, or Objectives of activities.
+    ${supplementModePrompt}
+    ORIGINAL LESSON PLAN:
+    ${info.content}
   ` : `
     ${modeText}
 
@@ -630,16 +668,19 @@ export const generateNLSLessonPlan = async (
          - Chia sẻ đáp án/phiếu học tập nhóm qua Padlet/màn hình số → Mã 2.2.TC1a(B3).
          - Cách viết: VẾ ĐƠN "HS tự [thao tác số/kiểm tra] bằng [công cụ số] để củng cố kết quả".
 
-         [VẬN DỤNG / Áp dụng thực tiễn / Dự án mở]:
-         - Tích hợp tìm kiếm thông tin thực tế mở rộng → Mã 1.1.TC1a(B2).
-         - Tích hợp tạo sản phẩm số: thiết kế poster / sơ đồ tư duy / bài trình chiếu bằng Canva / PowerPoint → Mã 3.1.TC1a hoặc 3.1.CB1a(B2).
-         - Tích hợp chia sẻ và nộp bài qua Google Classroom / Padlet / Zalo lớp → Mã 2.2.TC1a(B3). Tối đa 2-3 NLS.
+          [VẬN DỤNG / Áp dụng thực tiễn / Giải bài tập thực tế]:
+          - BÁM SÁT NHIỆM VỤ GỐC (BẮT BUỘC):
+            + Nếu bài tập tính toán / hình học / bài tập SGK (Toán, KHTN, Lý, Hóa): HS dùng GeoGebra / MTCT Casio giải quyết bài toán → Mã 5.2.TC1a(B2); HS chụp ảnh bài làm nộp qua Padlet/màn hình lớp → Mã 2.2.TC1a(B3). TUYỆT ĐỐI CẤM tự ý đổi bài tập Toán thành "thiết kế sơ đồ tư duy Canva/PowerPoint".
+            + Nếu bài tập dự án / tìm hiểu thực tế mở rộng (Văn, Sử, Địa, GDCD, HĐTN, STEM): HS tra cứu Internet → Mã 1.1.TC1a(B2); tạo sản phẩm số báo cáo (infographic, poster, bài trình chiếu) → Mã 3.1.TC1a(B2); nộp bài qua Padlet/Classroom → Mã 2.2.TC1a(B3). Tối đa 2-3 NLS.
 
-      11. NGUYÊN TẮC TÍCH HỢP ĐÚNG - TRÚNG - ĐỦ & KHÓA CHẶT VỊ TRÍ CHÈN (BẮT BUỘC):
-         - ĐÚNG: Chuẩn mã NLS theo cấp học (Lớp 1-3: CB1/CB2; Lớp 4-6: CB2/TC1; Lớp 7-9: TC1/TC2; Lớp 10-12: TC2/NC1).
-         - TRÚNG: Công cụ số gắn liền với nội dung bài (KHTN dùng kính hiển vi ảo/ảnh số; Toán dùng GeoGebra, MTCT; Văn/Sử/Địa dùng tra cứu, bản đồ số).
-         - ĐỦ: Mỗi kế hoạch bài dạy PHẢI TÍCH HỢP NLS TỪ 2–4 HOẠT ĐỘNG, phân bổ đều ở HTKM (trọng tâm), Luyện tập và Vận dụng. Tuyệt đối không dồn toàn bộ NLS vào chỉ 1 hoạt động Vận dụng.
-         - 🚫 KHÓA CHẶT VỊ TRÍ CHÈN: TUYỆT ĐỐI CẤM chèn bất kỳ thẻ màu nào (<blue>, <purple>, <green>, <orange>) vào mục "a. Mục tiêu", "b. Nội dung", hoặc "c. Sản phẩm" của hoạt động. CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" (hoặc các Bước 1, 2, 3 bên trong Tổ chức thực hiện).
+       11. NGUYÊN TẮC TÍCH HỢP ĐÚNG - TRÚNG - ĐỦ & BÁM SÁT NHIỆM VỤ GỐC (BẮT BUỘC):
+          - ĐÚNG: Chuẩn mã NLS theo cấp học (Lớp 1-3: CB1/CB2; Lớp 4-6: CB2/TC1; Lớp 7-9: TC1/TC2; Lớp 10-12: TC2/NC1).
+          - TRÚNG: Công cụ số gắn liền 100% với nội dung và nhiệm vụ thực tế của bài dạy:
+            + NLS chèn vào BẮT BUỘC PHẢI PHỤC VỤ TRỰC TIẾP cho nhiệm vụ được giao ở Bước 1 và sản phẩm ở mục c).
+            + CẤM TUYỆT ĐỐI tự ý "bịa" ra nhiệm vụ không có trong bài (ví dụ: bài tập Toán hình học lại chèn vẽ Canva sơ đồ tư duy).
+            + Toán dùng GeoGebra, MTCT Casio, Desmos, Padlet số hóa bài làm; KHTN dùng kính hiển vi ảo, mô phỏng PhET; Văn/Sử/Địa dùng bản đồ số, tra cứu tư liệu, Google Docs.
+          - ĐỦ: Mỗi kế hoạch bài dạy PHẢI TÍCH HỢP NLS TỪ 2–4 HOẠT ĐỘNG, phân bổ đều ở HTKM (trọng tâm), Luyện tập và Vận dụng. Tuyệt đối không dồn toàn bộ NLS vào chỉ 1 hoạt động Vận dụng.
+          - 🚫 KHÓA CHẶT VỊ TRÍ CHÈN: TUYỆT ĐỐI CẤM chèn bất kỳ thẻ màu nào (<blue>, <purple>, <green>, <orange>) vào mục "a. Mục tiêu", "b. Nội dung", hoặc "c. Sản phẩm" của hoạt động. CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" (hoặc các Bước 1, 2, 3 bên trong Tổ chức thực hiện).
     LƯU Ý VỀ TÍCH HỢP HOẠT ĐỘNG (KHI CÓ PPCT):
     - Các hoạt động dạy học (trong phần Tiến trình) cũng chỉ được thiết kế xoay quanh các năng lực số đã trích xuất từ PPCT. Không thiết kế hoạt động cho các năng lực nằm ngoài PPCT.
     
@@ -647,7 +688,7 @@ export const generateNLSLessonPlan = async (
     ĐỊNH DẠNG ĐẦU RA:
     - Trả về toàn bộ nội dung giáo án đã chỉnh sửa dưới dạng Markdown.
     
-    NỘI DUNG GIÁO ÁN GỐC:
+    ${supplementModePrompt}NỘI DUNG GIÁO ÁN GỐC:
     ${info.content}
   `;
 

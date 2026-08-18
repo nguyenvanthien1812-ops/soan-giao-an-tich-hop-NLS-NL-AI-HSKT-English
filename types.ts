@@ -56,6 +56,7 @@ export interface ProcessingOptions {
   disabilityType?: DisabilityType;
   includeEnglishIntegration?: boolean;
   englishIntegrationLevel?: EnglishIntegrationLevel;
+  hasExistingNLS?: boolean; // File giáo án đã có NLS được chèn sẵn → Chế độ Bổ sung
 }
 
 export interface GeminiResponse {

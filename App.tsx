@@ -52,6 +52,10 @@ const App: React.FC = () => {
   // State lưu trữ file DOCX gốc cho XML Injection
   const [originalDocx, setOriginalDocx] = useState<OriginalDocxFile | null>(null);
 
+  // State Chế độ Bổ sung (Supplement Mode)
+  const [hasExistingNLS, setHasExistingNLS] = useState<boolean>(false); // Auto-detect từ ContentInput
+  const [isSupplementMode, setIsSupplementMode] = useState<boolean>(false); // Thủ công từ LessonForm
+
   useEffect(() => {
     // Tự động kiểm tra thông tin License & Dùng thử 5 ngày
     const lic = getLicenseInfo();
@@ -154,7 +158,8 @@ const App: React.FC = () => {
           includeDisabilitySupport,
           disabilityType,
           includeEnglishIntegration,
-          englishIntegrationLevel
+          englishIntegrationLevel,
+          hasExistingNLS: isSupplementMode, // Truyền trạng thái Chế độ Bổ sung
         }
       );
 
@@ -217,6 +222,9 @@ const App: React.FC = () => {
               disabilityType={disabilityType} setDisabilityType={setDisabilityType}
               includeEnglishIntegration={includeEnglishIntegration} setIncludeEnglishIntegration={setIncludeEnglishIntegration}
               englishIntegrationLevel={englishIntegrationLevel} setEnglishIntegrationLevel={setEnglishIntegrationLevel}
+              hasExistingNLS={hasExistingNLS}
+              isSupplementMode={isSupplementMode}
+              setIsSupplementMode={setIsSupplementMode}
             />
 
             <ContentInput
@@ -225,6 +233,13 @@ const App: React.FC = () => {
               distributionContent={distributionContent}
               setDistributionContent={setDistributionContent}
               onOriginalDocxLoaded={setOriginalDocx}
+              onNLSDetected={(detected) => {
+                setHasExistingNLS(detected);
+                // Nếu phát hiện NLS tự động trong file, tự động kích hoạt Chế độ Bổ sung
+                if (detected) {
+                  setIsSupplementMode(true);
+                }
+              }}
             />
 
             {/* Options Panel */}

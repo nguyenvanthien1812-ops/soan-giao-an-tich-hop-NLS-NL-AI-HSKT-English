@@ -286,17 +286,25 @@ NGUYÊN TẮC NGHIÊM NGẶT:
         + Chia sẻ kết quả củng cố: HS chia sẻ đáp án / phiếu học tập nhóm qua Padlet / TV số lớp → Mã 2.2.TC1a (Bước 3).
       - Cách viết: VẾ ĐƠN "HS tự [thao tác số/kiểm tra] bằng [công cụ số] để củng cố kết quả".
 
-   D. HOẠT ĐỘNG VẬN DỤNG (Áp dụng thực tiễn, Dự án mở, Tìm hiểu cuộc sống):
-      - Mục đích: HS tự chủ áp dụng kiến thức vào tình huống thực tiễn mở.
-      - TÍCH HỢP NLS:
-        + Tìm kiếm thông tin thực tiễn mở rộng trên Internet → Mã 1.1.TC1a (Bước 2).
-        + Tạo sản phẩm số: HS thiết kế poster / sơ đồ tư duy / bài trình chiếu bằng Canva / PowerPoint / Mindmap → Mã 3.1.TC1a hoặc 3.1.CB1a (Bước 2).
-        + Chia sẻ và nộp sản phẩm: Nộp qua Google Classroom / Padlet / Zalo nhóm lớp → Mã 2.2.TC1a (Bước 3).
+   D. HOẠT ĐỘNG VẬN DỤNG (Áp dụng thực tiễn, Dự án mở, Giải bài tập thực tế):
+      - Mục đích: HS tự chủ áp dụng kiến thức vào giải quyết bài tập / tình huống thực tiễn mở.
+      - ⚠️ NGUYÊN TẮC BÁM SÁT NHIỆM VỤ GỐC (BẮT BUỘC):
+        + Nếu là bài tập tính toán, hình học, chứng minh, bài tập SGK (Toán, KHTN, Lý, Hóa):
+          * HS sử dụng phần mềm chuyên ngành (GeoGebra vẽ hình kiểm tra, MTCT Casio tính toán) để giải quyết bài toán → Mã 5.2.TC1a hoặc 5.3.TC1a (Bước 2).
+          * HS chụp ảnh bài làm/bài giải gửi lên Padlet/màn hình số lớp để báo cáo, đối chiếu phương án giải → Mã 2.2.TC1a (Bước 3).
+          * ❌ CẤM TUYỆT ĐỐI tự ý đổi nhiệm vụ giải bài tập Toán thành "thiết kế sơ đồ tư duy bằng Canva/PowerPoint" làm sai lệch nội dung bài dạy.
+        + Nếu là bài tập dự án mở, tìm hiểu thực tiễn, báo cáo chủ đề (Văn, Sử, Địa, GDCD, HĐTN, dự án STEM):
+          * Tìm kiếm thông tin thực tiễn mở rộng trên Internet → Mã 1.1.TC1a (Bước 2).
+          * Tạo sản phẩm số báo cáo (infographic, poster, bài trình chiếu, sơ đồ tư duy) → Mã 3.1.TC1a (Bước 2).
+          * Chia sẻ và nộp sản phẩm qua Padlet / Google Classroom / Zalo lớp → Mã 2.2.TC1a (Bước 3).
       - Giới hạn: Tối đa 2-3 NLS phù hợp.
 
-9. NGUYÊN TẮC TÍCH HỢP NLS ĐÚNG - TRÚNG - ĐỦ (BẮT BUỘC):
+9. NGUYÊN TẮC TÍCH HỢP NLS ĐÚNG - TRÚNG - ĐỦ & BÁM SÁT NHIỆM VỤ GỐC (BẮT BUỘC):
    - ĐÚNG: Chuẩn mã NLS theo cấp học / khối lớp (Lớp 1-3: CB1/CB2; Lớp 4-6: CB2/TC1; Lớp 7-9: TC1/TC2; Lớp 10-12: TC2/NC1).
-   - TRÚNG: Công cụ số và hoạt động số phải gắn liền với nội dung bài dạy (Sinh học/KHTN dùng kính hiển vi ảo, video vi sinh, ảnh số; Toán dùng GeoGebra, MTCT; Văn/Sử/Địa dùng tra cứu, bản đồ số).
+   - TRÚNG: Công cụ số và hoạt động số phải gắn liền 100% với nội dung và nhiệm vụ thực tế của bài dạy:
+     + NLS chèn vào BẮT BUỘC PHẢI PHỤC VỤ TRỰC TIẾP cho nhiệm vụ được giao ở Bước 1 và nội dung/sản phẩm của hoạt động.
+     + CẤM TUYỆT ĐỐI tự ý "bịa" ra nhiệm vụ không có trong bài (ví dụ: bài tập Toán hình học lại chèn vẽ Canva sơ đồ tư duy).
+     + Toán học dùng GeoGebra, MTCT Casio, Desmos, Padlet số hóa bài làm; KHTN dùng kính hiển vi ảo, thí nghiệm ảo PhET; Văn/Sử/Địa dùng bản đồ số, tra cứu tư liệu, Google Docs.
    - ĐỦ: Mỗi kế hoạch bài dạy PHẢI TÍCH HỢP NLS TỪ 2–4 HOẠT ĐỘNG, phân bổ hợp lý ở Hình thành kiến thức mới (trọng tâm), Luyện tập và Vận dụng. Tuyệt đối không dồn toàn bộ NLS vào chỉ 1 hoạt động Vận dụng cuối bài.
    - 🚫 KHÓA CHẶT VỊ TRÍ CHÈN THẺ MÀU (NLS, AI, HSKT, TIẾNG ANH):
      + TUYỆT ĐỐI CẤM chèn bất kỳ thẻ màu nào (<blue>, <purple>, <green>, <orange>) vào các mục: "a. Mục tiêu", "b. Nội dung", "c. Sản phẩm" của các hoạt động.

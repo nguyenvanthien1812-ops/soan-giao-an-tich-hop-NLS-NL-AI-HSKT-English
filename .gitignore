@@ -35,5 +35,11 @@ build/
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+# Large Media & Temp Files
+*.wmv
+*.mp4
+*.avi
+*.mkv
+~$*
+*.tmp
 .DS_Store

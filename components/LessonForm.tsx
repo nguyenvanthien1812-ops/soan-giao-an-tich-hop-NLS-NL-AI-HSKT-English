@@ -19,6 +19,10 @@ interface LessonFormProps {
   setIncludeEnglishIntegration: (val: boolean) => void;
   englishIntegrationLevel: import('../types').EnglishIntegrationLevel;
   setEnglishIntegrationLevel: (val: import('../types').EnglishIntegrationLevel) => void;
+  // Chế độ bổ sung: phát hiện tự động + cho phép bật/tắt thủ công
+  hasExistingNLS: boolean;       // Kết quả tự động phát hiện từ ContentInput
+  isSupplementMode: boolean;     // Trạng thái người dùng bật/tắt thủ công
+  setIsSupplementMode: (val: boolean) => void;
 }
 
 const LessonForm: React.FC<LessonFormProps> = ({
@@ -38,6 +42,9 @@ const LessonForm: React.FC<LessonFormProps> = ({
   setIncludeEnglishIntegration,
   englishIntegrationLevel,
   setEnglishIntegrationLevel,
+  hasExistingNLS,
+  isSupplementMode,
+  setIsSupplementMode,
 }) => {
   return (
     <div className="bg-white/90 backdrop-blur-md p-6 sm:p-7 rounded-3xl shadow-xl shadow-indigo-900/5 border border-indigo-100/80 mb-6 space-y-6">
@@ -103,8 +110,8 @@ const LessonForm: React.FC<LessonFormProps> = ({
         </label>
 
         {includeNLSAndAI && (
-          <div className="p-4 bg-slate-50/90 border border-indigo-100 rounded-2xl space-y-3 animate-fadeIn shadow-inner">
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Chọn chế độ tích hợp chi tiết:</label>
+          <div className="p-4 bg-slate-50/90 border border-indigo-100 rounded-2xl space-y-3.5 animate-fadeIn shadow-inner">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Chọn chế độ tích hợp chi tiết:</label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <button
                 type="button"
@@ -144,6 +151,46 @@ const LessonForm: React.FC<LessonFormProps> = ({
                 <Bot size={17} />
                 <span>Chỉ Năng lực AI</span>
               </button>
+            </div>
+
+            {/* Nút thủ công & Tự động: Chế độ Bổ sung (File đã có NLS sẵn) - LUÔN LUÔN HIỂN THỊ */}
+            <div className={`p-3.5 rounded-2xl border transition-all ${
+              isSupplementMode 
+                ? 'bg-blue-50/95 border-blue-300 ring-2 ring-blue-400/20 shadow-sm' 
+                : 'bg-white/80 border-slate-200 hover:border-slate-300'
+            }`}>
+              <label className="flex items-start space-x-3 cursor-pointer group select-none">
+                <input
+                  type="checkbox"
+                  checked={isSupplementMode}
+                  onChange={(e) => setIsSupplementMode(e.target.checked)}
+                  className="w-5 h-5 text-blue-600 rounded-lg border-slate-300 focus:ring-blue-500 focus:ring-offset-0 transition-transform group-hover:scale-105 mt-0.5"
+                />
+                <div className="flex-1 space-y-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors flex items-center gap-1.5">
+                      <span>🔄</span>
+                      Bài soạn ĐÃ CÓ sẵn NLS (Chế độ Bổ sung thêm AI / HSKT / Tiếng Anh)
+                    </span>
+                    {hasExistingNLS && (
+                      <span className="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 animate-pulse">
+                        ⚡ Đã tự phát hiện NLS
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                    {isSupplementMode ? (
+                      <span className="text-blue-800 font-medium">
+                        ✔ <strong>Đang kích hoạt Chế độ Bổ sung:</strong> Giữ nguyên 100% NLS cũ trong bài soạn gốc, AI chỉ chèn thêm các năng lực được chọn (Năng lực AI, HSKT, Tiếng Anh) vào đúng các bước mà không tái tạo lại NLS.
+                      </span>
+                    ) : (
+                      <span>
+                        Tích chọn mục này nếu bài soạn của bạn đã có NLS từ trước và bạn chỉ muốn bổ sung thêm AI, HSKT, hoặc Tiếng Anh vào đúng vị trí.
+                      </span>
+                    )}
+                  </p>
+                </div>
+              </label>
             </div>
           </div>
         )}
