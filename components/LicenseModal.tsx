@@ -175,6 +175,19 @@ const LicenseModal: React.FC<LicenseModalProps> = ({
                     <span>⏳ Bản Dùng Thử: Đã dùng <strong>{licenseInfo.trialDownloadsUsed}/5</strong> lượt tải (Còn <strong>{licenseInfo.trialDownloadsRemaining}</strong> lượt).</span>
                   </div>
                 )}
+
+                {/* Nút bấm 1-click để Reset về Dùng thử kiểm tra tính năng */}
+                <div className="flex items-center justify-between pt-2 border-t border-slate-200 text-xs">
+                  <span className="text-[11px] text-slate-500">Thầy/Cô muốn kiểm thử?</span>
+                  <button
+                    type="button"
+                    onClick={handleResetLicense}
+                    className="px-2.5 py-1 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 rounded-lg text-xs font-bold transition-all flex items-center space-x-1 shadow-xs active:scale-95"
+                  >
+                    <RotateCcw size={13} />
+                    <span>Xóa bản quyền ➔ Về Dùng thử (5 lượt)</span>
+                  </button>
+                </div>
               </div>
 
               {/* Bước 1: Sao chép Mã Thiết Bị */}
