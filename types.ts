@@ -76,7 +76,7 @@ export interface HistoryItem {
   disabilityType?: DisabilityType;
   englishIntegrationLevel?: EnglishIntegrationLevel;
 }
-export type ProPackage = 'TRIAL' | '1_YEAR' | '2_YEARS' | 'LIFETIME';
+export type ProPackage = 'TRIAL' | 'BONUS_5' | 'BONUS_10' | 'BONUS_20' | '1_YEAR' | '2_YEARS' | 'LIFETIME';
 
 export interface LicenseInfo {
   deviceId: string;

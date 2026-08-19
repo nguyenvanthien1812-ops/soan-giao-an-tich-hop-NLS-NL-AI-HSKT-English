@@ -230,7 +230,7 @@ const LicenseModal: React.FC<LicenseModalProps> = ({
                 </label>
                 <input
                   type="text"
-                  placeholder="Ví dụ: PRO-1Y-XXXXYYYY-ZZZZ"
+                  placeholder="Ví dụ: PRO-1Y-XXXX... hoặc BONUS-5-XXXX..."
                   value={inputKey}
                   onChange={(e) => setInputKey(e.target.value)}
                   className="w-full border border-slate-300 rounded-xl p-3 text-sm font-mono uppercase focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all tracking-wider text-center"
@@ -313,45 +313,88 @@ const LicenseModal: React.FC<LicenseModalProps> = ({
                     />
                   </div>
 
-                  {/* Chọn Gói Thời Hạn */}
-                  <div className="space-y-1.5">
-                    <label className="block text-xs font-semibold text-slate-700">2. Chọn Gói Bản Quyền Pro:</label>
-                    <div className="grid grid-cols-3 gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setAdminSelectedPackage('1_YEAR')}
-                        className={`py-2 rounded-xl text-xs font-bold border transition-all ${
-                          adminSelectedPackage === '1_YEAR'
-                            ? 'bg-purple-600 text-white border-purple-600 shadow'
-                            : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
-                        }`}
-                      >
-                        🥇 Gói 1 Năm
-                      </button>
+                  {/* Chọn Gói Bản Quyền Pro hoặc Cấp Thêm Lượt Dùng Thử */}
+                  <div className="space-y-3">
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-bold text-slate-700">2A. Gói Bản Quyền Pro (Không giới hạn):</label>
+                      <div className="grid grid-cols-3 gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setAdminSelectedPackage('1_YEAR')}
+                          className={`py-2 rounded-xl text-xs font-bold border transition-all ${
+                            adminSelectedPackage === '1_YEAR'
+                              ? 'bg-purple-600 text-white border-purple-600 shadow'
+                              : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                          }`}
+                        >
+                          🥇 Gói 1 Năm
+                        </button>
 
-                      <button
-                        type="button"
-                        onClick={() => setAdminSelectedPackage('2_YEARS')}
-                        className={`py-2 rounded-xl text-xs font-bold border transition-all ${
-                          adminSelectedPackage === '2_YEARS'
-                            ? 'bg-purple-600 text-white border-purple-600 shadow'
-                            : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
-                        }`}
-                      >
-                        🥈 Gói 2 Năm
-                      </button>
+                        <button
+                          type="button"
+                          onClick={() => setAdminSelectedPackage('2_YEARS')}
+                          className={`py-2 rounded-xl text-xs font-bold border transition-all ${
+                            adminSelectedPackage === '2_YEARS'
+                              ? 'bg-purple-600 text-white border-purple-600 shadow'
+                              : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                          }`}
+                        >
+                          🥈 Gói 2 Năm
+                        </button>
 
-                      <button
-                        type="button"
-                        onClick={() => setAdminSelectedPackage('LIFETIME')}
-                        className={`py-2 rounded-xl text-xs font-bold border transition-all ${
-                          adminSelectedPackage === 'LIFETIME'
-                            ? 'bg-amber-600 text-white border-amber-600 shadow'
-                            : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
-                        }`}
-                      >
-                        💎 Vĩnh Viễn
-                      </button>
+                        <button
+                          type="button"
+                          onClick={() => setAdminSelectedPackage('LIFETIME')}
+                          className={`py-2 rounded-xl text-xs font-bold border transition-all ${
+                            adminSelectedPackage === 'LIFETIME'
+                              ? 'bg-amber-600 text-white border-amber-600 shadow'
+                              : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                          }`}
+                        >
+                          💎 Vĩnh Viễn
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="block text-xs font-bold text-blue-900">2B. Cấp Thêm Lượt Dùng Thử (Mỗi mã dùng 1 lần):</label>
+                      <div className="grid grid-cols-3 gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setAdminSelectedPackage('BONUS_5')}
+                          className={`py-2 rounded-xl text-xs font-bold border transition-all ${
+                            adminSelectedPackage === 'BONUS_5'
+                              ? 'bg-blue-600 text-white border-blue-600 shadow'
+                              : 'bg-blue-50/60 border-blue-200 text-blue-800 hover:bg-blue-100'
+                          }`}
+                        >
+                          🎁 +5 Lượt Thử
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => setAdminSelectedPackage('BONUS_10')}
+                          className={`py-2 rounded-xl text-xs font-bold border transition-all ${
+                            adminSelectedPackage === 'BONUS_10'
+                              ? 'bg-blue-600 text-white border-blue-600 shadow'
+                              : 'bg-blue-50/60 border-blue-200 text-blue-800 hover:bg-blue-100'
+                          }`}
+                        >
+                          🎁 +10 Lượt Thử
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => setAdminSelectedPackage('BONUS_20')}
+                          className={`py-2 rounded-xl text-xs font-bold border transition-all ${
+                            adminSelectedPackage === 'BONUS_20'
+                              ? 'bg-blue-600 text-white border-blue-600 shadow'
+                              : 'bg-blue-50/60 border-blue-200 text-blue-800 hover:bg-blue-100'
+                          }`}
+                        >
+                          🎁 +20 Lượt Thử
+                        </button>
+                      </div>
                     </div>
                   </div>
 
