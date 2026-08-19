@@ -85,6 +85,13 @@ const LicenseModal: React.FC<LicenseModalProps> = ({
     setTimeout(() => setCopiedGenKey(false), 2000);
   };
 
+  // Format ngày hết hạn
+  const formatExpiryDate = (ts?: number) => {
+    if (!ts) return 'Vĩnh viễn';
+    const d = new Date(ts);
+    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  };
+
   const handleResetLicense = () => {
     if (window.confirm("Thầy/Cô có chắc chắn muốn xóa bản quyền trên máy này và đưa về Bản Dùng Thử (5 lượt tải về) để kiểm thử?")) {
       resetLicenseToTrial();
