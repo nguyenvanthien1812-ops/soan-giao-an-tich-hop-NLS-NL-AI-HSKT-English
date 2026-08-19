@@ -215,3 +215,13 @@ export function getLicenseInfo(): LicenseInfo {
     licenseKey: undefined
   };
 }
+
+// 5. Hàm Admin / Test: Xóa bản quyền và đặt lại về dùng thử 5 lượt tải
+export function resetLicenseToTrial(): void {
+  localStorage.removeItem(PRO_LICENSE_KEY);
+  localStorage.removeItem(PRO_PACKAGE_KEY);
+  localStorage.removeItem(PRO_EXPIRY_KEY);
+  localStorage.removeItem(TRIAL_DOWNLOADS_COUNT_KEY);
+  localStorage.removeItem(TRIAL_DOWNLOADS_HASH_KEY);
+  localStorage.removeItem(TRIAL_START_KEY);
+}

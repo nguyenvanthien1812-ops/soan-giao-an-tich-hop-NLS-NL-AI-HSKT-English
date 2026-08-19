@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { LicenseInfo, ProPackage } from '../types';
-import { activateProKey, generateProKey } from '../services/licenseService';
-import { Key, Shield, Copy, Check, Crown, Lock, Clock, Sparkles, AlertTriangle } from 'lucide-react';
+import { activateProKey, generateProKey, resetLicenseToTrial } from '../services/licenseService';
+import { Key, Shield, Copy, Check, Crown, Lock, Clock, Sparkles, AlertTriangle, RotateCcw } from 'lucide-react';
 
 interface LicenseModalProps {
   isOpen: boolean;
@@ -85,11 +85,13 @@ const LicenseModal: React.FC<LicenseModalProps> = ({
     setTimeout(() => setCopiedGenKey(false), 2000);
   };
 
-  // Format ngày hết hạn
-  const formatExpiryDate = (ts?: number) => {
-    if (!ts) return 'Vĩnh viễn';
-    const d = new Date(ts);
-    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  const handleResetLicense = () => {
+    if (window.confirm("Thầy/Cô có chắc chắn muốn xóa bản quyền trên máy này và đưa về Bản Dùng Thử (5 lượt tải về) để kiểm thử?")) {
+      resetLicenseToTrial();
+      onLicenseUpdated();
+      alert("Đã xóa bản quyền trên máy này và khôi phục về Bản dùng thử 5 lượt tải thành công!");
+      onClose();
+    }
   };
 
   return (
@@ -364,6 +366,22 @@ const LicenseModal: React.FC<LicenseModalProps> = ({
                       </p>
                     </div>
                   )}
+
+                  {/* 3. Công cụ Reset / Xóa bản quyền để kiểm thử */}
+                  <div className="pt-4 mt-2 border-t border-purple-200 space-y-2">
+                    <label className="block text-xs font-bold text-slate-700">3. Công cụ Kiểm thử (Test Mode):</label>
+                    <button
+                      type="button"
+                      onClick={handleResetLicense}
+                      className="w-full py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-300 rounded-xl text-xs font-bold transition-all flex items-center justify-center space-x-2 shadow-xs active:scale-95"
+                    >
+                      <RotateCcw size={15} />
+                      <span>XÓA BẢN QUYỀN TRÊN MÁY NÀY (VỀ DÙNG THỬ 5 LƯỢT)</span>
+                    </button>
+                    <p className="text-[11px] text-slate-500 text-center italic">
+                      * Bấm để khôi phục máy này về trạng thái Dùng thử (5 lượt tải về) nhằm kiểm thử tính năng.
+                    </p>
+                  </div>
                 </form>
               )}
             </div>
