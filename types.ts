@@ -84,7 +84,10 @@ export interface LicenseInfo {
   packageType: ProPackage;
   trialStartDate: number;
   trialDaysRemaining: number;
-  isTrialExpired: boolean;
-  proExpiryDate?: number; // Unix timestamp hết hạn (nếu gói theo năm)
+  trialDownloadsUsed: number;        // Số lượt đã tải về (0 -> 5)
+  trialDownloadsRemaining: number;   // Số lượt còn lại (5 -> 0)
+  maxTrialDownloads: number;         // 5 lượt
+  isTrialExpired: boolean;           // true khi đã dùng hết 5 lượt tải
+  proExpiryDate?: number;            // Unix timestamp hết hạn (nếu gói theo năm)
   licenseKey?: string;
 }

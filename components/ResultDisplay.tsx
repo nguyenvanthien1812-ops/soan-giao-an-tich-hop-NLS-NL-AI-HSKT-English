@@ -18,12 +18,16 @@ import {
 } from 'docx';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
-import { OriginalDocxFile } from '../types';
+import { OriginalDocxFile, LicenseInfo } from '../types';
+import { recordTrialDownload } from '../services/licenseService';
 
 interface ResultDisplayProps {
   result: string | null;
   loading: boolean;
   originalDocx?: OriginalDocxFile | null;
+  licenseInfo?: LicenseInfo;
+  onOpenLicense?: () => void;
+  onDownloadSuccess?: () => void;
 }
 
 // Interface cho các section NLS đã parse
@@ -36,10 +40,19 @@ interface NLSSection {
   quotedText?: string; // Đoạn trích dẫn nguyên văn câu liền trước từ AI
 }
 
-const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, originalDocx }) => {
+const ResultDisplay: React.FC<ResultDisplayProps> = ({
+  result,
+  loading,
+  originalDocx,
+  licenseInfo,
+  onOpenLicense,
+  onDownloadSuccess,
+}) => {
+  const isPro = licenseInfo?.isPro ?? false;
   const [showPreview, setShowPreview] = useState(false);
   const [isGeneratingDoc, setIsGeneratingDoc] = useState(false);
-  const [activeTab, setActiveTab] = useState<'manual' | 'word'>('manual');
+  const [activeTab, setActiveTab] = useState<'manual' | 'word'>('word');
+  const effectiveTab = isPro ? activeTab : 'word';
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [copiedAll, setCopiedAll] = useState<boolean>(false);
 
@@ -1155,6 +1168,23 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
   // Hàm chính xuất file DOCX
   const generateDocx = async () => {
     if (!result) return;
+
+    // Kiểm tra bản quyền & lượt tải dùng thử
+    if (!isPro) {
+      if (licenseInfo?.isTrialExpired || (licenseInfo?.trialDownloadsRemaining ?? 0) <= 0) {
+        alert("⚠️ Bạn đã sử dụng hết 5 lượt tải về dùng thử miễn phí. Vui lòng kích hoạt Bản Pro để tiếp tục sử dụng không giới hạn!");
+        onOpenLicense?.();
+        return;
+      }
+      const rec = recordTrialDownload();
+      if (!rec.success) {
+        alert("⚠️ Bạn đã sử dụng hết 5 lượt tải về dùng thử miễn phí. Vui lòng kích hoạt Bản Pro để tiếp tục sử dụng không giới hạn!");
+        onOpenLicense?.();
+        return;
+      }
+      onDownloadSuccess?.();
+    }
+
     setIsGeneratingDoc(true);
 
     try {
@@ -1183,6 +1213,23 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
 
   const handleDownloadTxt = () => {
     if (!result) return;
+
+    // Kiểm tra bản quyền & lượt tải dùng thử
+    if (!isPro) {
+      if (licenseInfo?.isTrialExpired || (licenseInfo?.trialDownloadsRemaining ?? 0) <= 0) {
+        alert("⚠️ Bạn đã sử dụng hết 5 lượt tải về dùng thử miễn phí. Vui lòng kích hoạt Bản Pro để tiếp tục sử dụng không giới hạn!");
+        onOpenLicense?.();
+        return;
+      }
+      const rec = recordTrialDownload();
+      if (!rec.success) {
+        alert("⚠️ Bạn đã sử dụng hết 5 lượt tải về dùng thử miễn phí. Vui lòng kích hoạt Bản Pro để tiếp tục sử dụng không giới hạn!");
+        onOpenLicense?.();
+        return;
+      }
+      onDownloadSuccess?.();
+    }
+
     const blob = new Blob([result], { type: 'text/plain' });
     FileSaver.saveAs(blob, 'Giao_an_NLS.txt');
   };
@@ -1280,7 +1327,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
       .replace(/===NLS_HOẠT_ĐỘNG_(\d+)_MỤC_TIÊU_HĐ.*?===/g, '\n**📌 HOẠT ĐỘNG $1 - MỤC TIÊU NLS:**\n')
       .replace(/===NLS_HOẠT_ĐỘNG_(\d+)_BƯỚC_(\d+).*?===/g, '\n**📌 HOẠT ĐỘNG $1 - BƯỚC $2 NLS:**\n')
       .replace(/===NLS_HOẠT_ĐỘNG_(\d+)_KẾT_LUẬN.*?===/g, '\n**📌 HOẠT ĐỘNG $1 - KẾT LUẬN NLS:**\n')
-      .replace(/===NLS_HOẠT_ĐỘNG_(\d+).*?===/g, '\n**📌 HOẠT ĐỘNG $1 - NLS:**\n')
+.replace(/===NLS_HOẠT_ĐỘNG_(\d+).*?===/g, '\n**📌 HOẠT ĐỘNG $1 - NLS:**\n')
       .replace(/===NLS_CỦNG_CỐ.*?===/g, '\n**📌 CỦNG CỐ - TÍCH HỢP NLS:**\n')
 
       // ================== ENGLISH DC MARKERS ==================
@@ -1335,38 +1382,50 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
         </div>
       </div>
 
-      {/* Tab Navigation */}
-      <div className="flex border-b border-slate-200/80 bg-slate-50/80 p-1.5 gap-1.5">
-        <button
-          onClick={() => setActiveTab('manual')}
-          className={`flex-1 py-3.5 px-4 sm:px-6 font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 rounded-2xl transition-all ${
-            activeTab === 'manual'
-              ? 'bg-white text-indigo-950 shadow-md shadow-indigo-900/5 text-indigo-600'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-          }`}
-        >
-          <ListChecks size={19} className={activeTab === 'manual' ? 'text-indigo-600' : 'text-slate-400'} />
-          <span>📋 Hướng dẫn chèn thủ công (Copy nhanh)</span>
-          <span className="ml-1.5 px-2 py-0.5 text-[11px] font-bold rounded-full bg-indigo-100 text-indigo-800">
-            {sections.length} mục
+      {/* Tab Navigation (Bản Pro hiển thị 2 Tab, Bản dùng thử chỉ hiển thị giao diện Xuất Word) */}
+      {isPro ? (
+        <div className="flex border-b border-slate-200/80 bg-slate-50/80 p-1.5 gap-1.5">
+          <button
+            onClick={() => setActiveTab('manual')}
+            className={`flex-1 py-3.5 px-4 sm:px-6 font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 rounded-2xl transition-all ${
+              effectiveTab === 'manual'
+                ? 'bg-white text-indigo-950 shadow-md shadow-indigo-900/5 text-indigo-600'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+            }`}
+          >
+            <ListChecks size={19} className={effectiveTab === 'manual' ? 'text-indigo-600' : 'text-slate-400'} />
+            <span>📋 Hướng dẫn chèn thủ công (Copy nhanh)</span>
+            <span className="ml-1.5 px-2 py-0.5 text-[11px] font-bold rounded-full bg-indigo-100 text-indigo-800">
+              {sections.length} mục
+            </span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('word')}
+            className={`flex-1 py-3.5 px-4 sm:px-6 font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 rounded-2xl transition-all ${
+              effectiveTab === 'word'
+                ? 'bg-white text-indigo-950 shadow-md shadow-indigo-900/5 text-indigo-600'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+            }`}
+          >
+            <FileSpreadsheet size={19} className={effectiveTab === 'word' ? 'text-indigo-600' : 'text-slate-400'} />
+            <span>📁 Xuất file Word tự động (.docx)</span>
+          </button>
+        </div>
+      ) : (
+        <div className="p-3.5 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-indigo-100 flex flex-wrap items-center justify-between text-xs sm:text-sm text-indigo-950 font-bold px-6 gap-2">
+          <span className="flex items-center space-x-2">
+            <FileSpreadsheet size={18} className="text-blue-600" />
+            <span>📁 Chế độ Dùng thử: Xuất file Word tự động (.docx)</span>
           </span>
-        </button>
+          <span className="bg-amber-100 text-amber-900 px-3 py-1 rounded-full border border-amber-300 font-bold">
+            Còn lại: {licenseInfo?.trialDownloadsRemaining ?? 5}/5 lượt tải miễn phí
+          </span>
+        </div>
+      )}
 
-        <button
-          onClick={() => setActiveTab('word')}
-          className={`flex-1 py-3.5 px-4 sm:px-6 font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 rounded-2xl transition-all ${
-            activeTab === 'word'
-              ? 'bg-white text-indigo-950 shadow-md shadow-indigo-900/5 text-indigo-600'
-              : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-          }`}
-        >
-          <FileSpreadsheet size={19} className={activeTab === 'word' ? 'text-indigo-600' : 'text-slate-400'} />
-          <span>📁 Xuất file Word tự động (.docx)</span>
-        </button>
-      </div>
-
-      {/* Tab 1: Hướng dẫn chèn thủ công */}
-      {activeTab === 'manual' && (
+      {/* Tab 1: Hướng dẫn chèn thủ công (CHỈ HIỂN THỊ CHO BẢN PRO) */}
+      {isPro && effectiveTab === 'manual' && (
         <div className="p-6 sm:p-7 bg-slate-50/50 space-y-6">
           {/* Instructions banner */}
           <div className="bg-gradient-to-r from-blue-50/90 via-indigo-50/90 to-purple-50/90 border border-indigo-100 rounded-2xl p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -1418,79 +1477,66 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
                   {/* Card Header */}
                   <div className="bg-slate-900 text-white px-5 py-3.5 flex flex-wrap items-center justify-between gap-2">
                     <div className="flex items-center space-x-2.5 flex-wrap">
-                      <span className="font-bold text-sm sm:text-base flex items-center tracking-tight">
-                        <span className="inline-block w-2.5 h-2.5 rounded-full bg-indigo-400 mr-2.5"></span>
-                        MỤC {idx + 1}: {formattedTitle}
+                      <span className="font-extrabold text-sm sm:text-base text-indigo-300">
+                        {formattedTitle}
                       </span>
                       {hasBlue && (
                         <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-blue-500/20 text-blue-300 border border-blue-400/30">
-                          🔵 NLS
+                          Năng lực số
                         </span>
                       )}
                       {hasPurple && (
                         <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-purple-500/20 text-purple-300 border border-purple-400/30">
-                          🟣 AI
+                          Năng lực AI
                         </span>
                       )}
                       {hasGreen && (
                         <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
-                          🟢 HSKT
+                          Hỗ trợ HSKT
                         </span>
                       )}
                       {hasOrange && (
                         <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-amber-500/20 text-amber-300 border border-amber-400/30">
-                          🟠 Tiếng Anh
+                          Tiếng Anh
                         </span>
                       )}
                       {hasRed && !hasBlue && !hasPurple && (
-                        <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-red-500/20 text-red-300 border border-red-400/30">
-                          🔴 NLS/AI
-                        </span>
-                      )}
-                      {isTable && (
-                        <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
-                          📊 Bảng tổng hợp
+                        <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-rose-500/20 text-rose-300 border border-rose-400/30">
+                          Toàn bài
                         </span>
                       )}
                     </div>
+
                     <button
                       onClick={() => handleCopySection(section.content, idx)}
-                      className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all active:scale-95 ${
-                        isCopied
-                          ? 'bg-emerald-600 text-white shadow-sm'
-                          : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-500/20'
-                      }`}
-                      title="Copy nội dung (Dán vào Word tự động giữ màu sắc & bảng kẻ ô)"
+                      className="flex items-center space-x-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs font-bold transition-all active:scale-95"
                     >
                       {isCopied ? (
                         <>
-                          <Check size={14} />
-                          <span>Đã sao chép!</span>
+                          <Check size={14} className="text-emerald-400" />
+                          <span className="text-emerald-400">Đã copy</span>
                         </>
                       ) : (
                         <>
                           <Copy size={14} />
-                          <span>Copy đoạn này (Ctrl+V vào Word)</span>
+                          <span>Copy đoạn này</span>
                         </>
                       )}
                     </button>
                   </div>
 
+                  {/* Card Body */}
                   <div className="p-5 space-y-4">
-                    {/* Location guidance box */}
-                    <div className="bg-amber-50/90 border-l-4 border-amber-500 p-4 rounded-r-xl shadow-2xs">
-                      <div className="flex items-start">
-                        <MapPin size={18} className="text-amber-600 mr-2.5 flex-shrink-0 mt-0.5" />
+                    {/* Guidance */}
+                    {section.locationGuidance && (
+                      <div className="p-3 bg-amber-50/80 border border-amber-200/80 rounded-xl text-xs text-amber-900 flex items-start space-x-2">
+                        <MapPin size={15} className="text-amber-600 mt-0.5 flex-shrink-0" />
                         <div>
-                          <p className="font-bold text-xs text-amber-900 uppercase tracking-wider">
-                            📍 VỊ TRÍ CHÈN TRONG GIÁO ÁN (CHUẨN KHỚP FILE WORD):
-                          </p>
-                          <p className="text-amber-950 font-bold text-xs sm:text-sm mt-1 leading-relaxed whitespace-pre-line">
-                            {section.locationGuidance || 'Mục I. MỤC TIÊU -> Cuối phần 2. Năng lực (hoặc phần d. Tổ chức thực hiện của Hoạt động)'}
-                          </p>
+                          <strong className="text-amber-950 font-bold">Vị trí dán chuẩn xác:</strong>
+                          <p className="mt-0.5 font-medium leading-relaxed">{section.locationGuidance}</p>
                         </div>
                       </div>
-                    </div>
+                    )}
 
                     {/* Content Preview (Text hoặc Table) */}
                     {isTable ? (
@@ -1548,7 +1594,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
       )}
 
       {/* Tab 2: Xuất file Word tự động */}
-      {activeTab === 'word' && (
+      {effectiveTab === 'word' && (
         <div className="p-8 sm:p-10 bg-slate-50/50 flex flex-col items-center justify-center text-center space-y-6">
           <div className="max-w-xl space-y-3">
             <h3 className="text-xl sm:text-2xl font-extrabold text-indigo-950 tracking-tight">Chèn tự động & Xuất file Word (.docx)</h3>

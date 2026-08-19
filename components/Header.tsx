@@ -42,10 +42,10 @@ const Header: React.FC<HeaderProps> = ({
         <button
           onClick={onOpenLicense}
           className="flex items-center space-x-2 px-3.5 py-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white rounded-2xl text-xs sm:text-sm font-bold shadow-lg shadow-red-500/30 border border-red-400/50 transition-all transform hover:scale-[1.03] active:scale-95 animate-pulse"
-          title="Hết hạn dùng thử - Bấm để kích hoạt Pro"
+          title="Hết 5 lượt tải dùng thử - Bấm để kích hoạt Pro"
         >
           <ShieldAlert size={17} />
-          <span>Hết Hạn 5 Ngày (Kích Hoạt Pro)</span>
+          <span>Hết 5 Lượt Tải (Kích Hoạt Pro)</span>
         </button>
       );
     }
@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({
         title="Bấm để nâng cấp Bản Pro"
       >
         <Crown size={17} className="text-yellow-300 fill-yellow-300/30" />
-        <span>Dùng thử: Còn <span className="font-bold text-yellow-300">{licenseInfo.trialDaysRemaining.toFixed(1)}</span> ngày</span>
+        <span>Dùng thử: Còn <span className="font-bold text-yellow-300">{licenseInfo.trialDownloadsRemaining}</span>/5 lượt tải</span>
       </button>
     );
   };

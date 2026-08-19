@@ -165,12 +165,12 @@ const LicenseModal: React.FC<LicenseModalProps> = ({
                 ) : licenseInfo.isTrialExpired ? (
                   <div className="flex items-center space-x-2 text-red-700 font-bold bg-red-50 p-3 rounded-lg border border-red-200">
                     <AlertTriangle className="text-red-500" size={20} />
-                    <span>⚠️ Thời gian dùng thử 5 ngày đã hết. Vui lòng kích hoạt Pro!</span>
+                    <span>⚠️ Bạn đã sử dụng hết 5/5 lượt tải về dùng thử miễn phí. Vui lòng kích hoạt Pro để tiếp tục!</span>
                   </div>
                 ) : (
                   <div className="flex items-center space-x-2 text-blue-700 font-semibold bg-blue-50 p-3 rounded-lg border border-blue-200">
                     <Clock className="text-blue-500" size={20} />
-                    <span>⏳ Dùng thử 5 Ngày: Còn {licenseInfo.trialDaysRemaining.toFixed(1)} ngày nữa.</span>
+                    <span>⏳ Bản Dùng Thử: Đã dùng <strong>{licenseInfo.trialDownloadsUsed}/5</strong> lượt tải (Còn <strong>{licenseInfo.trialDownloadsRemaining}</strong> lượt).</span>
                   </div>
                 )}
               </div>

@@ -124,7 +124,7 @@ const App: React.FC = () => {
     setLicenseInfo(currentLic);
 
     if (!currentLic.isPro && currentLic.isTrialExpired) {
-      setError("⚠️ Thời gian dùng thử 5 ngày đã hết. Vui lòng kích hoạt Bản Pro để tiếp tục sử dụng!");
+      setError("⚠️ Bạn đã sử dụng hết 5 lượt tải về dùng thử miễn phí. Vui lòng kích hoạt Bản Pro để tiếp tục sử dụng!");
       setShowLicenseModal(true);
       return;
     }
@@ -386,7 +386,14 @@ const App: React.FC = () => {
 
         {/* Result Section */}
         <div className="mt-10">
-          <ResultDisplay result={result} loading={loading} originalDocx={originalDocx} />
+          <ResultDisplay
+            result={result}
+            loading={loading}
+            originalDocx={originalDocx}
+            licenseInfo={licenseInfo}
+            onOpenLicense={() => setShowLicenseModal(true)}
+            onDownloadSuccess={() => setLicenseInfo(getLicenseInfo())}
+          />
         </div>
       </main>
 

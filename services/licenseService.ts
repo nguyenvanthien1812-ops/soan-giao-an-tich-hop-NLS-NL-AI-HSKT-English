@@ -7,8 +7,10 @@ const PRO_LICENSE_KEY = "NLS_PRO_LICENSE_KEY_V1";
 const PRO_PACKAGE_KEY = "NLS_PRO_PACKAGE_KEY_V1";
 const PRO_EXPIRY_KEY = "NLS_PRO_EXPIRY_KEY_V1";
 
-// 5 Ngày dùng thử tính bằng milliseconds
-const TRIAL_DURATION_MS = 5 * 24 * 60 * 60 * 1000;
+// 5 Lượt dùng thử tải về
+export const MAX_TRIAL_DOWNLOADS = 5;
+const TRIAL_DOWNLOADS_COUNT_KEY = "NLS_TRIAL_DOWNLOADS_COUNT_V2";
+const TRIAL_DOWNLOADS_HASH_KEY = "NLS_TRIAL_DOWNLOADS_HASH_V2";
 
 // Simple FNV-1a 32-bit Hash converted to 8-char uppercase hex/alphanumeric
 function hashString(str: string): string {
@@ -24,6 +26,48 @@ function hashString(str: string): string {
 // Làm sạch Device ID (loại bỏ dấu gạch ngang, chữ thường -> chữ hoa)
 function cleanString(str: string): string {
   return str.replace(/[^A-Z0-9]/gi, "").toUpperCase();
+}
+
+// Lấy số lượt tải dùng thử đã dùng (có bảo vệ checksum)
+export function getTrialDownloadsUsed(): number {
+  const countStr = localStorage.getItem(TRIAL_DOWNLOADS_COUNT_KEY);
+  const hashStr = localStorage.getItem(TRIAL_DOWNLOADS_HASH_KEY);
+  if (!countStr) return 0;
+  
+  const count = parseInt(countStr, 10);
+  if (isNaN(count) || count < 0) return 0;
+  
+  // Xác thực checksum chống chỉnh sửa trực tiếp
+  const expectedHash = hashString(`${count}:${SECRET_SALT}`);
+  if (hashStr !== expectedHash) {
+    return MAX_TRIAL_DOWNLOADS; // Nếu bị can thiệp thì khóa lượt dùng thử
+  }
+  return count;
+}
+
+// Ghi nhận 1 lượt tải về thành công
+export function recordTrialDownload(): { success: boolean; isPro: boolean; downloadsRemaining: number; isTrialExpired: boolean } {
+  const lic = getLicenseInfo();
+  if (lic.isPro) {
+    return { success: true, isPro: true, downloadsRemaining: 9999, isTrialExpired: false };
+  }
+
+  const currentUsed = getTrialDownloadsUsed();
+  if (currentUsed >= MAX_TRIAL_DOWNLOADS) {
+    return { success: false, isPro: false, downloadsRemaining: 0, isTrialExpired: true };
+  }
+
+  const newCount = currentUsed + 1;
+  localStorage.setItem(TRIAL_DOWNLOADS_COUNT_KEY, newCount.toString());
+  localStorage.setItem(TRIAL_DOWNLOADS_HASH_KEY, hashString(`${newCount}:${SECRET_SALT}`));
+
+  const remaining = Math.max(0, MAX_TRIAL_DOWNLOADS - newCount);
+  return {
+    success: true,
+    isPro: false,
+    downloadsRemaining: remaining,
+    isTrialExpired: remaining <= 0
+  };
 }
 
 // 1. Hàm khởi tạo hoặc lấy Mã Thiết Bị độc nhất (Cố định theo Phần cứng Máy tính)
@@ -136,16 +180,16 @@ export function getLicenseInfo(): LicenseInfo {
     }
 
     // Kiểm tra xem gói có thời hạn (1 năm/2 năm) đã hết hạn chưa
-    if (proExpiryDate && now > proExpiryDate) {
-      // Đã hết hạn Pro
-      // Quay về tính hết hạn dùng thử
-    } else {
+    if (!proExpiryDate || now <= proExpiryDate) {
       return {
         deviceId,
         isPro: true,
         packageType: proPackageStr,
         trialStartDate: 0,
         trialDaysRemaining: 0,
+        trialDownloadsUsed: 0,
+        trialDownloadsRemaining: 9999,
+        maxTrialDownloads: MAX_TRIAL_DOWNLOADS,
         isTrialExpired: false,
         proExpiryDate,
         licenseKey: proKey
@@ -153,27 +197,20 @@ export function getLicenseInfo(): LicenseInfo {
     }
   }
 
-  // Chế độ Dùng thử 5 Ngày
-  let trialStartStr = localStorage.getItem(TRIAL_START_KEY);
-  let trialStartDate = trialStartStr ? parseInt(trialStartStr, 10) : 0;
-
-  if (!trialStartDate || isNaN(trialStartDate)) {
-    trialStartDate = now;
-    localStorage.setItem(TRIAL_START_KEY, trialStartDate.toString());
-  }
-
-  const elapsedTime = now - trialStartDate;
-  const isTrialExpired = elapsedTime >= TRIAL_DURATION_MS;
-  const trialDaysRemaining = isTrialExpired 
-    ? 0 
-    : Math.max(0, (TRIAL_DURATION_MS - elapsedTime) / (24 * 60 * 60 * 1000));
+  // Chế độ Dùng thử 5 Lượt Tải Về
+  const trialDownloadsUsed = getTrialDownloadsUsed();
+  const trialDownloadsRemaining = Math.max(0, MAX_TRIAL_DOWNLOADS - trialDownloadsUsed);
+  const isTrialExpired = trialDownloadsUsed >= MAX_TRIAL_DOWNLOADS;
 
   return {
     deviceId,
     isPro: false,
     packageType: 'TRIAL',
-    trialStartDate,
-    trialDaysRemaining,
+    trialStartDate: 0,
+    trialDaysRemaining: 0,
+    trialDownloadsUsed,
+    trialDownloadsRemaining,
+    maxTrialDownloads: MAX_TRIAL_DOWNLOADS,
     isTrialExpired,
     licenseKey: undefined
   };
