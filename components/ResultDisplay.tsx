@@ -478,7 +478,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
         return new TextRun({ text: cleanLatex(part.replace(/<\/?blue>/g, '')), color: "0055D4", bold: true });
       }
       if (part.startsWith('<purple>') && part.endsWith('</purple>')) {
-        return new TextRun({ text: cleanLatex(part.replace(/<\/?purple>/g, '')), color: "7030A0", bold: true });
+        return new TextRun({ text: cleanLatex(part.replace(/<\/?purple>/g, '')), color: "0055D4", bold: true });
       }
       if (part.startsWith('<green>') && part.endsWith('</green>')) {
         return new TextRun({ text: cleanLatex(part.replace(/<\/?green>/g, '')), color: "008000", italics: true });
@@ -589,7 +589,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
       if (isItalic) rPr += `<w:i/>`;
       if (isUnderline) rPr += `<w:u w:val="single"/>`;
       if (isBlue) rPr += `<w:color w:val="0055D4"/>`;
-      else if (isPurple) rPr += `<w:color w:val="7030A0"/>`;
+      else if (isPurple) rPr += `<w:color w:val="0055D4"/>`;
       else if (isGreen) rPr += `<w:color w:val="008000"/>`;
       else if (isOrange) rPr += `<w:color w:val="B45309"/>`;
       else if (isRed) rPr += `<w:color w:val="FF0000"/>`;
@@ -690,7 +690,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
       if (isBlue) {
         style += " color: #1d4ed8; font-weight: 600;";
       } else if (isPurple) {
-        style += " color: #7c3aed; font-weight: 600;";
+        style += " color: #1d4ed8; font-weight: 600;";
       } else if (isGreen) {
         style += " color: #059669; font-style: italic;";
       } else if (isOrange) {
@@ -1204,7 +1204,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
       <span style={{ color: '#1d4ed8', fontWeight: 600 }}>{children}</span>
     ),
     purple: ({ children }: { children: React.ReactNode }) => (
-      <span style={{ color: '#7c3aed', fontWeight: 600 }}>{children}</span>
+      <span style={{ color: '#1d4ed8', fontWeight: 600 }}>{children}</span>
     ),
     green: ({ children }: { children: React.ReactNode }) => (
       <span style={{ color: '#059669', fontStyle: 'italic', fontWeight: 600 }}>{children}</span>
@@ -1521,7 +1521,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, loading, original
 
                             let colorClass = 'text-slate-800';
                             if (isBlue) colorClass = 'text-blue-700 font-bold';
-                            else if (isPurple) colorClass = 'text-purple-700 font-bold';
+                            else if (isPurple) colorClass = 'text-blue-700 font-bold';
                             else if (isGreen) colorClass = 'text-emerald-700 italic font-semibold';
                             else if (isOrange) colorClass = 'text-amber-800 italic font-semibold';
                             else if (isRed) colorClass = 'text-red-600 font-semibold';

@@ -51,7 +51,7 @@ AI trả về nội dung theo các section:
 ```
 
 ### 5.4. Quy tắc chèn chi tiết
-- **Mục I. MỤC TIÊU**: Chèn tiêu đề `<blue>* Phát triển năng lực số</blue>` kèm các câu chỉ báo mã NLS (ví dụ `1.1.TC1a:...`) ở cuối phần **`2. Năng lực`** (trước mục `3. Phẩm chất`).
+- **Mục I. MỤC TIÊU**: Chèn tiêu đề `<blue>* Năng lực số</blue>` kèm các câu chỉ báo mã NLS (ví dụ `1.1.TC1a:...`) ở cuối phần **`2. Năng lực`** (trước mục `3. Phẩm chất`).
 - **Các Hoạt động**: **CHỈ CHÈN** vào phần **`d) Tổ chức thực hiện`** (hoặc các bước *Chuyển giao*, *Thực hiện*, *Báo cáo*, *Đánh giá* trong Tổ chức thực hiện). Tuyệt đối không chèn vào `a) Mục tiêu`, `b) Nội dung`, `c) Sản phẩm`.
 - **Mã chỉ báo NLS/AI**: Giữ nguyên mã chỉ báo NLS (dạng `1.1.TC1a:`) bằng văn bản màu xanh dương, hoặc mã AI (`NLc.C2:`) bằng màu tím trong cả Mục I và trong các Hoạt động.
 

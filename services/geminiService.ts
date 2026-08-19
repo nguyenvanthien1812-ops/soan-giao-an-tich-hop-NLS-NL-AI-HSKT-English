@@ -426,16 +426,16 @@ export const generateNLSLessonPlan = async (
       
       Thì phần Mục tiêu phải ghi:
       ===NLS_MỤC_TIÊU===
-      <blue>* Phát triển năng lực số</blue>
-      <blue>1.1.TC1a: Tìm kiếm thông tin, quy tắc.</blue>
-      <blue>3.4.NC1a: Sử dụng MTCT để giải.</blue>
+      <blue>* Năng lực số</blue>
+      <blue>- 1.1.TC1a: Tìm kiếm thông tin, quy tắc.</blue>
+      <blue>- 3.4.NC1a: Sử dụng MTCT để giải.</blue>
       ===END===
       
       ⛔️ CÁC ĐIỀU CẤM (STRICTLY PROHIBITED):
       - CẤM TUYỆT ĐỐI việc tự ý thêm bất kỳ năng lực số nào khác không có trong PPCT của bài học này.
       - CẤM thay đổi mã số hay nội dung. VD: 1.1.TC1a phải giữ nguyên.
       - CẤM chèn Năng lực số vào các mục "a) Mục tiêu", "b) Nội dung", "c) Sản phẩm" của các hoạt động. CHỈ CHÈN VÀO "d) Tổ chức thực hiện".
-      - Nếu cột năng lực số trong PPCT để trống, thì mục tiêu NLS ghi là: "* Phát triển năng lực số: Không có (theo PPCT)".
+      - Nếu cột năng lực số trong PPCT để trống, thì mục tiêu NLS ghi là: "* Năng lực số: Không có (theo PPCT)".
 
       NỘI DUNG PPCT:
       ${info.distributionContent}
@@ -638,7 +638,13 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     8. VỊ TRÍ CHÈN VÀ TRÍCH DẪN DÒNG LIỀN TRƯỚC:
        - Mỗi Marker '===NLS_...===' PHẢI đính kèm thông tin '|VITRI:...' trích dẫn chính xác dòng/câu liền trước trong giáo án gốc của giáo viên.
        - Ví dụ Marker: '===NLS_HOẠT_ĐỘNG_1_BƯỚC_2|VITRI: Hoạt động 1 > d. Tổ chức thực hiện > Bước 2 > Sau dòng: "GV yêu cầu HS sử dụng GeoGebra..."==='
-       - Phần I. Mục tiêu: Chèn ở cuối mục "2. Năng lực" (trước mục 3. Phẩm chất). Nếu không bật NLS thì chèn tiêu đề HSKT (<green>...</green>) và/hoặc Tiếng Anh (<orange>...</orange>).
+       - Phần I. Mục tiêu: Chèn ở cuối mục "2. Năng lực" (trước mục 3. Phẩm chất).
+         ⭐ QUY TẮC BẮT BUỘC CHO MỤC TIÊU (===NLS_MỤC_TIÊU===):
+         + Tiêu đề NLS: <blue>* Năng lực số</blue>
+         + Tiêu đề Năng lực AI: <blue>* Năng lực Trí tuệ nhân tạo (AI)</blue> (hoặc thẻ <purple>...</purple>)
+         + Tiêu đề HSKT: <green>* Điều chỉnh mục tiêu đối với Học sinh Khuyết tật (HSKT):</green>
+         + Tiêu đề Tiếng Anh: <orange>* Tích hợp Tiếng Anh (English Integration):</orange>
+         + TẤT CẢ CÁC Ý CHỈ BÁO NĂNG LỰC BẮT BUỘC PHẢI CÓ DẤU GẠCH ĐẦU DÒNG ("- ") ở đầu mỗi dòng (ví dụ: <blue>- 1.1.TC1a: ...</blue>, <purple>- [7.C5.1]: ...</purple>, <green>- Nhận biết và thực hiện...</green>, <orange>- HS nhận biết...</orange>).
        - Các hoạt động dạy học: CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" (hoặc các Bước/Nhiệm vụ trong Tổ chức thực hiện). TUYỆT ĐỐI CẤM chèn bất kỳ thẻ màu nào (<blue>, <purple>, <green>, <orange>) vào phần Mục tiêu, Nội dung, hay Sản phẩm của các hoạt động.
      9. PHÂN BỔ NLS/AI THEO ĐÚNG BƯỚC – BẮT BUỘC TUÂN THỦ (căn cứ CV 3456/BGDĐT & QĐ 3439):
        ⭐ NLS (<blue>) VÀ NĂNG LỰC AI (<purple>) LUÔN LUÔN LÀ NĂNG LỰC CỦA HỌC SINH. GV chỉ tổ chức/hướng dẫn, KHÔNG phát triển NLS/AI. Câu chỉ báo PHẢI có chủ thể HS.

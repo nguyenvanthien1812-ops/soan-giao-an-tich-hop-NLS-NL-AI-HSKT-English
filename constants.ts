@@ -143,8 +143,8 @@ CẤU TRÚC ĐẦU RA - CHUẨN XÁC VỚI VỊ TRÍ TRÍCH DẪN (CHÚ Ý PHẦ
 
 1. Phần Mục tiêu (nằm cuối phần "2. Năng lực" của Mục I. MỤC TIÊU, trước "3. Phẩm chất"):
 ===NLS_MỤC_TIÊU|VITRI: Mục I. MỤC TIÊU > 2. Năng lực (Ngay sau Năng lực chung / trước 3. Phẩm chất)===
-<blue>* Phát triển năng lực số</blue>
-<blue>1.1.TC1a: HS tìm kiếm thông tin trên Internet về các yếu tố ảnh hưởng đến bài học và ứng dụng trong đời sống.</blue>
+<blue>* Năng lực số</blue>
+<blue>- 1.1.TC1a: HS tìm kiếm thông tin trên Internet về các yếu tố ảnh hưởng đến bài học và ứng dụng trong đời sống.</blue>
 ===END===
 
 2. Trong các hoạt động dạy học (ĐÍNH KÈM VỊ TRÍ VÀ DÒNG TRÍCH DẪN THỰC TẾ TRONG GIÁO ÁN GỐC):
@@ -170,10 +170,10 @@ VÍ DỤ MẪU:
 
 Phần I. MỤC TIÊU:
 ===NLS_MỤC_TIÊU|VITRI: Mục I > 2. Năng lực (Sau phần Năng lực chung, trước 3. Phẩm chất)===
-<blue>* Phát triển năng lực số</blue>
-<blue>1.1.TC1a: HS tiếp nhận thông tin số từ học liệu GV cung cấp để nhận biết vấn đề bài học.</blue>
-<blue>5.2.TC1a: HS sử dụng công cụ số (GeoGebra/MTCT) để giải quyết bài toán trong hoạt động học tập.</blue>
-<blue>2.2.TC1a: HS chia sẻ kết quả học tập qua nền tảng số (Padlet/Google Slides).</blue>
+<blue>* Năng lực số</blue>
+<blue>- 1.1.TC1a: HS tiếp nhận thông tin số từ học liệu GV cung cấp để nhận biết vấn đề bài học.</blue>
+<blue>- 5.2.TC1a: HS sử dụng công cụ số (GeoGebra/MTCT) để giải quyết bài toán trong hoạt động học tập.</blue>
+<blue>- 2.2.TC1a: HS chia sẻ kết quả học tập qua nền tảng số (Padlet/Google Slides).</blue>
 ===END===
 
 Hoạt động 1: Khởi động (GV chiếu video → HS xem → Bước 1 CÓ học liệu số)
@@ -205,6 +205,12 @@ Cuối bài học:
 
 NGUYÊN TẮC NGHIÊM NGẶT:
 1. PHẢI tạo NLS_MỤC_TIÊU + các sections NLS chèn vào phần "d) Tổ chức thực hiện" của các hoạt động + NLS_BẢNG_TỔNG_HỢP ở cuối bài.
+   ⭐ QUY TẮC BẮT BUỘC CHO MỤC TIÊU (===NLS_MỤC_TIÊU===):
+   - Tiêu đề NLS: "* Năng lực số" (hoặc <blue>* Năng lực số</blue>).
+   - Tiêu đề Năng lực AI: "* Năng lực Trí tuệ nhân tạo (AI)" (hoặc <blue>* Năng lực Trí tuệ nhân tạo (AI)</blue>).
+   - Tiêu đề HSKT: "* Điều chỉnh mục tiêu đối với Học sinh Khuyết tật (HSKT):".
+   - Tiêu đề Tiếng Anh: "* Tích hợp Tiếng Anh (English Integration):".
+   - BẮT BUỘC DÙNG DẤU GẠCH ĐẦU DÒNG ("- ") ở đầu mỗi dòng chỉ báo năng lực (ví dụ: "- 1.1.TC1a: ...", "- [7.C5.1]: ...", "- Nhận biết và thực hiện...", "- HS nhận biết...").
 2. TUYỆT ĐỐI KHÔNG tạo marker hay chèn NLS vào "NỘI_DUNG", "SẢN_PHẨM", "MỤC_TIÊU_HĐ". Chỉ chèn vào "TỔ_CHỨC" hoặc các "BƯỚC_X" trong tổ chức thực hiện.
 3. Trong mỗi marker '===NLS_...===', PHẢI bao gồm tham số '|VITRI:...' trích dẫn chính xác dòng/câu liền trước trong giáo án gốc của giáo viên để giáo viên dán thủ công chính xác 100%.
 4. PHẢI ghi rõ Mã chỉ báo NLS (ví dụ: 1.1.TC1a:, 5.2.NC1a:) hoặc Mã AI (ví dụ: NLc.C2:, NLa.A3:) ở đầu câu.
@@ -390,8 +396,8 @@ OUTPUT STRUCTURE:
 
 1. Objectives Section (inserted at the end of section "2. Competence" under Section I. OBJECTIVES):
 ===DC_OBJECTIVES===
-<blue>* Digital Competence Development</blue>
-<blue>1.1.TC1a: Students search for information on the Internet about lesson factors and real-life applications.</blue>
+<blue>* Digital Competence</blue>
+<blue>- 1.1.TC1a: Students search for information on the Internet about lesson factors and real-life applications.</blue>
 ===END===
 
 2. Within activities, ONLY USE ORGANIZATION SYNTAX:
@@ -420,7 +426,7 @@ KHUNG HƯỚNG DẪN GIÁO DỤC HÒA NHẬP HỌC SINH KHUYẾT TẬT (TT 03/20
 YÊU CẦU XỬ LÝ (KHI BẬT CHẾ ĐỘ TÍCH HỢP HÒA NHẬP HSKT):
 1. MỤC I. MỤC TIÊU:
    - Thêm mục "* Điều chỉnh mục tiêu đối với Học sinh Khuyết tật (HSKT):" ở cuối phần 2. Năng lực (sau phần Năng lực số / AI).
-   - Nội dung mục tiêu HSKT: Nhận biết và thực hiện được các thao tác/nhiệm vụ cơ bản vừa sức dưới sự hướng dẫn của giáo viên và sự hỗ trợ của bạn học; chủ động tham gia hòa nhập cùng các bạn.
+   - Nội dung mục tiêu HSKT (gạch đầu dòng "- "): <green>- Nhận biết và thực hiện được các thao tác/nhiệm vụ cơ bản vừa sức dưới sự hướng dẫn của giáo viên và sự hỗ trợ của bạn học; chủ động tham gia hòa nhập cùng các bạn.</green>
 
 2. MỤC II. TIẾN TRÌNH DẠY HỌC (CÁC HOẠT ĐỘNG):
    - ⚠️ VỊ TRÍ CHÈN BẮT BUỘC: CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" của các hoạt động, bọc trong thẻ <green>[Hỗ trợ HSKT: ...]</green>.
@@ -443,11 +449,11 @@ export const ENGLISH_CLIL_INSTRUCTIONS = `
 KHUNG HƯỚNG DẪN TÍCH HỢP TIẾNG ANH (NGÔN NGỮ THỨ 2 - QĐ 2371/2025):
 YÊU CẦU XỬ LÝ (KHI BẬT TÍCH HỢP TIẾNG ANH):
 1. MỤC I. MỤC TIÊU:
-   - Thêm mục "* Năng lực Ngôn ngữ (Language Objectives):" ở cuối phần 2. Năng lực (sau phần Năng lực số / AI / HSKT).
-   - Dựa vào cấp độ được chọn, sinh nội dung mục tiêu tương ứng:
-     + BASIC: Nhận biết và hiểu được một số từ vựng chuyên ngành tiếng Anh liên quan đến bài học.
-     + INTER: Nhận biết từ vựng chuyên ngành và hiểu các câu lệnh, hướng dẫn đơn giản bằng tiếng Anh trong lớp học.
-     + CLIL: Sử dụng tiếng Anh làm công cụ giao tiếp, tiếp nhận kiến thức và thực hiện các nhiệm vụ học tập cơ bản.
+   - Thêm mục "* Tích hợp Tiếng Anh (English Integration):" ở cuối phần 2. Năng lực (sau phần Năng lực số / AI / HSKT).
+   - Dựa vào cấp độ được chọn, sinh nội dung mục tiêu tương ứng (gạch đầu dòng "- "):
+     + BASIC: <orange>- HS nhận biết và hiểu được một số từ vựng chuyên ngành tiếng Anh liên quan đến bài học (Key Vocabulary).</orange>
+     + INTER: <orange>- HS nhận biết từ vựng chuyên ngành và hiểu các câu lệnh, hướng dẫn đơn giản bằng tiếng Anh trong lớp học.</orange>
+     + CLIL: <orange>- HS sử dụng tiếng Anh làm công cụ giao tiếp, tiếp nhận kiến thức và thực hiện các nhiệm vụ học tập cơ bản.</orange>
 
 2. MỤC II. TIẾN TRÌNH DẠY HỌC (CÁC HOẠT ĐỘNG):
    - CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" (hoặc các Bước 1, Bước 2... dưới phần Tổ chức thực hiện) của các hoạt động.
