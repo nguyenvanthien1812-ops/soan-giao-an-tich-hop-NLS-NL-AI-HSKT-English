@@ -488,13 +488,13 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
         return new TextRun({ text: part.replace(/<\/?u>/g, ''), underline: { type: UnderlineType.SINGLE } });
       }
       if (part.startsWith('<blue>') && part.endsWith('</blue>')) {
-        return new TextRun({ text: cleanLatex(part.replace(/<\/?blue>/g, '')), color: "0055D4", bold: true });
+        return new TextRun({ text: cleanLatex(part.replace(/<\/?blue>/g, '')), color: "DC2626", bold: true });
       }
       if (part.startsWith('<purple>') && part.endsWith('</purple>')) {
-        return new TextRun({ text: cleanLatex(part.replace(/<\/?purple>/g, '')), color: "0055D4", bold: true });
+        return new TextRun({ text: cleanLatex(part.replace(/\<\/?purple\>/g, '')), color: "0055D4", bold: true });
       }
       if (part.startsWith('<green>') && part.endsWith('</green>')) {
-        return new TextRun({ text: cleanLatex(part.replace(/<\/?green>/g, '')), color: "008000", italics: true });
+        return new TextRun({ text: cleanLatex(part.replace(/<\/?green>/g, '')), color: "7B2FBE", italics: true });
       }
       if (part.startsWith('<orange>') && part.endsWith('</orange>')) {
         return new TextRun({ text: cleanLatex(part.replace(/<\/?orange>/g, '')), color: "B45309", italics: true });
@@ -601,9 +601,9 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
       if (isBold) rPr += `<w:b/>`;
       if (isItalic) rPr += `<w:i/>`;
       if (isUnderline) rPr += `<w:u w:val="single"/>`;
-      if (isBlue) rPr += `<w:color w:val="0055D4"/>`;
+      if (isBlue) rPr += `<w:color w:val="DC2626"/>`;
       else if (isPurple) rPr += `<w:color w:val="0055D4"/>`;
-      else if (isGreen) rPr += `<w:color w:val="008000"/>`;
+      else if (isGreen) rPr += `<w:color w:val="7B2FBE"/>`;
       else if (isOrange) rPr += `<w:color w:val="B45309"/>`;
       else if (isRed) rPr += `<w:color w:val="FF0000"/>`;
 
@@ -701,11 +701,11 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
 
       let style = "margin-bottom: 4px; font-family: 'Times New Roman', Times, serif;";
       if (isBlue) {
-        style += " color: #1d4ed8; font-weight: 600;";
+        style += " color: #dc2626; font-weight: 600;";
       } else if (isPurple) {
         style += " color: #1d4ed8; font-weight: 600;";
       } else if (isGreen) {
-        style += " color: #059669; font-style: italic;";
+        style += " color: #7e22ce; font-style: italic;";
       } else if (isOrange) {
         style += " color: #b45309; font-style: italic;";
       } else if (isRed) {
@@ -1248,13 +1248,13 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
 
   const components = {
     blue: ({ children }: { children: React.ReactNode }) => (
-      <span style={{ color: '#1d4ed8', fontWeight: 600 }}>{children}</span>
+      <span style={{ color: '#dc2626', fontWeight: 600 }}>{children}</span>
     ),
     purple: ({ children }: { children: React.ReactNode }) => (
       <span style={{ color: '#1d4ed8', fontWeight: 600 }}>{children}</span>
     ),
     green: ({ children }: { children: React.ReactNode }) => (
-      <span style={{ color: '#059669', fontStyle: 'italic', fontWeight: 600 }}>{children}</span>
+      <span style={{ color: '#7e22ce', fontStyle: 'italic', fontWeight: 600 }}>{children}</span>
     ),
     orange: ({ children }: { children: React.ReactNode }) => (
       <span style={{ color: '#b45309', fontStyle: 'italic', fontWeight: 600 }}>{children}</span>
@@ -1566,9 +1566,9 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
                             const isRed = line.includes('<red>');
 
                             let colorClass = 'text-slate-800';
-                            if (isBlue) colorClass = 'text-blue-700 font-bold';
+                            if (isBlue) colorClass = 'text-red-600 font-bold';
                             else if (isPurple) colorClass = 'text-blue-700 font-bold';
-                            else if (isGreen) colorClass = 'text-emerald-700 italic font-semibold';
+                            else if (isGreen) colorClass = 'text-purple-700 italic font-semibold';
                             else if (isOrange) colorClass = 'text-amber-800 italic font-semibold';
                             else if (isRed) colorClass = 'text-red-600 font-semibold';
 
