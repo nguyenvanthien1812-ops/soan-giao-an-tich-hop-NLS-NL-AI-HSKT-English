@@ -157,14 +157,7 @@ Hoặc nếu giáo án chia theo Bước 1, Bước 2, Bước 3, Bước 4 tron
 <blue>1.1.TC1a: HS tiếp nhận và khai thác thông tin số từ SGK/học liệu số theo nhiệm vụ giao của GV.</blue>
 ===END===
 
-3. Ở CUỐI BÀI HỌC (ngay sau phần Vận dụng / Củng cố / Hướng dẫn về nhà), BẮT BUỘC PHẢI TẠO BẢNG TỔNG HỢP NĂNG LỰC SỐ TOÀN BÀI:
-===NLS_BẢNG_TỔNG_HỢP|VITRI: Cuối bài học (ngay sau phần Vận dụng / Củng cố / Hướng dẫn về nhà)===
-| STT | Mã NLS | Thành phần năng lực | Biểu hiện trong bài học | Hoạt động |
-| --- | --- | --- | --- | --- |
-| 1 | 1.1.TC1a | Nhận biết và tiếp nhận thông tin số | HS quan sát video, hình ảnh minh họa để nhận diện vấn đề bài học... | 1 |
-| 2 | 1.2.TC1a | Sử dụng thông tin số phục vụ học tập | HS khai thác thông tin từ SGK, sơ đồ để phân tích và hoàn thành nhiệm vụ... | 2.1, 3 |
-| 3 | 5.3.TC1a | Vận dụng công nghệ số trong giao tiếp, hợp tác và trình bày | HS trao đổi nhóm, trình bày kết quả học tập bằng sơ đồ tư duy, báo cáo nội dung vận dụng | 4 |
-===END===
+3. Ở CUỐI BÀI HỌC: KHÔNG tạo bảng tổng hợp NLS. Chỉ tích hợp NLS vào phần Mục tiêu và các bước trong Tổ chức thực hiện của từng hoạt động.
 
 VÍ DỤ MẪU:
 
@@ -194,17 +187,9 @@ Hoạt động 2: Hình thành kiến thức mới
 
 (Bước 4 – GV chốt kiến thức miệng → MẶC ĐỊNH KHÔNG CHÈN NLS nếu không có công cụ số/AI)
 
-Cuối bài học:
-===NLS_BẢNG_TỔNG_HỢP|VITRI: Cuối bài học (ngay sau phần Vận dụng / Củng cố)===
-| STT | Mã NLS | Thành phần năng lực | Biểu hiện trong bài học | Hoạt động |
-| --- | --- | --- | --- | --- |
-| 1 | 1.1.TC1a | Tiếp nhận thông tin số | HS quan sát video, hình ảnh số để nhận diện vấn đề bài học | 1 (Bước 1) |
-| 2 | 5.2.TC1a | Sử dụng công cụ số giải quyết vấn đề | HS sử dụng GeoGebra vẽ đồ thị, rút ra kết luận | 2 (Bước 2) |
-| 3 | 2.2.TC1a | Chia sẻ thông tin qua nền tảng số | HS trình bày kết quả qua Padlet, trao đổi phản biện | 2 (Bước 3) |
-===END===
 
 NGUYÊN TẮC NGHIÊM NGẶT:
-1. PHẢI tạo NLS_MỤC_TIÊU + các sections NLS chèn vào phần "d) Tổ chức thực hiện" của các hoạt động + NLS_BẢNG_TỔNG_HỢP ở cuối bài.
+1. PHẢI tạo NLS_MỤC_TIÊU + các sections NLS chèn vào phần "d) Tổ chức thực hiện" của các hoạt động. KHÔNG tạo NLS_BẢNG_TỔNG_HỢP ở cuối bài.
    ⭐ QUY TẮC BẮT BUỘC CHO MỤC TIÊU (===NLS_MỤC_TIÊU===):
    - Tiêu đề NLS: "* Năng lực số" (hoặc <blue>* Năng lực số</blue>).
    - Tiêu đề Năng lực AI: "* Năng lực Trí tuệ nhân tạo (AI)" (hoặc <blue>* Năng lực Trí tuệ nhân tạo (AI)</blue>).

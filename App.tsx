@@ -3,7 +3,7 @@ import Header from './components/Header';
 import LessonForm from './components/LessonForm';
 import ContentInput from './components/ContentInput';
 import ResultDisplay from './components/ResultDisplay';
-import { Subject, OriginalDocxFile, HistoryItem, IntegrationMode, LicenseInfo } from './types';
+import { Subject, OriginalDocxFile, HistoryItem, IntegrationMode, LicenseInfo, DisabilityType, EnglishIntegrationLevel } from './types';
 import { generateNLSLessonPlan } from './services/geminiService';
 import { getLicenseInfo } from './services/licenseService';
 import { Sparkles, Settings2, Key } from 'lucide-react';
@@ -20,7 +20,7 @@ const App: React.FC = () => {
   const [includeDisabilitySupport, setIncludeDisabilitySupport] = useState<boolean>(false);
   const [disabilityType, setDisabilityType] = useState<DisabilityType>('GENERAL');
   const [includeEnglishIntegration, setIncludeEnglishIntegration] = useState<boolean>(false);
-  const [englishIntegrationLevel, setEnglishIntegrationLevel] = useState<import('./types').EnglishIntegrationLevel>('BASIC');
+  const [englishIntegrationLevel, setEnglishIntegrationLevel] = useState<EnglishIntegrationLevel>('BASIC');
 
   // Content States
   const [lessonContent, setLessonContent] = useState<string>('');

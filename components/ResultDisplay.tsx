@@ -859,6 +859,11 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
     const notInsertedSections: string[] = [];
 
     for (const section of sections) {
+      // Bỏ qua bảng tổng hợp — không chèn vào file Word
+      if (section.marker.includes('BẢNG_TỔNG_HỢP') || section.marker.includes('SUMMARY_TABLE')) {
+        continue;
+      }
+
       let nlsXmlStr = '';
       if (section.content.trim().startsWith('|') || section.marker.includes('BẢNG_TỔNG_HỢP') || section.marker.includes('SUMMARY_TABLE')) {
         nlsXmlStr = `
@@ -1278,6 +1283,11 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
     let fullGuideHtml = `<div style="font-family: 'Times New Roman', Times, serif; font-size: 13pt; line-height: 1.35;"><h3 style="color: #1e1b4b;">HƯỚNG DẪN CHÈN THỦ CÔNG NĂNG LỰC SỐ VÀO GIÁO ÁN (CHUẨN KHỚP FILE WORD)</h3>`;
 
     sections.forEach((sec, idx) => {
+      // Bỏ qua bảng tổng hợp
+      if (sec.marker.includes('BẢNG_TỔNG_HỢP') || sec.marker.includes('SUMMARY_TABLE')) {
+        return;
+      }
+
       const markerTitle = sec.marker
         .replace(/^NLS_/, '')
         .replace(/^DC_/, '')
@@ -1459,6 +1469,11 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
           {/* Cards for each section */}
           <div className="space-y-5 text-left">
             {sections.map((section, idx) => {
+              // Ẩn bảng tổng hợp — không hiển thị trong tab hướng dẫn thủ công
+              if (section.marker.includes('BẢNG_TỔNG_HỢP') || section.marker.includes('SUMMARY_TABLE')) {
+                return null;
+              }
+
               const formattedTitle = section.marker
                 .replace(/^NLS_/, '')
                 .replace(/^DC_/, '')
