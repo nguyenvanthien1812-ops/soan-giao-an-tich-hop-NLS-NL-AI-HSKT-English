@@ -43,6 +43,9 @@ export type DisabilityType = 'GENERAL' | 'INTELLECTUAL' | 'VISUAL' | 'HEARING' |
 
 export type EnglishIntegrationLevel = 'NONE' | 'BASIC' | 'INTER' | 'CLIL';
 
+// Phiên bản Khung Năng lực AI: QĐ 2422 (chính thức 2026-2027) hoặc QĐ 3439 (thí điểm cũ)
+export type AIFrameworkVersion = 'QD2422' | 'QD3439';
+
 export interface ProcessingOptions {
   analyzeOnly: boolean;
   detailedReport: boolean;
@@ -52,12 +55,14 @@ export interface ProcessingOptions {
   selectedModel?: string;
   selectedMathModel?: string;
   integrationMode?: IntegrationMode;
+  aiFrameworkVersion?: AIFrameworkVersion; // Phiên bản Khung NL AI (mặc định: QD2422)
   includeDisabilitySupport?: boolean;
   disabilityType?: DisabilityType;
   includeEnglishIntegration?: boolean;
   englishIntegrationLevel?: EnglishIntegrationLevel;
   hasExistingNLS?: boolean; // File giáo án đã có NLS được chèn sẵn → Chế độ Bổ sung
 }
+
 
 export interface GeminiResponse {
   rawText: string;

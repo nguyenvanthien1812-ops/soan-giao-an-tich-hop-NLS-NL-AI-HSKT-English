@@ -3,7 +3,7 @@ import Header from './components/Header';
 import LessonForm from './components/LessonForm';
 import ContentInput from './components/ContentInput';
 import ResultDisplay from './components/ResultDisplay';
-import { Subject, OriginalDocxFile, HistoryItem, IntegrationMode, LicenseInfo, DisabilityType, EnglishIntegrationLevel } from './types';
+import { Subject, OriginalDocxFile, HistoryItem, IntegrationMode, LicenseInfo, DisabilityType, EnglishIntegrationLevel, AIFrameworkVersion } from './types';
 import { generateNLSLessonPlan } from './services/geminiService';
 import { getLicenseInfo } from './services/licenseService';
 import { Sparkles, Settings2, Key } from 'lucide-react';
@@ -21,6 +21,7 @@ const App: React.FC = () => {
   const [disabilityType, setDisabilityType] = useState<DisabilityType>('GENERAL');
   const [includeEnglishIntegration, setIncludeEnglishIntegration] = useState<boolean>(false);
   const [englishIntegrationLevel, setEnglishIntegrationLevel] = useState<EnglishIntegrationLevel>('BASIC');
+  const [aiFrameworkVersion, setAiFrameworkVersion] = useState<AIFrameworkVersion>('QD2422'); // Mặc định QĐ 2422 (chính thức 2026-2027)
 
   // Content States
   const [lessonContent, setLessonContent] = useState<string>('');
@@ -155,6 +156,7 @@ const App: React.FC = () => {
           selectedModel, 
           selectedMathModel, 
           integrationMode: includeNLSAndAI ? integrationMode : 'NONE',
+          aiFrameworkVersion,
           includeDisabilitySupport,
           disabilityType,
           includeEnglishIntegration,
@@ -218,6 +220,7 @@ const App: React.FC = () => {
               grade={grade} setGrade={setGrade}
               includeNLSAndAI={includeNLSAndAI} setIncludeNLSAndAI={setIncludeNLSAndAI}
               integrationMode={integrationMode} setIntegrationMode={setIntegrationMode}
+              aiFrameworkVersion={aiFrameworkVersion} setAiFrameworkVersion={setAiFrameworkVersion}
               includeDisabilitySupport={includeDisabilitySupport} setIncludeDisabilitySupport={setIncludeDisabilitySupport}
               disabilityType={disabilityType} setDisabilityType={setDisabilityType}
               includeEnglishIntegration={includeEnglishIntegration} setIncludeEnglishIntegration={setIncludeEnglishIntegration}

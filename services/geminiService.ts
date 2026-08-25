@@ -497,14 +497,23 @@ export const generateNLSLessonPlan = async (
 
   const needAI = options.integrationMode === 'AI' || options.integrationMode === 'BOTH';
 
-  // Lấy hướng dẫn NL AI theo lớp: ưu tiên QĐ 2422 (mới, chính thức) + giữ QĐ 3439 làm tham khảo thêm
-  const aiGradeGuidance = needAI ? getAIGradeGuidanceQD2422(info.grade) : "";
-  const aiGradeGuidanceLegacy = needAI ? getAIGradeGuidance(info.grade) : "";
+  // Chọn đúng Khung AI theo phiên bản GV chọn (mặc định QĐ 2422)
+  const useQD2422 = (options.aiFrameworkVersion ?? 'QD2422') === 'QD2422';
 
-  // Dữ liệu framework: QĐ 2422 (chính) + QĐ 3439 (tham khảo bổ sung)
-  const aiFrameworkPrompt = needAI
-    ? `\n    === KHUNG NĂNG LỰC AI QĐ 2422 (CHÍNH THỨC TỪ 2026-2027 — ÁP DỤNG BẮT BUỘC) ===\n    ${AI_FRAMEWORK_DATA_QD2422}\n\n    === KHUNG NL AI QĐ 3439 (THAM KHẢO BỔ SUNG) ===\n    ${AI_FRAMEWORK_DATA_QD3439}\n`
+  // Lấy hướng dẫn NL AI theo lớp cụ thể
+  const aiGradeGuidance = needAI
+    ? (useQD2422 ? getAIGradeGuidanceQD2422(info.grade) : getAIGradeGuidance(info.grade))
     : "";
+  // Luôn kèm hướng dẫn QĐ 3439 làm tham khảo bổ sung khi dùng QĐ 2422
+  const aiGradeGuidanceLegacy = (needAI && useQD2422) ? getAIGradeGuidance(info.grade) : "";
+
+  // Dữ liệu Khung AI đưa vào prompt
+  const aiFrameworkPrompt = needAI
+    ? (useQD2422
+        ? `\n    === KHUNG NĂNG LỰC AI QĐ 2422 (CHÍNH THỨC TỪ 2026-2027 — ÁP DỤNG BẮT BUỘC) ===\n    ${AI_FRAMEWORK_DATA_QD2422}\n\n    === KHUNG NL AI QĐ 3439 (THAM KHẢO BỔ SUNG) ===\n    ${AI_FRAMEWORK_DATA_QD3439}\n`
+        : `\n    ${AI_FRAMEWORK_DATA_QD3439}\n`)
+    : "";
+
   const disabilityPrompt = options.includeDisabilitySupport
     ? `\n    ${DISABILITY_SUPPORT_INSTRUCTIONS}\n    DẠNG KHUYẾT TẬT CẦN HỖ TRỢ: ${
         options.disabilityType === 'INTELLECTUAL' ? 'Khuyết tật Trí tuệ / Khó khăn học tập' :

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Subject, IntegrationMode, DisabilityType } from '../types';
+import { Subject, IntegrationMode, DisabilityType, AIFrameworkVersion } from '../types';
 import { Bot, Cpu, Sparkles, HeartHandshake } from 'lucide-react';
 
 interface LessonFormProps {
@@ -11,6 +11,8 @@ interface LessonFormProps {
   setIncludeNLSAndAI: (val: boolean) => void;
   integrationMode: IntegrationMode;
   setIntegrationMode: (val: IntegrationMode) => void;
+  aiFrameworkVersion: AIFrameworkVersion;
+  setAiFrameworkVersion: (val: AIFrameworkVersion) => void;
   includeDisabilitySupport: boolean;
   setIncludeDisabilitySupport: (val: boolean) => void;
   disabilityType: DisabilityType;
@@ -34,6 +36,8 @@ const LessonForm: React.FC<LessonFormProps> = ({
   setIncludeNLSAndAI,
   integrationMode,
   setIntegrationMode,
+  aiFrameworkVersion,
+  setAiFrameworkVersion,
   includeDisabilitySupport,
   setIncludeDisabilitySupport,
   disabilityType,
@@ -152,6 +156,39 @@ const LessonForm: React.FC<LessonFormProps> = ({
                 <span>Chỉ Năng lực AI</span>
               </button>
             </div>
+
+            {/* Chọn phiên bản Khung Năng lực AI — chỉ hiện khi AI được bật */}
+            {(integrationMode === 'AI' || integrationMode === 'BOTH') && (
+              <div className="flex items-center gap-3 px-1 py-2 flex-wrap">
+                <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider whitespace-nowrap">Khung AI:</span>
+                <label className="flex items-center gap-1.5 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="aiFramework"
+                    value="QD2422"
+                    checked={aiFrameworkVersion === 'QD2422'}
+                    onChange={() => setAiFrameworkVersion('QD2422')}
+                    className="w-3.5 h-3.5 text-purple-600 focus:ring-purple-500"
+                  />
+                  <span className={`text-xs font-bold ${aiFrameworkVersion === 'QD2422' ? 'text-purple-700' : 'text-slate-500'}`}>
+                    QĐ 2422 <span className="font-normal text-[10px]">(chính thức 2026–2027)</span>
+                  </span>
+                </label>
+                <label className="flex items-center gap-1.5 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="aiFramework"
+                    value="QD3439"
+                    checked={aiFrameworkVersion === 'QD3439'}
+                    onChange={() => setAiFrameworkVersion('QD3439')}
+                    className="w-3.5 h-3.5 text-slate-400 focus:ring-slate-400"
+                  />
+                  <span className={`text-xs font-bold ${aiFrameworkVersion === 'QD3439' ? 'text-slate-700' : 'text-slate-400'}`}>
+                    QĐ 3439 <span className="font-normal text-[10px]">(thí điểm)</span>
+                  </span>
+                </label>
+              </div>
+            )}
 
             {/* Nút thủ công & Tự động: Chế độ Bổ sung (File đã có NLS sẵn) - LUÔN LUÔN HIỂN THỊ */}
             <div className={`p-3.5 rounded-2xl border transition-all ${
