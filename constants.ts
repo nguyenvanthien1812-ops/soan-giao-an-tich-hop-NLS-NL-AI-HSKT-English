@@ -132,6 +132,185 @@ YÊU CẦU CẦN ĐẠT THEO CẤP HỌC (QĐ 3439/QĐ-BGDĐT):
 - CẤP THPT (Lớp 10 - 12): Phân tích rủi ro & pháp lý (Luật An ninh mạng, bảo vệ dữ liệu), thực hành đặt prompt nâng cao, tìm hiểu Mạng nơ-ron, học máy, tùy chỉnh & phát triển dự án AI thực tế.
 `;
 
+// ===================== KHUNG NĂNG LỰC AI MỚI - QĐ 2422/QĐ-BGDĐT (2026-2027) =====================
+
+export const AI_FRAMEWORK_DATA_QD2422 = `
+KHUNG NỘI DUNG GIÁO DỤC TRÍ TUỆ NHÂN TẠO (AI) CHO HỌC SINH PHỔ THÔNG
+(Ban hành kèm theo Quyết định số 2422/QĐ-BGDĐT của Bộ Giáo dục và Đào tạo, áp dụng từ năm học 2026–2027)
+
+QUY ƯỚC MÃ HÓA YÊU CẦU CẦN ĐẠT (YCCD):
+  [Lớp].[MãChủĐề].[SốThứTự]
+  Ví dụ: 6.A1.2 = lớp 6, chủ đề A1, yêu cầu số 2 (CỐT LÕI)
+  Ví dụ: 8.C3.MR1 = lớp 8, chủ đề C3, mở rộng số 1 (không bắt buộc)
+
+4 THÀNH PHẦN NĂNG LỰC AI (ký hiệu màu tím <purple>):
+  NLa – Tư duy lấy con người làm trung tâm (A1, A2, A3)
+  NLb – Đạo đức AI (B1, B2, B3)
+  NLc – Các kĩ thuật và ứng dụng AI (C1, C2, C3, C4, C5)
+  NLd – Thiết kế hệ thống AI (D1, D2)
+
+VỊ TRÍ CHÈN THEO TỪNG THÀNH PHẦN (áp dụng như NLS hiện tại):
+  NLa: Chèn vào Mục tiêu năng lực; Khởi động; Vận dụng (phản tư vai trò con người)
+  NLb: Chèn vào Thảo luận nhóm; Vận dụng; Mục phẩm chất; Hoạt động trải nghiệm
+  NLc: Chèn vào Hình thành kiến thức; Luyện tập; Thực hành công cụ AI
+  NLd: Chèn vào Vận dụng; Dự án; Bài tập sáng tạo; Nghiên cứu
+
+CÁCH VIẾT CHỈ BÁO AI (QĐ 2422): [Mã YCCD]: HS [hành động AI] để [mục đích học tập]
+  Ví dụ đúng: [8.NLc.C2.1]: HS sử dụng công cụ AI để tra cứu và kiểm tra kết quả bài tập.
+  Ví dụ đúng: [6.NLb.B2.1]: HS nhận diện được thông tin AI tạo ra có thể sai; biết kiểm chứng trước khi sử dụng.
+  Ví dụ đúng: [10.NLa.A1.2]: HS phân tích vai trò kiểm soát của con người khi sử dụng AI trong dự án học tập.
+
+═══════════════════════════════════════
+YÊU CẦU CẦN ĐẠT CỐT LÕI THEO TỪNG LỚP
+═══════════════════════════════════════
+
+--- LỚP 1 ---
+[1.A1.1] (NLa): Nêu được ví dụ về cảm xúc của con người và nhận ra rằng AI không có cảm xúc thật.
+[1.A1.2] (NLa): Nêu được rằng AI có thể mô phỏng cảm xúc nhưng không trải nghiệm như con người.
+[1.A2.2] (NLa): Nhận biết và kể tên được một số thiết bị có AI (loa thông minh, trợ lí ảo, robot hút bụi...).
+[1.B3.1] (NLb): Nhận biết được không dùng AI để làm hại người khác; nêu ví dụ dùng AI đúng cách.
+[1.C1.1] (NLc): Nhận biết AI trong các ví dụ đơn giản hằng ngày.
+[1.C1.2] (NLc): Nhận diện được công cụ AI quen thuộc trên điện thoại, máy tính bảng.
+[1.D1.1] (NLd): Nêu được ví dụ AI "học" từ hình ảnh/thông tin do con người cung cấp.
+[1.D2.1] (NLd): Nhận biết có loại AI chỉ làm một việc, có loại làm được nhiều việc.
+
+--- LỚP 2 ---
+[2.A1.1] (NLa): Trình bày được tình huống AI hỗ trợ hiệu quả và tình huống không nên dùng AI.
+[2.A1.3] (NLa): Nêu ví dụ cần con người giám sát AI (xe tự lái, bác sĩ kiểm tra kết quả AI...).
+[2.A3.1] (NLa): Nhận biết AI ghi nhận dữ liệu từ cách con người tương tác để học hỏi.
+[2.B1.1] (NLb): Nhận biết AI đôi khi thiên kiến, đối xử không công bằng với một số nhóm người.
+[2.B3.1] (NLb): Kể tên thứ riêng của mình và của người khác; nêu ví dụ quyền sở hữu sản phẩm AI tạo ra.
+[2.C1.1] (NLc): Giải thích "dữ liệu" là ví dụ con người dùng để dạy AI.
+[2.C3.1] (NLc): Nhận biết AI có thể phân loại và có thể phân loại sai.
+[2.D1.1] (NLd): Nêu vấn đề đơn giản trong đời sống có thể dùng AI để giải quyết.
+[2.D2.1] (NLd): Giải thích vai trò của dữ liệu trong việc "dạy" AI.
+
+--- LỚP 3 ---
+[3.A1.1] (NLa): Nhận biết tình huống dùng AI hỗ trợ học tập; nêu cách dùng trợ lí thông minh.
+[3.A1.3] (NLa): Phân biệt dùng AI hỗ trợ (chủ động) và để AI làm thay toàn bộ (thụ động).
+[3.A1.4] (NLa): Nêu tình huống gây rủi ro khi dùng AI; tự đặt câu hỏi trước khi quyết định dùng AI.
+[3.A3.1] (NLa): Nêu ví dụ AI có thể sai (dịch sai, nhận nhầm hình ảnh, chatbot thông tin sai).
+[3.A3.2] (NLa): Trình bày cần kiểm tra lại kết quả AI, đối chiếu nhiều nguồn.
+[3.B2.1] (NLb): Nhận biết thông tin AI tạo ra có thể không đúng sự thật.
+[3.C4.1] (NLc): Trình bày khái niệm dữ liệu qua ví dụ.
+[3.C5.1] (NLc): Mô tả cấu trúc "nếu…thì…" trong giải quyết tình huống/phân loại.
+[3.C5.2] (NLc): Nêu đặc điểm học máy là học trên dữ liệu; ứng dụng phân loại và dự đoán.
+[3.D1.1] (NLd): Trình bày quá trình đơn giản huấn luyện AI: thu thập ví dụ → cho AI học.
+[3.D2.1] (NLd): Nêu dữ liệu dạy AI có thể sai; nêu yêu cầu cơ bản với dữ liệu huấn luyện.
+
+--- LỚP 4 ---
+[4.A1.1] (NLa): Trình bày lĩnh vực AI hỗ trợ con người (nông nghiệp, y tế, giao thông...).
+[4.A1.2] (NLa): Nhận biết AI hỗ trợ nhưng không thay thế tư duy, cảm xúc, sáng tạo của con người.
+[4.A2.1] (NLa): Nêu AI được con người tạo ra để hỗ trợ đời sống, tiết kiệm thời gian.
+[4.A3.1] (NLa): Trình bày quyết định dùng AI hay không phụ thuộc mục đích, nhu cầu và an toàn.
+[4.B2.1] (NLb): Nêu thông tin cá nhân cần giữ bí mật và không nên chia sẻ cho AI.
+[4.C2.1] (NLc): Nêu ứng dụng AI trong học tập và đời sống gần gũi (bối cảnh Việt Nam).
+[4.D1.1] (NLd): Nêu ý tưởng AI học giải quyết vấn đề gần gũi (ưu tiên bối cảnh Việt Nam).
+[4.D2.1] (NLd): Trình bày con người cần đánh giá và nâng cấp liên tục để AI cho kết quả tốt hơn.
+
+--- LỚP 5 ---
+[5.A1.1] (NLa): Trình bày AI thực hiện được việc lặp lại, nguy hiểm, đòi hỏi tính chính xác cao.
+[5.A1.2] (NLa): Nêu trách nhiệm người tạo và dùng AI nếu AI đưa ra kết quả sai.
+[5.A2.1] (NLa): Giải thích AI hỗ trợ chứ không thay thế tư duy, cảm xúc, trách nhiệm của con người.
+[5.A2.2] (NLa): Trình bày AI phục vụ lợi ích chung của xã hội trong y tế, giáo dục, môi trường.
+[5.B1.1] (NLb): Nêu ví dụ về công bằng/không công bằng khi AI phục vụ con người.
+[5.B2.1] (NLb): Nêu cách giúp AI hoạt động công bằng hơn (dữ liệu đa dạng, kiểm tra kết quả).
+[5.C5.1] (NLc): Nêu cách dùng cấu trúc "nếu…thì…" trong lập trình AI đơn giản.
+[5.C5.2] (NLc): Thực hiện thao tác cơ bản với công cụ AI trực quan dựa trên học máy có giám sát.
+[5.D1.1] (NLd): Mô tả bước cơ bản huấn luyện AI: xác định vấn đề, thu thập dữ liệu, dạy máy học, kiểm tra.
+[5.D2.1] (NLd): Giải thích AI được cải tiến và hoạt động tốt hơn khi dữ liệu được bổ sung thường xuyên.
+
+--- LỚP 6 ---
+[6.A1.1] (NLa): Giải thích AI do con người tạo ra, lập trình và điều khiển; AI không hoạt động độc lập.
+[6.A1.2] (NLa): Trình bày AI chỉ là công cụ hỗ trợ, con người đưa ra quyết định và chịu trách nhiệm.
+[6.A1.3] (NLa): Kiểm tra kết quả AI bằng cách đối chiếu với nguồn tin cậy trước khi sử dụng.
+[6.A3.1] (NLa): Nêu ví dụ con người ra quyết định có AI hỗ trợ; thực hành ra quyết định có gợi ý AI.
+[6.A3.3] (NLa): Giải thích dữ liệu cá nhân là tài sản riêng; chỉ chủ sở hữu có quyền chia sẻ.
+[6.B1.1] (NLb): Chỉ ra mặt tích cực và hạn chế của tính năng AI cụ thể (thu thập dữ liệu vs quyền riêng tư).
+[6.B2.1] (NLb): Đặt câu hỏi đơn giản kiểm tra an toàn ứng dụng AI trước khi dùng.
+[6.C1.1] (NLc): Giải thích hai thành phần huấn luyện AI là dữ liệu và thuật toán; mô tả các bước hoạt động AI.
+[6.C1.2] (NLc): Nêu ví dụ tác động tích cực và tiêu cực của AI đến cuộc sống bản thân, gia đình.
+[6.C2.1] (NLc): Phân biệt công cụ có/không có AI; kể tên và mô tả chức năng công cụ AI thông dụng.
+[6.D1.1] (NLd): Nêu tình huống nên và không nên dùng AI; giải thích lí do dựa trên lợi ích và tác hại.
+[6.D2.1] (NLd): Trình bày giới hạn của AI so với con người trong các công việc cần cảm xúc, sáng tạo.
+
+--- LỚP 7 ---
+[7.A1.1] (NLa): Giải thích lí do con người cần giữ quyền ra quyết định khi dùng AI (công bằng, an toàn, quyền lợi).
+[7.A1.2] (NLa): Nêu hậu quả khi không xác thực kết quả AI trong một số trường hợp thực tế.
+[7.A2.1] (NLa): Phân tích tác hại nếu cho phép AI đưa ra quyết định cuối cùng thay con người.
+[7.A3.1] (NLa): Nêu tình huống AI tự thực hiện thao tác thay con người và tình huống cần con người quyết định.
+[7.A3.2] (NLa): Giải thích sự cần thiết bảo vệ quyền tự chủ của con người khi AI hỗ trợ ra quyết định.
+[7.B2.1] (NLb): Nêu tiêu chí đơn giản đánh giá mức độ phù hợp, an toàn của ứng dụng AI.
+[7.B3.1] (NLb): Thể hiện cam kết dùng AI có trách nhiệm; khai báo trung thực khi dùng AI trong học tập.
+[7.C4.1] (NLc): Trình bày vấn đề đạo đức từ dữ liệu huấn luyện AI (thiếu đa dạng, xâm phạm quyền riêng tư).
+[7.C5.1] (NLc): Mô tả bước chính huấn luyện AI: thu thập, gán nhãn dữ liệu; cho máy học; kiểm tra; điều chỉnh.
+[7.C5.2] (NLc): Nêu ví dụ một số cách học khác nhau của AI (có giám sát, không giám sát, học tăng cường) ở mức đơn giản.
+[7.D1.1] (NLd): Nêu vấn đề trong trường/cộng đồng có thể giải quyết bằng AI; mô tả phạm vi vấn đề.
+[7.D2.1] (NLd): Lập kế hoạch cho dự án sáng tạo có dùng AI theo nhóm nhỏ.
+
+--- LỚP 8 ---
+[8.A1.1] (NLa): Nêu lĩnh vực AI không nên thay thế con người (giáo dục, y tế, nghệ thuật...).
+[8.A1.2] (NLa): Nêu rủi ro lạm dụng AI tạo sinh: suy giảm tư duy phản biện, sáng tạo, thông tin sai lệch.
+[8.A2.1] (NLa): Giải thích AI thu thập, phân tích dữ liệu cá nhân để kiểm soát hành vi, thao túng quyết định.
+[8.A3.1] (NLa): Phân biệt vai trò người dùng và người phát triển AI.
+[8.A3.2] (NLa): Nêu trách nhiệm pháp lý của các bên (người sáng tạo, nhà cung cấp, người dùng) với hậu quả AI gây ra.
+[8.A3.3] (NLa): Nêu trách nhiệm giải trình khi dùng AI: cho biết công cụ đã dùng, kiểm tra tính chính xác.
+[8.B1.1] (NLb): Nhận diện, phân loại rủi ro khi dùng AI: dữ liệu/quyền riêng tư, thiên vị, lừa đảo deepfake.
+[8.B2.1] (NLb): Trình bày cách bảo vệ dữ liệu cá nhân, tôn trọng bản quyền khi dùng AI.
+[8.C1.1] (NLc): Mô tả cách AI thực hiện một số chức năng cơ bản; nêu cách cải thiện dữ liệu nâng cao chất lượng AI.
+[8.C3.1] (NLc): Trình bày nguyên lý AI tạo sinh (generative AI) và phân biệt với AI phân loại, dự đoán.
+[8.D1.1] (NLd): Xác định tình huống nên dùng AI và giới hạn của AI; lập kế hoạch dự án AI đơn giản theo nhóm.
+[8.D2.1] (NLd): Đánh giá kết quả dự án AI và đề xuất cải thiện.
+
+--- LỚP 9 ---
+[9.A1.1] (NLa): Nêu thách thức xã hội trong kỷ nguyên AI; phân tích thiên vị và thành kiến trong AI.
+[9.A2.1] (NLa): Nêu rủi ro lạm dụng AI; phân tích AI tác động đến xã hội, nghề nghiệp, định hướng học tập.
+[9.A3.1] (NLa): Nêu trách nhiệm pháp lý khi dùng AI; thực hành ra quyết định có AI hỗ trợ.
+[9.B1.1] (NLb): Nhận diện rủi ro khi dùng AI; thực hành phòng tránh rủi ro dữ liệu.
+[9.B2.1] (NLb): Phân tích trách nhiệm khi phát triển và sử dụng AI; đề xuất quy tắc ứng xử AI.
+[9.C2.1] (NLc): Thực hành vận dụng AI giải quyết vấn đề và tạo sản phẩm đơn giản.
+[9.C4.1] (NLc): Nêu cách cải thiện dữ liệu và nâng cao chất lượng sản phẩm AI.
+[9.D1.1] (NLd): Con người dẫn dắt AI trong dự án; đánh giá và cải tiến sản phẩm AI.
+
+--- LỚP 10 ---
+[10.A1.1] (NLa): Trình bày vai trò con người trong hệ thống AI; phân tích rủi ro khi AI quyết định.
+[10.A1.2] (NLa): Giải thích con người cần kiểm soát AI trong mọi dự án.
+[10.A2.1] (NLa): Nêu luật pháp với AI; quyền của người dùng và nhà phát triển AI.
+[10.B1.1] (NLb): Tuân thủ quy định pháp luật khi dùng AI; phân biệt hành vi hợp pháp và vi phạm.
+[10.B2.1] (NLb): Trình bày đạo đức trong vận hành và sáng tạo AI.
+[10.C1.1] (NLc): Liên hệ ứng dụng AI với vấn đề thực tế; trình bày một số ứng dụng AI trong học tập.
+[10.C3.1] (NLc): Đặt prompt phù hợp mục tiêu cụ thể; mô tả công nghệ AI cơ bản.
+[10.C4.1] (NLc): Nêu các dạng dữ liệu huấn luyện và ảnh hưởng đến chất lượng AI.
+[10.D1.1] (NLd): Đề xuất ý tưởng hệ thống AI giải quyết vấn đề thực tiễn.
+[10.D2.1] (NLd): Xác định cấu trúc hệ thống AI và mối liên hệ giữa các thành phần.
+
+--- LỚP 11 ---
+[11.A1.1] (NLa): Trình bày quy trình dùng AI an toàn; nêu AI nâng cao năng lực con người.
+[11.A1.2] (NLa): Phân tích bền vững, công bằng; quyền của người dùng và dự án AI.
+[11.B1.1] (NLb): Phòng tránh rủi ro khi dùng AI; trình bày đạo đức trong thiết kế AI.
+[11.B2.1] (NLb): Xác định trách nhiệm trong hệ sinh thái AI.
+[11.C2.1] (NLc): Trình bày và thực hành một số ứng dụng AI trong học tập.
+[11.C3.1] (NLc): Đặt prompt nâng cao; khám phá cách vận hành một số hệ thống AI.
+[11.C3.2] (NLc): Tùy chỉnh hệ thống AI bằng hướng dẫn hệ thống, điều chỉnh tham số.
+[11.C5.1] (NLc): Nêu ứng dụng mạng nơ-ron nhân tạo.
+[11.C5.2] (NLc): Nêu ứng dụng thuật toán phân cụm, phân lớp.
+[11.D1.1] (NLd): Trình bày cách thiết kế và vận hành tổng thể hệ thống AI.
+[11.D2.1] (NLd): Trình bày cách vận hành công nghệ trong hệ thống AI; mối liên hệ giữa các thành phần.
+
+--- LỚP 12 ---
+[12.A1.1] (NLa): Phân tích hệ thống AI đảm bảo con người kiểm soát và chịu trách nhiệm.
+[12.A1.2] (NLa): Phân tích vai trò con người và AI trong quá trình ra quyết định.
+[12.A2.1] (NLa): Trình bày nguyên tắc đạo đức cơ bản khi thiết kế, phát triển AI (an toàn, công bằng, minh bạch, tôn trọng quyền riêng tư, trách nhiệm, lợi ích xã hội).
+[12.A3.1] (NLa): Phân tích trách nhiệm công dân trong xã hội AI: an toàn, trung thực, tôn trọng quyền riêng tư.
+[12.B2.1] (NLb): Xác định mức độ rủi ro khi dùng AI có thể vi phạm quy định nhà trường hoặc pháp luật.
+[12.B3.1] (NLb): Trình bày quyền và trách nhiệm người phát triển và người dùng AI; vai trò cá nhân trong xây dựng chính sách AI.
+[12.C2.1] (NLc): Lựa chọn ý tưởng thiết kế công cụ AI thực hiện công việc cụ thể.
+[12.C3.1] (NLc): Nêu công cụ mã nguồn mở thiết kế, huấn luyện, phát triển AI (Teachable Machine, TensorFlow.js...).
+[12.C3.2] (NLc): Nêu ví dụ đánh giá hiệu quả hệ thống AI.
+[12.D1.1] (NLd): Nhận biết phương án thiết kế, vận hành AI phù hợp để đạt hiệu quả cao.
+[12.D2.1] (NLd): Nhận biết vai trò khác nhau (đề xuất ý tưởng, lập trình, huấn luyện, kiểm thử) trong phát triển sản phẩm AI.
+`;
+
 export const SYSTEM_INSTRUCTION = `
    - Lớp 1-3: Dùng mức CB1, CB2. Học sinh cần được hướng dẫn từng bước, tác vụ đơn giản.
    - Lớp 4-6: Dùng mức CB2, TC1.

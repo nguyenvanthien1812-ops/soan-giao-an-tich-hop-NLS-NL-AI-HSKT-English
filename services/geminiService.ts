@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { LessonInfo, ProcessingOptions, Subject } from "../types";
-import { SYSTEM_INSTRUCTION, NLS_FRAMEWORK_DATA, SYSTEM_INSTRUCTION_ENGLISH, NLS_FRAMEWORK_DATA_ENGLISH, AI_FRAMEWORK_DATA_QD3439, DISABILITY_SUPPORT_INSTRUCTIONS, ENGLISH_CLIL_INSTRUCTIONS } from "../constants";
+import { SYSTEM_INSTRUCTION, NLS_FRAMEWORK_DATA, SYSTEM_INSTRUCTION_ENGLISH, NLS_FRAMEWORK_DATA_ENGLISH, AI_FRAMEWORK_DATA_QD3439, AI_FRAMEWORK_DATA_QD2422, DISABILITY_SUPPORT_INSTRUCTIONS, ENGLISH_CLIL_INSTRUCTIONS } from "../constants";
 
 // Hàm xác định mức độ NLS phù hợp theo cấp lớp
 function getGradeLevelGuidance(grade: number): string {
@@ -142,6 +142,36 @@ function getAIGradeGuidance(grade: number): string {
   - NLc.C2/C3/C4: Tùy chỉnh công cụ AI hỗ trợ học tập & xã hội; thử nghiệm công cụ mã nguồn mở/miễn phí (Teachable Machine, ML5.js, TensorFlow.js, MIT App Inventor); thu thập, số hóa & cải thiện bộ dữ liệu.
   - NLd.D1/D2: Phân tích phương án thiết kế hệ thống AI đa chuyên môn; giải quyết phát sinh để hệ thống vận hành ổn định, bền vững.`;
   }
+}
+
+// Hàm lấy YCCĐạt Năng lực AI theo QĐ 2422/QĐ-BGDĐT chính xác cho từng lớp (Lớp 1-12)
+function getAIGradeGuidanceQD2422(grade: number): string {
+  // Lọc các dòng YCCĐạt đúng lớp từ constant AI_FRAMEWORK_DATA_QD2422
+  const lines = AI_FRAMEWORK_DATA_QD2422.split('\n');
+  const gradeHeader = `--- LỚP ${grade} ---`;
+  const gradeHeaderNext = grade < 12 ? `--- LỚP ${grade + 1} ---` : null;
+  
+  let inSection = false;
+  const result: string[] = [];
+  
+  for (const line of lines) {
+    if (line.includes(gradeHeader)) {
+      inSection = true;
+      result.push(line);
+      continue;
+    }
+    if (inSection) {
+      if (gradeHeaderNext && line.includes(gradeHeaderNext)) break;
+      if (line.startsWith('═══')) break;
+      result.push(line);
+    }
+  }
+  
+  if (result.length === 0) {
+    return `\n  🤖 KHUNG NĂNG LỰC AI LỚP ${grade} (QĐ 2422/QĐ-BGDĐT - 2026-2027):\n  Xem dữ liệu trong AI_FRAMEWORK_DATA_QD2422 cho lớp ${grade}.`;
+  }
+  
+  return `\n  🤖 KHUNG NĂNG LỰC AI LỚP ${grade} (QĐ 2422/QĐ-BGDĐT - Chính thức từ 2026-2027):\n  CÁC YCCĐạt CỐT LÕI PHẢI ÁP DỤNG CHO LỚP ${grade}:\n  (Chọn 1-3 YCCĐạt phù hợp nhất với nội dung bài học, KHÔNG chèn tất cả)\n${result.filter(l => l.trim().startsWith('[')).map(l => '  ' + l).join('\n')}`;
 }
 
 // Hàm phân tích đặc thù môn học và đưa ra hướng dẫn NLS phù hợp
@@ -467,9 +497,14 @@ export const generateNLSLessonPlan = async (
 
   const needAI = options.integrationMode === 'AI' || options.integrationMode === 'BOTH';
 
-  const aiGradeGuidance = needAI ? getAIGradeGuidance(info.grade) : "";
+  // Lấy hướng dẫn NL AI theo lớp: ưu tiên QĐ 2422 (mới, chính thức) + giữ QĐ 3439 làm tham khảo thêm
+  const aiGradeGuidance = needAI ? getAIGradeGuidanceQD2422(info.grade) : "";
+  const aiGradeGuidanceLegacy = needAI ? getAIGradeGuidance(info.grade) : "";
 
-  const aiFrameworkPrompt = needAI ? `\n    ${AI_FRAMEWORK_DATA_QD3439}\n` : "";
+  // Dữ liệu framework: QĐ 2422 (chính) + QĐ 3439 (tham khảo bổ sung)
+  const aiFrameworkPrompt = needAI
+    ? `\n    === KHUNG NĂNG LỰC AI QĐ 2422 (CHÍNH THỨC TỪ 2026-2027 — ÁP DỤNG BẮT BUỘC) ===\n    ${AI_FRAMEWORK_DATA_QD2422}\n\n    === KHUNG NL AI QĐ 3439 (THAM KHẢO BỔ SUNG) ===\n    ${AI_FRAMEWORK_DATA_QD3439}\n`
+    : "";
   const disabilityPrompt = options.includeDisabilitySupport
     ? `\n    ${DISABILITY_SUPPORT_INSTRUCTIONS}\n    DẠNG KHUYẾT TẬT CẦN HỖ TRỢ: ${
         options.disabilityType === 'INTELLECTUAL' ? 'Khuyết tật Trí tuệ / Khó khăn học tập' :
@@ -605,6 +640,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     - Khối lớp: ${info.grade}
     ${gradeLevelGuidance}
     ${aiGradeGuidance}
+    ${aiGradeGuidanceLegacy}
     ${subjectGuidance}
     
     ${distributionContext}
