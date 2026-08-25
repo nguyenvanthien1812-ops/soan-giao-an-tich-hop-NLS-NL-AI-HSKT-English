@@ -1,6 +1,76 @@
 import React, { useRef, useState } from 'react';
 import { UploadCloud, Loader2, CheckCircle, FileText, FileUp, AlertCircle, FolderUp, ClipboardPaste } from 'lucide-react';
-import { OriginalDocxFile } from '../types';
+import { OriginalDocxFile, Subject } from '../types';
+
+// Tự động nhận diện Môn học & Khối lớp từ tên file và nội dung giáo án
+export function detectSubjectAndGrade(text: string, fileName: string): { subject?: Subject; grade?: number } {
+  const sample = (fileName + "\n" + text.slice(0, 3000)).toLowerCase();
+  
+  let detectedSubject: Subject | undefined;
+  let detectedGrade: number | undefined;
+
+  // 1. Nhận diện Khối lớp (Lớp 1 -> 12)
+  const gradePatterns = [
+    /(?:lớp|lop|khối|khoi|khtn|toán|toan|văn|van|sinh|hóa|hoa|lí|ly|vật lí|vat ly|tin|tin học|anh|tiếng anh|gdcd|gdqp|gddp)\s*([1-9]|1[0-2])\b/i,
+    /\b(?:lớp|lop|khối|khoi)\s*:?\s*([1-9]|1[0-2])\b/i,
+    /\bkhbh\s+(?:môn\s+)?(?:[a-zà-ỹ\s]+)\s+([1-9]|1[0-2])\b/i,
+    /\bgiao\s*an\s+(?:[a-zà-ỹ\s]+)\s+([1-9]|1[0-2])\b/i,
+    /\b_([1-9]|1[0-2])(?:\.docx|\.pdf|_|\s)/i,
+    /\b([1-9]|1[0-2])\s*(?:a|b|c|d|e|g|h|k)\b/i
+  ];
+
+  for (const regex of gradePatterns) {
+    const match = sample.match(regex);
+    if (match && match[1]) {
+      const g = parseInt(match[1], 10);
+      if (g >= 1 && g <= 12) {
+        detectedGrade = g;
+        break;
+      }
+    }
+  }
+
+  // 2. Nhận diện Môn học
+  if (sample.includes('khoa học tự nhiên') || sample.includes('khtn')) {
+    detectedSubject = Subject.KHTN;
+  } else if (sample.includes('lịch sử và địa lí') || sample.includes('lịch sử & địa lí') || sample.includes('ls&đl') || sample.includes('ls và đl') || sample.includes('ls&dl') || sample.includes('ls-dl')) {
+    detectedSubject = Subject.LSDIA;
+  } else if (sample.includes('toán') || sample.includes('toan hoc') || sample.includes('hinh hoc') || sample.includes('dai so')) {
+    detectedSubject = Subject.TOAN;
+  } else if (sample.includes('ngữ văn') || sample.includes('ngu van') || sample.includes('tiếng việt') || sample.includes('tieng viet') || sample.includes('môn văn') || sample.includes('bài thơ') || sample.includes('văn bản')) {
+    detectedSubject = Subject.VAN;
+  } else if (sample.includes('tin học') || sample.includes('tin hoc') || sample.includes('scratch') || sample.includes('python') || sample.includes('lập trình')) {
+    detectedSubject = Subject.TIN;
+  } else if (sample.includes('tiếng anh') || sample.includes('tieng anh') || sample.includes('english') || sample.includes('unit ')) {
+    detectedSubject = Subject.ANH;
+  } else if (sample.includes('vật lí') || sample.includes('vật lý') || sample.includes('vat li') || sample.includes('vat ly')) {
+    detectedSubject = Subject.LY;
+  } else if (sample.includes('hóa học') || sample.includes('hoa hoc')) {
+    detectedSubject = Subject.HOA;
+  } else if (sample.includes('sinh học') || sample.includes('sinh hoc')) {
+    detectedSubject = Subject.SINH;
+  } else if (sample.includes('lịch sử') || sample.includes('lich su')) {
+    detectedSubject = Subject.SU;
+  } else if (sample.includes('địa lí') || sample.includes('địa lý') || sample.includes('dia li') || sample.includes('dia ly')) {
+    detectedSubject = Subject.DIA;
+  } else if (sample.includes('gdcd') || sample.includes('giáo dục công dân') || sample.includes('gdkt&pl') || sample.includes('kinh tế và pháp luật')) {
+    detectedSubject = Subject.GDCD;
+  } else if (sample.includes('công nghệ') || sample.includes('cong nghe')) {
+    detectedSubject = Subject.CONG_NGHE;
+  } else if (sample.includes('giáo dục quốc phòng') || sample.includes('gdqp')) {
+    detectedSubject = Subject.GDQPAN;
+  } else if (sample.includes('giáo dục địa phương') || sample.includes('gddp')) {
+    detectedSubject = Subject.GDDP;
+  } else if (sample.includes('hoạt động trải nghiệm') || sample.includes('hđtn') || sample.includes('hdtn')) {
+    detectedSubject = Subject.HDKH;
+  } else if (sample.includes('tự nhiên và xã hội') || sample.includes('tnxh')) {
+    detectedSubject = Subject.TNXH;
+  } else if (sample.includes('khoa học') && !sample.includes('khoa học tự nhiên') && !sample.includes('khoa học xã hội')) {
+    detectedSubject = Subject.KHOA_HOC;
+  }
+
+  return { subject: detectedSubject, grade: detectedGrade };
+}
 
 // Nhận diện giáo án đã có NLS được chèn sẵn
 function detectExistingNLS(text: string): boolean {
@@ -20,6 +90,8 @@ interface ContentInputProps {
   onOriginalDocxLoaded?: (file: OriginalDocxFile | null) => void;
   // Callback thông báo khi phát hiện NLS trong file giáo án
   onNLSDetected?: (hasNLS: boolean) => void;
+  // Callback tự động nhận diện Môn học & Khối lớp từ file
+  onMetaDetected?: (meta: { subject?: Subject; grade?: number }) => void;
 }
 
 // Khai báo thư viện ngoại
@@ -34,8 +106,10 @@ const ContentInput: React.FC<ContentInputProps> = ({
   distributionContent,
   setDistributionContent,
   onOriginalDocxLoaded,
-  onNLSDetected
+  onNLSDetected,
+  onMetaDetected
 }) => {
+
   const lessonInputRef = useRef<HTMLInputElement>(null);
   const distInputRef = useRef<HTMLInputElement>(null);
 
@@ -83,10 +157,13 @@ const ContentInput: React.FC<ContentInputProps> = ({
         if (isLesson) onNLSDetected?.(false);
       } else {
         setContent(text);
-        // Chỉ nhận diện NLS cho file giáo án (không phải PPCT)
+        // Chỉ nhận diện NLS & Môn/Khối lớp cho file giáo án (không phải PPCT)
         if (isLesson) {
           onNLSDetected?.(detectExistingNLS(text));
+          const meta = detectSubjectAndGrade(text, file.name);
+          onMetaDetected?.(meta);
         }
+
       }
 
     } catch (error) {

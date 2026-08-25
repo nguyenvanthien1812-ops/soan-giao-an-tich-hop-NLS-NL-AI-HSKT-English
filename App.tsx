@@ -22,6 +22,8 @@ const App: React.FC = () => {
   const [includeEnglishIntegration, setIncludeEnglishIntegration] = useState<boolean>(false);
   const [englishIntegrationLevel, setEnglishIntegrationLevel] = useState<EnglishIntegrationLevel>('BASIC');
   const [aiFrameworkVersion, setAiFrameworkVersion] = useState<AIFrameworkVersion>('QD2422'); // Mặc định QĐ 2422 (chính thức 2026-2027)
+  const [autoDetectedMsg, setAutoDetectedMsg] = useState<string | null>(null);
+
 
   // Content States
   const [lessonContent, setLessonContent] = useState<string>('');
@@ -228,6 +230,7 @@ const App: React.FC = () => {
               hasExistingNLS={hasExistingNLS}
               isSupplementMode={isSupplementMode}
               setIsSupplementMode={setIsSupplementMode}
+              autoDetectedMsg={autoDetectedMsg}
             />
 
             <ContentInput
@@ -243,7 +246,22 @@ const App: React.FC = () => {
                   setIsSupplementMode(true);
                 }
               }}
+              onMetaDetected={(meta) => {
+                const parts: string[] = [];
+                if (meta.subject) {
+                  setSubject(meta.subject);
+                  parts.push(`Môn: ${meta.subject}`);
+                }
+                if (meta.grade) {
+                  setGrade(meta.grade);
+                  parts.push(`Lớp: ${meta.grade}`);
+                }
+                if (parts.length > 0) {
+                  setAutoDetectedMsg(`✨ Đã tự động nhận diện từ file: ${parts.join(' - ')}`);
+                }
+              }}
             />
+
 
             {/* Options Panel */}
             <div className="bg-white/90 backdrop-blur-md p-6 rounded-3xl shadow-xl shadow-indigo-900/5 border border-indigo-100/80">

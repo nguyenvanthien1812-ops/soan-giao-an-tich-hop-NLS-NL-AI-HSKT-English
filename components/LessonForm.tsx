@@ -1,6 +1,6 @@
 import React from 'react';
 import { Subject, IntegrationMode, DisabilityType, AIFrameworkVersion } from '../types';
-import { Bot, Cpu, Sparkles, HeartHandshake } from 'lucide-react';
+import { Bot, Cpu, Sparkles, HeartHandshake, BookOpen, GraduationCap, CheckCircle, Info } from 'lucide-react';
 
 interface LessonFormProps {
   subject: Subject;
@@ -25,6 +25,7 @@ interface LessonFormProps {
   hasExistingNLS: boolean;       // Kết quả tự động phát hiện từ ContentInput
   isSupplementMode: boolean;     // Trạng thái người dùng bật/tắt thủ công
   setIsSupplementMode: (val: boolean) => void;
+  autoDetectedMsg?: string | null; // Thông báo tự nhận diện môn & lớp
 }
 
 const LessonForm: React.FC<LessonFormProps> = ({
@@ -49,6 +50,7 @@ const LessonForm: React.FC<LessonFormProps> = ({
   hasExistingNLS,
   isSupplementMode,
   setIsSupplementMode,
+  autoDetectedMsg,
 }) => {
   return (
     <div className="bg-white/90 backdrop-blur-md p-6 sm:p-7 rounded-3xl shadow-xl shadow-indigo-900/5 border border-indigo-100/80 mb-6 space-y-6">
@@ -64,39 +66,77 @@ const LessonForm: React.FC<LessonFormProps> = ({
         </span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        {/* Subject */}
-        <div className="space-y-2 text-left">
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Môn học</label>
-          <div className="relative">
-            <select
-              value={subject}
-              onChange={(e) => setSubject(e.target.value as Subject)}
-              className="block w-full rounded-2xl border-slate-200 bg-slate-50/80 p-3.5 text-sm font-semibold text-slate-800 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all cursor-pointer shadow-sm"
-            >
-              {Object.values(Subject).map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
+      {/* Vùng chọn Môn học & Khối lớp — Nổi bật & Tự động nhận diện */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-indigo-50/80 via-blue-50/40 to-slate-50/80 border-2 border-indigo-200/90 shadow-sm space-y-3.5">
+        {/* Banner thông báo tự động nhận diện nếu có */}
+        {autoDetectedMsg && (
+          <div className="flex items-center gap-2 p-2.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-bold animate-pulse">
+            <CheckCircle size={16} className="text-emerald-600 shrink-0" />
+            <span>{autoDetectedMsg}</span>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+          {/* Subject */}
+          <div className="space-y-1.5 text-left">
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-indigo-950">
+                <BookOpen size={15} className="text-indigo-600" />
+                <span>Môn học</span>
+                <span className="text-red-500">*</span>
+              </label>
+              <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-indigo-100/90 text-indigo-800 border border-indigo-200/60">
+                BẮT BUỘC
+              </span>
+            </div>
+            <div className="relative">
+              <select
+                value={subject}
+                onChange={(e) => setSubject(e.target.value as Subject)}
+                className="block w-full rounded-xl border-2 border-indigo-200 bg-white p-3 text-sm font-bold text-slate-800 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-500/15 transition-all cursor-pointer shadow-sm"
+              >
+                {Object.values(Subject).map((s) => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Grade */}
+          <div className="space-y-1.5 text-left">
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-indigo-950">
+                <GraduationCap size={16} className="text-indigo-600" />
+                <span>Khối lớp</span>
+                <span className="text-red-500">*</span>
+              </label>
+              <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-indigo-100/90 text-indigo-800 border border-indigo-200/60">
+                BẮT BUỘC
+              </span>
+            </div>
+            <div className="relative">
+              <select
+                value={grade}
+                onChange={(e) => setGrade(Number(e.target.value))}
+                className="block w-full rounded-xl border-2 border-indigo-200 bg-white p-3 text-sm font-bold text-slate-800 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-500/15 transition-all cursor-pointer shadow-sm"
+              >
+                {Array.from({ length: 12 }, (_, i) => i + 1).map((g) => (
+                  <option key={g} value={g}>Lớp {g}</option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
 
-        {/* Grade */}
-        <div className="space-y-2 text-left">
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Khối lớp</label>
-          <div className="relative">
-            <select
-              value={grade}
-              onChange={(e) => setGrade(Number(e.target.value))}
-              className="block w-full rounded-2xl border-slate-200 bg-slate-50/80 p-3.5 text-sm font-semibold text-slate-800 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all cursor-pointer shadow-sm"
-            >
-              {Array.from({ length: 12 }, (_, i) => i + 1).map((g) => (
-                <option key={g} value={g}>Lớp {g}</option>
-              ))}
-            </select>
-          </div>
+        {/* Hướng dẫn lưu ý */}
+        <div className="flex items-start gap-1.5 pt-1 text-[11px] sm:text-xs text-indigo-900/80 font-medium">
+          <Info size={14} className="text-indigo-500 shrink-0 mt-0.5" />
+          <span>
+            <strong>Lưu ý quan trọng:</strong> Môn học và Khối lớp giúp AI định hướng đúng công cụ giảng dạy (GeoGebra, PhET...) và phân cấp mã Năng lực số / AI chính xác theo độ tuổi học sinh.
+          </span>
         </div>
       </div>
+
 
       {/* Integration Mode Selector */}
       <div className="space-y-3.5 text-left pt-5 border-t border-slate-100">
