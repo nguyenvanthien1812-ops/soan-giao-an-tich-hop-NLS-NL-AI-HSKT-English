@@ -26,6 +26,9 @@ interface LessonFormProps {
   isSupplementMode: boolean;     // Trạng thái người dùng bật/tắt thủ công
   setIsSupplementMode: (val: boolean) => void;
   autoDetectedMsg?: string | null; // Thông báo tự nhận diện môn & lớp
+  // Tích hợp STEM vào Hoạt động Vận dụng
+  enableStem: boolean;
+  setEnableStem: (val: boolean) => void;
 }
 
 const LessonForm: React.FC<LessonFormProps> = ({
@@ -51,6 +54,8 @@ const LessonForm: React.FC<LessonFormProps> = ({
   isSupplementMode,
   setIsSupplementMode,
   autoDetectedMsg,
+  enableStem,
+  setEnableStem,
 }) => {
   return (
     <div className="bg-white/90 backdrop-blur-md p-6 sm:p-7 rounded-3xl shadow-xl shadow-indigo-900/5 border border-indigo-100/80 mb-6 space-y-6">
@@ -337,6 +342,38 @@ const LessonForm: React.FC<LessonFormProps> = ({
               <option value="INTER">🔶 Cấp độ 2 (Trung cấp): Tích hợp Câu lệnh lớp học (Classroom Instructions)</option>
               <option value="CLIL">🌐 Cấp độ 3 (Nâng cao): Soạn bài theo chuẩn CLIL toàn diện</option>
             </select>
+          </div>
+        )}
+      </div>
+
+      {/* STEM Integration Section */}
+      <div className="space-y-3.5 text-left pt-5 border-t border-slate-100">
+        <label className="flex items-center space-x-3 cursor-pointer group select-none">
+          <input
+            type="checkbox"
+            checked={enableStem}
+            onChange={(e) => setEnableStem(e.target.checked)}
+            className="w-5 h-5 text-teal-600 rounded-lg border-slate-300 focus:ring-teal-500 focus:ring-offset-0 transition-transform group-hover:scale-105"
+          />
+          <span className="text-sm sm:text-base font-bold text-slate-800 flex items-center group-hover:text-teal-700 transition-colors">
+            <span className="text-xl mr-2">🔬</span>
+            Tích hợp Giáo dục STEM{' '}
+            <span className="ml-2 text-xs font-medium px-2 py-0.5 rounded-full bg-teal-50 text-teal-800 border border-teal-200">
+              Mô hình A — CV 5512
+            </span>
+          </span>
+        </label>
+
+        {enableStem && (
+          <div className="p-4 bg-teal-50/70 border border-teal-200/80 rounded-2xl space-y-2 text-left animate-fadeIn shadow-sm">
+            <p className="text-xs font-bold text-teal-900">
+              ✅ <strong>Đang BẬT Tích hợp STEM:</strong>
+            </p>
+            <p className="text-[11px] sm:text-xs text-teal-800 leading-relaxed">
+              AI sẽ <strong>nâng cấp Hoạt động Vận dụng</strong> thành dự án STEM mini gắn thực tiễn:
+              giao nhiệm vụ chế tạo/thiết kế/quan trắc thực tế, có sản phẩm cụ thể và rubric đánh giá 3 tiêu chí.
+              Toàn bộ cấu trúc 4 hoạt động theo CV 5512 được giữ nguyên 100%.
+            </p>
           </div>
         )}
       </div>

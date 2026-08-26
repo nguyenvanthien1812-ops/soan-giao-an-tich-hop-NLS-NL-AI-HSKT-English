@@ -61,6 +61,7 @@ export interface ProcessingOptions {
   includeEnglishIntegration?: boolean;
   englishIntegrationLevel?: EnglishIntegrationLevel;
   hasExistingNLS?: boolean; // File giáo án đã có NLS được chèn sẵn → Chế độ Bổ sung
+  enableStem?: boolean; // Tích hợp STEM vào Hoạt động Vận dụng (mặc định: false)
 }
 
 

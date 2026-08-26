@@ -631,6 +631,72 @@ YÊU CẦU XỬ LÝ (KHI BẬT TÍCH HỢP TIẾNG ANH):
    - Tự động thêm phần "BẢNG TỪ VỰNG SONG NGỮ VIỆT - ANH (KEY VOCABULARY)" chứa 5-10 từ vựng quan trọng của toàn bài học để học sinh dễ theo dõi.
 `;
 
+export const STEM_INTEGRATION_GUIDANCE = `
+HƯỚNG DẪN TÍCH HỢP GIÁO DỤC STEM VÀO HOẠT ĐỘNG VẬN DỤNG (MÔ HÌNH A — THEO CV 5512/BGDĐT):
+
+⚠️ PHẠM VI ÁP DỤNG: CHỈ áp dụng cho Hoạt động Vận dụng (hoạt động cuối của bài học).
+   TUYỆT ĐỐI KHÔNG thay đổi cấu trúc và nội dung các hoạt động khác (Mở đầu, Hình thành kiến thức, Luyện tập).
+   TUYỆT ĐỐI KHÔNG tái cấu trúc hay sắp xếp lại các hoạt động.
+
+✅ YÊU CẦU CHO HOẠT ĐỘNG VẬN DỤNG — NÂNG CẤP THÀNH DỰ ÁN STEM MINI:
+
+1. PHẦN I. MỤC TIÊU:
+   - Bổ sung thêm 1 chỉ báo năng lực vận dụng STEM vào mục "2. Năng lực" (không xóa bất kỳ chỉ báo nào đã có).
+   - Nội dung chỉ báo bổ sung (gạch đầu dòng "- "): Vận dụng kiến thức bài học để giải quyết một bài toán/vấn đề thực tiễn hoặc thiết kế sản phẩm STEM mini gắn với cuộc sống địa phương theo quy trình: đặt vấn đề → phác thảo/thiết kế → thực hiện → báo cáo kết quả.
+   - KHÔNG tạo marker màu (không dùng thẻ <blue>, <purple>, <green>, <orange>) cho mục này.
+
+2. PHẦN II. HOẠT ĐỘNG VẬN DỤNG — GIỮ NGUYÊN KHUNG 4 MỤC a, b, c, d THEO ĐÚNG CHUẨN CV 5512:
+
+   a) Mục tiêu:
+   - Nâng cấp mục tiêu sang hướng STEM thực tiễn: Vận dụng kiến thức [tên bài học] để [thực hiện nhiệm vụ STEM mini cụ thể phù hợp nội dung bài].
+   - Ví dụ phù hợp:
+     + Bài Quần xã sinh vật (KHTN 8) → "Vận dụng kiến thức để thiết kế sản phẩm truyền thông số bảo vệ đa dạng sinh học địa phương."
+     + Bài Tính chất kim loại (KHTN 9) → "Vận dụng kiến thức để thiết kế bộ hướng dẫn bảo quản đồ dùng kim loại tại gia đình theo quy trình STEM mini."
+     + Bài Điện trở (Vật Lí/KHTN) → "Vận dụng kiến thức để lắp ráp và thử nghiệm mạch điện đơn giản từ vật liệu tái chế."
+     + Bài Toán học → "Vận dụng để giải quyết tình huống thực tiễn và tạo báo cáo số minh họa bằng công cụ số."
+
+   b) Nội dung:
+   - Giao nhiệm vụ STEM mini gắn với thực tiễn, phù hợp nội dung bài học.
+   - Nhiệm vụ PHẢI gắn liên môn tự nhiên: S (Khoa học — kiến thức bài học), T (Công nghệ — ứng dụng số, app, thiết bị), E (Kĩ thuật — quy trình phác thảo → làm → kiểm tra → cải tiến), M (Toán — đo đạc, tính toán, thống kê số liệu).
+   - Ưu tiên vật liệu rẻ tiền, tái chế, dễ tìm tại địa phương.
+   - Ví dụ sản phẩm STEM mini: Mô hình nhỏ chế tạo tại nhà, thí nghiệm thực tế tại nhà, poster/infographic số tuyên truyền, bảng quan trắc/đo đạc số liệu thực tế, video ngắn 1-2 phút minh họa quy trình.
+
+   c) Sản phẩm dự kiến:
+   - Mô tả cụ thể sản phẩm HS cần nộp: [ảnh chụp hoặc video ngắn sản phẩm thực tế + báo cáo nhóm bằng file số hoặc bài trình bày trực tiếp].
+   - Hình thức nộp: Qua Padlet nhóm lớp / Zalo lớp / Google Classroom / hoặc trưng bày trực tiếp tại lớp.
+
+   d) Tổ chức thực hiện (GIỮ ĐÚNG 4 BƯỚC THEO CHUẨN CV 5512):
+   - Bước 1 (Chuyển giao nhiệm vụ):
+     + GV nêu rõ bối cảnh thực tế và bài toán STEM.
+     + GV công bố rõ tiêu chí đánh giá sản phẩm (Rubric mini — xem bên dưới).
+     + GV cho HS xem ví dụ sản phẩm tham khảo (hình ảnh hoặc video mẫu nếu có).
+   - Bước 2 (Học sinh thực hiện nhiệm vụ):
+     + HS làm việc cá nhân hoặc nhóm nhỏ (tại nhà hoặc ngoài giờ lên lớp).
+     + HS ghi chép số liệu đo đạc thực tế (nếu có) / phác thảo thiết kế / chế tạo hoặc thiết kế sản phẩm.
+     + HS sử dụng công cụ số hỗ trợ khi phù hợp (ứng dụng nhận diện sinh vật PlantNet, Google Sheets ghi số liệu, Canva/PowerPoint thiết kế poster, điện thoại quay video, v.v.).
+   - Bước 3 (Báo cáo, thảo luận):
+     + HS nộp/trưng bày sản phẩm theo hình thức đã hướng dẫn.
+     + Đại diện 2-3 nhóm/cá nhân chia sẻ trước lớp hoặc qua kênh số lớp.
+     + Các HS khác nhận xét theo tiêu chí rubric.
+   - Bước 4 (Kết luận, nhận định):
+     + GV nhận xét chung theo tiêu chí đánh giá.
+     + GV kết nối sản phẩm STEM với nội dung kiến thức bài học và ứng dụng thực tiễn rộng hơn.
+     + GV khen ngợi sáng tạo và gợi ý cải tiến (tư duy lặp lại — Growth Mindset).
+
+   TIÊU CHÍ ĐÁNH GIÁ SẢN PHẨM STEM (RUBRIC MINI — 3 TIÊU CHÍ):
+   | Tiêu chí | Mức Đạt (3 điểm) | Mức Cơ bản (2 điểm) | Mức Cần hỗ trợ (1 điểm) |
+   |:--|:--|:--|:--|
+   | 1. Tính khoa học | Vận dụng đúng và đủ kiến thức bài học; giải thích rõ nguyên lí. | Vận dụng đúng một phần; giải thích chưa đầy đủ. | Vận dụng sai hoặc chưa gắn được với kiến thức bài học. |
+   | 2. Tính thực tiễn & Sáng tạo | Sản phẩm gắn thực tiễn địa phương; có yếu tố sáng tạo, vật liệu tái chế/dễ tìm. | Sản phẩm đạt yêu cầu; ít yếu tố sáng tạo. | Sản phẩm chưa hoàn thiện; ít gắn thực tiễn. |
+   | 3. Trình bày & Chia sẻ | Rõ ràng, tự tin; sản phẩm số đẹp hoặc video chất lượng tốt; đúng thời hạn. | Trình bày được; sản phẩm đơn giản; đúng thời hạn. | Trình bày chưa rõ; chưa hoàn thành đúng hạn. |
+
+NGUYÊN TẮC TỔNG QUÁT BẮT BUỘC TUÂN THEO:
+- Nhiệm vụ STEM PHẢI bám sát 100% nội dung kiến thức của bài học được cung cấp. TUYỆT ĐỐI KHÔNG tự ý đổi chủ đề.
+- KHÔNG chèn thẻ màu <blue>, <purple>, <green>, <orange> vào các mục a), b), c) của hoạt động.
+- Rubric mini luôn được đặt trong mục d) Tổ chức thực hiện, ngay sau nội dung Bước 1 (Chuyển giao nhiệm vụ) hoặc ở cuối mục d).
+- Giữ nguyên toàn bộ định dạng, bảng biểu và cấu trúc gốc của giáo án.
+`;
+
 export const PLACEHOLDER_LESSON = `TÊN BÀI HỌC: THỐNG KÊ MÔ TẢ
 Môn: Toán - Lớp: 7
 

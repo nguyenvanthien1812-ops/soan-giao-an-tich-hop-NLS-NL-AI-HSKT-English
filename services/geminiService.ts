@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { LessonInfo, ProcessingOptions, Subject } from "../types";
-import { SYSTEM_INSTRUCTION, NLS_FRAMEWORK_DATA, SYSTEM_INSTRUCTION_ENGLISH, NLS_FRAMEWORK_DATA_ENGLISH, AI_FRAMEWORK_DATA_QD3439, AI_FRAMEWORK_DATA_QD2422, DISABILITY_SUPPORT_INSTRUCTIONS, ENGLISH_CLIL_INSTRUCTIONS } from "../constants";
+import { SYSTEM_INSTRUCTION, NLS_FRAMEWORK_DATA, SYSTEM_INSTRUCTION_ENGLISH, NLS_FRAMEWORK_DATA_ENGLISH, AI_FRAMEWORK_DATA_QD3439, AI_FRAMEWORK_DATA_QD2422, DISABILITY_SUPPORT_INSTRUCTIONS, ENGLISH_CLIL_INSTRUCTIONS, STEM_INTEGRATION_GUIDANCE } from "../constants";
 
 // Hàm xác định mức độ NLS phù hợp theo cấp lớp
 function getGradeLevelGuidance(grade: number): string {
@@ -528,6 +528,11 @@ export const generateNLSLessonPlan = async (
     ? `\n    ${ENGLISH_CLIL_INSTRUCTIONS}\n    CẤP ĐỘ TÍCH HỢP TIẾNG ANH (CLIL): ${options.englishIntegrationLevel}\n`
     : "";
 
+  // TÍCH HỢP STEM VÀO HOẠT ĐỘNG VẬN DỤNG (MÔ HÌNH A)
+  const stemPrompt = options.enableStem
+    ? `\n    === TÍCH HỢP GIÁO DỤC STEM (BẬT) ===\n    ${STEM_INTEGRATION_GUIDANCE}\n    TRẠNG THÁI STEM: BẬT → BẮT BUỘC nâng cấp Hoạt động Vận dụng thành dự án STEM mini theo đúng hướng dẫn trên. Giữ nguyên 100% cấu trúc và nội dung tất cả các hoạt động còn lại.\n`
+    : `\n    TRẠNG THÁI STEM: TẮT → TUYỆT ĐỐI KHÔNG thêm bất kỳ nội dung STEM nào vào giáo án.\n`;
+
   // Tạo các câu quy tắc động theo đúng trạng thái Checkbox của người dùng
   const mode = options.integrationMode || 'BOTH';
   const isDigitalNLSActive = mode === 'NLS' || mode === 'BOTH';
@@ -606,6 +611,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     ${aiFrameworkPrompt}
     ${disabilityPrompt}
     ${englishPrompt}
+    ${stemPrompt}
 
     LESSON PLAN INPUT INFORMATION:
     - Subject: ${info.subject}
@@ -643,6 +649,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     ${aiFrameworkPrompt}
     ${disabilityPrompt}
     ${englishPrompt}
+    ${stemPrompt}
 
     THÔNG TIN GIÁO ÁN ĐẦU VÀO:
     - Môn học: ${info.subject}

@@ -22,6 +22,7 @@ const App: React.FC = () => {
   const [includeEnglishIntegration, setIncludeEnglishIntegration] = useState<boolean>(false);
   const [englishIntegrationLevel, setEnglishIntegrationLevel] = useState<EnglishIntegrationLevel>('BASIC');
   const [aiFrameworkVersion, setAiFrameworkVersion] = useState<AIFrameworkVersion>('QD2422'); // Mặc định QĐ 2422 (chính thức 2026-2027)
+  const [enableStem, setEnableStem] = useState<boolean>(false); // Tích hợp STEM vào HĐ Vận dụng (mặc định: TẮT)
   const [autoDetectedMsg, setAutoDetectedMsg] = useState<string | null>(null);
 
 
@@ -164,6 +165,7 @@ const App: React.FC = () => {
           includeEnglishIntegration,
           englishIntegrationLevel,
           hasExistingNLS: isSupplementMode, // Truyền trạng thái Chế độ Bổ sung
+          enableStem, // Tích hợp STEM vào HĐ Vận dụng
         }
       );
 
@@ -231,6 +233,8 @@ const App: React.FC = () => {
               isSupplementMode={isSupplementMode}
               setIsSupplementMode={setIsSupplementMode}
               autoDetectedMsg={autoDetectedMsg}
+              enableStem={enableStem}
+              setEnableStem={setEnableStem}
             />
 
             <ContentInput
