@@ -683,65 +683,34 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     1. GIỮ NGUYÊN ĐỊNH DẠNG GỐC: Bạn phải giữ nguyên các đoạn in đậm (**text**), in nghiêng (*text*) của văn bản gốc. Không được làm mất định dạng này.
     2. TOÁN HỌC: Tất cả công thức toán phải viết dạng LaTeX trong dấu $. Ví dụ: $x^2$. Không dùng unicode.
     3. BẢNG: Sử dụng Markdown Table chuẩn.
-    ${isDigitalNLSActive && isAINLActive ? "4. NLS & AI BỔ SUNG: Dùng thẻ <blue>...</blue> để đánh dấu màu xanh dương nội dung NLS, thẻ <purple>...</purple> cho nội dung AI. Giữ nguyên Mã chỉ báo NLS/AI (ví dụ: 1.1.TC1a:, NLc.C2:) trước mỗi ý." : isDigitalNLSActive ? "4. NLS BỔ SUNG: CHỈ dùng thẻ <blue>...</blue> để đánh dấu màu xanh dương nội dung NLS (ví dụ: 1.1.TC1a:). CẤM TUYỆT ĐỐI dùng thẻ <purple> hoặc mã Năng lực AI (NLa, NLb, NLc, NLd)." : isAINLActive ? "4. AI BỔ SUNG: CHỈ dùng thẻ <purple>...</purple> để đánh dấu màu tím nội dung AI (ví dụ: NLc.C2:). CẤM TUYỆT ĐỐI dùng thẻ <blue> hoặc mã NLS thông thường." : "4. NLS & AI BỔ SUNG: TẮT. KHÔNG DÙNG THẺ <blue> HOẶC <purple>."}
-    ${isDisabilityActive ? "5. HỖ TRỢ HSKT: Dùng thẻ <green>...</green> để đánh dấu màu xanh lá hỗ trợ HSKT." : "5. HỖ TRỢ HSKT: TẮT. CẤM TUYỆT ĐỐI DÙNG THẺ <green> VÀ CẤM TỰ Ý THÊM HSKT."}
-    ${isEnglishActive ? "6. TÍCH HỢP TIẾNG ANH: Dùng thẻ <orange>...</orange> để đánh dấu màu cam nội dung tiếng Anh." : "6. TÍCH HỢP TIẾNG ANH: TẮT. CẤM TUYỆT ĐỐI DÙNG THẺ <orange> VÀ CẤM TỰ Ý THÊM TIẾNG ANH."}
-    7. CHUẨN MÃ NLS THEO KHỐI LỚP & MÔN HỌC: Lớp 1-3 chỉ chọn mã CB1/CB2; Lớp 4-6 chọn CB2/TC1; Lớp 7-9 chọn TC1/TC2; Lớp 10-12 chọn TC2/NC1.
-    8. VỊ TRÍ CHÈN VÀ TRÍCH DẪN DÒNG LIỀN TRƯỚC:
+    4. THẺ MÀU & ĐÁNH DẤU:
+       ${isDigitalNLSActive && isAINLActive ? "- Dùng thẻ <blue>...</blue> để đánh dấu màu xanh dương NLS, thẻ <purple>...</purple> cho AI." : isDigitalNLSActive ? "- CHỈ dùng thẻ <blue>...</blue> cho NLS. CẤM dùng thẻ <purple>." : isAINLActive ? "- CHỈ dùng thẻ <purple>...</purple> cho AI. CẤM dùng thẻ <blue>." : "- NLS & AI: TẮT."}
+       ${isDisabilityActive ? "- HỖ TRỢ HSKT: Dùng thẻ <green>...</green> màu xanh lá." : "- HỖ TRỢ HSKT: TẮT."}
+       ${isEnglishActive ? "- TIẾNG ANH: Dùng thẻ <orange>...</orange> màu cam." : "- TIẾNG ANH: TẮT."}
+    5. QUY TẮC BẮT BUỘC CHO MỤC TIÊU (===NLS_MỤC_TIÊU===):
+       - Chèn ở cuối mục "2. Năng lực" (trước mục 3. Phẩm chất).
+       - Tiêu đề NLS: <blue>* Năng lực số</blue>
+       - Tiêu đề Năng lực AI: <blue>* Năng lực Trí tuệ nhân tạo (AI)</blue> (hoặc thẻ <purple>...</purple>)
+       - Tiêu đề HSKT: <green>* Điều chỉnh mục tiêu đối với Học sinh Khuyết tật (HSKT):</green>
+       - Tiêu đề Tiếng Anh: <orange>* Tích hợp Tiếng Anh (English Integration):</orange>
+       - TẤT CẢ CÁC Ý CHỈ BÁO NĂNG LỰC BẮT BUỘC PHẢI CÓ DẤU GẠCH ĐẦU DÒNG ("- ") ở đầu mỗi dòng (ví dụ: <blue>- 1.1.TC1a: ...</blue>, <purple>- [7.A1.2]: ...</purple>).
+    6. ⭐ QUY TẮC 100% CHỦ THỂ HỌC SINH (STUDENT-CENTRIC):
+       - NLS (<blue>) VÀ NĂNG LỰC AI (<purple>) LUÔN LUÔN LÀ NĂNG LỰC CỦA HỌC SINH (HS).
+       - MỌI CÂU CHỈ BÁO NLS/AI PHẢI BẮT ĐẦU BẰNG "HS [Hành động số / AI cụ thể] để [Mục đích học tập]".
+       - 🚫 CẤM TUYỆT ĐỐI dùng: "GV hướng dẫn HS...", "GV yêu cầu HS...". Câu chỉ báo chỉ mô tả hành động và năng lực thực tế của Học sinh.
+    7. ⭐ VỊ TRÍ CHÈN & MẬT ĐỘ "ĐÚNG - TRÚNG - ĐỦ":
+       - Mật độ: Mỗi giáo án CHỈ CHÈN TỪ 2 ĐẾN 3 VỊ TRÍ NLS/AI THIẾT THỰC NHẤT trong toàn bài. TUYỆT ĐỐI KHÔNG chèn dồn dập 2-3 mã vào cùng 1 bước!
+       - Bước 1 (Giao nhiệm vụ): ❌ Mặc định KHÔNG chèn khi GV giao bài miệng/giấy/chiếu slide. ✅ Chỉ chèn khi HS trực tiếp dùng thiết bị cá nhân đăng nhập làm bài Quizizz/Kahoot.
+       - Bước 2 (Thực hiện nhiệm vụ): ĐÂY LÀ BƯỚC TRỌNG TÂM (1 vị trí trong bài) – chèn khi HS THỰC SỰ THAO TÁC CÔNG CỤ SỐ (bấm MTCT, vẽ GeoGebra, thí nghiệm ảo PhET, nhập Excel, tra cứu máy tính).
+       - Bước 3 (Báo cáo): Chèn khi HS thực sự nộp/trình chiếu file số qua Padlet/Google Slides.
+       - Bước 4 (Kết luận): ❌ Mặc định KHÔNG chèn.
+       - 🚫 KHÓA CHẶT: TUYỆT ĐỐI CẤM chèn bất kỳ thẻ màu nào vào mục "a. Mục tiêu", "b. Nội dung", "c. Sản phẩm" của các hoạt động. CHỈ CHÈN VÀO "d. Tổ chức thực hiện".
+    8. ⭐ NGUYÊN TẮC TÍCH HỢP AI THỰC TẾ & BÁM SÁT BÀI HỌC:
+       - Cấp THCS (Lớp 6-9): AI chỉ dừng ở mức vừa sức (HS tra cứu mở rộng bằng Chatbot, đối chiếu thông tin AI với SGK, thảo luận tính đúng/sai). 🚫 CẤM TUYỆT ĐỐI yêu cầu HS cấp THCS "huấn luyện mô hình AI", "gán nhãn dữ liệu Machine Learning", "lập trình AI".
+       - BÁM SÁT 100% NỘI DUNG BÀI HỌC: NLS/AI/STEM chèn vào BẮT BUỘC PHẢI PHỤC VỤ TRỰC TIẾP cho kiến thức bài học đang dạy. 🚫 CẤM TUYỆT ĐỐI tự ý "bịa" ra nhiệm vụ lạc đề (ví dụ: bài học về thực vật thoát hơi nước thì CẤM đổi thành "tính BMR trên Excel" hay "làm thực đơn ăn kiêng"; bài tập Toán hình học thì CẤM đổi thành "vẽ Canva sơ đồ tư duy").
+    9. VỊ TRÍ TRÍCH DẪN DÒNG LIỀN TRƯỚC:
        - Mỗi Marker '===NLS_...===' PHẢI đính kèm thông tin '|VITRI:...' trích dẫn chính xác dòng/câu liền trước trong giáo án gốc của giáo viên.
-       - Ví dụ Marker: '===NLS_HOẠT_ĐỘNG_1_BƯỚC_2|VITRI: Hoạt động 1 > d. Tổ chức thực hiện > Bước 2 > Sau dòng: "GV yêu cầu HS sử dụng GeoGebra..."==='
-       - Phần I. Mục tiêu: Chèn ở cuối mục "2. Năng lực" (trước mục 3. Phẩm chất).
-         ⭐ QUY TẮC BẮT BUỘC CHO MỤC TIÊU (===NLS_MỤC_TIÊU===):
-         + Tiêu đề NLS: <blue>* Năng lực số</blue>
-         + Tiêu đề Năng lực AI: <blue>* Năng lực Trí tuệ nhân tạo (AI)</blue> (hoặc thẻ <purple>...</purple>)
-         + Tiêu đề HSKT: <green>* Điều chỉnh mục tiêu đối với Học sinh Khuyết tật (HSKT):</green>
-         + Tiêu đề Tiếng Anh: <orange>* Tích hợp Tiếng Anh (English Integration):</orange>
-         + TẤT CẢ CÁC Ý CHỈ BÁO NĂNG LỰC BẮT BUỘC PHẢI CÓ DẤU GẠCH ĐẦU DÒNG ("- ") ở đầu mỗi dòng (ví dụ: <blue>- 1.1.TC1a: ...</blue>, <purple>- [7.C5.1]: ...</purple>, <green>- Nhận biết và thực hiện...</green>, <orange>- HS nhận biết...</orange>).
-       - Các hoạt động dạy học: CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" (hoặc các Bước/Nhiệm vụ trong Tổ chức thực hiện). TUYỆT ĐỐI CẤM chèn bất kỳ thẻ màu nào (<blue>, <purple>, <green>, <orange>) vào phần Mục tiêu, Nội dung, hay Sản phẩm của các hoạt động.
-     9. PHÂN BỔ NLS/AI THEO ĐÚNG BƯỚC – BẮT BUỘC TUÂN THỦ (căn cứ CV 3456/BGDĐT & QĐ 3439):
-       ⭐ NLS (<blue>) VÀ NĂNG LỰC AI (<purple>) LUÔN LUÔN LÀ NĂNG LỰC CỦA HỌC SINH. GV chỉ tổ chức/hướng dẫn, KHÔNG phát triển NLS/AI. Câu chỉ báo PHẢI có chủ thể HS.
-       - Bước 1 (Chuyển giao nhiệm vụ – GV giao bài): CHỈ chèn khi HS CHỦ ĐỘNG THAO TÁC thiết bị / học liệu số (HS trực tiếp bấm Quizizz/Kahoot, truy cập Classroom/LMS nhận bài, hoặc chủ động trích xuất thông tin cụ thể từ video theo yêu cầu). CẤM chèn khi GV chỉ chiếu video/slide cho HS xem thụ động (đây là việc của GV, không tính là NLS của HS), GV chỉ nói miệng hoặc phát phiếu giấy.
-       - Bước 2 (Thực hiện nhiệm vụ – HS làm): ĐÂY LÀ BƯỚC TRỌNG TÂM – chèn khi HS dùng bất kỳ công cụ số (GeoGebra, PhET, MTCT, Google Docs, tìm kiếm web, AI Chatbot...). CẤM chèn khi HS chỉ làm tay / thảo luận miệng.
-       - Bước 3 (Báo cáo, thảo luận – HS trình bày): Chèn khi HS chia sẻ qua nền tảng số (Padlet, Google Slides, TV số...). CẤM chèn khi HS chỉ trình bày miệng / lên bảng đen.
-       - Bước 4 (Đánh giá, kết luận – GV chốt): MẶC ĐỊNH KHÔNG CHÈN NLS. Chỉ chèn khi GV/HS thực sự dùng AI / phần mềm số để phản biện hoặc tự đánh giá kết quả (rất hiếm gặp).
-       - Vị trí ngay dưới "d. Tổ chức thực hiện" (trước Bước 1): CHỈ dùng khi NLS/AI xuyên suốt NHIỀU BƯỚC hoặc TOÀN BỘ hoạt động (VD: Kahoot toàn hoạt động, Google Classroom nộp bài online xuyên suốt). KHÔNG dùng để đặt NLS chỉ xảy ra ở 1 bước đơn lẻ.
-      10. PHÂN BIỆT VÀ TÍCH HỢP NLS THEO LOẠI HOẠT ĐỘNG DẠY HỌC (CV 5512 & CV 3456 – BẮT BUỘC):
-         Mục tiêu là CHUYỂN ĐỔI VÀ TÍCH HỢP NLS VÀO BÀI DẠY. AI chủ động phân tích bài học để tích hợp NLS vừa sức theo từng hoạt động:
-
-         [MỞ ĐẦU / Khởi động]:
-         - Tích hợp trò chơi tương tác số (Quizizz/Kahoot/lật ô số trên màn chiếu) → Mã 2.1(B1 hoặc Vị trí 1).
-         - Quan sát hình ảnh/video số mở đầu và trích xuất dữ liệu trả lời câu hỏi → Mã 1.1(B1). Bước 4 mặc định không chèn.
-
-         [HÌNH THÀNH KIẾN THỨC MỚI (HTKM) – TRỌNG TÂM BÀI HỌC]:
-         - 🌟 BẮT BUỘC TÍCH HỢP NLS VÀO BƯỚC 2 (Thực hiện nhiệm vụ):
-           + Khai thác học liệu số / hình ảnh số phóng to / kính hiển vi ảo / video khoa học / mô phỏng 3D / PhET → Mã 5.2.TC1a hoặc 5.3.TC1a(B2).
-           + Tra cứu dữ liệu Internet bổ sung cho SGK theo hướng dẫn → Mã 1.1.TC1a(B2).
-           + Dùng phần mềm chuyên ngành: MTCT Casio kiểm tra tính toán → 5.2.TC1a(B2); GeoGebra vẽ hình/đồ thị → 5.2/5.3(B2); AI tra cứu (nếu bật AI) → NLc.C2(B2).
-           + Hợp tác nhóm số: thảo luận trên bảng nhóm số / Padlet / Google Docs → Mã 2.4.TC1a hoặc 3.1.CB1a(B2).
-         - Cách viết Bước 2: VẾ KÉP "GV hướng dẫn HS sử dụng [công cụ/học liệu số] → HS thao tác [hành động số cụ thể] để rút ra kiến thức".
-
-         [LUYỆN TẬP / Thực hành / Củng cố / Bài tập]:
-         - Tích hợp bài tập trắc nghiệm số / câu hỏi củng cố (Quizizz, Kahoot, Google Forms) → Mã 2.1.TC1a(B1 hoặc Vị trí 1).
-         - Tích hợp công cụ kiểm tra kết quả (MTCT Casio, GeoGebra, bảng tính) → Mã 5.2.TC1a(B2).
-         - Chia sẻ đáp án/phiếu học tập nhóm qua Padlet/màn hình số → Mã 2.2.TC1a(B3).
-         - Cách viết: VẾ ĐƠN "HS tự [thao tác số/kiểm tra] bằng [công cụ số] để củng cố kết quả".
-
-          [VẬN DỤNG / Áp dụng thực tiễn / Giải bài tập thực tế]:
-          - BÁM SÁT NHIỆM VỤ GỐC (BẮT BUỘC):
-            + Nếu bài tập tính toán / hình học / bài tập SGK (Toán, KHTN, Lý, Hóa): HS dùng GeoGebra / MTCT Casio giải quyết bài toán → Mã 5.2.TC1a(B2); HS chụp ảnh bài làm nộp qua Padlet/màn hình lớp → Mã 2.2.TC1a(B3). TUYỆT ĐỐI CẤM tự ý đổi bài tập Toán thành "thiết kế sơ đồ tư duy Canva/PowerPoint".
-            + Nếu bài tập dự án / tìm hiểu thực tế mở rộng (Văn, Sử, Địa, GDCD, HĐTN, STEM): HS tra cứu Internet → Mã 1.1.TC1a(B2); tạo sản phẩm số báo cáo (infographic, poster, bài trình chiếu) → Mã 3.1.TC1a(B2); nộp bài qua Padlet/Classroom → Mã 2.2.TC1a(B3). Tối đa 2-3 NLS.
-
-       11. NGUYÊN TẮC TÍCH HỢP ĐÚNG - TRÚNG - ĐỦ & BÁM SÁT NHIỆM VỤ GỐC (BẮT BUỘC):
-          - ĐÚNG: Chuẩn mã NLS theo cấp học (Lớp 1-3: CB1/CB2; Lớp 4-6: CB2/TC1; Lớp 7-9: TC1/TC2; Lớp 10-12: TC2/NC1).
-          - TRÚNG: Công cụ số gắn liền 100% với nội dung và nhiệm vụ thực tế của bài dạy:
-            + NLS chèn vào BẮT BUỘC PHẢI PHỤC VỤ TRỰC TIẾP cho nhiệm vụ được giao ở Bước 1 và sản phẩm ở mục c).
-            + CẤM TUYỆT ĐỐI tự ý "bịa" ra nhiệm vụ không có trong bài (ví dụ: bài tập Toán hình học lại chèn vẽ Canva sơ đồ tư duy).
-            + Toán dùng GeoGebra, MTCT Casio, Desmos, Padlet số hóa bài làm; KHTN dùng kính hiển vi ảo, mô phỏng PhET; Văn/Sử/Địa dùng bản đồ số, tra cứu tư liệu, Google Docs.
-          - ĐỦ: Mỗi kế hoạch bài dạy PHẢI TÍCH HỢP NLS TỪ 2–4 HOẠT ĐỘNG, phân bổ đều ở HTKM (trọng tâm), Luyện tập và Vận dụng. Tuyệt đối không dồn toàn bộ NLS vào chỉ 1 hoạt động Vận dụng.
-          - 🚫 KHÓA CHẶT VỊ TRÍ CHÈN: TUYỆT ĐỐI CẤM chèn bất kỳ thẻ màu nào (<blue>, <purple>, <green>, <orange>) vào mục "a. Mục tiêu", "b. Nội dung", hoặc "c. Sản phẩm" của hoạt động. CHỈ CHÈN VÀO PHẦN "d. Tổ chức thực hiện" (hoặc các Bước 1, 2, 3 bên trong Tổ chức thực hiện).
-    LƯU Ý VỀ TÍCH HỢP HOẠT ĐỘNG (KHI CÓ PPCT):
-    - Các hoạt động dạy học (trong phần Tiến trình) cũng chỉ được thiết kế xoay quanh các năng lực số đã trích xuất từ PPCT. Không thiết kế hoạt động cho các năng lực nằm ngoài PPCT.
-    
+       - Ví dụ Marker: '===NLS_HOẠT_ĐỘNG_1_BƯỚC_2|VITRI: Hoạt động 1 > d. Tổ chức thực hiện > Bước 2 > Sau dòng: "GV yêu cầu HS quan sát..."==='    
     
     ĐỊNH DẠNG ĐẦU RA:
     - Trả về toàn bộ nội dung giáo án đã chỉnh sửa dưới dạng Markdown.
