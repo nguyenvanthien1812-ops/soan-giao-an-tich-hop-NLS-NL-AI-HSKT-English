@@ -359,18 +359,17 @@ NGUYÊN TẮC NGHIÊM NGẶT (BẮT BUỘC TUÂN THỦ 100%):
      + ❌ <blue>5.2.TC1a: GV hướng dẫn HS dùng GeoGebra -> HS vẽ đồ thị...</blue> (Sai vì bắt đầu bằng GV).
      + ❌ <blue>1.1.CB2b: HS quan sát hình ảnh trên màn chiếu của GV...</blue> (Sai vì nhìn màn chiếu của GV không phải là NLS của HS).
 
-3. ⭐ QUY TẮC MẬT ĐỘ "ĐÚNG - TRÚNG - ĐỦ" & VỊ TRÍ CHÈN CHUẨN XÁC:
-   - MẬT ĐỘ TỐI ĐA: Mỗi giáo án CHỈ CHÈN TỪ 2 ĐẾN 3 VỊ TRÍ NLS/AI THIẾT THỰC NHẤT trong toàn bài. TUYỆT ĐỐI KHÔNG chèn dồn dập 2-3 mã vào cùng 1 bước!
-   - Bước 1 (Chuyển giao nhiệm vụ – GV giao bài):
-     + ❌ MẶC ĐỊNH KHÔNG CHÈN NLS/AI khi GV chỉ giao bài miệng, viết bảng, phát phiếu giấy hoặc chiếu slide/video cho cả lớp xem.
-     + ✅ CHỈ chèn khi HS trực tiếp cầm thiết bị cá nhân đăng nhập làm bài trắc nghiệm Quizizz/Kahoot hoặc nhận bài trên LMS: <blue>2.1.TC1a: HS truy cập trò chơi Quizizz trên thiết bị cá nhân để làm bài kiểm tra nhanh...</blue>
-   - Bước 2 (Thực hiện nhiệm vụ – HS làm việc): ĐÂY LÀ BƯỚC TRỌNG TÂM CHÈN NLS/AI (1 vị trí trong bài).
-     + ✅ Chèn khi HS THỰC SỰ THAO TÁC CÔNG CỤ SỐ: Bấm MTCT Casio, vẽ hình trên GeoGebra, thao tác thí nghiệm ảo PhET, nhập số liệu vào bảng tính Excel, tra cứu tài liệu trên máy tính.
-     + ❌ CẤM chèn khi HS chỉ thảo luận miệng, viết vở, làm bài tập giấy thông thường.
-   - Bước 3 (Báo cáo, thảo luận – HS trình bày):
-     + ✅ Chèn khi HS thực sự chia sẻ file sản phẩm số qua Padlet, Google Slides, máy chiếu.
-     + ❌ CẤM chèn khi HS chỉ phát biểu miệng, mang bảng nhóm giấy lên bảng.
-   - Bước 4 (Đánh giá, kết luận – GV chốt): ❌ MẶC ĐỊNH KHÔNG CHÈN NLS/AI.
+3. ⭐ QUY TẮC PHÂN BỔ TRẢI ĐỀU NLS VÀ NL AI QUA TẤT CẢ CÁC HOẠT ĐỘNG (CHUẨN CV 5512):
+   - MỌI HOẠT ĐỘNG (HĐ 1, HĐ 2, HĐ 3, HĐ 4) ĐỀU CẦN ĐƯỢC TÍCH HỢP NĂNG LỰC SỐ (NLS) VÀ/HOẶC NĂNG LỰC AI (NL AI) PHÙ HỢP, THIẾT THỰC:
+     + Hoạt động 1 (Khởi động / Mở đầu): Tích hợp NLS/AI vào tiếp nhận thông tin số, trò chơi tương tác số khởi động (Quizizz, Kahoot, Wordwall, Padlet), hoặc đặt câu hỏi khơi gợi vấn đề cho AI Chatbot.
+     + Hoạt động 2 (Hình thành kiến thức mới): Tích hợp NLS/AI vào khai thác học liệu số, tra cứu trực tuyến có chọn lọc, mô phỏng 3D/PhET/GeoGebra, bảng tính Excel/Sheets; hoặc tra cứu AI Chatbot và đối chiếu, phản biện với SGK.
+     + Hoạt động 3 (Luyện tập): Tích hợp NLS/AI vào thực hành tính toán (MTCT Casio), làm bài trắc nghiệm số tương tác (Google Forms, Azota, Quizizz), tạo sơ đồ tư duy số (Canva, XMind); hoặc dùng AI hỗ trợ kiểm tra bài làm/phân tích bài tập.
+     + Hoạt động 4 (Vận dụng / STEM): Tích hợp NLS/AI vào thu thập số liệu thực tế tại nhà, quay video/ảnh kết quả thí nghiệm, tạo bài báo cáo số; hoặc ứng dụng AI nhận diện thực tế (Google Lens, Seek), thảo luận an toàn & đạo đức AI.
+   - VỊ TRÍ CHÈN TRONG TỔ CHỨC THỰC HIỆN CỦA MỖI HOẠT ĐỘNG:
+     + Bước 1 (Chuyển giao nhiệm vụ – GV giao bài): ❌ Mặc định KHÔNG chèn NLS/AI.
+     + Bước 2 (Thực hiện nhiệm vụ – HS làm việc): ✅ ĐÂY LÀ VỊ TRÍ CHÈN TRỌNG TÂM cho từng hoạt động khi HS trực tiếp thao tác công cụ số/AI.
+     + Bước 3 (Báo cáo, thảo luận – HS trình bày): ✅ Chèn khi HS thực sự chia sẻ file sản phẩm số qua Padlet, Google Slides, máy chiếu.
+     + Bước 4 (Đánh giá, kết luận – GV chốt): ❌ Mặc định KHÔNG chèn NLS/AI.
 
 4. ⭐ NGUYÊN TẮC TÍCH HỢP AI THỰC TẾ — CẤM BỊA NHIỆM VỤ PHI THỰC TẾ:
    - CẤP TIỂU HỌC & THCS (Lớp 1-9):

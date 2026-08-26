@@ -133,31 +133,40 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
           if (subPart === 'BƯỚC_1') {
             searchPatterns = [
               '*Chuyển giao nhiệm vụ học tập', '*Chuyển giao nhiệm vụ', '*Chuyển giao',
-              'Chuyển giao nhiệm vụ học tập', 'Chuyển giao nhiệm vụ',
-              'Bước 1:', 'Bước 1.', 'bước 1', 'NV1:', 'Nhiệm vụ 1:',
-              '- Giao nhiệm vụ:', 'Giao nhiệm vụ:', '- Giao nhiệm vụ', '* Giao nhiệm vụ'
+              'Chuyển giao nhiệm vụ học tập', 'Chuyển giao nhiệm vụ', 'Chuyển giao',
+              'B1.', 'B1:', 'B1 ', 'B1', '*B1', '* B1',
+              'Bước 1:', 'Bước 1.', 'Bước 1', 'bước 1', 'NV1:', 'NV1.', 'Nhiệm vụ 1:', 'Nhiệm vụ 1',
+              '- Giao nhiệm vụ:', 'Giao nhiệm vụ:', '- Giao nhiệm vụ', '* Giao nhiệm vụ', '*GV giao nhiệm vụ',
+              '1. Chuyển giao', 'a. Chuyển giao', 'a) Chuyển giao'
             ];
           } else if (subPart === 'BƯỚC_2') {
             searchPatterns = [
               '*Thực hiện nhiệm vụ học tập', '*Thực hiện nhiệm vụ', '*HS thực hiện',
-              'Thực hiện nhiệm vụ học tập', 'Thực hiện nhiệm vụ',
-              'Bước 2:', 'Bước 2.', 'bước 2', 'NV2:', 'Nhiệm vụ 2:',
-              'Hướng dẫn HS thực hiện nhiệm vụ', 'Hướng dẫn HS thực hiện',
-              '- Hướng dẫn HS:', 'Hướng dẫn HS:'
+              'Thực hiện nhiệm vụ học tập', 'Thực hiện nhiệm vụ', 'Thực hiện',
+              'B2.', 'B2:', 'B2 ', 'B2', '*B2', '* B2',
+              'Bước 2:', 'Bước 2.', 'Bước 2', 'bước 2', 'NV2:', 'NV2.', 'Nhiệm vụ 2:', 'Nhiệm vụ 2',
+              'Hướng dẫn HS thực hiện nhiệm vụ', 'Hướng dẫn HS thực hiện', '*Hướng dẫn HS',
+              '- Hướng dẫn HS:', 'Hướng dẫn HS:',
+              '2. Thực hiện', 'b. Thực hiện', 'b) Thực hiện'
             ];
           } else if (subPart === 'BƯỚC_3') {
             searchPatterns = [
-              '*Báo cáo kết quả và thảo luận', '*Báo cáo kết quả', '*Báo cáo',
-              'Báo cáo kết quả và thảo luận', 'Báo cáo kết quả', 'Thảo luận',
-              'Bước 3:', 'Bước 3.', 'bước 3',
-              '- Báo cáo kết quả:', 'Báo cáo kết quả:'
+              '*Báo cáo kết quả và thảo luận', '*Báo cáo kết quả', '*Báo cáo', '*Thảo luận',
+              'Báo cáo kết quả và thảo luận', 'Báo cáo kết quả', 'Báo cáo, thảo luận', 'Báo cáo', 'Thảo luận',
+              'B3.', 'B3:', 'B3 ', 'B3', '*B3', '* B3',
+              'Bước 3:', 'Bước 3.', 'Bước 3', 'bước 3', 'NV3:', 'NV3.', 'Nhiệm vụ 3:', 'Nhiệm vụ 3',
+              '- Báo cáo kết quả:', 'Báo cáo kết quả:',
+              '3. Báo cáo', 'c. Báo cáo', 'c) Báo cáo'
             ];
           } else if (subPart === 'BƯỚC_4' || subPart === 'KẾT_LUẬN') {
             searchPatterns = [
-              '*Đánh giá kết quả thực hiện nhiệm vụ', '*Đánh giá kết quả', '*Kết luận',
-              'Đánh giá kết quả thực hiện nhiệm vụ', 'Đánh giá kết quả', 'Kết luận, nhận định',
-              'Bước 4:', 'Bước 4.', 'bước 4',
-              '- Đánh giá kết quả thực hiện nhiệm vụ:', 'Đánh giá kết quả thực hiện nhiệm vụ:'
+              '*Đánh giá kết quả thực hiện nhiệm vụ', '*Đánh giá kết quả', '*Đánh giá',
+              '*Kết luận, nhận định', '*Kết luận', '*Nhận xét',
+              'Đánh giá kết quả thực hiện nhiệm vụ', 'Đánh giá kết quả', 'Kết luận, nhận định', 'Kết luận',
+              'B4.', 'B4:', 'B4 ', 'B4', '*B4', '* B4',
+              'Bước 4:', 'Bước 4.', 'Bước 4', 'bước 4', 'NV4:', 'NV4.', 'Nhiệm vụ 4:', 'Nhiệm vụ 4',
+              '- Đánh giá kết quả thực hiện nhiệm vụ:', 'Đánh giá kết quả thực hiện nhiệm vụ:',
+              '4. Kết luận', 'd. Kết luận', 'd) Kết luận'
             ];
           } else {
             // Cho TỔ_CHỨC, NỘI_DUNG, SẢN_PHẨM => Luôn ép chèn vào "d. Tổ chức thực hiện"
@@ -172,23 +181,41 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
           searchPatterns = ['d) Tổ chức thực hiện', 'd. Tổ chức thực hiện', 'd.Tổ chức thực hiện', 'd)Tổ chức'];
         } else if (marker === 'BƯỚC_1') {
           searchPatterns = [
-            'Bước 1:', 'Chuyển giao nhiệm vụ học tập', 'Chuyển giao nhiệm vụ',
-            'Giao nhiệm vụ:', 'Giao nhiệm vụ', '- Giao nhiệm vụ'
+            '*Chuyển giao nhiệm vụ học tập', '*Chuyển giao nhiệm vụ', '*Chuyển giao',
+            'Chuyển giao nhiệm vụ học tập', 'Chuyển giao nhiệm vụ', 'Chuyển giao',
+            'B1.', 'B1:', 'B1 ', 'B1', '*B1', '* B1',
+            'Bước 1:', 'Bước 1.', 'Bước 1', 'bước 1', 'NV1:', 'NV1.', 'Nhiệm vụ 1:', 'Nhiệm vụ 1',
+            '- Giao nhiệm vụ:', 'Giao nhiệm vụ:', '- Giao nhiệm vụ', '* Giao nhiệm vụ', '*GV giao nhiệm vụ',
+            '1. Chuyển giao', 'a. Chuyển giao', 'a) Chuyển giao'
           ];
         } else if (marker === 'BƯỚC_2') {
           searchPatterns = [
-            'Bước 2:', 'Thực hiện nhiệm vụ học tập', 'Thực hiện nhiệm vụ',
-            'Hướng dẫn HS thực hiện nhiệm vụ', 'Hướng dẫn HS:', '- Hướng dẫn HS'
+            '*Thực hiện nhiệm vụ học tập', '*Thực hiện nhiệm vụ', '*HS thực hiện',
+            'Thực hiện nhiệm vụ học tập', 'Thực hiện nhiệm vụ', 'Thực hiện',
+            'B2.', 'B2:', 'B2 ', 'B2', '*B2', '* B2',
+            'Bước 2:', 'Bước 2.', 'Bước 2', 'bước 2', 'NV2:', 'NV2.', 'Nhiệm vụ 2:', 'Nhiệm vụ 2',
+            'Hướng dẫn HS thực hiện nhiệm vụ', 'Hướng dẫn HS thực hiện', '*Hướng dẫn HS',
+            '- Hướng dẫn HS:', 'Hướng dẫn HS:',
+            '2. Thực hiện', 'b. Thực hiện', 'b) Thực hiện'
           ];
         } else if (marker === 'BƯỚC_3') {
           searchPatterns = [
-            'Bước 3:', 'Báo cáo kết quả và thảo luận', 'Báo cáo kết quả',
-            'Báo cáo kết quả:', '- Báo cáo kết quả'
+            '*Báo cáo kết quả và thảo luận', '*Báo cáo kết quả', '*Báo cáo', '*Thảo luận',
+            'Báo cáo kết quả và thảo luận', 'Báo cáo kết quả', 'Báo cáo, thảo luận', 'Báo cáo', 'Thảo luận',
+            'B3.', 'B3:', 'B3 ', 'B3', '*B3', '* B3',
+            'Bước 3:', 'Bước 3.', 'Bước 3', 'bước 3', 'NV3:', 'NV3.', 'Nhiệm vụ 3:', 'Nhiệm vụ 3',
+            '- Báo cáo kết quả:', 'Báo cáo kết quả:',
+            '3. Báo cáo', 'c. Báo cáo', 'c) Báo cáo'
           ];
         } else if (marker === 'BƯỚC_4') {
           searchPatterns = [
-            'Bước 4:', 'Đánh giá kết quả thực hiện', 'Kết luận, nhận định',
-            'Đánh giá kết quả thực hiện nhiệm vụ:', '- Đánh giá kết quả'
+            '*Đánh giá kết quả thực hiện nhiệm vụ', '*Đánh giá kết quả', '*Đánh giá',
+            '*Kết luận, nhận định', '*Kết luận', '*Nhận xét',
+            'Đánh giá kết quả thực hiện nhiệm vụ', 'Đánh giá kết quả', 'Kết luận, nhận định', 'Kết luận',
+            'B4.', 'B4:', 'B4 ', 'B4', '*B4', '* B4',
+            'Bước 4:', 'Bước 4.', 'Bước 4', 'bước 4', 'NV4:', 'NV4.', 'Nhiệm vụ 4:', 'Nhiệm vụ 4',
+            '- Đánh giá kết quả thực hiện nhiệm vụ:', 'Đánh giá kết quả thực hiện nhiệm vụ:',
+            '4. Kết luận', 'd. Kết luận', 'd) Kết luận'
           ];
         } else if (marker === 'CỦNG_CỐ' || marker === 'BẢNG_TỔNG_HỢP') {
           searchPatterns = [
@@ -855,6 +882,11 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
       return text.toLowerCase().replace(/\s+/g, ' ').trim();
     };
 
+    // Hàm lọc sạch dấu câu và ký tự đầu dòng để so khớp nội dung cốt lõi
+    const cleanPunctuation = (text: string): string => {
+      return text.toLowerCase().replace(/[*_\-+:.,;!?"'“”‘’()[\]{}/\\~`]/g, ' ').replace(/\s+/g, ' ').trim();
+    };
+
     let insertedCount = 0;
     const notInsertedSections: string[] = [];
 
@@ -1000,9 +1032,20 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
         // =========================================================================
         if (section.quotedText && section.quotedText.length >= 3) {
           const normQuote = normalizeText(section.quotedText);
+          const cleanQuote = cleanPunctuation(section.quotedText);
+
           const foundByQuote = finalSearchScope.find(p => {
-            const normPText = normalizeText(p.textContent || '');
-            return normPText.includes(normQuote) || (normQuote.length > 15 && normPText.includes(normQuote.substring(0, 15)));
+            const pRaw = p.textContent || '';
+            const normPText = normalizeText(pRaw);
+            const cleanPText = cleanPunctuation(pRaw);
+
+            // So khớp nguyên bản hoặc so khớp sau khi lọc sạch dấu câu
+            if (normPText.includes(normQuote) || cleanPText.includes(cleanQuote)) return true;
+
+            // So khớp đoạn đầu (ít nhất 15 ký tự)
+            if (cleanQuote.length >= 15 && cleanPText.includes(cleanQuote.substring(0, 15))) return true;
+
+            return false;
           });
 
           if (foundByQuote) {

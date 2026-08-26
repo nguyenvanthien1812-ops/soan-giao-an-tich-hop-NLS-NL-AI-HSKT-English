@@ -628,7 +628,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     ${disabilityStatusInstruction}
     ${englishStatusInstruction}
 
-    ${options.analyzeOnly ? "- Analyze only, do not edit in detail." : needMarkersForSubFeatures ? "- DO NOT insert Digital Competence in blue (<blue>) or AI Competence in purple (<purple>). DO NOT generate DC summary tables.\n    - BUT YOU MUST STILL OUTPUT THE STRUCTURED MARKERS ===DC_OBJECTIVES=== AND ===DC_ACTIVITY_X_ORGANIZATION=== to wrap <green>Disability Support</green> and/or <orange>English Integration</orange> content for automated Word DOCX injection." : isNlsActive ? "- Edit the lesson plan and INTEGRATE ALL ENABLED COMPETENCIES (Digital Competence / AI / Disability Support / English) in parallel into teaching activities." : "- Keep lesson plan structure and only process enabled items."}
+    ${options.analyzeOnly ? "- Analyze only, do not edit in detail." : needMarkersForSubFeatures ? "- DO NOT insert Digital Competence in blue (<blue>) or AI Competence in purple (<purple>). DO NOT generate DC summary tables.\n    - BUT YOU MUST STILL OUTPUT THE STRUCTURED MARKERS ===DC_OBJECTIVES=== AND ===DC_ACTIVITY_X_ORGANIZATION=== to wrap <green>Disability Support</green> and/or <orange>English Integration</orange> content for automated Word DOCX injection." : isNlsActive ? "- Edit the lesson plan and INTEGRATE ALL ENABLED COMPETENCIES (Digital Competence / AI / Disability Support / English) evenly across activities." : "- Keep lesson plan structure and only process enabled items."}
     ${options.detailedReport ? "- Include a detailed explanation table of selected competence codes at the end." : ""}
     
     FORMAT REQUIREMENTS (MANDATORY):
@@ -698,11 +698,11 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
        - NLS (<blue>) VÀ NĂNG LỰC AI (<purple>) LUÔN LUÔN LÀ NĂNG LỰC CỦA HỌC SINH (HS).
        - MỌI CÂU CHỈ BÁO NLS/AI PHẢI BẮT ĐẦU BẰNG "HS [Hành động số / AI cụ thể] để [Mục đích học tập]".
        - 🚫 CẤM TUYỆT ĐỐI dùng: "GV hướng dẫn HS...", "GV yêu cầu HS...". Câu chỉ báo chỉ mô tả hành động và năng lực thực tế của Học sinh.
-    7. ⭐ VỊ TRÍ CHÈN & MẬT ĐỘ "ĐÚNG - TRÚNG - ĐỦ":
-       - Mật độ: Mỗi giáo án CHỈ CHÈN TỪ 2 ĐẾN 3 VỊ TRÍ NLS/AI THIẾT THỰC NHẤT trong toàn bài. TUYỆT ĐỐI KHÔNG chèn dồn dập 2-3 mã vào cùng 1 bước!
-       - Bước 1 (Giao nhiệm vụ): ❌ Mặc định KHÔNG chèn khi GV giao bài miệng/giấy/chiếu slide. ✅ Chỉ chèn khi HS trực tiếp dùng thiết bị cá nhân đăng nhập làm bài Quizizz/Kahoot.
-       - Bước 2 (Thực hiện nhiệm vụ): ĐÂY LÀ BƯỚC TRỌNG TÂM (1 vị trí trong bài) – chèn khi HS THỰC SỰ THAO TÁC CÔNG CỤ SỐ (bấm MTCT, vẽ GeoGebra, thí nghiệm ảo PhET, nhập Excel, tra cứu máy tính).
-       - Bước 3 (Báo cáo): Chèn khi HS thực sự nộp/trình chiếu file số qua Padlet/Google Slides.
+    7. ⭐ QUY TẮC PHÂN BỔ TRẢI ĐỀU NLS VÀ NL AI QUA TẤT CẢ CÁC HOẠT ĐỘNG (CHUẨN CV 5512):
+       - Trải đều: MỌI HOẠT ĐỘNG (HĐ 1 Khởi động, HĐ 2 Khám phá/HTKM, HĐ 3 Luyện tập, HĐ 4 Vận dụng/STEM) đều cần được tích hợp NLS và/hoặc NL AI phù hợp, thiết thực.
+       - Bước 1 (Giao nhiệm vụ): ❌ Mặc định KHÔNG chèn.
+       - Bước 2 (Thực hiện nhiệm vụ): ✅ ĐÂY LÀ VỊ TRÍ CHÈN TRỌNG TÂM cho từng hoạt động khi HS trực tiếp thao tác công cụ số/AI (tra cứu, bấm MTCT, vẽ GeoGebra, thí nghiệm ảo PhET, nhập Excel, làm bài trắc nghiệm Quizizz/Kahoot, đối chiếu câu trả lời AI với SGK).
+       - Bước 3 (Báo cáo): ✅ Chèn khi HS thực sự nộp/trình chiếu file số qua Padlet/Google Slides/máy chiếu.
        - Bước 4 (Kết luận): ❌ Mặc định KHÔNG chèn.
        - 🚫 KHÓA CHẶT: TUYỆT ĐỐI CẤM chèn bất kỳ thẻ màu nào vào mục "a. Mục tiêu", "b. Nội dung", "c. Sản phẩm" của các hoạt động. CHỈ CHÈN VÀO "d. Tổ chức thực hiện".
     8. ⭐ NGUYÊN TẮC TÍCH HỢP AI THỰC TẾ & BÁM SÁT BÀI HỌC:
