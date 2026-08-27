@@ -535,58 +535,76 @@ YÊU CẦU XỬ LÝ (KHI BẬT TÍCH HỢP TIẾNG ANH):
 `;
 
 export const STEM_INTEGRATION_GUIDANCE = `
-HƯỚNG DẪN TÍCH HỢP GIÁO DỤC STEM VÀO HOẠT ĐỘNG VẬN DỤNG (MÔ HÌNH A — THEO CV 5512/BGDĐT):
+HƯỚNG DẪN TÍCH HỢP GIÁO DỤC STEM VÀO HOẠT ĐỘNG VẬN DỤNG (MÔ HÌNH A — THEO CV 5512/BGDĐT + HDTH KHTN 2025-2026):
 
 ⚠️ PHẠM VI ÁP DỤNG: CHỈ áp dụng cho Hoạt động Vận dụng (hoạt động 4 / hoạt động cuối của bài học).
    TUYỆT ĐỐI KHÔNG thay đổi cấu trúc và nội dung các hoạt động khác (Mở đầu, Hình thành kiến thức, Luyện tập).
 
-✅ YÊU CẦU CHO HOẠT ĐỘNG VẬN DỤNG — NÂNG CẤP THÀNH DỰ ÁN STEM MINI:
+✅ YÊU CẦU CHO HOẠT ĐỘNG VẬN DỤNG — NÂNG CẤP THÀNH DỰ ÁN STEM MINI (3 VỊ TRÍ BẮT BUỘC):
 
 1. PHẦN I. MỤC TIÊU:
-   - Bổ sung thêm 1 chỉ báo năng lực vận dụng STEM vào mục "2. Năng lực" (không xóa chỉ báo đã có).
-   - Nội dung (gạch đầu dòng "- "): Vận dụng kiến thức bài học để giải quyết bài toán/thực hiện thí nghiệm/thiết kế sản phẩm STEM mini gắn với thực tiễn đời sống.
+   - Bổ sung thêm chỉ báo năng lực STEM vào mục "2. Năng lực" (không xóa chỉ báo đã có).
+   - Tiêu đề: "* Năng lực Giáo dục STEM (Vận dụng thực tiễn & Kĩ thuật):"
+   - Nội dung (mỗi gạch đầu dòng "- "):
+     + "- Vận dụng kiến thức [nội dung bài học] để thiết kế, thực hiện nhiệm vụ STEM mini [Tên nhiệm vụ cụ thể gắn liền với bài], thu thập số liệu và đánh giá kết quả theo Rubric."
+     + "- Năng lực giải quyết vấn đề: Đề xuất ≥2 phương án thực hiện, lựa chọn phương án khả thi nhất và cải tiến sau khi kiểm tra kết quả thực tế."
    - KHÔNG tạo marker màu (không dùng thẻ <blue>, <purple>, <green>, <orange>) cho mục này.
 
-2. PHẦN II. HOẠT ĐỘNG VẬN DỤNG — GIỮ NGUYÊN KHUNG 4 MỤC a, b, c, d THEO ĐÚNG CHUẨN CV 5512:
+2. PHẦN II. THIẾT BỊ DẠY HỌC VÀ HỌC LIỆU — BỔ SUNG VÀO CUỐI MỤC THIẾT BỊ:
+   Bổ sung vào "1. Giáo viên:" thêm dòng:
+   "- Thiết bị & Học liệu STEM: Máy tính, tivi kết nối Internet; Bảng tiêu chí đánh giá sản phẩm (Rubric mini 3 tiêu chí); Phiếu hướng dẫn nhiệm vụ STEM mini; đường link Padlet/Azota để HS nộp sản phẩm."
+
+   Bổ sung vào "2. Học sinh:" thêm các dòng:
+   "- Phiếu học tập STEM: Phiếu 1-KWLH (Đã biết – Muốn biết – Cách tìm hiểu – Đã học được); Phiếu 2-Thiết kế thực nghiệm (biến độc lập, biến phụ thuộc, biến kiểm soát); Phiếu 3-Thu thập & phân tích số liệu (Bảng ghi: Điều kiện/Lần 1/Lần 2/Lần 3/Trung bình/Nhận xét)."
+   "- Thiết bị số: Điện thoại/máy tính để chụp ảnh minh chứng từng giai đoạn, nhập số liệu Google Sheets."
+   "- Vật liệu thực hành STEM: [Liệt kê cụ thể vật liệu dễ tìm/tái chế bám sát 100% nội dung bài học và nhiệm vụ STEM mini ở Hoạt động 4]."
+   - KHÔNG tạo marker màu cho mục Thiết bị.
+
+3. PHẦN III. HOẠT ĐỘNG VẬN DỤNG — GIỮ NGUYÊN KHUNG 4 MỤC a, b, c, d THEO ĐÚNG CHUẨN CV 5512:
 
    a) Mục tiêu:
    - Nâng cấp mục tiêu theo hướng STEM thực tiễn: Vận dụng kiến thức [nội dung bài học] để [thực hiện nhiệm vụ STEM mini cụ thể gắn liền với bài].
 
    b) Nội dung (Nhiệm vụ STEM mini):
    - 🌟 NGUYÊN TẮC TỐI THƯỢNG: Nhiệm vụ STEM BẮT BUỘC PHẢI XUẤT PHÁT 100% TỪ NỘI DUNG CHUYÊN MÔN CỦA BÀI HỌC VÀ CÂU HỎI VẬN DỤNG GỐC TRONG GIÁO ÁN:
-     + Nếu bài học về Thực vật / Thoát hơi nước / Trao đổi chất (câu hỏi về cây héo lá) → Nhiệm vụ STEM là: Thí nghiệm kiểm chứng sự thoát hơi nước ở cành lá tại nhà (dùng 2 cốc nước cắm cành có lá và cành vặt lá, nhỏ dầu ăn lên mặt nước, đo lượng nước giảm sau 1 ngày ngoài nắng). CẤM ĐỔI SANG tính BMR hay thực đơn dinh dưỡng!
+     + Nếu bài học về Thực vật / Thoát hơi nước / Trao đổi chất → Nhiệm vụ STEM là: Thí nghiệm kiểm chứng sự thoát hơi nước ở cành lá tại nhà (dùng 2 cốc nước cắm cành có lá và cành vặt lá, nhỏ dầu ăn lên mặt nước, đo lượng nước giảm sau 1 ngày ngoài nắng). CẤM ĐỔI SANG tính BMR hay thực đơn dinh dưỡng!
      + Nếu bài học về Tế bào → Nhiệm vụ STEM là: Thiết kế mô hình 3D tế bào từ vật liệu tái chế/dễ tìm (đất nặn, hộp nhựa, thạch, bìa carton).
-     + If bài học về Kim loại / Hóa học → Nhiệm vụ STEM là: Khảo sát hiện tượng ăn mòn kim loại trong gia đình hoặc làm sản phẩm tẩy gỉ sét từ giấm ăn/chanh.
-     + If bài học về Điện / Năng lượng → Nhiệm vụ STEM là: Chế tạo mô hình đèn pin mini, pin chanh hoặc phong vũ biểu mini từ chai nhựa.
-   - Nhiệm vụ kết hợp liên môn: S (Khoa học - kiến thức bài), T (Công nghệ - dùng điện thoại chụp ảnh/ghi nhật ký), E (Kĩ thuật - quy trình thử nghiệm/làm sản phẩm), M (Toán - đo đạc số liệu, tính toán).
+     + Nếu bài học về Kim loại / Hóa học → Nhiệm vụ STEM là: Khảo sát hiện tượng ăn mòn kim loại trong gia đình hoặc làm sản phẩm tẩy gỉ sét từ giấm ăn/chanh.
+     + Nếu bài học về Điện / Năng lượng → Nhiệm vụ STEM là: Chế tạo mô hình đèn pin mini, pin chanh hoặc phong vũ biểu mini từ chai nhựa.
+   - Nhiệm vụ kết hợp liên môn: S (Khoa học - kiến thức bài), T (Công nghệ - dùng điện thoại chụp ảnh/ghi nhật ký), E (Kĩ thuật - đề xuất phương án, quy trình thử nghiệm/làm sản phẩm), M (Toán - đo đạc số liệu, tính toán, so sánh).
+   - HS được yêu cầu ĐỀ XUẤT ≥2 PHƯƠNG ÁN thiết kế/giải pháp, so sánh ưu/nhược điểm và LỰA CHỌN PHƯƠNG ÁN khả thi nhất để thực hiện.
 
    c) Sản phẩm:
-   - Mô tả cụ thể sản phẩm HS nộp: Ảnh chụp các giai đoạn thí nghiệm/mô hình thực tế + Bảng ghi số liệu đo đạc + Đoạn văn giải thích hiện tượng dựa trên kiến thức bài học.
+   - Mô tả cụ thể sản phẩm HS nộp: (1) Ảnh chụp từng giai đoạn thí nghiệm/mô hình thực tế; (2) Bảng ghi số liệu đo đạc (đo ≥3 lần, tính trung bình); (3) Đoạn văn giải thích hiện tượng dựa trên kiến thức bài học; (4) Phiếu KWLH đã điền đủ 4 cột (đặc biệt cột L: Đã học được).
 
-   d) Tổ chức thực hiện (GIỮ ĐÚNG 4 BƯỚC THEO CHUẨN CV 5512):
+   d) Tổ chức thực hiện (GIỮ ĐÚNG 4 BƯỚC THEO CHUẨN CV 5512, LỒNG GHÉP 6 BƯỚC ENGINEERING DESIGN):
    - Bước 1 (Chuyển giao nhiệm vụ):
      + GV nêu bối cảnh thực tế và giao nhiệm vụ STEM mini (như mục b).
-     + GV công bố Tiêu chí đánh giá sản phẩm (Rubric mini — xem bên dưới).
+     + HS điền Phiếu KWLH cột K (Đã biết) và W (Muốn biết) — cá nhân 3 phút, chia sẻ cặp đôi.
+     + GV công bố Tiêu chí đánh giá sản phẩm (Rubric mini 3 tiêu chí — xem bên dưới).
    - Bước 2 (Học sinh thực hiện nhiệm vụ):
-     + HS thực hiện thí nghiệm/chế tạo tại nhà (theo cá nhân hoặc nhóm).
-     + <blue>5.2.TC1a: HS sử dụng điện thoại/thiết bị số để chụp ảnh các giai đoạn thực hiện và ghi chép số liệu đo đạc vào bảng theo dõi.</blue> (100% chủ thể HS).
+     + HS đề xuất ≥2 phương án thiết kế/giải pháp trên giấy, so sánh ưu/nhược điểm và lựa chọn phương án khả thi nhất.
+     + HS thực hiện thí nghiệm/chế tạo sản phẩm tại nhà (cá nhân hoặc nhóm) theo phương án đã chọn.
+     + <blue>5.2.TC1a: HS sử dụng điện thoại/thiết bị số để chụp ảnh từng giai đoạn thực hiện và ghi chép số liệu đo đạc ≥3 lần vào Phiếu 3 (bảng: Điều kiện/Lần 1/Lần 2/Lần 3/Trung bình/Nhận xét).</blue>
+     + <purple>[7.D2.1]: HS đề xuất ≥2 phương án thiết kế trên giấy, phân tích ưu/nhược điểm từng phương án và chọn phương án tốt nhất để thực hiện; cải tiến sản phẩm nếu kết quả thực tế chưa đạt yêu cầu.</purple>
    - Bước 3 (Báo cáo, thảo luận):
-     + <blue>2.2.TC1a: HS đăng tải ảnh sản phẩm và bảng số liệu lên Padlet/Zalo nhóm lớp hoặc nộp trực tiếp tại lớp để báo cáo kết quả.</blue>
-     + Đại diện 2-3 HS chia sẻ kết quả đo đạc/sản phẩm trong tiết học tiếp theo.
+     + <blue>2.2.TC1a: HS đăng tải ảnh/video sản phẩm và bảng số liệu lên Padlet/Zalo nhóm lớp hoặc nộp trực tiếp để báo cáo kết quả; điền đầy đủ cột L (Đã học được) trong Phiếu KWLH.</blue>
+     + Đại diện 2-3 HS chia sẻ kết quả đo đạc/sản phẩm và trả lời câu hỏi phản biện trong tiết học tiếp theo.
    - Bước 4 (Kết luận, nhận định):
-     + GV nhận xét, đánh giá sản phẩm theo Rubric và chốt lại kiến thức khoa học trọng tâm của bài học.
+     + GV nhận xét, đánh giá sản phẩm theo Rubric mini và chốt lại kiến thức khoa học trọng tâm của bài học.
 
    📋 TIÊU CHÍ ĐÁNH GIÁ SẢN PHẨM STEM (RUBRIC MINI — 3 TIÊU CHÍ):
    | Tiêu chí | Mức Đạt (3-4 điểm) | Mức Cơ bản (2 điểm) | Mức Cần hỗ trợ (1 điểm) |
    |:--|:--|:--|:--|
-   | 1. Tính khoa học | Giải thích đúng và đủ cơ chế khoa học dựa trên kiến thức bài học. | Giải thích đúng một phần; chưa liên hệ đầy đủ kiến thức. | Giải thích sai hoặc không giải thích được hiện tượng. |
-   | 2. Kĩ thuật & Đo đạc | Bố trí thí nghiệm/mô hình đúng cách, có ghi chép số liệu/hình ảnh rõ ràng. | Có sản phẩm nhưng số liệu đo đạc hoặc mô hình chưa hoàn thiện. | Sản phẩm chưa đạt yêu cầu, thiếu số liệu/hình ảnh. |
-   | 3. Báo cáo & Trình bày | Sản phẩm trực quan, ảnh chụp/video rõ nét; nộp bài đúng thời hạn. | Báo cáo được; sản phẩm đơn giản; nộp đúng hạn. | Báo cáo chưa rõ ràng; nộp bài muộn. |
+   | 1. Tính khoa học | Giải thích đúng và đủ cơ chế khoa học; kết quả thực nghiệm khớp với lý thuyết bài học. | Giải thích đúng một phần; liên hệ kiến thức bài học chưa đầy đủ. | Giải thích sai hoặc không giải thích được hiện tượng. |
+   | 2. Kĩ thuật & Đo đạc | Đề xuất được ≥2 phương án; bố trí thí nghiệm/mô hình đúng cách; ghi số liệu ≥3 lần, tính trung bình. | Có sản phẩm; chỉ thực hiện 1 phương án; số liệu đo đạc chưa đủ ≥3 lần hoặc mô hình chưa hoàn thiện. | Sản phẩm chưa đạt yêu cầu; không đề xuất phương án; thiếu số liệu/hình ảnh minh chứng. |
+   | 3. Báo cáo & Trình bày | Ảnh/video rõ nét từng giai đoạn; Phiếu KWLH điền đủ 4 cột (K-W-L-H); nộp đúng hạn trên Padlet/Zalo. | Báo cáo được; Phiếu KWLH chưa đủ cột L; nộp đúng hạn nhưng sản phẩm đơn giản. | Báo cáo chưa rõ ràng; thiếu Phiếu KWLH; nộp bài muộn. |
 
 NGUYÊN TẮC BẮT BUỘC TUÂN THEO:
 - TUYỆT ĐỐI CẤM tự ý đổi chủ đề bài học sang bài toán không liên quan.
 - Mọi câu chỉ báo NLS/AI trong phần STEM PHẢI là chủ thể Học sinh ("HS..."), CẤM dùng "GV hướng dẫn...".
-- KHÔNG chèn thẻ màu <blue>, <purple>, <green>, <orange> vào các mục a), b), c) của hoạt động.
+- KHÔNG chèn thẻ màu <blue>, <purple>, <green>, <orange> vào các mục a), b), c) và phần Mục tiêu, Thiết bị của hoạt động.
+- CHỈ chèn thẻ màu NLS (<blue>) và AI (<purple>) vào mục d) Tổ chức thực hiện, cụ thể tại Bước 2 và Bước 3.
 `;
 
 export const PLACEHOLDER_LESSON = `TÊN BÀI HỌC: THỐNG KÊ MÔ TẢ

@@ -530,7 +530,7 @@ export const generateNLSLessonPlan = async (
 
   // TÍCH HỢP STEM VÀO HOẠT ĐỘNG VẬN DỤNG (MÔ HÌNH A)
   const stemPrompt = options.enableStem
-    ? `\n    === TÍCH HỢP GIÁO DỤC STEM (BẬT) ===\n    ${STEM_INTEGRATION_GUIDANCE}\n    TRẠNG THÁI STEM: BẬT → BẮT BUỘC nâng cấp Hoạt động Vận dụng thành dự án STEM mini theo đúng hướng dẫn trên. Giữ nguyên 100% cấu trúc và nội dung tất cả các hoạt động còn lại.\n`
+    ? `\n    === TÍCH HỢP GIÁO DỤC STEM (BẬT) ===\n    ${STEM_INTEGRATION_GUIDANCE}\n    TRẠNG THÁI STEM: BẬT → BẮT BUỘC đồng bộ hóa STEM vào 3 vị trí:\\n    (1) PHẦN I. MỤC TIÊU: Bổ sung chỉ báo Năng lực Giáo dục STEM với yêu cầu đề xuất ≥2 phương án và cải tiến.\\n    (2) PHẦN II. THIẾT BỊ DẠY HỌC: Bổ sung Thiết bị & Học liệu STEM cho GV (Rubric, Phiếu STEM, Padlet) và HS (Phiếu KWLH, Phiếu thiết kế TN, Phiếu ghi số liệu, thiết bị số, vật liệu thực hành).\\n    (3) PHẦN III. HOẠT ĐỘNG VẬN DỤNG: Nâng cấp thành dự án STEM mini theo đúng hướng dẫn trên. Giữ nguyên 100% cấu trúc và nội dung tất cả các hoạt động còn lại.\n`
     : `\n    TRẠNG THÁI STEM: TẮT → TUYỆT ĐỐI KHÔNG thêm bất kỳ nội dung STEM nào vào giáo án.\n`;
 
   // Tạo các câu quy tắc động theo đúng trạng thái Checkbox của người dùng

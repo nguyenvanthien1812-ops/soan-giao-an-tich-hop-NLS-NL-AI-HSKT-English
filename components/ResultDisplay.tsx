@@ -224,6 +224,26 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
             'Hoạt động 4', 'Hoạt động 3', 'Tiến trình dạy học'
           ];
         }
+        // ================== STEM MARKERS: THIẾT BỊ GV & HS (STEM mini) ==================
+        // Chèn phần Thiết bị STEM cho Giáo viên: TRƯỚC dòng "2. Học sinh:"
+        else if (marker === 'THIẾT_BỊ_GV') {
+          searchPatterns = [
+            '2. Học sinh:', '2. Học sinh', '2.Học sinh:', '2.Học sinh',
+            'b. Học sinh:', 'b. Học sinh', 'b) Học sinh:', 'b) Học sinh',
+            'Đối với học sinh:', 'Đối với học sinh',
+            'III. TIẾN TRÌNH DẠY HỌC', 'III. TIẾN TRÌNH', 'III. Tiến trình',
+            'TIẾN TRÌNH DẠY HỌC', 'Tiến trình dạy học'
+          ];
+        }
+        // Chèn phần Thiết bị STEM cho Học sinh: TRƯỚC phần TIẾN TRÌNH DẠY HỌC
+        else if (marker === 'THIẾT_BỊ_HS') {
+          searchPatterns = [
+            'III. TIẾN TRÌNH DẠY HỌC', 'III. TIẾN TRÌNH', 'III. Tiến trình',
+            'TIẾN TRÌNH DẠY HỌC', 'Tiến trình dạy học',
+            'Hoạt động 1:', 'Hoạt động 1.', 'Hoạt động 1 ', 'HOẠT ĐỘNG 1',
+            '1. Hoạt động Khởi động', '1. Khởi động'
+          ];
+        }
       }
       // ================== ENGLISH DC MARKERS ==================
       else if (prefix === 'DC') {
@@ -381,6 +401,10 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
           standardizedLocation = 'd. Tổ chức thực hiện > Ngay SAU dòng "Bước 4: Đánh giá kết quả" (hoặc "*Đánh giá kết quả thực hiện nhiệm vụ" trong bảng GV-HS)';
         } else if (marker === 'CỦNG_CỐ' || marker === 'BẢNG_TỔNG_HỢP') {
           standardizedLocation = 'Cuối cùng của giáo án (Ngay SAU phần Vận dụng / Củng cố / Hướng dẫn về nhà)';
+        } else if (marker === 'THIẾT_BỊ_GV') {
+          standardizedLocation = 'Mục II. THIẾT BỊ DẠY HỌC > Cuối phần "1. Giáo viên:" (Ngay TRƯỚC dòng "2. Học sinh:")';
+        } else if (marker === 'THIẾT_BỊ_HS') {
+          standardizedLocation = 'Mục II. THIẾT BỊ DẠY HỌC > Cuối phần "2. Học sinh:" (Ngay TRƯỚC phần III. TIẾN TRÌNH DẠY HỌC)';
         } else {
           standardizedLocation = 'd. Tổ chức thực hiện > Ngay dưới dòng "d. Tổ chức thực hiện:" (trước Chuyển giao nhiệm vụ học tập)';
         }
