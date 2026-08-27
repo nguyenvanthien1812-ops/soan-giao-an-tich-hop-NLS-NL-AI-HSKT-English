@@ -42,4 +42,6 @@ build/
 *.mkv
 ~$*
 *.tmp
+*.pdf
+scratch*
 .DS_Store
