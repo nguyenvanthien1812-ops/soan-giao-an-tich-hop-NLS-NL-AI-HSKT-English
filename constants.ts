@@ -550,15 +550,18 @@ HƯỚNG DẪN TÍCH HỢP GIÁO DỤC STEM VÀO HOẠT ĐỘNG VẬN DỤNG (M�
      + "- Năng lực giải quyết vấn đề: Đề xuất ≥2 phương án thực hiện, lựa chọn phương án khả thi nhất và cải tiến sau khi kiểm tra kết quả thực tế."
    - KHÔNG tạo marker màu (không dùng thẻ <blue>, <purple>, <green>, <orange>) cho mục này.
 
-2. PHẦN II. THIẾT BỊ DẠY HỌC VÀ HỌC LIỆU — BỔ SUNG VÀO CUỐI MỤC THIẾT BỊ:
-   Bổ sung vào "1. Giáo viên:" thêm dòng:
-   "- Thiết bị & Học liệu STEM: Máy tính, tivi kết nối Internet; Bảng tiêu chí đánh giá sản phẩm (Rubric mini 3 tiêu chí); Phiếu hướng dẫn nhiệm vụ STEM mini; đường link Padlet/Azota để HS nộp sản phẩm."
+2. PHẦN II. THIẾT BỊ DẠY HỌC VÀ HỌC LIỆU (BẮT BUỘC TẠO 2 KHỐI MARKER CHO GV VÀ HS):
+   BẮT BUỘC bao bọc nội dung bổ sung vào đúng 2 Marker sau (bọc nội dung trong thẻ <blue>...</blue>):
 
-   Bổ sung vào "2. Học sinh:" thêm các dòng:
-   "- Phiếu học tập STEM: Phiếu 1-KWLH (Đã biết – Muốn biết – Cách tìm hiểu – Đã học được); Phiếu 2-Thiết kế thực nghiệm (biến độc lập, biến phụ thuộc, biến kiểm soát); Phiếu 3-Thu thập & phân tích số liệu (Bảng ghi: Điều kiện/Lần 1/Lần 2/Lần 3/Trung bình/Nhận xét)."
-   "- Thiết bị số: Điện thoại/máy tính để chụp ảnh minh chứng từng giai đoạn, nhập số liệu Google Sheets."
-   "- Vật liệu thực hành STEM: [Liệt kê cụ thể vật liệu dễ tìm/tái chế bám sát 100% nội dung bài học và nhiệm vụ STEM mini ở Hoạt động 4]."
-   - KHÔNG tạo marker màu cho mục Thiết bị.
+   ===NLS_THIẾT_BỊ_GV|VITRI: Mục II. Thiết bị dạy học và học liệu > 1. Giáo viên (Trước dòng "2. Học sinh:" hoặc "2.Học sinh:")===
+   <blue>- Thiết bị & Học liệu STEM: Máy tính, tivi kết nối Internet; Bảng tiêu chí đánh giá sản phẩm (Rubric mini 3 tiêu chí); Phiếu hướng dẫn nhiệm vụ STEM mini; đường link Padlet/Azota để HS nộp sản phẩm.</blue>
+   ===END===
+
+   ===NLS_THIẾT_BỊ_HS|VITRI: Mục II. Thiết bị dạy học và học liệu > 2. Học sinh (Trước dòng "III. Tiến trình dạy học")===
+   <blue>- Phiếu học tập STEM: Phiếu 1-KWLH (Đã biết – Muốn biết – Cách tìm hiểu – Đã học được); Phiếu 2-Thiết kế thực nghiệm; Phiếu 3-Thu thập & phân tích số liệu (đo ≥3 lần, tính trung bình).</blue>
+   <blue>- Thiết bị số: Điện thoại/máy tính để chụp ảnh minh chứng từng giai đoạn, nhập số liệu Google Sheets.</blue>
+   <blue>- Vật liệu thực hành STEM: [Liệt kê cụ thể vật liệu dễ tìm/tái chế bám sát 100% nội dung bài học và nhiệm vụ STEM mini ở Hoạt động 4].</blue>
+   ===END===
 
 3. PHẦN III. HOẠT ĐỘNG VẬN DỤNG — GIỮ NGUYÊN KHUNG 4 MỤC a, b, c, d THEO ĐÚNG CHUẨN CV 5512:
 
@@ -603,8 +606,8 @@ HƯỚNG DẪN TÍCH HỢP GIÁO DỤC STEM VÀO HOẠT ĐỘNG VẬN DỤNG (M�
 NGUYÊN TẮC BẮT BUỘC TUÂN THEO:
 - TUYỆT ĐỐI CẤM tự ý đổi chủ đề bài học sang bài toán không liên quan.
 - Mọi câu chỉ báo NLS/AI trong phần STEM PHẢI là chủ thể Học sinh ("HS..."), CẤM dùng "GV hướng dẫn...".
-- KHÔNG chèn thẻ màu <blue>, <purple>, <green>, <orange> vào các mục a), b), c) và phần Mục tiêu, Thiết bị của hoạt động.
-- CHỈ chèn thẻ màu NLS (<blue>) và AI (<purple>) vào mục d) Tổ chức thực hiện, cụ thể tại Bước 2 và Bước 3.
+- Đối với phần Thiết bị STEM: BẮT BUỘC xuất đúng 2 khối marker ===NLS_THIẾT_BỊ_GV=== và ===NLS_THIẾT_BỊ_HS=== với nội dung bọc trong thẻ <blue>...</blue>.
+- KHÔNG chèn thẻ màu vào các mục a), b), c) của Hoạt động 4 (chỉ chèn vào d. Tổ chức thực hiện ở Bước 2 và Bước 3).
 `;
 
 export const PLACEHOLDER_LESSON = `TÊN BÀI HỌC: THỐNG KÊ MÔ TẢ

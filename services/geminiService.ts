@@ -530,7 +530,7 @@ export const generateNLSLessonPlan = async (
 
   // TÍCH HỢP STEM VÀO HOẠT ĐỘNG VẬN DỤNG (MÔ HÌNH A)
   const stemPrompt = options.enableStem
-    ? `\n    === TÍCH HỢP GIÁO DỤC STEM (BẬT) ===\n    ${STEM_INTEGRATION_GUIDANCE}\n    TRẠNG THÁI STEM: BẬT → BẮT BUỘC đồng bộ hóa STEM vào 3 vị trí:\\n    (1) PHẦN I. MỤC TIÊU: Bổ sung chỉ báo Năng lực Giáo dục STEM với yêu cầu đề xuất ≥2 phương án và cải tiến.\\n    (2) PHẦN II. THIẾT BỊ DẠY HỌC: Bổ sung Thiết bị & Học liệu STEM cho GV (Rubric, Phiếu STEM, Padlet) và HS (Phiếu KWLH, Phiếu thiết kế TN, Phiếu ghi số liệu, thiết bị số, vật liệu thực hành).\\n    (3) PHẦN III. HOẠT ĐỘNG VẬN DỤNG: Nâng cấp thành dự án STEM mini theo đúng hướng dẫn trên. Giữ nguyên 100% cấu trúc và nội dung tất cả các hoạt động còn lại.\n`
+    ? `\n    === TÍCH HỢP GIÁO DỤC STEM (BẬT) ===\n    ${STEM_INTEGRATION_GUIDANCE}\n    TRẠNG THÁI STEM: BẬT → BẮT BUỘC đồng bộ hóa STEM vào 3 vị trí:\\n    (1) PHẦN I. MỤC TIÊU: Bổ sung chỉ báo Năng lực Giáo dục STEM với yêu cầu đề xuất ≥2 phương án và cải tiến.\\n    (2) PHẦN II. THIẾT BỊ DẠY HỌC: BẮT BUỘC tạo 2 khối Marker riêng biệt: ===NLS_THIẾT_BỊ_GV=== (chèn trước dòng 2. Học sinh:) và ===NLS_THIẾT_BỊ_HS=== (chèn trước dòng III. Tiến trình dạy học) với nội dung bọc trong thẻ <blue>...</blue> theo đúng hướng dẫn.\\n    (3) PHẦN III. HOẠT ĐỘNG VẬN DỤNG: Nâng cấp thành dự án STEM mini theo đúng hướng dẫn trên. Giữ nguyên 100% cấu trúc và nội dung tất cả các hoạt động còn lại.\n`
     : `\n    TRẠNG THÁI STEM: TẮT → TUYỆT ĐỐI KHÔNG thêm bất kỳ nội dung STEM nào vào giáo án.\n`;
 
   // Tạo các câu quy tắc động theo đúng trạng thái Checkbox của người dùng
@@ -694,6 +694,18 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
        - Tiêu đề HSKT: <green>* Điều chỉnh mục tiêu đối với Học sinh Khuyết tật (HSKT):</green>
        - Tiêu đề Tiếng Anh: <orange>* Tích hợp Tiếng Anh (English Integration):</orange>
        - TẤT CẢ CÁC Ý CHỈ BÁO NĂNG LỰC BẮT BUỘC PHẢI CÓ DẤU GẠCH ĐẦU DÒNG ("- ") ở đầu mỗi dòng (ví dụ: <blue>- 1.1.TC1a: ...</blue>, <purple>- [7.A1.2]: ...</purple>).
+     5b. QUY TẮC BẮT BUỘC CHO THIẾT BỊ DẠY HỌC STEM (===NLS_THIẾT_BỊ_GV=== VÀ ===NLS_THIẾT_BỊ_HS===):
+        Khi bật STEM, BẮT BUỘC tạo 2 khối Marker riêng biệt cho mục II. Thiết bị:
+        - Marker Thiết bị Giáo viên:
+          ===NLS_THIẾT_BỊ_GV|VITRI: Mục II. Thiết bị dạy học và học liệu > 1. Giáo viên (Trước dòng "2. Học sinh:" hoặc "2.Học sinh:")===
+          <blue>- Thiết bị & Học liệu STEM: Máy tính, tivi kết nối Internet; Bảng tiêu chí đánh giá sản phẩm (Rubric mini 3 tiêu chí); Phiếu hướng dẫn nhiệm vụ STEM mini; đường link Padlet/Azota để HS nộp sản phẩm.</blue>
+          ===END===
+        - Marker Thiết bị Học sinh:
+          ===NLS_THIẾT_BỊ_HS|VITRI: Mục II. Thiết bị dạy học và học liệu > 2. Học sinh (Trước dòng "III. Tiến trình dạy học")===
+          <blue>- Phiếu học tập STEM: Phiếu 1-KWLH (Đã biết – Muốn biết – Cách tìm hiểu – Đã học được); Phiếu 2-Thiết kế thực nghiệm; Phiếu 3-Thu thập & phân tích số liệu (đo ≥3 lần, tính trung bình).</blue>
+          <blue>- Thiết bị số: Điện thoại/máy tính để chụp ảnh minh chứng từng giai đoạn, nhập số liệu Google Sheets.</blue>
+          <blue>- Vật liệu thực hành STEM: [Liệt kê cụ thể vật liệu dễ tìm/tái chế bám sát 100% bài học và Hoạt động 4].</blue>
+          ===END===
     6. ⭐ QUY TẮC 100% CHỦ THỂ HỌC SINH (STUDENT-CENTRIC):
        - NLS (<blue>) VÀ NĂNG LỰC AI (<purple>) LUÔN LUÔN LÀ NĂNG LỰC CỦA HỌC SINH (HS).
        - MỌI CÂU CHỈ BÁO NLS/AI PHẢI BẮT ĐẦU BẰNG "HS [Hành động số / AI cụ thể] để [Mục đích học tập]".

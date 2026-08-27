@@ -229,19 +229,20 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
         else if (marker === 'THIẾT_BỊ_GV') {
           searchPatterns = [
             '2. Học sinh:', '2. Học sinh', '2.Học sinh:', '2.Học sinh',
+            '2. học sinh:', '2. học sinh', '2.học sinh:', '2.học sinh',
             'b. Học sinh:', 'b. Học sinh', 'b) Học sinh:', 'b) Học sinh',
             'Đối với học sinh:', 'Đối với học sinh',
-            'III. TIẾN TRÌNH DẠY HỌC', 'III. TIẾN TRÌNH', 'III. Tiến trình',
+            'III. TIẾN TRÌNH DẠY HỌC', 'III. TIẾN TRÌNH', 'III. Tiến trình', 'III.Tiến trình',
             'TIẾN TRÌNH DẠY HỌC', 'Tiến trình dạy học'
           ];
         }
         // Chèn phần Thiết bị STEM cho Học sinh: TRƯỚC phần TIẾN TRÌNH DẠY HỌC
         else if (marker === 'THIẾT_BỊ_HS') {
           searchPatterns = [
-            'III. TIẾN TRÌNH DẠY HỌC', 'III. TIẾN TRÌNH', 'III. Tiến trình',
+            'III. TIẾN TRÌNH DẠY HỌC', 'III. TIẾN TRÌNH', 'III. Tiến trình', 'III.Tiến trình',
             'TIẾN TRÌNH DẠY HỌC', 'Tiến trình dạy học',
             'Hoạt động 1:', 'Hoạt động 1.', 'Hoạt động 1 ', 'HOẠT ĐỘNG 1',
-            '1. Hoạt động Khởi động', '1. Khởi động'
+            '1. Hoạt động Khởi động', '1. Khởi động', '1. Khởi động:', '1.Hoạt động 1'
           ];
         }
       }
@@ -984,7 +985,47 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
           }
         }
       } 
-      // 2. Cho các Hoạt động -> Dùng Scoped Search (Khoanh vùng Hoạt động X)
+      // 3. Nếu là Thiết bị STEM Giáo viên -> Tìm và chèn TRƯỚC dòng "2. Học sinh:"
+      else if (section.marker.includes('THIẾT_BỊ_GV')) {
+        for (const pattern of section.searchPatterns) {
+          const normPattern = normalizeText(pattern);
+          const compactPattern = normPattern.replace(/\s+/g, '');
+          const targetP = paragraphs.find(p => {
+            const normP = normalizeText(p.textContent || '');
+            return normP.includes(normPattern) || normP.replace(/\s+/g, '').includes(compactPattern);
+          });
+          if (targetP && targetP.parentNode) {
+            // Chèn TRƯỚC targetP (ngay trước dòng "2. Học sinh:")
+            nlsNodes.forEach(node => {
+              targetP.parentNode?.insertBefore(node, targetP);
+            });
+            inserted = true;
+            console.log(`✓ DOMParser đã chèn THIẾT_BỊ_GV thành công trước: "${pattern}"`);
+            break;
+          }
+        }
+      }
+      // 4. Nếu là Thiết bị STEM Học sinh -> Tìm và chèn TRƯỚC dòng "III. Tiến trình dạy học"
+      else if (section.marker.includes('THIẾT_BỊ_HS')) {
+        for (const pattern of section.searchPatterns) {
+          const normPattern = normalizeText(pattern);
+          const compactPattern = normPattern.replace(/\s+/g, '');
+          const targetP = paragraphs.find(p => {
+            const normP = normalizeText(p.textContent || '');
+            return normP.includes(normPattern) || normP.replace(/\s+/g, '').includes(compactPattern);
+          });
+          if (targetP && targetP.parentNode) {
+            // Chèn TRƯỚC targetP (ngay trước dòng "III. Tiến trình dạy học")
+            nlsNodes.forEach(node => {
+              targetP.parentNode?.insertBefore(node, targetP);
+            });
+            inserted = true;
+            console.log(`✓ DOMParser đã chèn THIẾT_BỊ_HS thành công trước: "${pattern}"`);
+            break;
+          }
+        }
+      }
+      // 5. Cho các Hoạt động -> Dùng Scoped Search (Khoanh vùng Hoạt động X)
       else {
         let scopeStartIdx = -1;
         let scopeEndIdx = paragraphs.length;
