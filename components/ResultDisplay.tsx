@@ -665,16 +665,91 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
     return runsXml;
   };
 
-  // Chuyển Markdown sang Word XML - MÀU XANH DƯƠNG NLS, MÀU TÍM AI, MÀU XANH LÁ HSKT, MÀU CAM TIẾNG ANH (GIỮ NGUYÊN MÃ NLS)
+  // Helper: Chuyển đổi Markdown Table sang Word XML Table (<w:tbl>)
+  const convertMarkdownTableToWordXmlTable = (markdown: string): string => {
+    const lines = markdown.split('\n').filter(l => l.trim().startsWith('|'));
+    const validLines = lines.filter(line => !line.match(/^\|?\s*[-:]+[-|\s:]*\|?\s*$/));
+    if (validLines.length === 0) return '';
+
+    let tblXml = `<w:tbl>
+      <w:tblPr>
+        <w:tblW w:w="5000" w:type="pct"/>
+        <w:tblBorders>
+          <w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+          <w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+          <w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+          <w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+          <w:insideH w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+          <w:insideV w:val="single" w:sz="4" w:space="0" w:color="000000"/>
+        </w:tblBorders>
+      </w:tblPr>`;
+
+    validLines.forEach((line, rowIndex) => {
+      const cells = line.split('|');
+      if (line.trim().startsWith('|')) cells.shift();
+      if (line.trim().endsWith('|')) cells.pop();
+
+      const isHeader = rowIndex === 0;
+      tblXml += `<w:tr>`;
+
+      cells.forEach((cellText, colIndex) => {
+        const cleanCell = escapeXml(cellText.trim().replace(/<\/?(blue|purple|green|orange|red)>/g, '').replace(/\*\*/g, ''));
+        const totalCols = cells.length;
+        const isCenter = colIndex === 0 || isHeader;
+        const alignXml = isCenter ? `<w:jc w:val="center"/>` : `<w:jc w:val="both"/>`;
+        const boldXml = isHeader ? `<w:b/>` : ``;
+        const shdXml = isHeader ? `<w:shd w:val="clear" w:color="auto" w:fill="F2F4F7"/>` : ``;
+
+        tblXml += `<w:tc>
+          <w:tcPr>
+            ${shdXml}
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p>
+            <w:pPr>
+              ${alignXml}
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
+                ${boldXml}
+              </w:rPr>
+              <w:t>${cleanCell}</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>`;
+      });
+
+      tblXml += `</w:tr>`;
+    });
+
+    tblXml += `</w:tbl>`;
+    return tblXml;
+  };
+
+  // Chuyển Markdown sang Word XML - HỖ TRỢ CẢ ĐOẠN VĂN (<w:p>) VÀ BẢNG THỰC (<w:tbl>)
   const convertMarkdownToWordXml = (markdown: string): string => {
     // Bước 1: Thay thế <br> thành ký tự xuống dòng thực sự trước khi split
     const normalizedMarkdown = markdown.replace(/<br\s*\/?>/gi, '\n');
     const lines = normalizedMarkdown.split('\n');
     let xml = '';
+    let tableBuffer: string[] = [];
+    let inTable = false;
 
-    for (const line of lines) {
+    const flushTable = () => {
+      if (tableBuffer.length > 0) {
+        const tblXml = convertMarkdownTableToWordXmlTable(tableBuffer.join('\n'));
+        if (tblXml) {
+          xml += tblXml;
+        }
+        tableBuffer = [];
+      }
+      inTable = false;
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
       const trimmed = line.trim();
-      if (!trimmed) continue;
 
       // Bỏ qua các dòng thông báo/hướng dẫn
       if (trimmed.startsWith('[Chèn') || trimmed.startsWith('(Chèn') ||
@@ -684,7 +759,25 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
         continue;
       }
 
+      // Phát hiện dòng bảng Markdown
+      if (trimmed.startsWith('|')) {
+        inTable = true;
+        tableBuffer.push(trimmed);
+        continue;
+      } else if (inTable) {
+        flushTable();
+      }
+
+      if (!trimmed) continue;
+
       let processedLine = trimmed;
+
+      // Tiêu đề bảng markdown dạng "### BẢNG TIÊU CHÍ ĐÁNH GIÁ..."
+      if (processedLine.startsWith('### ') || processedLine.startsWith('## ')) {
+        const headingText = processedLine.replace(/^#+\s*/, '');
+        xml += `<w:p><w:pPr><w:spacing w:before="160" w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/><w:b/><w:color w:val="000000"/></w:rPr><w:t>${escapeXml(headingText)}</w:t></w:r></w:p>`;
+        continue;
+      }
 
       // Loại bỏ "* Tích hợp NLS:" hoặc "Tích hợp NLS:" ở đầu dòng nhưng GIỮ NGUYÊN MÃ NLS (1.1.TC1a:)
       processedLine = processedLine.replace(/^\*?\s*Tích hợp NLS:\s*/i, '- ');
@@ -693,6 +786,10 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
       if (runsXml) {
         xml += `<w:p>${runsXml}</w:p>`;
       }
+    }
+
+    if (inTable) {
+      flushTable();
     }
 
     return xml;
@@ -810,65 +907,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
     }
   };
 
-  // Helper: Chuyển đổi Markdown Table sang Word XML Table (<w:tbl>)
-  const convertMarkdownTableToWordXmlTable = (markdown: string): string => {
-    const lines = markdown.split('\n').filter(l => l.trim().startsWith('|'));
-    const validLines = lines.filter(line => !line.match(/^\|?\s*[-:]+[-|\s:]*\|?\s*$/));
-    if (validLines.length === 0) return '';
-
-    let tblXml = `<w:tbl>
-      <w:tblPr>
-        <w:tblW w:w="5000" w:type="pct"/>
-        <w:tblBorders>
-          <w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-          <w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-          <w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-          <w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-          <w:insideH w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-          <w:insideV w:val="single" w:sz="4" w:space="0" w:color="000000"/>
-        </w:tblBorders>
-      </w:tblPr>`;
-
-    validLines.forEach((line, rowIndex) => {
-      const cells = line.split('|');
-      if (line.trim().startsWith('|')) cells.shift();
-      if (line.trim().endsWith('|')) cells.pop();
-
-      const isHeader = rowIndex === 0;
-      tblXml += `<w:tr>`;
-
-      cells.forEach((cellText, colIndex) => {
-        const cleanCell = escapeXml(cellText.trim().replace(/<\/?red>/g, ''));
-        const totalCols = cells.length;
-        const isCenter = colIndex === 0 || colIndex === 1 || (totalCols === 6 && colIndex === 2) || colIndex === (totalCols - 1);
-        const alignXml = isCenter ? `<w:jc w:val="center"/>` : `<w:jc w:val="both"/>`;
-        const boldXml = isHeader ? `<w:b/>` : ``;
-
-        tblXml += `<w:tc>
-          <w:tcPr>
-            <w:vAlign w:val="center"/>
-          </w:tcPr>
-          <w:p>
-            <w:pPr>
-              ${alignXml}
-            </w:pPr>
-            <w:r>
-              <w:rPr>
-                <w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>
-                ${boldXml}
-              </w:rPr>
-              <w:t>${cleanCell}</w:t>
-            </w:r>
-          </w:p>
-        </w:tc>`;
-      });
-
-      tblXml += `</w:tr>`;
-    });
-
-    tblXml += `</w:tbl>`;
-    return tblXml;
-  };
+// (convertMarkdownTableToWordXmlTable moved above convertMarkdownToWordXml)
 
   // Helper: DOMParser XML Injection sau/trước node hoặc trong Scope
   const injectNLSWithDOMParser = (

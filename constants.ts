@@ -578,7 +578,7 @@ HƯỚNG DẪN TÍCH HỢP GIÁO DỤC STEM VÀO HOẠT ĐỘNG VẬN DỤNG (M�
 
    🔹 Bước 1 (Giao nhiệm vụ STEM mini tiếp nối câu hỏi gốc):
    ===NLS_HOẠT_ĐỘNG_4_BƯỚC_1|VITRI: Hoạt động 4 > d. Tổ chức thực hiện > Bước 1 > Sau dòng: "[Ghi nguyên văn câu hỏi/nhiệm vụ cuối cùng của Bước 1 gốc]"===
-   <blue>- Giao nhiệm vụ STEM mini: Từ vấn đề thực tiễn trên, GV giao nhiệm vụ cho HS/nhóm HS thực hiện dự án STEM mini "[Tên dự án STEM mini đã ghi ở Mục I]" (sử dụng các vật liệu/học liệu đã chuẩn bị ở Mục II). HS hoàn thành cột K (Đã biết) và W (Muốn biết) vào Phiếu 1-KWLH. GV công bố Bảng tiêu chí đánh giá sản phẩm (Rubric mini 3 tiêu chí).</blue>
+   <blue>- Giao nhiệm vụ STEM mini: GV giao nhiệm vụ cho HS/nhóm HS thực hiện dự án STEM mini "[Tên dự án STEM mini đã ghi ở Mục I]" (sử dụng các vật liệu/học liệu đã chuẩn bị ở Mục II) để giải quyết các vấn đề thực tiễn của bài học. HS hoàn thành cột K (Đã biết) và W (Muốn biết) vào Phiếu 1-KWLH. GV công bố Bảng tiêu chí đánh giá sản phẩm (Rubric mini 3 tiêu chí):</blue>
    ===END===
 
    🔹 Bước 2 (HS thực hiện nhiệm vụ — trọng tâm NLS & AI):
