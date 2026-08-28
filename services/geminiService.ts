@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { LessonInfo, ProcessingOptions, Subject } from "../types";
-import { SYSTEM_INSTRUCTION, NLS_FRAMEWORK_DATA, SYSTEM_INSTRUCTION_ENGLISH, NLS_FRAMEWORK_DATA_ENGLISH, AI_FRAMEWORK_DATA_QD3439, AI_FRAMEWORK_DATA_QD2422, DISABILITY_SUPPORT_INSTRUCTIONS, ENGLISH_CLIL_INSTRUCTIONS, STEM_INTEGRATION_GUIDANCE } from "../constants";
+import { SYSTEM_INSTRUCTION, NLS_FRAMEWORK_DATA, SYSTEM_INSTRUCTION_ENGLISH, NLS_FRAMEWORK_DATA_ENGLISH, AI_FRAMEWORK_DATA_QD3439, AI_FRAMEWORK_DATA_QD2422, DISABILITY_SUPPORT_INSTRUCTIONS, ENGLISH_CLIL_INSTRUCTIONS, STEM_INTEGRATION_GUIDANCE, FLIPPED_CLASSROOM_GUIDANCE } from "../constants";
 
 // Hàm xác định mức độ NLS phù hợp theo cấp lớp
 function getGradeLevelGuidance(grade: number): string {
@@ -530,8 +530,29 @@ export const generateNLSLessonPlan = async (
 
   // TÍCH HỢP STEM VÀO HOẠT ĐỘNG VẬN DỤNG (MÔ HÌNH A)
   const stemPrompt = options.enableStem
-    ? `\n    === TÍCH HỢP GIÁO DỤC STEM (BẬT) ===\n    ${STEM_INTEGRATION_GUIDANCE}\n    TRẠNG THÁI STEM: BẬT → BẮT BUỘC đồng bộ hóa STEM vào 3 vị trí:\\n    (1) PHẦN I. MỤC TIÊU: Bổ sung chỉ báo Năng lực Giáo dục STEM với yêu cầu đề xuất ≥2 phương án và cải tiến.\\n    (2) PHẦN II. THIẾT BỊ DẠY HỌC: BẮT BUỘC tạo 2 khối Marker riêng biệt: ===NLS_THIẾT_BỊ_GV=== (chèn trước dòng 2. Học sinh:) và ===NLS_THIẾT_BỊ_HS=== (chèn trước dòng III. Tiến trình dạy học) với nội dung bọc trong thẻ <blue>...</blue> theo đúng hướng dẫn.\\n    (3) PHẦN III. HOẠT ĐỘNG VẬN DỤNG: BẮT BUỘC tạo ĐỦ 4 KHỐI MARKER (BƯỚC 1, 2, 3, 4) cho Hoạt động 4: ===NLS_HOẠT_ĐỘNG_4_BƯỚC_1=== (giao nhiệm vụ STEM mini tiếp nối câu hỏi gốc + công bố Rubric), ===NLS_HOẠT_ĐỘNG_4_BƯỚC_2=== (HS thực hiện, đo đạc >=3 lần), ===NLS_HOẠT_ĐỘNG_4_BƯỚC_3=== (báo cáo Padlet/Zalo + KWLH), ===NLS_HOẠT_ĐỘNG_4_BƯỚC_4=== (đánh giá theo Rubric 3 tiêu chí). Giữ nguyên 100% cấu trúc và nội dung tất cả các hoạt động còn lại.\n`
+    ? `\n    === TÍCH HỢP GIÁO DỤC STEM (BẬT) ===\n    ${STEM_INTEGRATION_GUIDANCE}\n    TRẠNG THÁI STEM: BẬT → BẮT BUỘC đồng bộ hóa STEM vào 3 vị trí:\\n    (1) PHẦN I. MỤC TIÊU: Bổ sung chỉ báo Năng lực Giáo dục STEM với yêu cầu đề xuất ≥2 phương án và cải tiến.\\n    (2) PHẦN II. THIẾT BỊ DẠY HỌC: BẮT BUỘC tạo 2 khối Marker riêng biệt: ===NLS_THIẾT_BỊ_GV=== (chèn trước dòng 2. Học sinh:) và ===NLS_THIẾT_BỊ_HS=== (chèn trước dòng III. Tiến trình dạy học) với nội dung bọc trong thẻ <blue>...</blue> theo đúng hướng dẫn.\\n    (3) PHẦN III. HOẠT ĐỘNG VẬN DỤNG: BẮT BUỘC tạo ĐỦ 4 KHỐI MARKER (BƯỚC 1, 2, 3, 4) cho Hoạt động 4: ===NLS_HOẠT_ĐỘNG_4_BƯỚC_1=== (giao nhiệm vụ STEM mini tiếp nối câu hỏi gốc + công bố Rubric), ===NLS_HOẠT_ĐỘNG_4_BƯỚC_2=== (HS thực hiện, đo đạc >=3 lần), ===NLS_HOẠT_ĐỘNG_4_BƯỚC_3=== (báo cáo Padlet/Zalo + KWLH), ===NLS_HOẠT_ĐỘNG_4_BƯỚC_4=== (đánh giá theo Rubric 3 tiêu chí). Giữ nguyên 100% cấu trúc và nội dung tất cả các hoạt động còn lại.\n\n    (4) PHẦN CUỐI GIÁO ÁN (TRƯỚC DẶN DÒ): BẮT BUỘC tạo marker ===NLS_RUBRIC_STEM=== chứa toàn bộ Bảng Rubric 3 tiêu chí dạng bảng Markdown (4 hàng × 4 cột) để hệ thống tự động chèn bảng kẻ ô Word ngay TRƯỚC phần Dặn dò / Hướng dẫn về nhà của giáo án.`
     : `\n    TRẠNG THÁI STEM: TẮT → TUYỆT ĐỐI KHÔNG thêm bất kỳ nội dung STEM nào vào giáo án.\n`;
+
+  // MÔ HÌNH LỚP HỌC ĐẢO NGƯỢC (FLIPPED CLASSROOM)
+  const isFlipped = options.teachingEnvironment === 'FLIPPED_CLASSROOM';
+
+  // Xây dựng thông tin bài học tiếp theo (Waterfall 3 cấp)
+  let nextLessonInfo = '';
+  if (isFlipped) {
+    if (options.nextLessonContent && options.nextLessonContent.trim().length > 50) {
+      // Cấp 1: Đã có nội dung file bài sau (trích đoạn đầu đủ để AI đọc)
+      const snippet = options.nextLessonContent.trim().slice(0, 2000);
+      nextLessonInfo = `\n    THÔNG TIN BÀI HỌC TIẾP THEO (Đọc từ file giáo án bài sau — Dùng để viết Dặn dò):\n    ${snippet}\n`;
+    } else if (options.nextLessonTitle || options.nextLessonSummary) {
+      // Cấp 2: Giáo viên nhập tay tên bài + tóm tắt
+      nextLessonInfo = `\n    THÔNG TIN BÀI HỌC TIẾP THEO (Nhập thủ công — Dùng để viết Dặn dò):\n    - Tên bài: ${options.nextLessonTitle || '(chưa cung cấp)'}\n    - Nội dung chính: ${options.nextLessonSummary || '(chưa cung cấp)'}\n`;
+    }
+    // Cấp 3: Fallback — không có nextLessonInfo, AI tự suy luận theo môn học
+  }
+
+  const flippedPrompt = isFlipped
+    ? `\n    === MÔ HÌNH LỚP HỌC ĐẢO NGƯỢC (BẬT) ===\n    ${FLIPPED_CLASSROOM_GUIDANCE}\n    ${nextLessonInfo}\n    TRẠNG THÁI LỚP HỌC ĐẢO NGƯỢC: BẬT →\n    (1) Các hoạt động HĐ 1, HĐ 2: Diễn đạt theo mô hình HS chuẩn bị ở nhà, trình chiếu báo cáo qua máy tính GV trên lớp. CẤM viết "HS dùng điện thoại/máy tính trực tiếp trên lớp".\n    (2) HĐ 3 (Luyện tập): HS làm vở/giấy; 1-2 HS đại diện thao tác trực tiếp trên máy tính GV.\n    (3) HĐ 4 (Vận dụng): Giao nhiệm vụ về nhà cụ thể, nộp qua Padlet/Zalo để báo cáo tiết sau.\n    (4) BẮT BUỘC TẠO MARKER ===NLS_DẶN_DÒ_TIẾT_SAU=== để chèn câu Dặn dò thông minh vào phần Hướng dẫn tự học/Dặn dò cuối bài. Nội dung câu Dặn dò phải bám sát thông tin bài học tiếp theo đã cung cấp (nếu có) hoặc theo định hướng môn học chung.\n    Cấu trúc Marker Dặn dò:\n    ===NLS_DẶN_DÒ_TIẾT_SAU|VITRI: Phần Hướng dẫn tự học / Dặn dò > Cuối bài===\n    <blue>- Nhiệm vụ số chuẩn bị cho bài học tiếp theo [Tên bài nếu có]: HS sử dụng Internet hoặc AI Chatbot để tìm hiểu trước [Nội dung cụ thể bám sát bài học tiếp theo]; ghi lại kết quả vào vở và tải lên Padlet/Zalo nhóm lớp. Trong tiết học tới, đại diện nhóm sẽ trình chiếu và báo cáo kết quả trước lớp qua máy tính của GV.</blue>\n    ===END===\n`
+    : `\n    TRẠNG THÁI LỚP HỌC ĐẢO NGƯỢC: TẮT → Giữ nguyên phong cách diễn đạt hoạt động trực tiếp trên lớp như hiện tại. KHÔNG tạo Marker ===NLS_DẶN_DÒ_TIẾT_SAU===.\n`;
 
   // Tạo các câu quy tắc động theo đúng trạng thái Checkbox của người dùng
   const mode = options.integrationMode || 'BOTH';
@@ -650,6 +671,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     ${disabilityPrompt}
     ${englishPrompt}
     ${stemPrompt}
+    ${flippedPrompt}
 
     THÔNG TIN GIÁO ÁN ĐẦU VÀO:
     - Môn học: ${info.subject}

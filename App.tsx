@@ -3,7 +3,7 @@ import Header from './components/Header';
 import LessonForm from './components/LessonForm';
 import ContentInput from './components/ContentInput';
 import ResultDisplay from './components/ResultDisplay';
-import { Subject, OriginalDocxFile, HistoryItem, IntegrationMode, LicenseInfo, DisabilityType, EnglishIntegrationLevel, AIFrameworkVersion } from './types';
+import { Subject, OriginalDocxFile, HistoryItem, IntegrationMode, LicenseInfo, DisabilityType, EnglishIntegrationLevel, AIFrameworkVersion, TeachingEnvironment } from './types';
 import { generateNLSLessonPlan } from './services/geminiService';
 import { getLicenseInfo } from './services/licenseService';
 import { Sparkles, Settings2, Key } from 'lucide-react';
@@ -23,6 +23,12 @@ const App: React.FC = () => {
   const [englishIntegrationLevel, setEnglishIntegrationLevel] = useState<EnglishIntegrationLevel>('BASIC');
   const [aiFrameworkVersion, setAiFrameworkVersion] = useState<AIFrameworkVersion>('QD2422'); // Mặc định QĐ 2422 (chính thức 2026-2027)
   const [enableStem, setEnableStem] = useState<boolean>(false); // Tích hợp STEM vào HĐ Vận dụng (mặc định: TẮT)
+  // Môi trường thiết bị dạy học (Flipped Classroom)
+  const [teachingEnvironment, setTeachingEnvironment] = useState<TeachingEnvironment>('IN_CLASS_DEVICES');
+  const [nextLessonContent, setNextLessonContent] = useState<string>('');
+  const [nextLessonFileName, setNextLessonFileName] = useState<string>('');
+  const [nextLessonTitle, setNextLessonTitle] = useState<string>('');
+  const [nextLessonSummary, setNextLessonSummary] = useState<string>('');
   const [autoDetectedMsg, setAutoDetectedMsg] = useState<string | null>(null);
 
 
@@ -166,6 +172,10 @@ const App: React.FC = () => {
           englishIntegrationLevel,
           hasExistingNLS: isSupplementMode, // Truyền trạng thái Chế độ Bổ sung
           enableStem, // Tích hợp STEM vào HĐ Vận dụng
+          teachingEnvironment,  // Môi trường thiết bị dạy học
+          nextLessonContent: nextLessonContent || undefined,
+          nextLessonTitle: nextLessonTitle || undefined,
+          nextLessonSummary: nextLessonSummary || undefined,
         }
       );
 
@@ -193,6 +203,7 @@ const App: React.FC = () => {
         includeDisabilitySupport,
         disabilityType,
         englishIntegrationLevel: includeEnglishIntegration ? englishIntegrationLevel : undefined,
+        teachingEnvironment,
       };
 
       saveToHistory(historyItem);
@@ -235,6 +246,23 @@ const App: React.FC = () => {
               autoDetectedMsg={autoDetectedMsg}
               enableStem={enableStem}
               setEnableStem={setEnableStem}
+              teachingEnvironment={teachingEnvironment}
+              setTeachingEnvironment={setTeachingEnvironment}
+              nextLessonFileName={nextLessonFileName || undefined}
+              onNextLessonFileLoaded={(text, fileName) => {
+                setNextLessonContent(text);
+                setNextLessonFileName(fileName);
+                setNextLessonTitle('');
+                setNextLessonSummary('');
+              }}
+              onNextLessonFileCleared={() => {
+                setNextLessonContent('');
+                setNextLessonFileName('');
+              }}
+              nextLessonTitle={nextLessonTitle}
+              setNextLessonTitle={setNextLessonTitle}
+              nextLessonSummary={nextLessonSummary}
+              setNextLessonSummary={setNextLessonSummary}
             />
 
             <ContentInput

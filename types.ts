@@ -46,6 +46,9 @@ export type EnglishIntegrationLevel = 'NONE' | 'BASIC' | 'INTER' | 'CLIL';
 // Phiên bản Khung Năng lực AI: QĐ 2422 (chính thức 2026-2027) hoặc QĐ 3439 (thí điểm cũ)
 export type AIFrameworkVersion = 'QD2422' | 'QD3439';
 
+// Môi trường thiết bị dạy học: Lớp học đảo ngược (làm ở nhà) hoặc có thiết bị trực tiếp
+export type TeachingEnvironment = 'FLIPPED_CLASSROOM' | 'IN_CLASS_DEVICES';
+
 export interface ProcessingOptions {
   analyzeOnly: boolean;
   detailedReport: boolean;
@@ -62,7 +65,13 @@ export interface ProcessingOptions {
   englishIntegrationLevel?: EnglishIntegrationLevel;
   hasExistingNLS?: boolean; // File giáo án đã có NLS được chèn sẵn → Chế độ Bổ sung
   enableStem?: boolean; // Tích hợp STEM vào Hoạt động Vận dụng (mặc định: false)
+  // Lớp học đảo ngược (Flipped Classroom)
+  teachingEnvironment?: TeachingEnvironment; // Mặc định: IN_CLASS_DEVICES (giữ nguyên luồng cũ)
+  nextLessonContent?: string;  // Nội dung file giáo án bài tiếp theo (text đã đọc từ docx)
+  nextLessonTitle?: string;    // Tên bài học tiếp theo (nhập tay - Cách 2)
+  nextLessonSummary?: string;  // Tóm tắt nội dung bài tiếp theo (nhập tay - Cách 2)
 }
+
 
 
 export interface GeminiResponse {
@@ -81,6 +90,7 @@ export interface HistoryItem {
   includeDisabilitySupport?: boolean;
   disabilityType?: DisabilityType;
   englishIntegrationLevel?: EnglishIntegrationLevel;
+  teachingEnvironment?: TeachingEnvironment;
 }
 export type ProPackage = 'TRIAL' | 'BONUS_5' | 'BONUS_10' | 'BONUS_20' | '1_YEAR' | '2_YEARS' | 'LIFETIME';
 

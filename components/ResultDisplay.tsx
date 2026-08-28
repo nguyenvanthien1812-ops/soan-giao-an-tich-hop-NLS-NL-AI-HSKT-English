@@ -245,6 +245,27 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
             '1. Hoạt động Khởi động', '1. Khởi động', '1. Khởi động:', '1.Hoạt động 1'
           ];
         }
+        // Chèn Dặn dò tiết sau (Lớp học đảo ngược): chèn VÀO CUỐI phần Dặn dò / Hướng dẫn tự học
+        else if (marker === 'DẶN_DÒ_TIẾT_SAU') {
+          searchPatterns = [
+            'Hướng dẫn tự học', 'HƯỚNG DẪN TỰ HỌC', 'Hướng dẫn về nhà',
+            'Dặn dò', 'DẶN DÒ', 'Dặn dò:', 'DẶN DÒ:',
+            'IV. DẶN DÒ', 'IV. Dặn dò', '4. Dặn dò', '4. DẶN DÒ',
+            'Hướng dẫn học sinh tự học', 'Hướng dẫn học bài', 'Hướng dẫn về nhà:',
+            'HƯỚNG DẪN VỀ NHÀ', 'Hướng dẫn HS tự học', 'Hướng dẫn bài về nhà'
+          ];
+        }
+        // ================== STEM RUBRIC: Bảng Rubric 3 tiêu chí ==================
+        // Chèn bảng Rubric TRƯỚC phần Dặn dò / Hướng dẫn về nhà
+        else if (marker === 'RUBRIC_STEM') {
+          searchPatterns = [
+            'Hướng dẫn tự học', 'HƯỚNG DẪN TỰ HỌC', 'Hướng dẫn về nhà',
+            'Dặn dò', 'DẶN DÒ', 'Dặn dò:', 'DẶN DÒ:',
+            'IV. DẶN DÒ', 'IV. Dặn dò', '4. Dặn dò', '4. DẶN DÒ',
+            'Hướng dẫn học sinh tự học', 'Hướng dẫn học bài', 'Hướng dẫn về nhà:',
+            'HƯỚNG DẪN VỀ NHÀ', 'Hướng dẫn HS tự học', 'Hướng dẫn bài về nhà'
+          ];
+        }
       }
       // ================== ENGLISH DC MARKERS ==================
       else if (prefix === 'DC') {
@@ -406,6 +427,10 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
           standardizedLocation = 'Mục II. THIẾT BỊ DẠY HỌC > Cuối phần "1. Giáo viên:" (Ngay TRƯỚC dòng "2. Học sinh:")';
         } else if (marker === 'THIẾT_BỊ_HS') {
           standardizedLocation = 'Mục II. THIẾT BỊ DẠY HỌC > Cuối phần "2. Học sinh:" (Ngay TRƯỚC phần III. TIẾN TRÌNH DẠY HỌC)';
+        } else if (marker === 'DẶN_DÒ_TIẾT_SAU') {
+          standardizedLocation = 'Phần Hướng dẫn tự học / Dặn dò > Cuối bài (Chuẩn bị cho bài học tiếp theo)';
+        } else if (marker === 'RUBRIC_STEM') {
+          standardizedLocation = 'Cuối giáo án > Ngay TRƯỚC phần Dặn dò / Hướng dẫn về nhà (Bảng Rubric 3 tiêu chí STEM mini)';
         } else {
           standardizedLocation = 'd. Tổ chức thực hiện > Ngay dưới dòng "d. Tổ chức thực hiện:" (trước Chuyển giao nhiệm vụ học tập)';
         }
@@ -1064,7 +1089,84 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
           }
         }
       }
-      // 5. Cho các Hoạt động -> Dùng Scoped Search (Khoanh vùng Hoạt động X)
+      // 5. Nếu là Dặn dò tiết sau (Lớp học đảo ngược) -> Tìm và chèn SAU phần Dặn dò / Hướng dẫn tự học
+      else if (section.marker.includes('DẶN_DÒ_TIẾT_SAU')) {
+        for (const pattern of section.searchPatterns) {
+          const normPattern = normalizeText(pattern);
+          const compactPattern = normPattern.replace(/\s+/g, '');
+          const targetP = paragraphs.find(p => {
+            const normP = normalizeText(p.textContent || '');
+            return normP.includes(normPattern) || normP.replace(/\s+/g, '').includes(compactPattern);
+          });
+          if (targetP && targetP.parentNode) {
+            // Chèn SAU targetP
+            const nextSibling = targetP.nextSibling;
+            nlsNodes.forEach(node => {
+              if (nextSibling) {
+                targetP.parentNode?.insertBefore(node, nextSibling);
+              } else {
+                targetP.parentNode?.appendChild(node);
+              }
+            });
+            inserted = true;
+            console.log(`✓ DOMParser đã chèn DẶN_DÒ_TIẾT_SAU thành công sau: "${pattern}"`);
+            break;
+          }
+        }
+        // Fallback: Nếu không tìm thấy heading dặn dò thì chèn vào cuối tài liệu (trước w:sectPr)
+        if (!inserted) {
+          const bodyNode = xmlDoc.getElementsByTagName('w:body')[0];
+          if (bodyNode) {
+            const sectPr = bodyNode.getElementsByTagName('w:sectPr')[0];
+            nlsNodes.forEach(node => {
+              if (sectPr && sectPr.parentNode === bodyNode) {
+                bodyNode.insertBefore(node, sectPr);
+              } else {
+                bodyNode.appendChild(node);
+              }
+            });
+            inserted = true;
+            console.log(`✓ DOMParser fallback chèn DẶN_DÒ_TIẾT_SAU vào cuối văn bản`);
+          }
+        }
+      }
+      // 6. Bảng Rubric STEM -> Tìm và chèn TRƯỚC phần Dặn dò / Hướng dẫn về nhà
+      else if (section.marker.includes('RUBRIC_STEM')) {
+        for (const pattern of section.searchPatterns) {
+          const normPattern = normalizeText(pattern);
+          const compactPattern = normPattern.replace(/\s+/g, '');
+          const targetP = paragraphs.find(p => {
+            const normP = normalizeText(p.textContent || '');
+            return normP.includes(normPattern) || normP.replace(/\s+/g, '').includes(compactPattern);
+          });
+          if (targetP && targetP.parentNode) {
+            // Chèn TRƯỚC targetP (ngay trước dòng Dặn dò)
+            nlsNodes.forEach(node => {
+              targetP.parentNode?.insertBefore(node, targetP);
+            });
+            inserted = true;
+            console.log(`✓ DOMParser đã chèn RUBRIC_STEM thành công trước: "${pattern}"`);
+            break;
+          }
+        }
+        // Fallback: nếu không tìm thấy Dặn dò -> chèn cuối tài liệu (trước w:sectPr)
+        if (!inserted) {
+          const bodyNode = xmlDoc.getElementsByTagName('w:body')[0];
+          if (bodyNode) {
+            const sectPr = bodyNode.getElementsByTagName('w:sectPr')[0];
+            nlsNodes.forEach(node => {
+              if (sectPr && sectPr.parentNode === bodyNode) {
+                bodyNode.insertBefore(node, sectPr);
+              } else {
+                bodyNode.appendChild(node);
+              }
+            });
+            inserted = true;
+            console.log(`✓ DOMParser fallback chèn RUBRIC_STEM vào cuối văn bản`);
+          }
+        }
+      }
+      // 6. Cho các Hoạt động -> Dùng Scoped Search (Khoanh vùng Hoạt động X)
       else {
         let scopeStartIdx = -1;
         let scopeEndIdx = paragraphs.length;
@@ -1486,6 +1588,10 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
       .replace(/===NLS_HOẠT_ĐỘNG_(\d+)_KẾT_LUẬN.*?===/g, '\n**📌 HOẠT ĐỘNG $1 - KẾT LUẬN NLS:**\n')
 .replace(/===NLS_HOẠT_ĐỘNG_(\d+).*?===/g, '\n**📌 HOẠT ĐỘNG $1 - NLS:**\n')
       .replace(/===NLS_CỦNG_CỐ.*?===/g, '\n**📌 CỦNG CỐ - TÍCH HỢP NLS:**\n')
+      .replace(/===NLS_THIẾT_BỊ_GV.*?===/g, '\n**📌 THIẾT BỊ DẠY HỌC (GIÁO VIÊN):**\n')
+      .replace(/===NLS_THIẾT_BỊ_HS.*?===/g, '\n**📌 THIẾT BỊ DẠY HỌC (HỌC SINH):**\n')
+      .replace(/===NLS_DẶN_DÒ_TIẾT_SAU.*?===/g, '\n**📌 DẶN DÒ CHUẨN BỊ CHO BÀI HỌC TIẾP THEO:**\n')
+      .replace(/===NLS_RUBRIC_STEM.*?===/g, '\n**📌 BẢNG RUBRIC 3 TIÊU CHÍ STEM (Chèn trước Dặn dò):**\n')
 
       // ================== ENGLISH DC MARKERS ==================
       .replace(/===DC_OBJECTIVES.*?===/g, '\n**📌 DIGITAL COMPETENCE OBJECTIVES:**\n')

@@ -1,6 +1,9 @@
-import React from 'react';
-import { Subject, IntegrationMode, DisabilityType, AIFrameworkVersion } from '../types';
-import { Bot, Cpu, Sparkles, HeartHandshake, BookOpen, GraduationCap, CheckCircle, Info } from 'lucide-react';
+import React, { useRef } from 'react';
+import { Subject, IntegrationMode, DisabilityType, AIFrameworkVersion, TeachingEnvironment } from '../types';
+import { Bot, Cpu, Sparkles, HeartHandshake, BookOpen, GraduationCap, CheckCircle, Info, Home, School, Upload, X } from 'lucide-react';
+
+// Khai báo thư viện ngoại mammoth
+declare const mammoth: any;
 
 interface LessonFormProps {
   subject: Subject;
@@ -29,6 +32,16 @@ interface LessonFormProps {
   // Tích hợp STEM vào Hoạt động Vận dụng
   enableStem: boolean;
   setEnableStem: (val: boolean) => void;
+  // Môi trường thiết bị dạy học (Flipped Classroom)
+  teachingEnvironment: TeachingEnvironment;
+  setTeachingEnvironment: (val: TeachingEnvironment) => void;
+  nextLessonFileName?: string;
+  onNextLessonFileLoaded?: (text: string, fileName: string) => void;
+  onNextLessonFileCleared?: () => void;
+  nextLessonTitle: string;
+  setNextLessonTitle: (val: string) => void;
+  nextLessonSummary: string;
+  setNextLessonSummary: (val: string) => void;
 }
 
 const LessonForm: React.FC<LessonFormProps> = ({
@@ -56,7 +69,42 @@ const LessonForm: React.FC<LessonFormProps> = ({
   autoDetectedMsg,
   enableStem,
   setEnableStem,
+  teachingEnvironment,
+  setTeachingEnvironment,
+  nextLessonFileName,
+  onNextLessonFileLoaded,
+  onNextLessonFileCleared,
+  nextLessonTitle,
+  setNextLessonTitle,
+  nextLessonSummary,
+  setNextLessonSummary,
 }) => {
+  const nextLessonFileRef = useRef<HTMLInputElement>(null);
+
+  const handleNextLessonFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      if (typeof mammoth !== 'undefined' && (file.name.endsWith('.docx') || file.type.includes('word'))) {
+        const arrayBuffer = await file.arrayBuffer();
+        const result = await mammoth.extractRawText({ arrayBuffer });
+        onNextLessonFileLoaded?.(result.value, file.name);
+      } else {
+        const text = await file.text();
+        onNextLessonFileLoaded?.(text, file.name);
+      }
+    } catch (err) {
+      console.error("Lỗi đọc file bài tiếp theo:", err);
+      try {
+        const text = await file.text();
+        onNextLessonFileLoaded?.(text, file.name);
+      } catch {
+        alert("Không thể đọc được nội dung từ file này.");
+      }
+    }
+    if (e.target) e.target.value = '';
+  };
+
   return (
     <div className="bg-white/90 backdrop-blur-md p-6 sm:p-7 rounded-3xl shadow-xl shadow-indigo-900/5 border border-indigo-100/80 mb-6 space-y-6">
       <div className="flex items-center justify-between">
@@ -373,6 +421,128 @@ const LessonForm: React.FC<LessonFormProps> = ({
               AI sẽ <strong>nâng cấp Hoạt động Vận dụng</strong> thành dự án STEM mini gắn thực tiễn:
               giao nhiệm vụ chế tạo/thiết kế/quan trắc thực tế, có sản phẩm cụ thể và rubric đánh giá 3 tiêu chí.
               Toàn bộ cấu trúc 4 hoạt động theo CV 5512 được giữ nguyên 100%.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* ====== PHẦN MÔI TRƯỜNG THIẾT BỊ DẠY HỌC (FLIPPED CLASSROOM) ====== */}
+      <div className="space-y-3.5 text-left pt-5 border-t border-slate-100">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-xl">🏫</span>
+          <span className="text-sm sm:text-base font-bold text-slate-800">
+            Môi trường thiết bị dạy học
+          </span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* Lựa chọn 1: Phòng máy/Thiết bị cá nhân (Luồng cũ) */}
+          <button
+            type="button"
+            onClick={() => setTeachingEnvironment('IN_CLASS_DEVICES')}
+            className={`p-3.5 rounded-2xl border text-left transition-all ${
+              teachingEnvironment === 'IN_CLASS_DEVICES'
+                ? 'bg-gradient-to-br from-indigo-50 to-blue-50 border-indigo-400 shadow-md ring-2 ring-indigo-300/40'
+                : 'bg-white border-slate-200 hover:bg-slate-50 shadow-sm'
+            }`}
+          >
+            <div className="flex items-center gap-2 mb-1">
+              <School size={16} className={teachingEnvironment === 'IN_CLASS_DEVICES' ? 'text-indigo-600' : 'text-slate-500'} />
+              <span className={`text-xs font-bold ${teachingEnvironment === 'IN_CLASS_DEVICES' ? 'text-indigo-700' : 'text-slate-700'}`}>
+                🏫 Phòng máy / Thiết bị cá nhân
+              </span>
+            </div>
+            <p className="text-[10px] text-slate-500 leading-relaxed">HS thao tác trực tiếp trên lớp (Luồng mặc định — giữ 100% tính năng cũ)</p>
+          </button>
+
+          {/* Lựa chọn 2: Lớp học đảo ngược (Mới) */}
+          <button
+            type="button"
+            onClick={() => setTeachingEnvironment('FLIPPED_CLASSROOM')}
+            className={`p-3.5 rounded-2xl border text-left transition-all ${
+              teachingEnvironment === 'FLIPPED_CLASSROOM'
+                ? 'bg-gradient-to-br from-amber-50 to-orange-50 border-amber-400 shadow-md ring-2 ring-amber-300/40'
+                : 'bg-white border-slate-200 hover:bg-slate-50 shadow-sm'
+            }`}
+          >
+            <div className="flex items-center gap-2 mb-1">
+              <Home size={16} className={teachingEnvironment === 'FLIPPED_CLASSROOM' ? 'text-amber-600' : 'text-slate-500'} />
+              <span className={`text-xs font-bold ${teachingEnvironment === 'FLIPPED_CLASSROOM' ? 'text-amber-700' : 'text-slate-700'}`}>
+                🏡 Lớp học đảo ngược <span className="text-[9px] font-medium ml-1 px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-700">Khuyên dùng</span>
+              </span>
+            </div>
+            <p className="text-[10px] text-slate-500 leading-relaxed">HS chuẩn bị ở nhà, báo cáo trên lớp qua máy chiếu GV (Phù hợp 90% trường học VN)</p>
+          </button>
+        </div>
+
+        {/* Khu vực Dặn dò thông minh — chỉ hiện khi chọn Lớp học đảo ngược */}
+        {teachingEnvironment === 'FLIPPED_CLASSROOM' && (
+          <div className="p-4 bg-amber-50/80 border border-amber-200/80 rounded-2xl space-y-3 animate-fadeIn shadow-sm">
+            <p className="text-xs font-bold text-amber-900 flex items-center gap-1.5">
+              <span>📌</span> Dặn dò thông minh cho bài học tiếp theo
+            </p>
+            <p className="text-[11px] text-amber-800 leading-relaxed">
+              Cung cấp thông tin bài sau để AI viết câu Dặn dò chính xác, kết nối năng lực số/AI sang tiết học tiếp theo.
+            </p>
+
+            {/* Cách 1: Tải file giáo án bài tiếp theo */}
+            <div className="space-y-1.5">
+              <p className="text-[11px] font-bold text-amber-900">📎 Cách 1: Tải file giáo án bài tiếp theo (Chính xác nhất)</p>
+              <input
+                ref={nextLessonFileRef}
+                type="file"
+                accept=".docx,.doc,.txt"
+                className="hidden"
+                onChange={handleNextLessonFile}
+              />
+              {nextLessonFileName ? (
+                <div className="flex items-center gap-2 p-2 bg-amber-100 border border-amber-300 rounded-xl">
+                  <Upload size={14} className="text-amber-700 shrink-0" />
+                  <span className="text-[11px] font-bold text-amber-800 truncate flex-1">{nextLessonFileName}</span>
+                  <button
+                    type="button"
+                    onClick={() => onNextLessonFileCleared?.()}
+                    className="p-0.5 rounded-full hover:bg-amber-200 transition-colors"
+                  >
+                    <X size={12} className="text-amber-700" />
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => nextLessonFileRef.current?.click()}
+                  className="w-full p-2.5 border-2 border-dashed border-amber-300 rounded-xl text-[11px] font-bold text-amber-700 hover:bg-amber-100/60 transition-colors flex items-center justify-center gap-2"
+                >
+                  <Upload size={14} />
+                  Chọn file .docx / .txt giáo án bài tiếp theo
+                </button>
+              )}
+            </div>
+
+            {/* Cách 2: Nhập thủ công (hiện khi chưa có file) */}
+            {!nextLessonFileName && (
+              <div className="space-y-2 border-t border-amber-200 pt-2.5">
+                <p className="text-[11px] font-bold text-amber-900">✍️ Cách 2: Nhập nhanh thông tin bài tiếp theo</p>
+                <div className="space-y-2">
+                  <input
+                    type="text"
+                    value={nextLessonTitle}
+                    onChange={(e) => setNextLessonTitle(e.target.value)}
+                    placeholder="Tên bài học tiếp theo (VD: Bài 8: Quang hợp ở thực vật)"
+                    className="w-full rounded-xl border border-amber-300 bg-white px-3 py-2 text-[11px] text-slate-800 placeholder-slate-400 focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20"
+                  />
+                  <textarea
+                    value={nextLessonSummary}
+                    onChange={(e) => setNextLessonSummary(e.target.value)}
+                    placeholder="Tóm tắt nội dung chính bài sau (1–2 câu, VD: Cây xanh tổng hợp chất hữu cơ từ CO₂ và ánh sáng mặt trời...)"
+                    rows={2}
+                    className="w-full rounded-xl border border-amber-300 bg-white px-3 py-2 text-[11px] text-slate-800 placeholder-slate-400 focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 resize-none"
+                  />
+                </div>
+              </div>
+            )}
+
+            <p className="text-[10px] text-amber-700 italic">
+              💡 Nếu bỏ trống cả hai: App vẫn viết Dặn dò theo định hướng chung của môn học.
             </p>
           </div>
         )}

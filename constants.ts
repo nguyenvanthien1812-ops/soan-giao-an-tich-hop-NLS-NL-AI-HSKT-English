@@ -597,19 +597,67 @@ HƯỚNG DẪN TÍCH HỢP GIÁO DỤC STEM VÀO HOẠT ĐỘNG VẬN DỤNG (M�
    <blue>- Đánh giá sản phẩm STEM mini: GV tổ chức cho HS tự đánh giá và đánh giá chéo theo Bảng Rubric mini 3 tiêu chí (1. Tính khoa học; 2. Kĩ thuật & Đo đạc; 3. Báo cáo & Trình bày); HS hoàn thiện cột L trong Phiếu KWLH. GV nhận xét, chốt lại kiến thức trọng tâm của bài học.</blue>
    ===END===
 
-   📋 TIÊU CHÍ ĐÁNH GIÁ SẢN PHẨM STEM (RUBRIC MINI — 3 TIÊU CHÍ):
-   | Tiêu chí | Mức Đạt (3-4 điểm) | Mức Cơ bản (2 điểm) | Mức Cần hỗ trợ (1 điểm) |
-   |:--|:--|:--|:--|
-   | 1. Tính khoa học | Giải thích đúng và đủ cơ chế khoa học; kết quả thực nghiệm khớp với lý thuyết bài học. | Giải thích đúng một phần; liên hệ kiến thức bài học chưa đầy đủ. | Giải thích sai hoặc không giải thích được hiện tượng. |
-   | 2. Kĩ thuật & Đo đạc | Đề xuất được ≥2 phương án; bố trí thí nghiệm/mô hình đúng cách; ghi số liệu ≥3 lần, tính trung bình. | Có sản phẩm; chỉ thực hiện 1 phương án; số liệu đo đạc chưa đủ ≥3 lần hoặc mô hình chưa hoàn thiện. | Sản phẩm chưa đạt yêu cầu; không đề xuất phương án; thiếu số liệu/hình ảnh minh chứng. |
-   | 3. Báo cáo & Trình bày | Ảnh/video rõ nét từng giai đoạn; Phiếu KWLH điền đủ 4 cột (K-W-L-H); nộp đúng hạn trên Padlet/Zalo. | Báo cáo được; Phiếu KWLH chưa đủ cột L; nộp đúng hạn nhưng sản phẩm đơn giản. | Báo cáo chưa rõ ràng; thiếu Phiếu KWLH; nộp bài muộn. |
+    🔹 Bảng Rubric mini 3 tiêu chí (BẮT BUỘC XUẤT — chèn ngay TRƯỚC phần Dặn dò / Hướng dẫn về nhà):
+    ===NLS_RUBRIC_STEM|VITRI: Cuối giáo án > Ngay TRƯỚC phần Dặn dò / Hướng dẫn về nhà===
+    <blue>BẢNG TIÊU CHÍ ĐÁNH GIÁ SẢN PHẨM STEM (RUBRIC MINI — 3 TIÊU CHÍ)</blue>
+    | Tiêu chí | Mức Đạt (3-4 điểm) | Mức Cơ bản (2 điểm) | Mức Cần hỗ trợ (1 điểm) |
+    |:--|:--|:--|:--|
+    | 1. Tính khoa học | Giải thích đúng và đủ cơ chế khoa học; kết quả thực nghiệm khớp với lý thuyết bài học. | Giải thích đúng một phần; liên hệ kiến thức bài học chưa đầy đủ. | Giải thích sai hoặc không giải thích được hiện tượng. |
+    | 2. Kĩ thuật & Đo đạc | Đề xuất được ≥2 phương án; bố trí thí nghiệm/mô hình đúng cách; ghi số liệu ≥3 lần, tính trung bình. | Có sản phẩm; chỉ thực hiện 1 phương án; số liệu đo đạc chưa đủ ≥3 lần hoặc mô hình chưa hoàn thiện. | Sản phẩm chưa đạt yêu cầu; không đề xuất phương án; thiếu số liệu/hình ảnh minh chứng. |
+    | 3. Báo cáo & Trình bày | Ảnh/video rõ nét từng giai đoạn; Phiếu KWLH điền đủ 4 cột (K-W-L-H); nộp đúng hạn trên Padlet/Zalo. | Báo cáo được; Phiếu KWLH chưa đủ cột L; nộp đúng hạn nhưng sản phẩm đơn giản. | Báo cáo chưa rõ ràng; thiếu Phiếu KWLH; nộp bài muộn. |
+    ===END===
 
 NGUYÊN TẮC BẮT BUỘC TUÂN THEO:
 - TUYỆT ĐỐI CẤM tự ý đổi chủ đề bài học sang bài toán không liên quan.
 - Mọi câu chỉ báo NLS/AI trong phần STEM PHẢI là chủ thể Học sinh ("HS..."), CẤM dùng "GV hướng dẫn...".
 - Khi bật STEM: BẮT BUỘC xuất đủ 4 khối marker cho Hoạt động 4 (BƯỚC_1, BƯỚC_2, BƯỚC_3, BƯỚC_4) để khép kín chu trình STEM (Giao việc → Thực hiện → Báo cáo → Đánh giá Rubric).
+- Khi bật STEM: BẮT BUỘC xuất thêm marker ===NLS_RUBRIC_STEM=== chứa Bảng Rubric kẻ ô 3 tiêu chí (dạng bảng Markdown thực thụ) để hệ thống chèn bảng Word trước phần Dặn dò. TUYỆT ĐỐI KHÔNG được viết bảng Rubric dưới dạng văn bản thường, PHẢI dùng bảng Markdown.
 - Đối với phần Thiết bị STEM: BẮT BUỘC xuất đúng 2 khối marker ===NLS_THIẾT_BỊ_GV=== và ===NLS_THIẾT_BỊ_HS=== với nội dung bọc trong thẻ <blue>...</blue>.
 - KHÔNG chèn thẻ màu vào các mục a), b), c) của Hoạt động 4 (chỉ chèn vào d. Tổ chức thực hiện ở Bước 1, Bước 2, Bước 3, Bước 4).
+`;
+
+// =============================================================================
+// HƯỚNG DẪN MÔ HÌNH LỚP HỌC ĐẢO NGƯỢC (FLIPPED CLASSROOM)
+// Áp dụng khi teachingEnvironment === 'FLIPPED_CLASSROOM'
+// =============================================================================
+export const FLIPPED_CLASSROOM_GUIDANCE = `
+HƯỚNG DẪN MÔ HÌNH LỚP HỌC ĐẢO NGƯỢC (FLIPPED CLASSROOM — ĐẶC THÙ PHÒNG HỌC THÔNG THƯỜNG VIỆT NAM):
+
+🏫 BỐI CẢNH THỰC TẾ:
+- Phòng học chỉ có 01 máy tính của GV kết nối tivi/máy chiếu.
+- Học sinh KHÔNG có máy tính hoặc điện thoại riêng trong giờ học (Thông tư 32/2020/TT-BGDĐT).
+- Giải pháp chuẩn Bộ GD&ĐT (CV 5512): Hoạt động 4 và nhiệm vụ số được thực hiện ở nhà, báo cáo trên lớp.
+
+🔄 NGUYÊN TẮC KẾT NỐI HAI CHIỀU BẮT BUỘC:
+- Chiều 1 (Đầu vào — Tiếp nhận nhiệm vụ từ tiết trước):
+  HĐ 1 và HĐ 2: Đại diện HS/nhóm dùng MÁY TÍNH CỦA GV để trình chiếu/báo cáo kết quả đã chuẩn bị ở nhà lên màn hình/tivi. TUYỆT ĐỐI CẤM viết "HS dùng điện thoại trên lớp" hay "HS mở phần mềm trực tiếp trên lớp".
+
+- Chiều 2 (Đầu ra — Giao nhiệm vụ cho tiết sau):
+  HĐ 4 Vận dụng: Giao NHIỆM VỤ VỀ NHÀ cụ thể (làm thí nghiệm, tra cứu, đo đạc, quay video), nộp qua Padlet/Zalo.
+  Phần Dặn dò cuối bài: Giao nhiệm vụ số/AI chuẩn bị cho bài học TIẾP THEO.
+
+📋 QUY CHUẨN DIỄN ĐẠT CHO TỪNG HOẠT ĐỘNG:
+
+🔹 Hoạt động 1 (Khởi động / Mở đầu):
+Câu NLS Bước 2 hoặc Bước 3 phải viết theo dạng:
+"HS/Đại diện nhóm sử dụng máy tính của GV để trình chiếu [video/hình ảnh/kết quả tìm kiếm] đã chuẩn bị ở nhà (đã nộp qua Padlet/Zalo từ tiết trước) lên màn hình tivi."
+Hoặc: "HS quan sát [trò chơi/câu hỏi tương tác] do GV khởi chiếu trên màn hình và tham gia trả lời."
+
+🔹 Hoạt động 2 (Hình thành kiến thức mới):
+Câu NLS Bước 2 hoặc Bước 3 phải viết theo dạng:
+"Đại diện nhóm sử dụng máy tính của GV báo cáo kết quả [tra cứu/tài liệu số/mô phỏng] đã tìm hiểu ở nhà (đã gửi qua Padlet/Zalo từ tiết trước); các nhóm khác lắng nghe, phản biện và đối chiếu với SGK."
+Hoặc với AI: "Đại diện nhóm trình chiếu kết quả truy vấn AI Chatbot đã chuẩn bị ở nhà, chỉ ra điểm đúng/sai và đối chiếu với SGK trước cả lớp qua màn hình máy chiếu."
+
+🔹 Hoạt động 3 (Luyện tập):
+Câu NLS Bước 2 phải viết theo dạng:
+"HS thực hiện tính toán trên MTCT Casio/vở ghi; 1–2 HS đại diện lên bảng thao tác trực tiếp trên máy tính GV (trình chiếu lên tivi cho cả lớp cùng theo dõi và nhận xét kết quả)."
+
+🔹 Hoạt động 4 (Vận dụng / STEM):
+Câu NLS Bước 1 hoặc Bước 2 phải viết theo dạng:
+"GV giao nhiệm vụ cho HS làm việc theo nhóm tại nhà: [thực hiện nhiệm vụ cụ thể], chụp ảnh từng giai đoạn, ghi chép số liệu vào phiếu; nộp sản phẩm lên Padlet/Zalo nhóm lớp trước ngày ... để báo cáo trong tiết học tiếp theo."
+
+🔹 Phần Dặn dò / Hướng dẫn về nhà (PHẦN QUAN TRỌNG NHẤT — BẮT BUỘC TẠO MARKER):
+BẮT BUỘC tạo Marker ===NLS_DẶN_DÒ_TIẾT_SAU=== chèn vào phần "Hướng dẫn tự học / Dặn dò" ở CUỐI BÀI để giao nhiệm vụ số chuẩn bị cho bài học tiếp theo.
 `;
 
 export const PLACEHOLDER_LESSON = `TÊN BÀI HỌC: THỐNG KÊ MÔ TẢ
