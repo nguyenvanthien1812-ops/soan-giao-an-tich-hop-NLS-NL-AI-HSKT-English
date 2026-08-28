@@ -623,40 +623,43 @@ NGUYÊN TẮC BẮT BUỘC TUÂN THEO:
 export const FLIPPED_CLASSROOM_GUIDANCE = `
 HƯỚNG DẪN MÔ HÌNH LỚP HỌC ĐẢO NGƯỢC (FLIPPED CLASSROOM — ĐẶC THÙ PHÒNG HỌC THÔNG THƯỜNG VIỆT NAM):
 
-🏫 BỐI CẢNH THỰC TẾ:
-- Phòng học chỉ có 01 máy tính của GV kết nối tivi/máy chiếu.
+🏫 BỐI CẢNH THỰC TẾ & CĂN CỨ PHÁP LÝ:
+- Phòng học tiêu chuẩn chỉ có 01 máy tính của GV kết nối tivi/máy chiếu.
 - Học sinh KHÔNG có máy tính hoặc điện thoại riêng trong giờ học (Thông tư 32/2020/TT-BGDĐT).
-- Giải pháp chuẩn Bộ GD&ĐT (CV 5512): Hoạt động 4 và nhiệm vụ số được thực hiện ở nhà, báo cáo trên lớp.
+- Quy định chuyên môn (Công văn 5512/BGDĐT-GDTrH): Mọi nhiệm vụ tìm kiếm số, hỏi AI Chatbot, thiết kế Canva, làm thí nghiệm/STEM được thực hiện tại nhà; lên lớp tiến hành báo cáo, đối chiếu và thảo luận.
 
 🔄 NGUYÊN TẮC KẾT NỐI HAI CHIỀU BẮT BUỘC:
 - Chiều 1 (Đầu vào — Tiếp nhận nhiệm vụ từ tiết trước):
-  HĐ 1 và HĐ 2: Đại diện HS/nhóm dùng MÁY TÍNH CỦA GV để trình chiếu/báo cáo kết quả đã chuẩn bị ở nhà lên màn hình/tivi. TUYỆT ĐỐI CẤM viết "HS dùng điện thoại trên lớp" hay "HS mở phần mềm trực tiếp trên lớp".
-
+  + HĐ 1 (Khởi động) và HĐ 2 (Khám phá): Báo cáo, trình chiếu kết quả đã chuẩn bị ở nhà thông qua MÁY TÍNH CỦA GV.
+  + TUYỆT ĐỐI CẤM viết "HS mở điện thoại trên lớp để tra cứu" hay "HS dùng AI Chatbot tra cứu trực tiếp trong giờ học".
 - Chiều 2 (Đầu ra — Giao nhiệm vụ cho tiết sau):
-  HĐ 4 Vận dụng: Giao NHIỆM VỤ VỀ NHÀ cụ thể (làm thí nghiệm, tra cứu, đo đạc, quay video), nộp qua Padlet/Zalo.
-  Phần Dặn dò cuối bài: Giao nhiệm vụ số/AI chuẩn bị cho bài học TIẾP THEO.
+  + HĐ 4 (Vận dụng / STEM): Giao NHIỆM VỤ VỀ NHÀ cụ thể (làm thí nghiệm, tra cứu, đo đạc, thiết kế), nộp qua Padlet/Zalo.
+  + Phần Dặn dò cuối bài: Giao nhiệm vụ số/AI chuẩn bị cho bài học TIẾP THEO.
 
-📋 QUY CHUẨN DIỄN ĐẠT CHO TỪNG HOẠT ĐỘNG:
+📋 QUY CHUẨN DIỄN ĐẠT BẮT BUỘC CHO TỪNG HOẠT ĐỘNG (ÁP DỤNG CHO MỌI MÔN HỌC & MÃ CHỈ BÁO):
 
-🔹 Hoạt động 1 (Khởi động / Mở đầu):
-Câu NLS Bước 2 hoặc Bước 3 phải viết theo dạng:
-"HS/Đại diện nhóm sử dụng máy tính của GV để trình chiếu [video/hình ảnh/kết quả tìm kiếm] đã chuẩn bị ở nhà (đã nộp qua Padlet/Zalo từ tiết trước) lên màn hình tivi."
-Hoặc: "HS quan sát [trò chơi/câu hỏi tương tác] do GV khởi chiếu trên màn hình và tham gia trả lời."
+🔹 Hoạt động 1: Mở đầu / Khởi động
+- Bước 2 (Thực hiện): "1-2 HS đại diện thao tác trên máy tính của GV để lật mở ô chữ / tham gia trò chơi tương tác [Tên trò chơi] hiển thị trên màn hình tivi."
+- Bước 3 (Báo cáo): "HS đại diện nhóm trình chiếu kết quả truy vấn nhanh từ Internet/AI Chatbot (đã thực hiện ở nhà) lên màn hình tivi qua máy tính của GV để cả lớp cùng nhận xét, dẫn dắt vào bài mới."
 
-🔹 Hoạt động 2 (Hình thành kiến thức mới):
-Câu NLS Bước 2 hoặc Bước 3 phải viết theo dạng:
-"Đại diện nhóm sử dụng máy tính của GV báo cáo kết quả [tra cứu/tài liệu số/mô phỏng] đã tìm hiểu ở nhà (đã gửi qua Padlet/Zalo từ tiết trước); các nhóm khác lắng nghe, phản biện và đối chiếu với SGK."
-Hoặc với AI: "Đại diện nhóm trình chiếu kết quả truy vấn AI Chatbot đã chuẩn bị ở nhà, chỉ ra điểm đúng/sai và đối chiếu với SGK trước cả lớp qua màn hình máy chiếu."
+🔹 Hoạt động 2: Hình thành kiến thức mới / Khám phá (QUAN TRỌNG NHẤT VỀ NGÔN NGỮ CHỈ BÁO):
+- Bước 2 (Thực hiện nhiệm vụ học tập — Thảo luận nhóm trên lớp):
+  + Khi chèn mã tra cứu thông tin (1.1.TC1a, 1.2.TC1a...): BẮT BUỘC viết dạng: "HS sử dụng tài liệu/thông tin số và kết quả tra cứu Internet đã chuẩn bị ở nhà (hoặc ghi chép trong vở/phiếu) kết hợp đối chiếu SGK để thảo luận nhóm và hoàn thành phiếu học tập."
+  + Khi chèn mã AI (7.A1.2, 8.A1.1...): BẮT BUỘC viết dạng: "HS sử dụng kết quả truy vấn từ AI Chatbot (đã thực hiện ở nhà) đối chiếu với nội dung SGK để xác thực thông tin, phát hiện các điểm chưa chính xác hoặc thiếu sót của AI."
+  + Khi chèn mã Đạo đức AI (7.B3.1, 8.B3.1...): "HS thể hiện cam kết sử dụng AI có trách nhiệm, khai báo trung thực nguồn thông tin do AI hỗ trợ khi hoàn thiện báo cáo nhóm."
+- Bước 3 (Báo cáo kết quả và thảo luận):
+  + BẮT BUỘC viết dạng: "Đại diện nhóm sử dụng máy tính của GV để trình chiếu bài báo cáo số (dạng slide PowerPoint, Canva hoặc sơ đồ tư duy đã chuẩn bị trước ở nhà và gửi qua Zalo/Padlet) lên màn hình tivi; các nhóm khác lắng nghe, phản biện và đối chiếu với SGK."
 
-🔹 Hoạt động 3 (Luyện tập):
-Câu NLS Bước 2 phải viết theo dạng:
-"HS thực hiện tính toán trên MTCT Casio/vở ghi; 1–2 HS đại diện lên bảng thao tác trực tiếp trên máy tính GV (trình chiếu lên tivi cho cả lớp cùng theo dõi và nhận xét kết quả)."
+🔹 Hoạt động 3: Luyện tập
+- Bước 2 (Thực hiện): "HS thực hiện giải bài tập/tính toán trên vở ghi hoặc MTCT Casio; 1–2 HS đại diện thao tác trực tiếp trên máy tính GV để chọn đáp án/nhập kết quả trên phần mềm trắc nghiệm (Quizizz/Google Forms/Azota) hiển thị trên tivi cho cả lớp cùng theo dõi và đối chiếu."
 
-🔹 Hoạt động 4 (Vận dụng / STEM):
-Câu NLS Bước 1 hoặc Bước 2 phải viết theo dạng:
-"GV giao nhiệm vụ cho HS làm việc theo nhóm tại nhà: [thực hiện nhiệm vụ cụ thể], chụp ảnh từng giai đoạn, ghi chép số liệu vào phiếu; nộp sản phẩm lên Padlet/Zalo nhóm lớp trước ngày ... để báo cáo trong tiết học tiếp theo."
+🔹 Hoạt động 4: Vận dụng / STEM mini
+- Bước 1 (Giao nhiệm vụ): "GV giao nhiệm vụ cho HS làm việc theo nhóm tại nhà: [nhiệm vụ cụ thể], hoàn thành cột K, W vào Phiếu KWLH, công bố Bảng Rubric 3 tiêu chí."
+- Bước 2 (Thực hiện tại nhà): "HS sử dụng điện thoại/thiết bị số tại nhà để chụp ảnh các giai đoạn chế tạo, ghi chép số liệu đo đạc ≥3 lần vào Phiếu 3; đề xuất ≥2 phương án thiết kế trên giấy và chọn phương án tối ưu."
+- Bước 3 (Báo cáo): "HS đăng tải ảnh/video sản phẩm mô hình và bảng số liệu lên Padlet/Zalo nhóm lớp để báo cáo kết quả; hoàn thiện cột L trong Phiếu KWLH."
+- Bước 4 (Đánh giá): "GV và HS tổ chức đánh giá chéo theo Bảng Rubric mini 3 tiêu chí."
 
-🔹 Phần Dặn dò / Hướng dẫn về nhà (PHẦN QUAN TRỌNG NHẤT — BẮT BUỘC TẠO MARKER):
+🔹 Phần Dặn dò / Hướng dẫn về nhà (BẮT BUỘC TẠO MARKER):
 BẮT BUỘC tạo Marker ===NLS_DẶN_DÒ_TIẾT_SAU=== chèn vào phần "Hướng dẫn tự học / Dặn dò" ở CUỐI BÀI để giao nhiệm vụ số chuẩn bị cho bài học tiếp theo.
 `;
 
