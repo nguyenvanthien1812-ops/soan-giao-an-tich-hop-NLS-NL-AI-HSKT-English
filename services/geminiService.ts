@@ -533,6 +533,11 @@ export const generateNLSLessonPlan = async (
     ? `\n    === TÍCH HỢP GIÁO DỤC STEM (BẬT) ===\n    ${STEM_INTEGRATION_GUIDANCE}\n    TRẠNG THÁI STEM: BẬT → BẮT BUỘC đồng bộ hóa STEM vào 3 vị trí:\\n    (1) PHẦN I. MỤC TIÊU: Bổ sung chỉ báo Năng lực Giáo dục STEM với yêu cầu đề xuất ≥2 phương án và cải tiến.\\n    (2) PHẦN II. THIẾT BỊ DẠY HỌC: BẮT BUỘC tạo 2 khối Marker riêng biệt: ===NLS_THIẾT_BỊ_GV=== (chèn trước dòng 2. Học sinh:) và ===NLS_THIẾT_BỊ_HS=== (chèn trước dòng III. Tiến trình dạy học) với nội dung bọc trong thẻ <blue>...</blue> theo đúng hướng dẫn.\\n    (3) PHẦN III. HOẠT ĐỘNG VẬN DỤNG: BẮT BUỘC tạo ĐỦ 4 KHỐI MARKER (BƯỚC 1, 2, 3, 4) cho Hoạt động 4: ===NLS_HOẠT_ĐỘNG_4_BƯỚC_1=== (giao nhiệm vụ STEM mini tiếp nối câu hỏi gốc + công bố Rubric), ===NLS_HOẠT_ĐỘNG_4_BƯỚC_2=== (HS thực hiện, đo đạc >=3 lần), ===NLS_HOẠT_ĐỘNG_4_BƯỚC_3=== (báo cáo Padlet/Zalo + KWLH), ===NLS_HOẠT_ĐỘNG_4_BƯỚC_4=== (đánh giá theo Rubric 3 tiêu chí). Giữ nguyên 100% cấu trúc và nội dung tất cả các hoạt động còn lại.\n\n    (4) PHẦN CUỐI GIÁO ÁN (TRƯỚC DẶN DÒ): BẮT BUỘC tạo marker ===NLS_RUBRIC_STEM=== chứa toàn bộ Bảng Rubric 3 tiêu chí dạng bảng Markdown (4 hàng × 4 cột) để hệ thống tự động chèn bảng kẻ ô Word ngay TRƯỚC phần Dặn dò / Hướng dẫn về nhà của giáo án.`
     : `\n    TRẠNG THÁI STEM: TẮT → TUYỆT ĐỐI KHÔNG thêm bất kỳ nội dung STEM nào vào giáo án.\n`;
 
+  // BẢNG TỔNG HỢP HOẠT ĐỘNG NLS & AI (TÙY CHỌN)
+  const summaryTablePrompt = options.enableSummaryTable
+    ? `\n    === BẢNG TỔNG HỢP HOẠT ĐỘNG NLS & AI (BẬT) ===\n    BẮT BUỘC tạo marker sau ở CUỐI BÀI (NGAY SAU phần Dặn dò / Hướng dẫn về nhà):\n    ===NLS_BẢNG_TỔNG_HỢP_HĐ|VITRI: Cuối giáo án > Sau phần Dặn dò / Hướng dẫn về nhà===\n    | Hoạt động | NLS/AI tích hợp | Công cụ | Sản phẩm/minh chứng |\n    |:--|:--|:--|:--|\n    | Hoạt động 1: [Tên HĐ 1] | [Mã NLS/AI đã chèn vào HĐ1] | [Công cụ từ câu chỉ báo HĐ1] | [Sản phẩm từ câu chỉ báo HĐ1] |\n    | Hoạt động 2: [Tên HĐ 2] | [Mã NLS/AI đã chèn vào HĐ2] | [Công cụ từ câu chỉ báo HĐ2] | [Sản phẩm từ câu chỉ báo HĐ2] |\n    | Hoạt động 3: [Tên HĐ 3] | [Mã NLS/AI đã chèn vào HĐ3] | [Công cụ từ câu chỉ báo HĐ3] | [Sản phẩm từ câu chỉ báo HĐ3] |\n    | Hoạt động 4: [Tên HĐ 4] | [Mã NLS/AI đã chèn vào HĐ4] | [Công cụ từ câu chỉ báo HĐ4] | [Sản phẩm từ câu chỉ báo HĐ4] |\n    ===END===\n\n    NGUYÊN TẮC KHỚP CHÍNH XÁC — BẮT BUỘC TUYỆT ĐỐI:\n    1. DUYỆT LẠI toàn bộ nội dung vừa sinh ở HĐ 1 → HĐ 4. Với mỗi hoạt động:\n       Liệt kê CHÍNH XÁC các mã NLS (x.x.TCxa) và AI ([7.X.x]) đã xuất hiện trong phần d. Tổ chức thực hiện.\n    2. CHỈ đưa vào bảng các mã ĐÃ THỰC SỰ XUẤT HIỆN — TUYỆT ĐỐI CẤM thêm mã mới không có trong giáo án.\n    3. TUYỆT ĐỐI CẤM gộp mã của hoạt động này sang hoạt động khác.\n    4. Cột Công cụ và Sản phẩm/minh chứng PHẢI BÁM SÁT câu chỉ báo NLS/AI đã viết.\n    5. Nếu một hoạt động không có NLS/AI → ghi Không có vào cột NLS/AI tích hợp.\n    6. Tên hoạt động trong cột Hoạt động PHẢI KHỚP với tên thực tế trong giáo án.\n`
+    : `\n    BẢNG TỔNG HỢP NLS & AI: TẮT → Không tạo marker ===NLS_BẢNG_TỔNG_HỢP_HĐ===.\n`;
+
   // MÔ HÌNH LỚP HỌC ĐẢO NGƯỢC (FLIPPED CLASSROOM)
   const isFlipped = options.teachingEnvironment === 'FLIPPED_CLASSROOM';
 
@@ -635,6 +640,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     ${disabilityPrompt}
     ${englishPrompt}
     ${stemPrompt}
+    ${summaryTablePrompt}
 
     LESSON PLAN INPUT INFORMATION:
     - Subject: ${info.subject}
@@ -674,6 +680,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     ${englishPrompt}
     ${stemPrompt}
     ${flippedPrompt}
+    ${summaryTablePrompt}
 
     THÔNG TIN GIÁO ÁN ĐẦU VÀO:
     - Môn học: ${info.subject}

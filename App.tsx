@@ -23,6 +23,7 @@ const App: React.FC = () => {
   const [englishIntegrationLevel, setEnglishIntegrationLevel] = useState<EnglishIntegrationLevel>('BASIC');
   const [aiFrameworkVersion, setAiFrameworkVersion] = useState<AIFrameworkVersion>('QD2422'); // Mặc định QĐ 2422 (chính thức 2026-2027)
   const [enableStem, setEnableStem] = useState<boolean>(false); // Tích hợp STEM vào HĐ Vận dụng (mặc định: TẮT)
+  const [enableSummaryTable, setEnableSummaryTable] = useState<boolean>(false); // Bảng Tổng hợp Hoạt động NLS & AI (mặc định: TẮT)
   // Môi trường thiết bị dạy học (Flipped Classroom)
   const [teachingEnvironment, setTeachingEnvironment] = useState<TeachingEnvironment>('IN_CLASS_DEVICES');
   const [nextLessonContent, setNextLessonContent] = useState<string>('');
@@ -172,6 +173,7 @@ const App: React.FC = () => {
           englishIntegrationLevel,
           hasExistingNLS: isSupplementMode, // Truyền trạng thái Chế độ Bổ sung
           enableStem, // Tích hợp STEM vào HĐ Vận dụng
+          enableSummaryTable, // Bảng Tổng hợp Hoạt động NLS & AI cuối giáo án
           teachingEnvironment,  // Môi trường thiết bị dạy học
           nextLessonContent: nextLessonContent || undefined,
           nextLessonTitle: nextLessonTitle || undefined,
@@ -246,6 +248,8 @@ const App: React.FC = () => {
               autoDetectedMsg={autoDetectedMsg}
               enableStem={enableStem}
               setEnableStem={setEnableStem}
+              enableSummaryTable={enableSummaryTable}
+              setEnableSummaryTable={setEnableSummaryTable}
               teachingEnvironment={teachingEnvironment}
               setTeachingEnvironment={setTeachingEnvironment}
               nextLessonFileName={nextLessonFileName || undefined}

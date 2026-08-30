@@ -32,6 +32,9 @@ interface LessonFormProps {
   // Tích hợp STEM vào Hoạt động Vận dụng
   enableStem: boolean;
   setEnableStem: (val: boolean) => void;
+  // Bảng Tổng hợp Hoạt động NLS & AI cuối giáo án
+  enableSummaryTable: boolean;
+  setEnableSummaryTable: (val: boolean) => void;
   // Môi trường thiết bị dạy học (Flipped Classroom)
   teachingEnvironment: TeachingEnvironment;
   setTeachingEnvironment: (val: TeachingEnvironment) => void;
@@ -69,6 +72,8 @@ const LessonForm: React.FC<LessonFormProps> = ({
   autoDetectedMsg,
   enableStem,
   setEnableStem,
+  enableSummaryTable,
+  setEnableSummaryTable,
   teachingEnvironment,
   setTeachingEnvironment,
   nextLessonFileName,
@@ -421,6 +426,41 @@ const LessonForm: React.FC<LessonFormProps> = ({
               AI sẽ <strong>nâng cấp Hoạt động Vận dụng</strong> thành dự án STEM mini gắn thực tiễn:
               giao nhiệm vụ chế tạo/thiết kế/quan trắc thực tế, có sản phẩm cụ thể và rubric đánh giá 3 tiêu chí.
               Toàn bộ cấu trúc 4 hoạt động theo CV 5512 được giữ nguyên 100%.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* ====== BẢNG TỔNG HỢP HOẠT ĐỘNG NLS & AI ====== */}
+      <div className="space-y-3.5 text-left pt-5 border-t border-slate-100">
+        <label className="flex items-center space-x-3 cursor-pointer group select-none">
+          <input
+            type="checkbox"
+            checked={enableSummaryTable}
+            onChange={(e) => setEnableSummaryTable(e.target.checked)}
+            className="w-5 h-5 text-indigo-600 rounded-lg border-slate-300 focus:ring-indigo-500 focus:ring-offset-0 transition-transform group-hover:scale-105"
+          />
+          <span className="text-sm sm:text-base font-bold text-slate-800 flex items-center group-hover:text-indigo-700 transition-colors">
+            <span className="text-xl mr-2">📊</span>
+            Bảng Tổng hợp Hoạt động NLS & AI{' '}
+            <span className="ml-2 text-xs font-medium px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-800 border border-indigo-200">
+              Tuỳ chọn
+            </span>
+          </span>
+        </label>
+
+        {enableSummaryTable && (
+          <div className="p-4 bg-indigo-50/70 border border-indigo-200/80 rounded-2xl space-y-2 text-left animate-fadeIn shadow-sm">
+            <p className="text-xs font-bold text-indigo-900">
+              ✅ <strong>Đang BẬT Bảng Tổng hợp NLS & AI:</strong>
+            </p>
+            <p className="text-[11px] sm:text-xs text-indigo-800 leading-relaxed">
+              AI sẽ tự <strong>tổng hợp lại chính xác</strong> tất cả mã NLS & AI đã tích hợp vào từng hoạt động
+              thành <strong>bảng 4 cột</strong> (Hoạt động | NLS/AI tích hợp | Công cụ | Sản phẩm/minh chứng)
+              đặt ở <strong>cuối giáo án</strong>. Bảng xuất ra file Word dạng kẻ ô chuẩn.
+            </p>
+            <p className="text-[10px] text-indigo-700 italic">
+              📌 Lưu ý: Bảng chỉ tổng hợp đúng các mã đã có trong giáo án — không thêm mã mới.
             </p>
           </div>
         )}

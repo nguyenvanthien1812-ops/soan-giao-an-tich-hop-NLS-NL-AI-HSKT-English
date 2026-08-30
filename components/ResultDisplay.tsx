@@ -266,6 +266,12 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
             'HƯỚNG DẪN VỀ NHÀ', 'Hướng dẫn HS tự học', 'Hướng dẫn bài về nhà'
           ];
         }
+        // ================== BẢNG TỔNG HỢP HOẠT ĐỘNG NLS & AI ==================
+        // Chèn vào CUỐI TÀI LIỆU (sau phần Dặn dò, trước w:sectPr)
+        // searchPatterns không dùng — xử lý đặc biệt ở injectNLSWithDOMParser
+        else if (marker === 'BẢNG_TỔNG_HỢP_HĐ') {
+          searchPatterns = []; // Không tìm kiếm vị trí — chèn cuối tài liệu trực tiếp
+        }
       }
       // ================== ENGLISH DC MARKERS ==================
       else if (prefix === 'DC') {
@@ -431,6 +437,8 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
           standardizedLocation = 'Phần Hướng dẫn tự học / Dặn dò > Cuối bài (Chuẩn bị cho bài học tiếp theo)';
         } else if (marker === 'RUBRIC_STEM') {
           standardizedLocation = 'Cuối giáo án > Ngay TRƯỚC phần Dặn dò / Hướng dẫn về nhà (Bảng Rubric 3 tiêu chí STEM mini)';
+        } else if (marker === 'BẢNG_TỔNG_HỢP_HĐ') {
+          standardizedLocation = 'Cuối giáo án > Ngay SAU phần Dặn dò / Hướng dẫn về nhà (Bảng Tổng hợp Hoạt động NLS & AI)';
         } else {
           standardizedLocation = 'd. Tổ chức thực hiện > Ngay dưới dòng "d. Tổ chức thực hiện:" (trước Chuyển giao nhiệm vụ học tập)';
         }
@@ -980,13 +988,19 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
     const notInsertedSections: string[] = [];
 
     for (const section of sections) {
-      // Bỏ qua bảng tổng hợp — không chèn vào file Word
-      if (section.marker.includes('BẢNG_TỔNG_HỢP') || section.marker.includes('SUMMARY_TABLE')) {
+      // Bỏ qua bảng tổng hợp cũ — không chèn vào file Word (chỉ giữ BẢNG_TỔNG_HỢP_HĐ mới)
+      if ((section.marker.includes('BẢNG_TỔNG_HỢP') && !section.marker.includes('BẢNG_TỔNG_HỢP_HĐ')) || section.marker.includes('SUMMARY_TABLE')) {
         continue;
       }
 
       let nlsXmlStr = '';
-      if (section.content.trim().startsWith('|') || section.marker.includes('BẢNG_TỔNG_HỢP') || section.marker.includes('SUMMARY_TABLE')) {
+      if (section.marker.includes('BẢNG_TỔNG_HỢP_HĐ')) {
+        nlsXmlStr = `
+          <w:p><w:pPr><w:pBdr><w:top w:val="single" w:sz="12" w:space="1" w:color="0055D4"/></w:pBdr></w:pPr></w:p>
+          <w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/><w:b/><w:color w:val="000000"/></w:rPr><w:t>BẢNG TỔNG HỢP HOẠT ĐỘNG NĂNG LỰC SỐ (NLS) VÀ AI TÍCH HỢP</w:t></w:r></w:p>
+          ${convertMarkdownTableToWordXmlTable(section.content)}
+        `;
+      } else if (section.content.trim().startsWith('|') || section.marker.includes('BẢNG_TỔNG_HỢP') || section.marker.includes('SUMMARY_TABLE')) {
         nlsXmlStr = `
           <w:p><w:pPr><w:pBdr><w:top w:val="single" w:sz="12" w:space="1" w:color="0055D4"/></w:pBdr></w:pPr></w:p>
           <w:p><w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/><w:b/><w:color w:val="000000"/></w:rPr><w:t>BẢNG TỔNG HỢP NĂNG LỰC SỐ TRONG BÀI HỌC</w:t></w:r></w:p>
@@ -1001,8 +1015,8 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
 
       let inserted = false;
 
-      // 1. Cho Bảng tổng hợp -> Chèn vào CUỐI CÙNG của giáo án (sau dòng/nội dung cuối cùng của Hoạt động 4 / Vận dụng)
-      if (section.marker.includes('BẢNG_TỔNG_HỢP') || section.marker.includes('SUMMARY_TABLE')) {
+      // 1. Cho Bảng tổng hợp hoạt động NLS & AI -> Chèn vào CUỐI CÙNG của giáo án (sau phần Dặn dò, trước w:sectPr)
+      if (section.marker.includes('BẢNG_TỔNG_HỢP_HĐ') || section.marker.includes('BẢNG_TỔNG_HỢP') || section.marker.includes('SUMMARY_TABLE')) {
         const bodyNode = xmlDoc.getElementsByTagName('w:body')[0];
         if (bodyNode) {
           const sectPr = bodyNode.getElementsByTagName('w:sectPr')[0];
@@ -1014,6 +1028,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
             }
           });
           inserted = true;
+          console.log(`✓ DOMParser đã chèn BẢNG_TỔNG_HỢP_HĐ vào cuối tài liệu`);
         }
       }
       // 2. Nếu là Mục tiêu -> Tìm TRƯỚC "3. Phẩm chất" hoặc "III. Tiến trình"
@@ -1532,8 +1547,8 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
     let fullGuideHtml = `<div style="font-family: 'Times New Roman', Times, serif; font-size: 13pt; line-height: 1.35;"><h3 style="color: #1e1b4b;">HƯỚNG DẪN CHÈN THỦ CÔNG NĂNG LỰC SỐ VÀO GIÁO ÁN (CHUẨN KHỚP FILE WORD)</h3>`;
 
     sections.forEach((sec, idx) => {
-      // Bỏ qua bảng tổng hợp
-      if (sec.marker.includes('BẢNG_TỔNG_HỢP') || sec.marker.includes('SUMMARY_TABLE')) {
+      // Bỏ qua bảng tổng hợp cũ
+      if ((sec.marker.includes('BẢNG_TỔNG_HỢP') && !sec.marker.includes('BẢNG_TỔNG_HỢP_HĐ')) || sec.marker.includes('SUMMARY_TABLE')) {
         return;
       }
 
@@ -1592,6 +1607,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
       .replace(/===NLS_THIẾT_BỊ_HS.*?===/g, '\n**📌 THIẾT BỊ DẠY HỌC (HỌC SINH):**\n')
       .replace(/===NLS_DẶN_DÒ_TIẾT_SAU.*?===/g, '\n**📌 DẶN DÒ CHUẨN BỊ CHO BÀI HỌC TIẾP THEO:**\n')
       .replace(/===NLS_RUBRIC_STEM.*?===/g, '\n**📌 BẢNG RUBRIC 3 TIÊU CHÍ STEM (Chèn trước Dặn dò):**\n')
+      .replace(/===NLS_BẢNG_TỔNG_HỢP_HĐ.*?===/g, '\n**📌 BẢNG TỔNG HỢP HOẠT ĐỘNG NĂNG LỰC SỐ VÀ AI TÍCH HỢP (Chèn cuối giáo án):**\n')
 
       // ================== ENGLISH DC MARKERS ==================
       .replace(/===DC_OBJECTIVES.*?===/g, '\n**📌 DIGITAL COMPETENCE OBJECTIVES:**\n')
@@ -1722,8 +1738,8 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
           {/* Cards for each section */}
           <div className="space-y-5 text-left">
             {sections.map((section, idx) => {
-              // Ẩn bảng tổng hợp — không hiển thị trong tab hướng dẫn thủ công
-              if (section.marker.includes('BẢNG_TỔNG_HỢP') || section.marker.includes('SUMMARY_TABLE')) {
+              // Ẩn bảng tổng hợp cũ — không hiển thị trong tab hướng dẫn thủ công (giữ lại BẢNG_TỔNG_HỢP_HĐ mới)
+              if ((section.marker.includes('BẢNG_TỔNG_HỢP') && !section.marker.includes('BẢNG_TỔNG_HỢP_HĐ')) || section.marker.includes('SUMMARY_TABLE')) {
                 return null;
               }
 

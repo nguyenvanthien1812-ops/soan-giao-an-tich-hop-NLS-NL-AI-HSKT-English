@@ -65,6 +65,7 @@ export interface ProcessingOptions {
   englishIntegrationLevel?: EnglishIntegrationLevel;
   hasExistingNLS?: boolean; // File giáo án đã có NLS được chèn sẵn → Chế độ Bổ sung
   enableStem?: boolean; // Tích hợp STEM vào Hoạt động Vận dụng (mặc định: false)
+  enableSummaryTable?: boolean; // Bảng Tổng hợp Hoạt động NLS & AI cuối giáo án (mặc định: false)
   // Lớp học đảo ngược (Flipped Classroom)
   teachingEnvironment?: TeachingEnvironment; // Mặc định: IN_CLASS_DEVICES (giữ nguyên luồng cũ)
   nextLessonContent?: string;  // Nội dung file giáo án bài tiếp theo (text đã đọc từ docx)
