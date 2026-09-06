@@ -663,6 +663,41 @@ HƯỚNG DẪN MÔ HÌNH LỚP HỌC ĐẢO NGƯỢC (FLIPPED CLASSROOM — Đ�
 BẮT BUỘC tạo Marker ===NLS_DẶN_DÒ_TIẾT_SAU=== chèn vào phần "Hướng dẫn tự học / Dặn dò" ở CUỐI BÀI để giao nhiệm vụ số chuẩn bị cho bài học tiếp theo.
 `;
 
+export const QPAN_INTEGRATION_GUIDANCE = `
+HƯỚNG DẪN LỒNG GHÉP GIÁO DỤC QUỐC PHÒNG VÀ AN NINH (QPAN)
+CĂN CỨ PHÁP LÝ: THÔNG TƯ SỐ 08/2024/TT-BGDĐT NGÀY 15/05/2024 CỦA BỘ GIÁO DỤC VÀ ĐÀO TẠO
+(Áp dụng từ ngày 01/07/2024 cho cấp Tiểu học và THCS)
+
+1. NGUYÊN TẮC BẤT DI BẤT DỊCH (Điều 2 & Điều 3):
+- Lồng ghép, tích hợp thông qua nội dung các bài học, KHÔNG làm thay đổi quy định khung chương trình GDPT, KHÔNG làm tăng thời lượng học tập của môn học.
+- Lồng ghép truyền cảm, ngắn gọn, dễ nhớ, dễ hiểu, có trọng tâm trọng điểm; bồi dưỡng lòng yêu nước, tự hào dân tộc, ý thức tổ chức kỷ luật và trách nhiệm công dân.
+- Tăng cường ứng dụng công nghệ thông tin / chuyển đổi số trong dạy học lồng ghép (Điều 4).
+
+2. NỘI DUNG LỒNG GHÉP TRỌNG TÂM THEO KHỐI LỚP (Điều 3):
+* CẤP TIỂU HỌC (Lớp 1 đến Lớp 5):
+  - Lớp 1: Tình yêu quê hương, hòa bình, Tổ quốc Việt Nam XHCN; giới thiệu một số hình ảnh về Quân đội Nhân dân Việt Nam và Công an Nhân dân Việt Nam; di tích lịch sử địa phương.
+  - Lớp 2: Tinh thần đoàn kết toàn dân tộc, sự hi sinh của chiến sĩ cách mạng; hình ảnh cán bộ, chiến sĩ QĐND & CAND bảo vệ Tổ quốc, giữ gìn trật tự an toàn xã hội; yêu thương, chia sẻ, giúp đỡ nhau trong học tập.
+  - Lớp 3: Truyền thống chống ngoại xâm của dân tộc; gương dũng cảm thiếu niên, nhi đồng, Bà Mẹ Việt Nam anh hùng; học sinh tham gia bảo vệ môi trường ở địa phương và trường học.
+  - Lớp 4: Bản đồ hành chính Việt Nam, khẳng định chủ quyền của Việt Nam đối với quần đảo Hoàng Sa và Trường Sa; bài hát về biển, đảo Việt Nam; ý thức chấp hành pháp luật về trật tự, an toàn giao thông.
+  - Lớp 5: Chủ quyền, quyền chủ quyền biển, đảo của Việt Nam; khai thác thủy hải sản và tài nguyên để phát triển KT-XH bảo đảm QPAN; gương dũng cảm của cán bộ, chiến sĩ QĐND & CAND trong cứu hộ, cứu nạn.
+
+* CẤP THCS (Lớp 6 đến Lớp 9):
+  - Lớp 6: Lịch sử và truyền thống vẻ vang của Quân đội Nhân dân Việt Nam và Công an Nhân dân Việt Nam; địa danh lịch sử gắn với các cuộc kháng chiến; cách đánh mưu trí, sáng tạo của quân và dân ta trong chống giặc ngoại xâm.
+  - Lớp 7: Hoạt động, hình ảnh bảo vệ chủ quyền biển, đảo Việt Nam; bảo vệ thông tin cá nhân khi tham gia mạng xã hội; quyền tự do tín ngưỡng, tôn giáo theo quy định của pháp luật.
+  - Lớp 8: Lòng tự hào, tự tôn dân tộc và sức mạnh đại đoàn kết toàn dân tộc trong đấu tranh chống ngoại xâm; một số mốc quốc giới; tác hại của tệ nạn xã hội; trách nhiệm của học sinh tham gia phòng, chống bạo lực học đường.
+  - Lớp 9: Hậu quả của các cuộc chiến tranh xâm lược đối với dân tộc Việt Nam; phát triển kinh tế - xã hội gắn với bảo đảm quốc phòng, an ninh; bài hát ca ngợi truyền thống vẻ vang của QĐND & CAND; trách nhiệm của học sinh tham gia xây dựng và bảo vệ Tổ quốc.
+
+3. QUY TẮC ĐỊNH DẠNG VÀ VỊ TRÍ CHÈN (BẮT BUỘC):
+- DÙNG THẺ MÀU ĐỎ: <red>[Lồng ghép QPAN - TT 08/2024]: ...</red>
+- VỊ TRÍ 1 (MỤC TIÊU - ===NLS_MỤC_TIÊU===): Thêm 1 gạch đầu dòng vào mục Phẩm chất:
+  <red>- Giáo dục Quốc phòng và An ninh (TT 08/2024/TT-BGDĐT): Bồi dưỡng lòng yêu nước, niềm tự hào dân tộc, ý thức [chủ đề tương ứng với khối lớp và bài học].</red>
+- VỊ TRÍ 2 (TIẾN TRÌNH DẠY HỌC - d. Tổ chức thực hiện):
+  + Chọn đúng 1-2 hoạt động phù hợp nhất trong bài (thường ở Hoạt động 1 Khởi động khi liên hệ hình ảnh/tư liệu, hoặc Hoạt động 2/3/4 khi liên hệ thực tiễn/trách nhiệm công dân/chủ quyền/an toàn mạng).
+  + Chèn 1 câu lệnh của GV hoặc câu hỏi gợi mở cho HS, đặt trên DÒNG RIÊNG:
+    <red>[Lồng ghép QPAN - TT 08/2024]: GV lồng ghép giáo dục [nội dung cụ thể bám sát Thông tư 08/2024 và bài học] thông qua [hình ảnh/video/tình huống thực tế/câu hỏi liên hệ]; HS nêu ý thức và trách nhiệm của bản thân.</red>
+  + TUYỆT ĐỐI KHÔNG lồng ghép dàn trải, gượng ép ở tất cả các bước.
+`;
+
 export const PLACEHOLDER_LESSON = `TÊN BÀI HỌC: THỐNG KÊ MÔ TẢ
 Môn: Toán - Lớp: 7
 

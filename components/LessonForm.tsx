@@ -35,6 +35,9 @@ interface LessonFormProps {
   // Bảng Tổng hợp Hoạt động NLS & AI cuối giáo án
   enableSummaryTable: boolean;
   setEnableSummaryTable: (val: boolean) => void;
+  // Lồng ghép Giáo dục Quốc phòng & An ninh (TT 08/2024)
+  includeQPAN: boolean;
+  setIncludeQPAN: (val: boolean) => void;
   // Môi trường thiết bị dạy học (Flipped Classroom)
   teachingEnvironment: TeachingEnvironment;
   setTeachingEnvironment: (val: TeachingEnvironment) => void;
@@ -74,6 +77,8 @@ const LessonForm: React.FC<LessonFormProps> = ({
   setEnableStem,
   enableSummaryTable,
   setEnableSummaryTable,
+  includeQPAN,
+  setIncludeQPAN,
   teachingEnvironment,
   setTeachingEnvironment,
   nextLessonFileName,
@@ -426,6 +431,40 @@ const LessonForm: React.FC<LessonFormProps> = ({
               AI sẽ <strong>nâng cấp Hoạt động Vận dụng</strong> thành dự án STEM mini gắn thực tiễn:
               giao nhiệm vụ chế tạo/thiết kế/quan trắc thực tế, có sản phẩm cụ thể và rubric đánh giá 3 tiêu chí.
               Toàn bộ cấu trúc 4 hoạt động theo CV 5512 được giữ nguyên 100%.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* ====== LỒNG GHÉP GIÁO DỤC QUỐC PHÒNG VÀ AN NINH (QPAN) ====== */}
+      <div className="space-y-3.5 text-left pt-5 border-t border-slate-100">
+        <label className="flex items-center space-x-3 cursor-pointer group select-none">
+          <input
+            type="checkbox"
+            checked={includeQPAN}
+            onChange={(e) => setIncludeQPAN(e.target.checked)}
+            className="w-5 h-5 text-rose-600 rounded-lg border-slate-300 focus:ring-rose-500 focus:ring-offset-0 transition-transform group-hover:scale-105"
+          />
+          <span className="text-sm sm:text-base font-bold text-slate-800 flex items-center group-hover:text-rose-700 transition-colors">
+            <span className="text-xl mr-2">🎖️</span>
+            Lồng ghép Giáo dục Quốc phòng & An ninh{' '}
+            <span className="ml-2 text-xs font-medium px-2 py-0.5 rounded-full bg-rose-50 text-rose-800 border border-rose-200">
+              TT 08/2024
+            </span>
+          </span>
+        </label>
+
+        {includeQPAN && (
+          <div className="p-4 bg-rose-50/70 border border-rose-200/80 rounded-2xl space-y-2 text-left animate-fadeIn shadow-sm">
+            <p className="text-xs font-bold text-rose-900">
+              ✅ <strong>Đang BẬT Lồng ghép QPAN (Thông tư 08/2024/TT-BGDĐT):</strong>
+            </p>
+            <p className="text-[11px] sm:text-xs text-rose-800 leading-relaxed">
+              AI sẽ tự động lồng ghép nội dung bồi dưỡng lòng yêu nước, tự hào dân tộc, chủ quyền biển đảo,
+              an ninh biên giới, bảo vệ thông tin cá nhân trên không gian mạng và trật tự ATXH theo đúng khối lớp ({grade >= 1 && grade <= 5 ? `Tiểu học - Lớp ${grade}` : `THCS - Lớp ${grade}`}) vào 1 dòng Mục tiêu và 1-2 điểm phù hợp trong hoạt động học.
+            </p>
+            <p className="text-[10px] text-rose-700 italic">
+              📌 Nội dung lồng ghép ngắn gọn, truyền cảm, tô màu đỏ cờ chuẩn mực trong giáo án.
             </p>
           </div>
         )}

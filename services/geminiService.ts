@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { LessonInfo, ProcessingOptions, Subject } from "../types";
-import { SYSTEM_INSTRUCTION, NLS_FRAMEWORK_DATA, SYSTEM_INSTRUCTION_ENGLISH, NLS_FRAMEWORK_DATA_ENGLISH, AI_FRAMEWORK_DATA_QD3439, AI_FRAMEWORK_DATA_QD2422, DISABILITY_SUPPORT_INSTRUCTIONS, ENGLISH_CLIL_INSTRUCTIONS, STEM_INTEGRATION_GUIDANCE, FLIPPED_CLASSROOM_GUIDANCE } from "../constants";
+import { SYSTEM_INSTRUCTION, NLS_FRAMEWORK_DATA, SYSTEM_INSTRUCTION_ENGLISH, NLS_FRAMEWORK_DATA_ENGLISH, AI_FRAMEWORK_DATA_QD3439, AI_FRAMEWORK_DATA_QD2422, DISABILITY_SUPPORT_INSTRUCTIONS, ENGLISH_CLIL_INSTRUCTIONS, STEM_INTEGRATION_GUIDANCE, FLIPPED_CLASSROOM_GUIDANCE, QPAN_INTEGRATION_GUIDANCE } from "../constants";
 
 // Hàm xác định mức độ NLS phù hợp theo cấp lớp
 function getGradeLevelGuidance(grade: number): string {
@@ -538,6 +538,12 @@ export const generateNLSLessonPlan = async (
     ? `\n    === BẢNG TỔNG HỢP HOẠT ĐỘNG NLS & AI (BẬT) ===\n    BẮT BUỘC tạo marker sau ở CUỐI BÀI (NGAY SAU phần Dặn dò / Hướng dẫn về nhà):\n    ===NLS_BẢNG_TỔNG_HỢP_HĐ|VITRI: Cuối giáo án > Sau phần Dặn dò / Hướng dẫn về nhà===\n    | Hoạt động | NLS/AI tích hợp | Công cụ | Sản phẩm/minh chứng |\n    |:--|:--|:--|:--|\n    | Hoạt động 1: [Tên HĐ 1] | [Mã NLS/AI đã chèn vào HĐ1] | [Công cụ từ câu chỉ báo HĐ1] | [Sản phẩm từ câu chỉ báo HĐ1] |\n    | Hoạt động 2: [Tên HĐ 2] | [Mã NLS/AI đã chèn vào HĐ2] | [Công cụ từ câu chỉ báo HĐ2] | [Sản phẩm từ câu chỉ báo HĐ2] |\n    | Hoạt động 3: [Tên HĐ 3] | [Mã NLS/AI đã chèn vào HĐ3] | [Công cụ từ câu chỉ báo HĐ3] | [Sản phẩm từ câu chỉ báo HĐ3] |\n    | Hoạt động 4: [Tên HĐ 4] | [Mã NLS/AI đã chèn vào HĐ4] | [Công cụ từ câu chỉ báo HĐ4] | [Sản phẩm từ câu chỉ báo HĐ4] |\n    ===END===\n\n    NGUYÊN TẮC KHỚP CHÍNH XÁC — BẮT BUỘC TUYỆT ĐỐI:\n    1. DUYỆT LẠI toàn bộ nội dung vừa sinh ở HĐ 1 → HĐ 4. Với mỗi hoạt động:\n       Liệt kê CHÍNH XÁC các mã NLS (x.x.TCxa) và AI ([7.X.x]) đã xuất hiện trong phần d. Tổ chức thực hiện.\n    2. CHỈ đưa vào bảng các mã ĐÃ THỰC SỰ XUẤT HIỆN — TUYỆT ĐỐI CẤM thêm mã mới không có trong giáo án.\n    3. TUYỆT ĐỐI CẤM gộp mã của hoạt động này sang hoạt động khác.\n    4. Cột Công cụ và Sản phẩm/minh chứng PHẢI BÁM SÁT câu chỉ báo NLS/AI đã viết.\n    5. Nếu một hoạt động không có NLS/AI → ghi Không có vào cột NLS/AI tích hợp.\n    6. Tên hoạt động trong cột Hoạt động PHẢI KHỚP với tên thực tế trong giáo án.\n`
     : `\n    BẢNG TỔNG HỢP NLS & AI: TẮT → Không tạo marker ===NLS_BẢNG_TỔNG_HỢP_HĐ===.\n`;
 
+  // LỒNG GHÉP GIÁO DỤC QUỐC PHÒNG VÀ AN NINH (THÔNG TƯ 08/2024/TT-BGDĐT)
+  const isQpanActive = !!options.includeQPAN;
+  const qpanPrompt = isQpanActive
+    ? `\n    === LỒNG GHÉP GIÁO DỤC QUỐC PHÒNG VÀ AN NINH (BẬT) ===\n    ${QPAN_INTEGRATION_GUIDANCE}\n    TRẠNG THÁI GIÁO DỤC QPAN: BẬT → BẮT BUỘC thực hiện đúng 2 vị trí:\n    (1) PHẦN I. MỤC TIÊU (trong ===NLS_MỤC_TIÊU===): Thêm 1 gạch đầu dòng vào mục Phẩm chất trong thẻ <red>...</red>:\n        <red>- Giáo dục Quốc phòng và An ninh (TT 08/2024/TT-BGDĐT): Bồi dưỡng lòng yêu nước, niềm tự hào dân tộc, ý thức [chủ đề cụ thể phù hợp với lớp ${info.grade} và bài học].</red>\n    (2) PHẦN III. TIẾN TRÌNH DẠY HỌC (d. Tổ chức thực hiện): Chọn đúng 1-2 hoạt động phù hợp nhất trong bài (thường ở Hoạt động 1 Khởi động khi liên hệ hình ảnh/tư liệu thực tế, hoặc Hoạt động 2/3/4 khi liên hệ thực tiễn/trách nhiệm công dân/chủ quyền/an toàn mạng). Chèn câu lồng ghép trên DÒNG RIÊNG bọc trong thẻ <red>[Lồng ghép QPAN - TT 08/2024]: ...</red>. Lồng ghép ngắn gọn, truyền cảm, có trọng tâm; tuyệt đối không gượng ép dàn trải.\n`
+    : `\n    GIÁO DỤC QUỐC PHÒNG VÀ AN NINH: TẮT → CẤM TUYỆT ĐỐI chèn nội dung QPAN, CẤM DÙNG THẺ <red>.\n`;
+
   // MÔ HÌNH LỚP HỌC ĐẢO NGƯỢC (FLIPPED CLASSROOM)
   const isFlipped = options.teachingEnvironment === 'FLIPPED_CLASSROOM';
 
@@ -595,6 +601,10 @@ export const generateNLSLessonPlan = async (
     ? "3. TÍCH HỢP TIẾNG ANH (<orange>): BẬT -> BẮT BUỘC chèn nội dung tiếng Anh màu cam trong thẻ <orange>...</orange>."
     : "3. TÍCH HỢP TIẾNG ANH (<orange>): TẮT -> CẤM TUYỆT ĐỐI chèn bất kỳ từ vựng hay câu lệnh Tiếng Anh nào, CẤM DÙNG THẺ <orange>. Không được tự ý đưa Tiếng Anh vào.";
 
+  const qpanStatusInstruction = isQpanActive
+    ? "4. GIÁO DỤC QUỐC PHÒNG VÀ AN NINH (<red>): BẬT -> BẮT BUỘC chèn nội dung lồng ghép QPAN màu đỏ trong thẻ <red>[Lồng ghép QPAN - TT 08/2024: ...]</red> theo Thông tư 08/2024/TT-BGDĐT (1 dòng mục tiêu và 1-2 điểm trong tiến trình dạy học)."
+    : "4. GIÁO DỤC QUỐC PHÒNG VÀ AN NINH: TẮT -> CẤM TUYỆT ĐỐI chèn bất kỳ nội dung QPAN nào, CẤM DÙNG THẺ <red>.";
+
   const needMarkersForSubFeatures = !isNlsActive && (isDisabilityActive || isEnglishActive);
 
   // ====== CHẾ ĐỘ BỔ SUNG (SUPPLEMENT MODE) ======
@@ -606,6 +616,7 @@ export const generateNLSLessonPlan = async (
   if (isAINLActive) supplementTasks.push(`Bổ sung NĂNG LỰC AI (<purple>...</purple>) vào phần "d. Tổ chức thực hiện" của các hoạt động phù hợp`);
   if (isDisabilityActive) supplementTasks.push(`Bổ sung HỖ TRỢ HSKT (<green>[Hỗ trợ HSKT: ...]</green>) vào Bước 1 (điều chỉnh giao nhiệm vụ) và Bước 2 (hỗ trợ thực hiện) của 1-2 hoạt động trọng tâm`);
   if (isEnglishActive) supplementTasks.push(`Bổ sung TIẾNG ANH (<orange>...</orange>) dạng song ngữ cho các khái niệm/thuật ngữ kỹ thuật quan trọng trong phần d. Tổ chức thực hiện`);
+  if (isQpanActive) supplementTasks.push(`Lồng ghép GIÁO DỤC QUỐC PHÒNG VÀ AN NINH (<red>[Lồng ghép QPAN - TT 08/2024: ...]</red>) vào 1-2 hoạt động phù hợp theo Thông tư 08/2024`);
 
   const supplementModePrompt = isSupplementMode ? `
 === CHẾ ĐỘ BỔ SUNG (SUPPLEMENT MODE) — ĐÃ PHÁT HIỆN GIÁO ÁN CÓ NLS ===
@@ -629,6 +640,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
 - AI (<purple>): Chèn cuối Bước 1 (khi GV giao nhiệm vụ có AI) hoặc cuối Bước 2 (HS thực hành AI). Phân bổ 1-3 điểm cho cả bài.
 - HSKT (<green>): Bước 1 (1 câu GV điều chỉnh nhiệm vụ) + Bước 2 (1 câu GV hỗ trợ trực tiếp). Áp dụng cho 1-2 hoạt động.
 - Tiếng Anh (<orange>): Song ngữ khái niệm kỹ thuật, ngay sau lần xuất hiện đầu tiên trong Bước 1/2. Tối đa 3-5 khái niệm/bài.
+- QPAN (<red>): Chèn 1 câu lệnh/câu hỏi liên hệ trong Bước 1 hoặc Bước 2 của 1-2 hoạt động trọng tâm theo Thông tư 08/2024.
 
 ` : '';
 
@@ -641,6 +653,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     ${englishPrompt}
     ${stemPrompt}
     ${summaryTablePrompt}
+    ${qpanPrompt}
 
     LESSON PLAN INPUT INFORMATION:
     - Subject: ${info.subject}
@@ -656,6 +669,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     ${nlsStatusInstruction}
     ${disabilityStatusInstruction}
     ${englishStatusInstruction}
+    ${qpanStatusInstruction}
 
     ${options.analyzeOnly ? "- Analyze only, do not edit in detail." : needMarkersForSubFeatures ? "- DO NOT insert Digital Competence in blue (<blue>) or AI Competence in purple (<purple>). DO NOT generate DC summary tables.\n    - BUT YOU MUST STILL OUTPUT THE STRUCTURED MARKERS ===DC_OBJECTIVES=== AND ===DC_ACTIVITY_X_ORGANIZATION=== to wrap <green>Disability Support</green> and/or <orange>English Integration</orange> content for automated Word DOCX injection." : isNlsActive ? "- Edit the lesson plan and INTEGRATE ALL ENABLED COMPETENCIES (Digital Competence / AI / Disability Support / English) evenly across activities." : "- Keep lesson plan structure and only process enabled items."}
     ${options.detailedReport ? "- Include a detailed explanation table of selected competence codes at the end." : ""}
@@ -681,6 +695,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     ${stemPrompt}
     ${flippedPrompt}
     ${summaryTablePrompt}
+    ${qpanPrompt}
 
     THÔNG TIN GIÁO ÁN ĐẦU VÀO:
     - Môn học: ${info.subject}
@@ -696,6 +711,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
     ${nlsStatusInstruction}
     ${disabilityStatusInstruction}
     ${englishStatusInstruction}
+    ${qpanStatusInstruction}
 
     YÊU CẦU XỬ LÝ NỘI DUNG:
     ${options.analyzeOnly ? "- Chỉ phân tích, không chỉnh sửa chi tiết." : needMarkersForSubFeatures ? "- KHÔNG chèn Năng lực số màu xanh (<blue>) hay Năng lực AI màu tím (<purple>), KHÔNG tạo Bảng tổng hợp NLS ở cuối bài.\n    - NHƯNG BẮT BUỘC PHẢI TẠO CÁC MARKER ===NLS_MỤC_TIÊU=== VÀ ===NLS_HOẠT_ĐỘNG_X_TỔ_CHỨC=== (hoặc ===NLS_HOẠT_ĐỘNG_X_BƯỚC_Y===) để bọc nội dung được BẬT (HSKT hoặc Tiếng Anh) phục vụ chèn tự động vào file Word (.docx)." : (() => {
@@ -705,6 +721,7 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
         else if (isAINLActive) tasks.push("TÍCH HỢP NĂNG LỰC AI (<purple>) vào phần d. Tổ chức thực hiện (CẤM dùng thẻ <blue> hay mã NLS thông thường)");
         if (isDisabilityActive) tasks.push("ĐỒNG THỜI chèn câu HỖ TRỢ HSKT (<green>) vào đúng các bước của hoạt động (trọng tâm Bước 1 & Bước 2, tối đa 1 câu/bước)");
         if (isEnglishActive) tasks.push("ĐỒNG THỜI chèn nội dung TÍCH HỢP TIẾNG ANH (<orange>) vào các hoạt động theo đúng cấp độ");
+        if (isQpanActive) tasks.push("ĐỒNG THỜI lồng ghép GIÁO DỤC QUỐC PHÒNG VÀ AN NINH (<red>) theo Thông tư 08/2024/TT-BGDĐT vào 1-2 hoạt động phù hợp nhất");
         if (tasks.length === 0) return "- Giữ nguyên khung bài dạy, chỉ xử lý định dạng.";
         return "- Chỉnh sửa giáo án, THỰC HIỆN SONG SONG ĐẦY ĐỦ CÁC MỤC ĐƯỢC BẬT:\n" + tasks.map(t => "      + " + t).join("\n");
       })()}
@@ -718,12 +735,14 @@ QUY TẮC VỊ TRÍ CHÈN (CHỈ TRONG CHẾ ĐỘ BỔ SUNG):
        ${isDigitalNLSActive && isAINLActive ? "- Dùng thẻ <blue>...</blue> để đánh dấu màu xanh dương NLS, thẻ <purple>...</purple> cho AI." : isDigitalNLSActive ? "- CHỈ dùng thẻ <blue>...</blue> cho NLS. CẤM dùng thẻ <purple>." : isAINLActive ? "- CHỈ dùng thẻ <purple>...</purple> cho AI. CẤM dùng thẻ <blue>." : "- NLS & AI: TẮT."}
        ${isDisabilityActive ? "- HỖ TRỢ HSKT: Dùng thẻ <green>...</green> màu xanh lá." : "- HỖ TRỢ HSKT: TẮT."}
        ${isEnglishActive ? "- TIẾNG ANH: Dùng thẻ <orange>...</orange> màu cam." : "- TIẾNG ANH: TẮT."}
+       ${isQpanActive ? "- GIÁO DỤC QPAN (TT 08/2024/TT-BGDĐT): Dùng thẻ <red>[Lồng ghép QPAN - TT 08/2024]: ...</red> màu đỏ cờ." : "- GIÁO DỤC QPAN: TẮT."}
     5. QUY TẮC BẮT BUỘC CHO MỤC TIÊU (===NLS_MỤC_TIÊU===):
        - Chèn ở cuối mục "2. Năng lực" (trước mục 3. Phẩm chất).
        - Tiêu đề NLS: <blue>* Năng lực số</blue>
        - Tiêu đề Năng lực AI: <blue>* Năng lực Trí tuệ nhân tạo (AI)</blue> (hoặc thẻ <purple>...</purple>)
        - Tiêu đề HSKT: <green>* Điều chỉnh mục tiêu đối với Học sinh Khuyết tật (HSKT):</green>
        - Tiêu đề Tiếng Anh: <orange>* Tích hợp Tiếng Anh (English Integration):</orange>
+       - Lồng ghép QPAN: <red>* Lồng ghép Giáo dục Quốc phòng và An ninh (TT 08/2024/TT-BGDĐT):</red>
        - TẤT CẢ CÁC Ý CHỈ BÁO NĂNG LỰC BẮT BUỘC PHẢI CÓ DẤU GẠCH ĐẦU DÒNG ("- ") ở đầu mỗi dòng (ví dụ: <blue>- 1.1.TC1a: ...</blue>, <purple>- [7.A1.2]: ...</purple>).
      5b. QUY TẮC BẮT BUỘC CHO THIẾT BỊ DẠY HỌC STEM (===NLS_THIẾT_BỊ_GV=== VÀ ===NLS_THIẾT_BỊ_HS===):
         Khi bật STEM, BẮT BUỘC tạo 2 khối Marker riêng biệt cho mục II. Thiết bị:

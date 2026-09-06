@@ -66,6 +66,7 @@ export interface ProcessingOptions {
   hasExistingNLS?: boolean; // File giáo án đã có NLS được chèn sẵn → Chế độ Bổ sung
   enableStem?: boolean; // Tích hợp STEM vào Hoạt động Vận dụng (mặc định: false)
   enableSummaryTable?: boolean; // Bảng Tổng hợp Hoạt động NLS & AI cuối giáo án (mặc định: false)
+  includeQPAN?: boolean; // Lồng ghép Giáo dục Quốc phòng và An ninh (Thông tư 08/2024/TT-BGDĐT)
   // Lớp học đảo ngược (Flipped Classroom)
   teachingEnvironment?: TeachingEnvironment; // Mặc định: IN_CLASS_DEVICES (giữ nguyên luồng cũ)
   nextLessonContent?: string;  // Nội dung file giáo án bài tiếp theo (text đã đọc từ docx)
@@ -92,6 +93,7 @@ export interface HistoryItem {
   disabilityType?: DisabilityType;
   englishIntegrationLevel?: EnglishIntegrationLevel;
   teachingEnvironment?: TeachingEnvironment;
+  includeQPAN?: boolean;
 }
 export type ProPackage = 'TRIAL' | 'BONUS_5' | 'BONUS_10' | 'BONUS_20' | '1_YEAR' | '2_YEARS' | 'LIFETIME';
 

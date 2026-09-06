@@ -1784,9 +1784,9 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
                           Tiếng Anh
                         </span>
                       )}
-                      {hasRed && !hasBlue && !hasPurple && (
+                      {hasRed && (
                         <span className="px-2 py-0.5 text-[11px] font-bold rounded-md bg-rose-500/20 text-rose-300 border border-rose-400/30">
-                          Toàn bài
+                          QPAN (TT 08)
                         </span>
                       )}
                     </div>
